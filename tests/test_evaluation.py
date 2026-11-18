@@ -2,7 +2,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from orchid.blind import make_packets, score_reviews
+from orchid.blind import DIMENSIONS, make_packets, read_form, score_reviews, write_csv
 from orchid.evaluation import sample_mean_delta
 from orchid.io import write_json, write_jsonl
 from orchid.metrics import TrainMatches, judge_format_keywords, rhyme_status
@@ -49,9 +49,57 @@ class EvalTests(unittest.TestCase):
             folder=p/"blind"
             mock=make_packets(p/"output.jsonl",p/"prompts.json",folder,["before","after"])
             self.assertFalse("before" in (folder/mock[0]).read_text())
+            blank = [folder/f for f in mock]
+            rated = read_form(blank[1])
+            for row in rated:
+                row.update(dict.fromkeys(DIMENSIONS,"3"))
+            write_csv(p/"synthetic_ratings.csv", rated)
             with self.assertRaises(ValueError):
-                score_reviews(folder/"private_key.json",[folder/f for f in mock],p/"scores.json")
+                score_reviews(p/"output.jsonl", p/"prompts.json", folder/"private_key.json",
+                              blank, [blank[0], p/"synthetic_ratings.csv"], p/"scores.json")
             self.assertFalse((p/"scores.json").exists())
+
+    def test_returned_ratings_must_match_original_poems(self):
+        with TemporaryDirectory() as td:
+            p = Path(td)
+            protocol, generations = p/"protocol.json", p/"generations.jsonl"
+            write_json(protocol, {"blind": {"prompt_ids": ["M1", "M2"], "sample_seed": 11}})
+            write_jsonl(generations, ({"suite": "main", "prompt_id": i, "sampling_seed": 11,
+                                      "keywords": [w], "model": m, "generated": poem}
+                for i, w in (("M1", "山"), ("M2", "月"))
+                for m, poem in (("before", ""), ("after", "青山繞碧波。"))))
+            folder = p/"blind"
+            names = make_packets(generations, protocol, folder, ["before", "after"])
+            blank = [folder/f for f in names]
+            returned = [p/f for f in names]
+            output = p/"scores.json"
+            for n, (src, dst) in enumerate(zip(blank, returned), 1):
+                rec = read_form(src)
+                for row in rec:
+                    row.update(dict.fromkeys(DIMENSIONS, str(n+2) if row["output"] else "1"))
+                write_csv(dst, rec)
+
+            def aggregate():
+                return score_reviews(generations, protocol, folder/"private_key.json", blank, returned, output)
+
+            result = aggregate()
+            self.assertEqual(result["differences"]["fluency"]["mean"], 2.5)
+            self.assertEqual(result["empty_items"], 2)
+            self.assertEqual(result["pairs"], 2)
+
+            altered = read_form(returned[0])
+            altered[0]["output"] += "改"
+            write_csv(returned[0], altered)
+            output.unlink()
+            with self.assertRaisesRegex(ValueError, "original prompt, output"):
+                aggregate()
+            self.assertFalse(output.exists())
+
+            altered = read_form(blank[0])
+            altered[0]["output"] += "改"
+            write_csv(blank[0], altered)
+            with self.assertRaisesRegex(ValueError, "changed prompt or poem"):
+                aggregate()
 
 
 if __name__=="__main__":

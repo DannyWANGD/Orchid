@@ -12,3 +12,5 @@ __pycache__/
 /dist/
 /artifacts/*.pt
 /artifacts/*.npy
+/report/blind_review/**/*_completed.csv
+/report/blind_review/meter_review_completed.md

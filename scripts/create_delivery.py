@@ -18,7 +18,7 @@ PROJECT_DIRS = ("orchid", "scripts", "configs", "docs", "tests", "data/lexicon",
 ROOT_FILES = ("README.md", "GPT_BUILD_CHECKLIST.md", "Problem.md", "THIRD_PARTY_NOTICES.md", "requirements.txt",
               ".python-version", ".gitignore")
 REPORT_FILES = ("experiment_report.md", "Orchid课程报告.pdf", "pretraining.md", "finetuning.md",
-                "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md")
+                "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md", "prosody_source_audit.md")
 
 
 def make_zip(output, bundle):
@@ -41,7 +41,7 @@ def make_zip(output, bundle):
                 for file in sorted((ROOT/directory).rglob("*")):
                     if file.is_file() and "__pycache__" not in file.parts and file.suffix in (
                         ".py", ".json", ".yaml", ".md", ".txt", ".pdf", ".svg", ".csv"
-                    ) and not file.name.endswith("_completed.csv"):
+                    ) and not file.name.endswith(("_completed.csv", "_completed.md")):
                         add(file, file.relative_to(ROOT))
             for name in REPORT_FILES:
                 path = ROOT/"report"/name
