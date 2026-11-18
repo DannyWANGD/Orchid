@@ -1,0 +1,27 @@
+{
+  "files": {
+    "best.pt": {
+      "bytes": 168606427,
+      "sha256": "e4fd1f0c3a73bbfaaab9b145dafb64cf7f56d09a14be52ffc7593280ed928d7e"
+    },
+    "last.pt": {
+      "bytes": 168606427,
+      "sha256": "e99be96bea5d2501e9aa6e8bea216dc389c74c9e92b21fd2d86cdbe1ba5c3676"
+    },
+    "random.pt": {
+      "bytes": 56196927,
+      "sha256": "4cfe362e450d594f8c0f8fb5cae0d982e78ca69529e86ad1d6fd880d82776924"
+    }
+  },
+  "provenance": "measured on RTX 4080 SUPER; fixed Tang corpus",
+  "validation_best": {
+    "nll": 4.954019817201638,
+    "ppl": 141.74360361798853,
+    "target_tokens": 158708
+  },
+  "validation_initial": {
+    "nll": 9.136061194142702,
+    "ppl": 9284.124654768757,
+    "target_tokens": 158708
+  }
+}

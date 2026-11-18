@@ -23,3 +23,12 @@ python -E scripts/build_tokenizer.py --config configs/data.yaml
 ```
 
 首次运行下载原始唐诗到 `data/raw/tang/`。添加 `--offline` 可用本地已校验的分片复跑。同一快照和配置重建 `data/processed/`，其中包含三个独立诗集与 token 流；`artifacts/` 保存源文件清单、冻结的划分、字表和统计。训练只学习 train 的 8,582 个 token（含保留标记）；验证和测试里的生僻字可以变成 `<unk>`，比例见 [token 统计](artifacts/token_stats.json)。
+
+正式预训练可按实际记录分两段运行（首轮试训后完整续训，调度仍以 10 轮为上限）：
+
+```bash
+python -E scripts/pretrain.py --config configs/pretrain.yaml --run-id pretrain-tang-v1 --stop-after 87
+python -E scripts/pretrain.py --config configs/pretrain.yaml --resume checkpoints/pretrain/pretrain-tang-v1/last.pt
+```
+
+日志写入 `runs/pretrain-tang-v1/`；权重写入 `checkpoints/pretrain/pretrain-tang-v1/{random,best,last}.pt`。重新运行实验时使用新的 `--run-id`。详见 [预训练实测](report/pretraining.md)。

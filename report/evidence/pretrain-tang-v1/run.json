@@ -1,0 +1,139 @@
+{
+  "code": {
+    "files": {
+      "orchid/data.py": "bc73370590e8ade9175c5d3c144de5c8030d8a3ea4d1da56e7483bb43579cd74",
+      "orchid/generation.py": "235d8312712762b7690ed9503d98b6632b62e5a8348c1b9b8ae2541ceba44e75",
+      "orchid/io.py": "25a994501638958a8c64732c8a4ca9bcce5892821130c5753586c51536a7b9fa",
+      "orchid/model.py": "8a0dd2d07ce81e0c6fa9a3c94f7fae80ee5a08e82c8dcb66dd8b8fe8cb1b5268",
+      "orchid/runner.py": "ce5d78edcb478b23afb9c47fb8e3be234e0c3cd9b5cd8a5ee8f21d90676ad897",
+      "orchid/tokenizer.py": "5745522500c53f1e475226fdfbec661232de76510cc94ed6e845101250a811f4",
+      "orchid/training.py": "7b837ab083dc4ae0bff46c267a8f1022d93c6db9e853339a7978e71f85c1a313",
+      "scripts/pretrain.py": "64e4b4ac204bc371adb44458477d132b193fa404494d0756d690547308cbaf61"
+    },
+    "git_head": "930cc16bf6901a0d7e9960433a5e0b7ed95e4a64",
+    "source_sha256": "f2561bc16b8144d73a1887e5472e5a9537ea19c454eef3d27f94129df3aef390"
+  },
+  "config_sha256": "5cbe9464a3691402a77fa5f30d051ac86abfdb05b05b10527bdae267bf3ebacb",
+  "environment": {
+    "accelerator": "NVIDIA GeForce RTX 4080 SUPER",
+    "cpu_threads": 2,
+    "cuda_build": "12.6",
+    "deterministic": false,
+    "device": "cuda",
+    "fp32_matmul_precision": "highest",
+    "numpy": "2.4.6",
+    "python": "3.11.16",
+    "torch": "2.14.1+cu126"
+  },
+  "initialization": {
+    "kind": "random_init",
+    "seed": 2026
+  },
+  "lineage": {
+    "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+    "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+    "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+    "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+    "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+  },
+  "model": {
+    "attention": "sdpa",
+    "context_length": 256,
+    "d_model": 384,
+    "dropout": 0.1,
+    "n_head": 6,
+    "n_layer": 6,
+    "vocab_size": 8582
+  },
+  "resolved": {
+    "data": "configs/data.yaml",
+    "data_config": {
+      "paths": {
+        "artifacts": "artifacts",
+        "processed": "data/processed",
+        "raw": "data/raw/tang"
+      },
+      "seed": 2026,
+      "source": {
+        "directory": "全唐诗",
+        "repo": "chinese-poetry/chinese-poetry",
+        "revision": "b8594f81a89752241442f2ce267d6f66f96704ee",
+        "tang_shards": 58
+      },
+      "split": {
+        "test": 0.05,
+        "train": 0.9,
+        "validation": 0.05
+      }
+    },
+    "model": "configs/model.yaml",
+    "model_config": {
+      "attention": "sdpa",
+      "context_length": 256,
+      "d_model": 384,
+      "dropout": 0.1,
+      "n_head": 6,
+      "n_layer": 6,
+      "vocab_size": 8582
+    },
+    "planned_steps": 870,
+    "resolved_device": "cuda",
+    "resolved_precision": "bf16",
+    "runtime": {
+      "cpu_threads": 2,
+      "deterministic": false,
+      "device": "cuda",
+      "fp32_matmul_precision": "highest",
+      "precision": "bf16"
+    },
+    "sampling": {
+      "max_new_tokens": 48,
+      "prefixes": [
+        "春",
+        "孤舟",
+        "山月"
+      ],
+      "seed": 11,
+      "temperature": 0.8,
+      "top_k": 50,
+      "top_p": 1.0
+    },
+    "seed": 2026,
+    "steps_per_epoch": 87,
+    "task": "configs/task.yaml",
+    "task_config": {
+      "chars_per_line": 5,
+      "form": "wujue",
+      "keywords": {
+        "max": 3,
+        "max_chars": 2,
+        "min": 1,
+        "min_chars": 1
+      },
+      "lines": 4,
+      "script": "source_traditional"
+    },
+    "training": {
+      "accumulation": 4,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "epochs": 10,
+      "eps": 1e-08,
+      "eval_every": 0,
+      "grad_clip": 1.0,
+      "lr": 0.0003,
+      "micro_batch": 32,
+      "min_improvement": 0.0001,
+      "min_lr_fraction": 0.1,
+      "patience": 3,
+      "warmup_fraction": 0.03,
+      "weight_decay": 0.1
+    }
+  },
+  "run_id": "pretrain-tang-v1",
+  "seed": 2026,
+  "stage": "pretrain",
+  "tokenizer_path": "artifacts/tokenizer.json"
+}
