@@ -1,0 +1,66 @@
+{
+  "checkpoint": "14M validated export",
+  "cpu_generation": {
+    "canonical_punctuation": true,
+    "constrained_form": false,
+    "device": "cpu",
+    "format_ok": true,
+    "generated": "自夜清夜雨，無心自有深。幽人獨自處，空齋空有山。",
+    "generated_ids": [
+      5634,
+      1305,
+      3577,
+      1305,
+      7603,
+      8373,
+      3892,
+      1997,
+      5634,
+      2828,
+      3567,
+      8,
+      1845,
+      258,
+      4110,
+      5634,
+      6094,
+      8373,
+      4825,
+      8343,
+      4825,
+      2828,
+      1631,
+      8
+    ],
+    "generated_steps": 25,
+    "joint_ok": false,
+    "keyword_hits": [],
+    "keywords": [
+      "秋雨",
+      "孤舟"
+    ],
+    "keywords_ok": false,
+    "lines": [
+      "自夜清夜雨",
+      "無心自有深",
+      "幽人獨自處",
+      "空齋空有山"
+    ],
+    "load_seconds": 0.12826007907278836,
+    "model_hash": "94f6e655dff666fe8957d339276ad29f7ec0a98e0998ed70bdac0fdc7ecbfbc3",
+    "parsed": true,
+    "seconds": 0.11817501811310649,
+    "stop": "eos"
+  },
+  "cursor": {
+    "epoch": 0,
+    "rows": 16,
+    "step": 2,
+    "target_tokens": 4096,
+    "train_seconds": 2.1254460581112653
+  },
+  "evaluation_smoke_sha": "8912be787570e69e7b364d0cffeba62f175db6343237b56f5ba7d8317aa70fc5",
+  "install": "clean Python 3.11.16 virtualenv from requirements; 182 pins and CUDA check passed",
+  "prepare": "pinned source downloaded and frozen IDs verified in clean archive",
+  "scope": "new checkout, installed independently; short training and resume"
+}
