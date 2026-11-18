@@ -1,8 +1,10 @@
 # 诗歌盲评：组织者说明
 
-**优先评 92M 交付版。** 请将 [评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) 和 [评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip) 分别交给两位评阅者。每个 ZIP 只有一份匿名 CSV 和[评分说明](reviewer_guide.md)。表里有 30 道题、共 60 条输出；两份表的题序和组内显示顺序独立打乱。评阅者评切题、通顺、连贯、意象与意境，四项各 1～5 分。
+**14M 已收到 1/2 份有效回件。** 第 2 份回件的 60 条匿名 ID 和 240 个评分均通过校验，本机备份为 `reviewer_2_completed.csv`。交给同版另一位评阅者的是 [14M 评阅者 1 独立材料](../../dist/orchid-blind-14m/reviewer_1.zip)。
 
-请勿把本组织者页面、课程包、模型对应关系、生成日志或[格律抽查说明](meter_review.md)一同发给评阅者。回件只需填完的 UTF-8 CSV；请放在 `report/blind_review/expanded/`，分别命名为 `reviewer_1_completed.csv` 和 `reviewer_2_completed.csv`。这两份回件默认不进 Git，也不进入交付 ZIP。组织者负责确认由两人独立完成，这不能由 CSV 自动证明。基线 14M 的两份表保留为可选附加对照；翻阅任何结果前先评完。
+**原 92M 收到 0/2 份回件。** [92M 评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) 和 [92M 评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip) 各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。评阅者评切题、通顺、连贯、意象与意境，四项各 1～5 分。[评分说明](reviewer_guide.md)
+
+评阅者仅需各自的 ZIP，并在查看结果前独立完成。14M 回件放在本目录，原 92M 回件放在 `expanded/`，均用 `reviewer_1_completed.csv` 和 `reviewer_2_completed.csv` 命名。回件保存在本机，课程包使用空白表。按同一版本汇总，组织者确认两位独立完成。新押韵版已完成自动对照，已有评分对应旧轮次的原诗。[押韵改进实测](../prosody_optimization.md)
 
 ## 重建表与单独分发包
 
@@ -37,4 +39,4 @@ python -E scripts/blind_review.py aggregate \
     --output runs/human_review_expanded.json
 ```
 
-私有映射如已丢失，汇总时把 `--key` 改为上面重建的路径。收到完整评分后再填入报告，同时保留四维均值、分布、逐题配对差值与至少相差 2 分的条目。当前收到 **0/2** 份真实评分。
+汇总 14M 时，生成文件用 `report/evidence/fixed-eval-v1/generations.jsonl`，私有映射与两份空白原件用 `runs/poetry-blind-v1/`，回件用本目录的两个 `*_completed.csv`。私有映射如需重建，使用该生成文件及模型 `R1 R2-2027`。完整汇总保留四维均值、分布、逐题配对差值与至少相差 2 分的条目。

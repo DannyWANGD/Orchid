@@ -6,6 +6,8 @@
     1,
     5
   ],
-  "received": 0,
+  "received": 1,
+  "validated_review_rows": 60,
+  "validated_score_cells": 240,
   "source_key_sha256": "b9a5a211f07aab5f7eb1cfaead35a6b2e056899791593bcbec65b9d766cb364e"
 }

@@ -1,0 +1,201 @@
+{
+  "constrained_samples": {
+    "cpu": {
+      "command": [
+        "scripts/generate.py",
+        "--checkpoint",
+        "model",
+        "--keywords",
+        "秋雨",
+        "孤舟",
+        "--device",
+        "cpu",
+        "--seed",
+        "11",
+        "--json"
+      ],
+      "result": {
+        "candidate_count": 4,
+        "canonical_punctuation": true,
+        "constrained_form": true,
+        "constrained_keywords": true,
+        "constrained_rhyme": true,
+        "device": "cpu",
+        "format_ok": true,
+        "generated": "萬里孤舟急，千秋雨葉微。愁心對明月，不見鷓鴣飛。",
+        "generated_ids": [
+          5876,
+          7257,
+          1498,
+          5667,
+          2040,
+          8373,
+          749,
+          4761,
+          7603,
+          5885,
+          1989,
+          8,
+          2146,
+          1997,
+          1586,
+          2722,
+          2827,
+          8373,
+          189,
+          6420,
+          8206,
+          8144,
+          7817,
+          8
+        ],
+        "generated_steps": 25,
+        "joint_ok": true,
+        "keyword_hits": [
+          "秋雨",
+          "孤舟"
+        ],
+        "keywords": [
+          "秋雨",
+          "孤舟"
+        ],
+        "keywords_ok": true,
+        "lines": [
+          "萬里孤舟急",
+          "千秋雨葉微",
+          "愁心對明月",
+          "不見鷓鴣飛"
+        ],
+        "load_seconds": 0.7541107139550149,
+        "mode": "rhymed",
+        "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
+        "parsed": true,
+        "ping_matches": [
+          "上平聲五微"
+        ],
+        "repeated_rhyme_char": false,
+        "rhyme": "pass",
+        "rhyme_cause": null,
+        "rhyme_characters": [
+          "微",
+          "飛"
+        ],
+        "seconds": 2.4033225420862436,
+        "stop": "eos"
+      }
+    },
+    "cuda": {
+      "command": [
+        "scripts/generate.py",
+        "--checkpoint",
+        "model",
+        "--keywords",
+        "秋雨",
+        "孤舟",
+        "--device",
+        "cuda",
+        "--seed",
+        "11",
+        "--json"
+      ],
+      "result": {
+        "candidate_count": 4,
+        "canonical_punctuation": true,
+        "constrained_form": true,
+        "constrained_keywords": true,
+        "constrained_rhyme": true,
+        "device": "cuda",
+        "format_ok": true,
+        "generated": "孤舟橫古道，千里秋雨寒。一宿秋風前，蕭蕭征馬鞍。",
+        "generated_ids": [
+          1498,
+          5667,
+          3188,
+          812,
+          7072,
+          8373,
+          749,
+          7257,
+          4761,
+          7603,
+          1552,
+          8,
+          182,
+          1542,
+          4761,
+          7792,
+          641,
+          8373,
+          6003,
+          6003,
+          1963,
+          7890,
+          7682,
+          8
+        ],
+        "generated_steps": 25,
+        "joint_ok": true,
+        "keyword_hits": [
+          "秋雨",
+          "孤舟"
+        ],
+        "keywords": [
+          "秋雨",
+          "孤舟"
+        ],
+        "keywords_ok": true,
+        "lines": [
+          "孤舟橫古道",
+          "千里秋雨寒",
+          "一宿秋風前",
+          "蕭蕭征馬鞍"
+        ],
+        "load_seconds": 1.019635139964521,
+        "mode": "rhymed",
+        "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
+        "parsed": true,
+        "ping_matches": [
+          "上平聲十四寒"
+        ],
+        "repeated_rhyme_char": false,
+        "rhyme": "pass",
+        "rhyme_cause": null,
+        "rhyme_characters": [
+          "寒",
+          "鞍"
+        ],
+        "seconds": 0.3489956269040704,
+        "stop": "eos"
+      }
+    }
+  },
+  "contains_private_review_or_keys": false,
+  "original_blank_reviewer_templates": 4,
+  "package": {
+    "bundle": {
+      "files": {
+        "config.json": "5035e17b4948731486107816c98f5970c269656b12405f41c6df9a92664f99e4",
+        "tokenizer.json": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "weights.pt": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59"
+      },
+      "source_checkpoint_sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+      "source_run": "sft-prosody-rhyme-20261118",
+      "source_stage": "sft",
+      "source_step": 384,
+      "version": 1
+    },
+    "bytes": 351617686,
+    "file_count": 294,
+    "zip": "dist/Orchid-course-prosody.zip",
+    "zip_sha256": "c15a1c2c3401b08d05855f0fbdb81c31533bdc3803691f568a4edfa54f91865d"
+  },
+  "raw_parity": {
+    "identical": true,
+    "prompt_id": "M001",
+    "seed": 11
+  },
+  "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+  "scope": "Fresh extraction with local installed dependencies",
+  "unittest_summary": "----------------------------------------------------------------------\nRan 17 tests in 0.802s\n\nOK",
+  "without_training_data": true
+}

@@ -1,0 +1,537 @@
+{
+  "device": "cuda",
+  "generations_sha256": "87c78887776a3a02b91856eaba33a9e61b03f0cf22101106bcac918696de0c74",
+  "input_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+  "models": {
+    "form": {
+      "path": "checkpoints/sft/sft-prosody-rhyme-20261118/last.pt",
+      "run_id": "sft-prosody-rhyme-20261118",
+      "sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+      "summary": {
+        "all_rules": {
+          "count": 17,
+          "rate": 0.11333333333333333,
+          "total": 150
+        },
+        "canonical_punctuation": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "distinct_rhyme": {
+          "count": 93,
+          "rate": 0.62,
+          "total": 150
+        },
+        "format_ok": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "joint_ok": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "keyword_coverage_micro": {
+          "count": 73,
+          "rate": 0.24092409240924093,
+          "total": 303
+        },
+        "keywords_ok": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "median_seconds": 0.050734366523101926,
+        "parsed": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "rejected_by_case": {},
+        "repeat_occurrence": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "repeated_line": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "requests": 150,
+        "rhyme": {
+          "decided_among_wellformed": {
+            "count": 110,
+            "rate": 0.7333333333333333,
+            "total": 150
+          },
+          "fail": 14,
+          "pass": 96,
+          "pass_among_decided": {
+            "count": 96,
+            "rate": 0.8727272727272727,
+            "total": 110
+          },
+          "repeated_char": 3,
+          "unknown": 40,
+          "unknown_causes": {
+            "ambiguous_reading": 34,
+            "missing_form": 6
+          }
+        },
+        "rhyme_groups": {
+          "上平聲一東": 4,
+          "上平聲七虞": 2,
+          "上平聲二冬": 1,
+          "上平聲五微": 7,
+          "上平聲八齊": 2,
+          "上平聲六魚": 1,
+          "上平聲十一真": 8,
+          "上平聲十三元": 4,
+          "上平聲十五刪": 1,
+          "上平聲十四寒": 4,
+          "上平聲十灰": 4,
+          "上平聲四支": 9,
+          "下平聲一先": 6,
+          "下平聲七陽": 3,
+          "下平聲九青": 1,
+          "下平聲二蕭": 2,
+          "下平聲五歌": 2,
+          "下平聲八庚": 9,
+          "下平聲六麻": 4,
+          "下平聲十一尤": 12,
+          "下平聲十二侵": 5,
+          "下平聲十蒸": 1,
+          "下平聲四豪": 1
+        },
+        "same_poem_across_prompts": 0,
+        "stop_reasons": {
+          "eos": 150
+        },
+        "train_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      }
+    },
+    "raw": {
+      "path": "checkpoints/sft/sft-prosody-rhyme-20261118/last.pt",
+      "run_id": "sft-prosody-rhyme-20261118",
+      "sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+      "summary": {
+        "all_rules": {
+          "count": 17,
+          "rate": 0.11333333333333333,
+          "total": 150
+        },
+        "canonical_punctuation": {
+          "count": 148,
+          "rate": 0.9866666666666667,
+          "total": 150
+        },
+        "distinct_rhyme": {
+          "count": 92,
+          "rate": 0.6133333333333333,
+          "total": 150
+        },
+        "format_ok": {
+          "count": 148,
+          "rate": 0.9866666666666667,
+          "total": 150
+        },
+        "joint_ok": {
+          "count": 24,
+          "rate": 0.16,
+          "total": 150
+        },
+        "keyword_coverage_micro": {
+          "count": 73,
+          "rate": 0.24092409240924093,
+          "total": 303
+        },
+        "keywords_ok": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "median_seconds": 0.032036450458690524,
+        "parsed": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "rejected_by_case": {},
+        "repeat_occurrence": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 148
+        },
+        "repeated_line": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "requests": 150,
+        "rhyme": {
+          "decided_among_wellformed": {
+            "count": 109,
+            "rate": 0.7364864864864865,
+            "total": 148
+          },
+          "fail": 14,
+          "pass": 95,
+          "pass_among_decided": {
+            "count": 95,
+            "rate": 0.8715596330275229,
+            "total": 109
+          },
+          "repeated_char": 3,
+          "unknown": 39,
+          "unknown_causes": {
+            "ambiguous_reading": 32,
+            "missing_form": 7
+          }
+        },
+        "rhyme_groups": {
+          "上平聲一東": 4,
+          "上平聲七虞": 2,
+          "上平聲二冬": 1,
+          "上平聲五微": 7,
+          "上平聲八齊": 2,
+          "上平聲六魚": 1,
+          "上平聲十一真": 8,
+          "上平聲十三元": 4,
+          "上平聲十五刪": 2,
+          "上平聲十四寒": 3,
+          "上平聲十灰": 4,
+          "上平聲四支": 9,
+          "下平聲一先": 5,
+          "下平聲七陽": 3,
+          "下平聲九青": 1,
+          "下平聲二蕭": 2,
+          "下平聲五歌": 2,
+          "下平聲八庚": 9,
+          "下平聲六麻": 5,
+          "下平聲十一尤": 11,
+          "下平聲十二侵": 5,
+          "下平聲十蒸": 1,
+          "下平聲四豪": 1
+        },
+        "same_poem_across_prompts": 0,
+        "stop_reasons": {
+          "eos": 150
+        },
+        "train_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          }
+        }
+      }
+    },
+    "rhyme-only": {
+      "path": "checkpoints/sft/sft-prosody-rhyme-20261118/last.pt",
+      "run_id": "sft-prosody-rhyme-20261118",
+      "sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+      "summary": {
+        "all_rules": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "canonical_punctuation": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "distinct_rhyme": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "format_ok": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "joint_ok": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "keyword_coverage_micro": {
+          "count": 74,
+          "rate": 0.24422442244224424,
+          "total": 303
+        },
+        "keywords_ok": {
+          "count": 25,
+          "rate": 0.16666666666666666,
+          "total": 150
+        },
+        "median_seconds": 0.04945968650281429,
+        "parsed": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "rejected_by_case": {},
+        "repeat_occurrence": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "repeated_line": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "requests": 150,
+        "rhyme": {
+          "decided_among_wellformed": {
+            "count": 150,
+            "rate": 1.0,
+            "total": 150
+          },
+          "fail": 0,
+          "pass": 150,
+          "pass_among_decided": {
+            "count": 150,
+            "rate": 1.0,
+            "total": 150
+          },
+          "repeated_char": 0,
+          "unknown": 0,
+          "unknown_causes": {}
+        },
+        "rhyme_groups": {
+          "上平聲一東": 7,
+          "上平聲七虞": 2,
+          "上平聲九佳": 1,
+          "上平聲二冬": 1,
+          "上平聲五微": 8,
+          "上平聲八齊": 3,
+          "上平聲六魚": 2,
+          "上平聲十一真": 11,
+          "上平聲十三元": 6,
+          "上平聲十二文": 3,
+          "上平聲十五刪": 2,
+          "上平聲十四寒": 9,
+          "上平聲十灰": 7,
+          "上平聲四支": 12,
+          "下平聲一先": 9,
+          "下平聲七陽": 11,
+          "下平聲九青": 3,
+          "下平聲二蕭": 1,
+          "下平聲五歌": 2,
+          "下平聲八庚": 15,
+          "下平聲六麻": 9,
+          "下平聲十一尤": 13,
+          "下平聲十二侵": 10,
+          "下平聲十蒸": 1,
+          "下平聲四豪": 2
+        },
+        "same_poem_across_prompts": 0,
+        "stop_reasons": {
+          "eos": 150
+        },
+        "train_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      }
+    },
+    "rhymed": {
+      "path": "checkpoints/sft/sft-prosody-rhyme-20261118/last.pt",
+      "run_id": "sft-prosody-rhyme-20261118",
+      "sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+      "summary": {
+        "all_rules": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "canonical_punctuation": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "distinct_rhyme": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "format_ok": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "joint_ok": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "keyword_coverage_micro": {
+          "count": 303,
+          "rate": 1.0,
+          "total": 303
+        },
+        "keywords_ok": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "median_seconds": 0.18867312895599753,
+        "parsed": {
+          "count": 150,
+          "rate": 1.0,
+          "total": 150
+        },
+        "rejected_by_case": {},
+        "repeat_occurrence": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "repeated_line": {
+          "count": 0,
+          "rate": 0.0,
+          "total": 150
+        },
+        "requests": 150,
+        "rhyme": {
+          "decided_among_wellformed": {
+            "count": 150,
+            "rate": 1.0,
+            "total": 150
+          },
+          "fail": 0,
+          "pass": 150,
+          "pass_among_decided": {
+            "count": 150,
+            "rate": 1.0,
+            "total": 150
+          },
+          "repeated_char": 0,
+          "unknown": 0,
+          "unknown_causes": {}
+        },
+        "rhyme_groups": {
+          "上平聲一東": 7,
+          "上平聲七虞": 3,
+          "上平聲九佳": 1,
+          "上平聲二冬": 1,
+          "上平聲五微": 7,
+          "上平聲八齊": 1,
+          "上平聲六魚": 2,
+          "上平聲十一真": 12,
+          "上平聲十三元": 6,
+          "上平聲十五刪": 3,
+          "上平聲十四寒": 10,
+          "上平聲十灰": 10,
+          "上平聲四支": 10,
+          "下平聲一先": 9,
+          "下平聲七陽": 6,
+          "下平聲九青": 1,
+          "下平聲二蕭": 1,
+          "下平聲五歌": 1,
+          "下平聲八庚": 17,
+          "下平聲六麻": 8,
+          "下平聲十一尤": 18,
+          "下平聲十二侵": 12,
+          "下平聲十蒸": 2,
+          "下平聲四豪": 2
+        },
+        "same_poem_across_prompts": 0,
+        "stop_reasons": {
+          "eos": 150
+        },
+        "train_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      }
+    }
+  },
+  "precision": "fp32",
+  "prompt_count": 50,
+  "protocol_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+  "provenance": "Measured on the Orchid checkpoints and frozen prompts",
+  "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  },
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "selection": {
+    "model": "rhyme-sft",
+    "validation_checks": {
+      "all_rules_retained": true,
+      "form_and_keywords_retained": true,
+      "more_distinct_rhymes_than_original_and_control": true,
+      "no_more_exact_train_matches": true
+    }
+  },
+  "stage": "test",
+  "torch": "2.14.1+cu126",
+  "train_sha256": "0fc0d34bb5e5cdcf2ad7c032020dfa71803241aef236fac115a6bd68c9d297f0",
+  "validation_study_sha256": "bf3c70f2d8508ab43e5f9c21e77391a036294130236c34efe904e025ba8fc27c"
+}

@@ -6,6 +6,8 @@
 
 14M 基线包的本机入口：[Orchid-course-baseline.zip](../dist/Orchid-course-baseline.zip)。其中权重、字表、配置与归档内容都已逐项校验；在独立目录解压后可用 `--checkpoint model`，无需训练数据。[归档校验](../report/evidence/delivery-baseline.json)与[解压后生成记录](../report/evidence/independent-archive-generation.json)可复查。
 
-正式交付使用 [Orchid-course.zip](../dist/Orchid-course.zip) 的 92M 唐宋版。已在独立环境解压：在没有原始语料和训练 checkpoint 的条件下，CPU 可加载原始模式，CUDA 可跑带字数和关键词约束的模式，全部单元测试通过。[归档校验](../report/evidence/delivery-92m.json)和[解压验收](../report/evidence/delivery-92m-extraction.json)。
+新版课程包使用 92M 韵律续训权重、离线韵表和默认四句五字押韵解码。解压至独立目录后，用 `--checkpoint model` 即可生成。课程包使用空白评分表。[新版课程包](../dist/Orchid-course-prosody.zip) · [新版解压验收](../report/evidence/delivery-92m-prosody.json)
+
+原 92M 唐宋版作为旧评阅和实验对应的留档。在独立环境，归档可在 CPU 加载原始模式，也可在 CUDA 跑原版字数和关键词约束。[原课程包](../dist/Orchid-course.zip) · [原归档校验](../report/evidence/delivery-92m.json) · [原解压验收](../report/evidence/delivery-92m-extraction.json)
 
 真人评阅者只使用各自的[独立评分包](../report/blind_review/README.md)。课程 ZIP 含解盲后的自动评估和可复现源码，用于课程交付，不用作盲评发放材料。

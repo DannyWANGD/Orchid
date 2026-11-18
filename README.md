@@ -4,6 +4,18 @@ Orchid 是一个从随机初始化训练的字符级 GPT。课程任务是给定
 
 课程要求见 [Problem.md](Problem.md)，进度和验收标准见 [GPT_BUILD_CHECKLIST.md](GPT_BUILD_CHECKLIST.md)。[数据约定](docs/data_contract.md)说明语料和测试边界；具体参考及许可证见 [第三方登记](THIRD_PARTY_NOTICES.md)。
 
+## 使用新版生成古诗
+
+```bash
+python -E scripts/generate.py --checkpoint dist/orchid-92m-prosody --keywords 秋雨 孤舟 --device cuda --json
+```
+
+新版默认写四句，每句五字，使用全部关键词，第 2、4 句以同一平水韵平声部的不同字结尾。输入可包含 1～3 个繁体关键词，每个 1～2 字。用 `--mode raw` 查看模型自由生成，`--mode rhyme-only` 只限定字数和押韵。原有 `--constrain-form` 和 `--constrain-keywords` 分别复现旧实验的字数和固定词位。JSON 会给出韵脚字、韵部和生成时间。
+
+解压 [92M 押韵版课程包](dist/Orchid-course-prosody.zip) 后，将命令中的检查点改为 `model`。无 CUDA 时用 `--device cpu`。续训、解码对照和逐条输出见[押韵改进实测](report/prosody_optimization.md)。
+
+## 环境与基础训练
+
 在 Ubuntu 22.04、Python 3.11.16 上，用仓库的 `.venv` 或用同版本 Python 新建虚拟环境。`requirements.txt` 固定了 CUDA 12.6 构建的 PyTorch。
 
 ```bash
@@ -51,13 +63,13 @@ done
 ```bash
 python -E scripts/evaluate.py --config configs/eval.yaml --device cpu --output runs/fixed-eval-v1
 python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --output dist/orchid-14m
-python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cpu --json
-python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cuda --json
+python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cpu --mode raw --json
+python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cuda --mode raw --json
 ```
 
-`--constrain-form` 只强制字数、标点和停止，默认关闭。CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对照固定设备。无 CUDA 时可用 `--device cpu`。本地权重不进 Git；可从检查点重新导出，`dist/orchid-14m/bundle.json` 记录权重、字表和配置哈希。详见 [封存评估](report/evaluation_baseline.md) 和 [盲评说明](report/blind_review/README.md)。
+CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对照固定设备。`dist/orchid-14m/bundle.json` 记录从检查点导出的权重、字表和配置哈希。详见[封存评估](report/evaluation_baseline.md)和[盲评说明](report/blind_review/README.md)。
 
-### 交付包与盲评
+### 历史基线包与盲评
 
 本机 ZIP 示例：[14M 基线包](dist/Orchid-course-baseline.zip)。在新目录解压进入 `orchid-course/`，安装固定依赖后运行：
 
@@ -65,9 +77,7 @@ python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤
 python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --device cpu --constrain-keywords --json
 ```
 
-`--constrain-keywords` 同时固定五言四句外形和每个关键词的出现位置，不能保证押韵或用词自然。默认的无约束模式衡量的是模型原始能力。
-
-两份真人评分表位于 [report/blind_review](report/blind_review/README.md)。不要把结果页面或私有模型映射交给评阅者。汇总命令会校验两份表的 60 个匿名 ID 及 1～5 分评分。
+评阅者收到的是各自的匿名诗、题目及评分说明。14M 已核验一份回件，旧 92M 仍待回件。汇总命令会校验同版本两份表的 60 个匿名 ID 及 1～5 分评分。[盲评说明](report/blind_review/README.md)
 
 报告源文件 [Markdown](report/experiment_report.md)，可读版 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，从仓库根目录运行 `python -E scripts/build_report.py` 重建 PDF。
 
@@ -91,10 +101,10 @@ done
 
 ```bash
 python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-song-92m-2028/best.pt --output dist/orchid-92m
-python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cpu --json
+python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cpu --mode raw --json
 python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cuda --constrain-keywords
 ```
 
 如要复跑多模型冻结对照，使用 `python -E scripts/evaluate.py --config configs/eval-expanded.json --device cuda --output runs/retained-expanded-eval-v1`；该配置同时登记 14M/42M/92M 对照的本地权重。只查看现成结果无需训练。每个运行 ID 的配置、成绩与 checkpoint 哈希在 [report/evidence](report/evidence/)。
 
-交付文件：[92M 本地 ZIP](dist/Orchid-course.zip) · [封存测试](report/evaluation_expanded.md) · [课程 PDF](report/Orchid课程报告.pdf)。在新目录解压 ZIP 后，`model/` 是 92M 交付权重；可直接用上一节的推理方式。源码和训练数据的固定下载地址同时附在包内。大的数据与 checkpoint 目录只存本机。两份 92M [盲评表](report/blind_review/README.md)仍待独立评阅者填写。
+原 92M 权重、封存对照与两份匿名表可从旧版留档查看。当前报告纳入了新版韵律续训、推理解码和同题对照。[原 92M 本地 ZIP](dist/Orchid-course.zip) · [封存测试](report/evaluation_expanded.md) · [课程 PDF](report/Orchid课程报告.pdf)
