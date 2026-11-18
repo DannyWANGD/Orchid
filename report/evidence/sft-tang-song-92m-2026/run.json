@@ -1,0 +1,136 @@
+{
+  "code": {
+    "files": {
+      "orchid/data.py": "bc73370590e8ade9175c5d3c144de5c8030d8a3ea4d1da56e7483bb43579cd74",
+      "orchid/generation.py": "235d8312712762b7690ed9503d98b6632b62e5a8348c1b9b8ae2541ceba44e75",
+      "orchid/io.py": "25a994501638958a8c64732c8a4ca9bcce5892821130c5753586c51536a7b9fa",
+      "orchid/model.py": "8a0dd2d07ce81e0c6fa9a3c94f7fae80ee5a08e82c8dcb66dd8b8fe8cb1b5268",
+      "orchid/runner.py": "ce5d78edcb478b23afb9c47fb8e3be234e0c3cd9b5cd8a5ee8f21d90676ad897",
+      "orchid/tokenizer.py": "5745522500c53f1e475226fdfbec661232de76510cc94ed6e845101250a811f4",
+      "orchid/training.py": "7b837ab083dc4ae0bff46c267a8f1022d93c6db9e853339a7978e71f85c1a313",
+      "scripts/finetune.py": "3a94fc4debe587e0f45a021031342909487c57810d81aa301fb08a8def168054"
+    },
+    "git_head": "7e2b363edfbd06b772e1bbea20513fc6fe897742",
+    "source_sha256": "1fb4e46f0c3e857715a35f5dfcdc69b2c29d773ab687f77464ff06a99335445d"
+  },
+  "config_sha256": "7b79d48b24dc400b17efa3fdd3b0222be425fdf853bd876ca8117be5d48ea1c0",
+  "environment": {
+    "accelerator": "NVIDIA GeForce RTX 4080 SUPER",
+    "cpu_threads": 2,
+    "cuda_build": "12.6",
+    "deterministic": false,
+    "device": "cuda",
+    "fp32_matmul_precision": "highest",
+    "numpy": "2.4.6",
+    "python": "3.11.16",
+    "torch": "2.14.1+cu126"
+  },
+  "initialization": {
+    "kind": "pretrain_best",
+    "path": "checkpoints/pretrain/pretrain-tang-song-92m/best.pt",
+    "sha256": "90ee0bd6ca869380134ed20fa13ce9960bda803684ab2b266654886ac864b514",
+    "source_run_id": "pretrain-tang-song-92m",
+    "source_step": 5076
+  },
+  "lineage": {
+    "data_manifest_sha256": "c9c3f54d59bf80cee65332b3d5427a87c3718864772b803f4fb36f372e33610a",
+    "sft_stats_sha256": "2a72a608584e3af092437a860adc315db6d34945d5e20ae343c4d6d112409768",
+    "split_manifest_sha256": "986346b1e9a8382a62c2c6f5fae9c2e25f168f0589510945df30ffd15ec556c0",
+    "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+    "train_input_sha256": "afd289f98bee816427d377862546082fc06305e0d184c2abe5212ba1413542e0",
+    "validation_input_sha256": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3"
+  },
+  "model": {
+    "attention": "sdpa",
+    "context_length": 256,
+    "d_model": 768,
+    "dropout": 0.1,
+    "n_head": 12,
+    "n_layer": 12,
+    "vocab_size": 8582
+  },
+  "resolved": {
+    "data": "configs/data-tang-song.yaml",
+    "data_config": {
+      "paths": {
+        "artifacts": "artifacts/tang-song",
+        "processed": "data/processed/tang-song",
+        "raw": "data/raw"
+      },
+      "song": "configs/song.yaml",
+      "tang": "configs/data.yaml"
+    },
+    "model": "configs/model-92m.yaml",
+    "model_config": {
+      "attention": "sdpa",
+      "context_length": 256,
+      "d_model": 768,
+      "dropout": 0.1,
+      "n_head": 12,
+      "n_layer": 12,
+      "vocab_size": 8582
+    },
+    "planned_steps": 9700,
+    "resolved_device": "cuda",
+    "resolved_precision": "bf16",
+    "runtime": {
+      "cpu_threads": 2,
+      "deterministic": false,
+      "device": "cuda",
+      "fp32_matmul_precision": "highest",
+      "precision": "bf16"
+    },
+    "sampling": {
+      "max_new_tokens": 64,
+      "seed": 11,
+      "temperature": 0.8,
+      "top_k": 50,
+      "top_p": 1.0,
+      "validation_count": 30
+    },
+    "seed": 2026,
+    "steps_per_epoch": 388,
+    "supervision": {
+      "frozen_holdout_data": "configs/data.yaml",
+      "min_train_poems": 2,
+      "seed": 2026,
+      "stopwords": "data/lexicon/stopwords.txt",
+      "whitelist": "data/lexicon/imagery.txt"
+    },
+    "task": "configs/task.yaml",
+    "task_config": {
+      "chars_per_line": 5,
+      "form": "wujue",
+      "keywords": {
+        "max": 3,
+        "max_chars": 2,
+        "min": 1,
+        "min_chars": 1
+      },
+      "lines": 4,
+      "script": "source_traditional"
+    },
+    "training": {
+      "accumulation": 1,
+      "betas": [
+        0.9,
+        0.95
+      ],
+      "epochs": 25,
+      "eps": 1e-08,
+      "eval_every": 0,
+      "grad_clip": 1.0,
+      "lr": 0.00015,
+      "micro_batch": 32,
+      "min_improvement": 0.0001,
+      "min_lr_fraction": 0.1,
+      "patience": 3,
+      "warmup_fraction": 0.03,
+      "weight_decay": 0.1
+    }
+  },
+  "run_id": "sft-tang-song-92m-2026",
+  "seed": 2026,
+  "stage": "sft",
+  "tokenizer_path": "artifacts/tang-song/tokenizer.json"
+}

@@ -217,13 +217,14 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
     torch.set_num_threads(cfg["runtime"]["cpu_threads"])
     device = device_override or cfg["runtime"]["device"]
     selected = cfg["selected"]
+    paired_pretrain = cfg.get("paired_pretrain", "R1")
     models = cfg["models"]
-    if selected not in models:
-        raise ValueError("Selected SFT model not present")
+    if selected not in models or paired_pretrain not in models:
+        raise ValueError("Selected SFT model or its pretraining baseline not present")
     if variants_only:
         models = {k:v for k,v in models.items() if k.startswith("X-")}
     if smoke:
-        models = {k:v for k,v in models.items() if k in ("R1",selected)}
+        models = {k:v for k,v in models.items() if k in (paired_pretrain,selected)}
     cases = {}
     reference, benchmarks, provenance = {}, {}, {}
     by_main_id = {r["id"]: r for r in ps["suites"]["main"]}
@@ -285,20 +286,27 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
         r["replacement_all_hit"] = control["keywords_ok"]
     metrics = {n: {s: strata([r for r in rows if r["suite"] == s]) for s in sorted({r["suite"] for r in rows})}
                for n, rows in cases.items()}
-    multi = {}
-    for s in suites:
-        names = [n for n,values in metrics.items() if n.startswith("R2-20") and s in values]
-        if not names:
-            continue
-        multi[s] = {}
-        for k in ("format_ok","keywords_ok","joint_ok"):
-            values = [metrics[n][s]["overall"][k] for n in names]
-            vals = [r["rate"] for r in values]
-            multi[s][k] = {"mean": mean(vals), "std": stdev(vals) if len(vals)>1 else None,
-                           "n_seeds": len(vals), "by_run": dict(zip(names,values))}
+    def summarize_group(names):
+        group = {}
+        for s in suites:
+            present = [n for n in names if s in metrics.get(n, {})]
+            if not present:
+                continue
+            group[s] = {}
+            for k in ("format_ok","keywords_ok","joint_ok"):
+                values = [metrics[n][s]["overall"][k] for n in present]
+                vals = [r["rate"] for r in values]
+                group[s][k] = {"mean": mean(vals), "std": stdev(vals) if len(vals)>1 else None,
+                               "n_seeds": len(vals), "by_run": dict(zip(present,values))}
+        return group
+
+    multi = summarize_group([n for n in metrics if n.startswith("R2-20")])
+    extra_groups = {name:summarize_group(names) for name,names in cfg.get("seed_groups", {}).items()}
     contrasts = {}
-    if selected in cases and "R1" in cases:
-        comparisons = [("R1",selected), ("R2-K",selected), (selected,"R3")]
+    if selected in cases and paired_pretrain in cases and "R2-K" in cases:
+        if provenance[selected]["init"].get("sha256") != provenance[paired_pretrain]["sha256"]:
+            raise ValueError("The evaluation baseline is not the selected model's pretraining checkpoint")
+        comparisons = [(paired_pretrain,selected), ("R2-K",selected), (selected,"R3")]
         if "R3-K" in cases:
             comparisons.append((selected,"R3-K"))
         for a, b in comparisons:
@@ -310,7 +318,8 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
         "schema": "orchid-eval-v1", "task": "keywords -> four five-Han-character lines",
         "dataset": "pinned chinese-poetry Tang holdouts; training lineage recorded per model",
         "metrics": ["word exact hit", "four-by-five", "joint", "train matches", "even-line rhyme", "reference NLL"],
-        "selected": selected, "seeds": seeds, "sampling": cfg["sampling"], "smoke": smoke,
+        "selected": selected, "paired_pretrain": paired_pretrain,
+        "seeds": seeds, "sampling": cfg["sampling"], "smoke": smoke,
         "provenance": {"mode":"measured", "timestamp": datetime.now(timezone.utc).isoformat(),
                        "device": str(device), "dataset_contract":"docs/data_contract.md",
                        "data_manifest_sha256": data_stat["data_manifest_sha256"],
@@ -318,7 +327,8 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
                        "split_manifest_sha256": data_stat["split_manifest_sha256"],
                        "prompt_version": ps["version"], "prompt_sha256": sha256_file(frozen),
                        "rhyme_sha256": rule["sha256"], "models": provenance},
-        "summary": metrics, "r2_across_seeds": multi, "reference_nll": reference,
+        "summary": metrics, "r2_across_seeds": multi, "training_seed_groups": extra_groups,
+        "reference_nll": reference,
         "swap_input_hit_rate": ratio(sum(r["replacement_all_hit"] for r in cases.get("R2-K", [])),
                                      len(cases.get("R2-K", []))),
         "paired_prompt_bootstrap": contrasts, "benchmark": benchmarks, "generations": generations,

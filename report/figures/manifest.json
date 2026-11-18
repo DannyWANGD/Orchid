@@ -52,6 +52,15 @@
       "path_svg": "corpus-expansion.svg",
       "section": "语料与训练量",
       "source": "evidence/pretrain-tang-92m-26/metrics.jsonl and evidence/pretrain-tang-song-92m/metrics.jsonl"
+    },
+    {
+      "caption": "唐宋版三种子的 SFT 验证曲线：训练损失下降，验证损失在第一轮后回升。",
+      "id": "sft-tang-song",
+      "path_csv": "sft-tang-song.csv",
+      "path_pdf": "sft-tang-song.pdf",
+      "path_svg": "sft-tang-song.svg",
+      "section": "扩容微调",
+      "source": "evidence/sft-tang-song-92m-{2026,2027,2028}/metrics.jsonl"
     }
   ]
 }

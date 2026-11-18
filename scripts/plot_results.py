@@ -100,8 +100,10 @@ def writing_comparison(metrics_path, output):
     m = read_json(metrics_path)
     summary = m["summary"]
     selected = m["selected"]
-    names = [n for n in ("R1", selected, "R2-K", "R3") if n in summary]
-    captions = {"R1": "Pretraining", selected: "After SFT", "R2-K": "Swapped input", "R3": "Forced form"}
+    paired = m.get("paired_pretrain", "R1")
+    names = [n for n in (paired, selected, "R2-K", "R3", "R3-K") if n in summary]
+    captions = {paired: "Pretraining", selected: "After SFT", "R2-K": "Swapped input",
+                "R3": "Forced form", "R3-K": "Forced keywords"}
     keys = {"format_ok": "Four × five", "keywords_ok": "All keywords", "joint_ok": "Both"}
     data = [{"model": n, "score": k, **summary[n]["main"]["overall"][k]}
             for n in names for k in keys]
@@ -110,7 +112,7 @@ def writing_comparison(metrics_path, output):
         for ax, (metric, title) in zip(axes, keys.items()):
             samples = [r for r in data if r["score"] == metric]
             values = [100*r["rate"] for r in samples]
-            bars = ax.bar(range(len(values)), values, width=.65, color=PALETTE[:len(values)])
+            bars = ax.bar(range(len(values)), values, width=.65, color=[*PALETTE, "#66727a"][:len(values)])
             for b, row in zip(bars, samples):
                 ax.text(b.get_x()+b.get_width()/2, max(1.0,b.get_height()+1.4), str(row["count"]),
                         fontsize=8, ha="center", va="bottom")

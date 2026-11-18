@@ -73,6 +73,7 @@ def main():
     c["models"]={**c["models"]}
     c["models"]["X-42M"]="checkpoints/sft/sft-tang-42m-2026/best.pt"
     c["models"]["X-92M-10"]="checkpoints/sft/sft-tang-92m-2026/best.pt"
+    c["models"]["X-92M-TangSong-Pre"]="checkpoints/pretrain/pretrain-tang-song-92m/best.pt"
     for seed in (2026,2027,2028):
         c["models"][f"X-92M-Tang-Long-{seed}"]=f"checkpoints/sft/sft-tang-92m-26-{seed}/best.pt"
         c["models"][f"X-92M-TangSong-{seed}"]=f"checkpoints/sft/sft-tang-song-92m-{seed}/best.pt"
@@ -84,9 +85,20 @@ def main():
     matched = [name for name,path in c["models"].items() if path==selection["checkpoint"]]
     c["selected"]=matched[0] if matched else "X-selected"
     c["models"][c["selected"]]=selection["checkpoint"]
+    summary = read_json(Path("runs") / selected / "summary.json")
+    parent = summary["initialization"]
+    if parent["kind"] != "pretrain_best" or sha256_file(Path(parent["path"])) != parent["sha256"]:
+        raise ValueError("Could not verify the selected model's own pretraining baseline")
+    paired = [name for name,path in c["models"].items() if path==parent["path"]]
+    c["paired_pretrain"]=paired[0] if paired else "X-selected-pre"
+    c["models"][c["paired_pretrain"]]=parent["path"]
     c["expanded_models"]={"data":"configs/data-tang-song.yaml",
                           "names":[k for k,v in c["models"].items() if "tang-song" in v]}
     c["keyword_constraint_control"]=True
+    c["seed_groups"] = {
+        "Tang_14M": [f"R2-{s}" for s in (2026, 2027, 2028)],
+        "TangSong_92M": [f"X-92M-TangSong-{s}" for s in (2026, 2027, 2028)],
+    }
     write_json(a.eval_output,c)
     print("Selected from validation only:", selected, c["selected"])
 

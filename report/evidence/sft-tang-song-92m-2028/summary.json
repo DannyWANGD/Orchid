@@ -1,0 +1,32 @@
+{
+  "best_checkpoint": "checkpoints/sft/sft-tang-song-92m-2028/best.pt",
+  "best_sha256": "a6d8470ed0f4cb7d6514402cb716fa31ca525344b7815bafa76fbbe94d88e232",
+  "cursor": {
+    "epoch": 4,
+    "rows": 0,
+    "step": 1552,
+    "target_tokens": 1239400,
+    "train_seconds": 31.974366975715384
+  },
+  "device": "cuda",
+  "initialization": {
+    "kind": "pretrain_best",
+    "path": "checkpoints/pretrain/pretrain-tang-song-92m/best.pt",
+    "sha256": "90ee0bd6ca869380134ed20fa13ce9960bda803684ab2b266654886ac864b514",
+    "source_run_id": "pretrain-tang-song-92m",
+    "source_step": 5076
+  },
+  "invocation_wall_seconds": 65.70699421688914,
+  "last_checkpoint": "checkpoints/sft/sft-tang-song-92m-2028/last.pt",
+  "parameters": 91843584,
+  "precision": "bf16",
+  "run_id": "sft-tang-song-92m-2028",
+  "stage": "sft",
+  "stop_reason": "validation_patience",
+  "validation": {
+    "best_nll": 3.687068003459149,
+    "best_step": 388,
+    "patience_best": 3.687068003459149,
+    "stale": 3
+  }
+}
