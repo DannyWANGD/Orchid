@@ -1,0 +1,127 @@
+{
+  "constraint_cuda": {
+    "canonical_punctuation": true,
+    "constrained_form": true,
+    "constrained_keywords": true,
+    "device": "cuda",
+    "format_ok": true,
+    "generated": "江闊魚龍集，江清魚蟹肥。平孤舟楫處，秋色霜天威。",
+    "generated_ids": [
+      3378,
+      7475,
+      8062,
+      8367,
+      7583,
+      8373,
+      3378,
+      3577,
+      8062,
+      6250,
+      5502,
+      8,
+      1836,
+      1498,
+      5667,
+      3090,
+      6094,
+      8373,
+      4761,
+      5704,
+      7630,
+      1309,
+      1390,
+      8
+    ],
+    "generated_steps": 25,
+    "joint_ok": true,
+    "keyword_hits": [
+      "霜",
+      "孤舟"
+    ],
+    "keywords": [
+      "霜",
+      "孤舟"
+    ],
+    "keywords_ok": true,
+    "lines": [
+      "江闊魚龍集",
+      "江清魚蟹肥",
+      "平孤舟楫處",
+      "秋色霜天威"
+    ],
+    "load_seconds": 1.0164135398808867,
+    "model_hash": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30",
+    "parsed": true,
+    "seconds": 0.19386425707489252,
+    "stop": "eos"
+  },
+  "model": {
+    "files": {
+      "config.json": "e29689712c9625aec080e1c7412bcbcaf2d7d8c43f658829b503effa622ed104",
+      "tokenizer.json": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+      "weights.pt": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30"
+    },
+    "source_checkpoint_sha256": "a6d8470ed0f4cb7d6514402cb716fa31ca525344b7815bafa76fbbe94d88e232",
+    "source_run": "sft-tang-song-92m-2028",
+    "source_stage": "sft",
+    "source_step": 388,
+    "version": 1
+  },
+  "raw_cpu": {
+    "canonical_punctuation": true,
+    "constrained_form": false,
+    "constrained_keywords": false,
+    "device": "cpu",
+    "format_ok": true,
+    "generated": "清溪上下看，寒水中間得。魚躍石間鳴，人行天外直。",
+    "generated_ids": [
+      3577,
+      3637,
+      187,
+      188,
+      4489,
+      8373,
+      1552,
+      3358,
+      201,
+      7448,
+      1976,
+      8,
+      8062,
+      6885,
+      4580,
+      7448,
+      8128,
+      8373,
+      258,
+      6285,
+      1309,
+      1301,
+      4477,
+      8
+    ],
+    "generated_steps": 25,
+    "joint_ok": false,
+    "keyword_hits": [],
+    "keywords": [
+      "霜",
+      "孤舟"
+    ],
+    "keywords_ok": false,
+    "lines": [
+      "清溪上下看",
+      "寒水中間得",
+      "魚躍石間鳴",
+      "人行天外直"
+    ],
+    "load_seconds": 0.7603521170094609,
+    "model_hash": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30",
+    "parsed": true,
+    "seconds": 0.569366083946079,
+    "stop": "eos"
+  },
+  "report_pdf_sha256": "d775506307151df3625217c1dc1919bf60ac2502ec7d0eef2d3ff4673b622f13",
+  "test": "Fresh ZIP extraction with independently installed requirements, no training data present",
+  "tests_passed": 13,
+  "zip_sha256": "65e139b6f26dffcba83a901639b8fa54a0706ed0e079fcf45a47abcee2eeb706"
+}
