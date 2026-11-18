@@ -1,0 +1,26 @@
+model: configs/model-92m.yaml
+data: configs/data.yaml
+task: configs/task.yaml
+seed: 2026
+runtime: {device: cuda, precision: bf16, deterministic: false, cpu_threads: 2, fp32_matmul_precision: highest}
+training:
+  epochs: 26
+  micro_batch: 32
+  accumulation: 4
+  lr: 0.0003
+  min_lr_fraction: 0.1
+  warmup_fraction: 0.03
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+  grad_clip: 1.0
+  eval_every: 0   # zero = once per epoch
+  patience: 3
+  min_improvement: 0.0001
+sampling:
+  temperature: 0.8
+  top_k: 50
+  top_p: 1.0
+  max_new_tokens: 48
+  prefixes: ["春", "孤舟", "山月"]
+  seed: 11

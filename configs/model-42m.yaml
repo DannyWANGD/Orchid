@@ -1,0 +1,6 @@
+n_layer: 12
+d_model: 512
+n_head: 8
+context_length: 256
+dropout: 0.1
+attention: sdpa

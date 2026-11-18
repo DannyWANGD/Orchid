@@ -1,0 +1,222 @@
+{
+  "environment": {
+    "accelerator": "NVIDIA GeForce RTX 4080 SUPER",
+    "cpu_threads": 2,
+    "cuda_build": "12.6",
+    "deterministic": false,
+    "device": "cuda",
+    "fp32_matmul_precision": "highest",
+    "numpy": "2.4.6",
+    "python": "3.11.16",
+    "torch": "2.14.1+cu126"
+  },
+  "runs": [
+    {
+      "config": "configs/pretrain.yaml",
+      "free_before_bytes": 13895204864,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.010534023672031859,
+      "micro_batch": 16,
+      "parameters": 14041344,
+      "peak_allocated_bytes": 947598848,
+      "peak_reserved_bytes": 1069547520,
+      "precision": "bf16",
+      "seconds": 0.12640828406438231,
+      "target_tokens": 49152,
+      "timed_steps": 12,
+      "tokens_per_second": 388835.27581915347,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain.yaml",
+      "free_before_bytes": 13735952384,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.01793432026170194,
+      "micro_batch": 32,
+      "parameters": 14041344,
+      "peak_allocated_bytes": 1668717056,
+      "peak_reserved_bytes": 2023751680,
+      "precision": "bf16",
+      "seconds": 0.2152118431404233,
+      "target_tokens": 98304,
+      "timed_steps": 12,
+      "tokens_per_second": 456777.836040639,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain.yaml",
+      "free_before_bytes": 13735952384,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.034570420742966235,
+      "micro_batch": 64,
+      "parameters": 14041344,
+      "peak_allocated_bytes": 3113228800,
+      "peak_reserved_bytes": 3898605568,
+      "precision": "bf16",
+      "seconds": 0.4148450489155948,
+      "target_tokens": 196608,
+      "timed_steps": 12,
+      "tokens_per_second": 473931.1714432495,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-42m.yaml",
+      "free_before_bytes": 13754499072,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.025084981073935825,
+      "micro_batch": 16,
+      "parameters": 42354688,
+      "peak_allocated_bytes": 1947653120,
+      "peak_reserved_bytes": 2101346304,
+      "precision": "bf16",
+      "seconds": 0.3010197728872299,
+      "target_tokens": 49152,
+      "timed_steps": 12,
+      "tokens_per_second": 163284.95476745197,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-42m.yaml",
+      "free_before_bytes": 13768654848,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.044218741493144385,
+      "micro_batch": 32,
+      "parameters": 42354688,
+      "peak_allocated_bytes": 3277902848,
+      "peak_reserved_bytes": 3433037824,
+      "precision": "bf16",
+      "seconds": 0.5306248979177326,
+      "target_tokens": 98304,
+      "timed_steps": 12,
+      "tokens_per_second": 185260.81302585415,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-42m.yaml",
+      "free_before_bytes": 13740867584,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.08744908700464293,
+      "micro_batch": 64,
+      "parameters": 42354688,
+      "peak_allocated_bytes": 5929915392,
+      "peak_reserved_bytes": 6505365504,
+      "precision": "bf16",
+      "seconds": 1.0493890440557152,
+      "target_tokens": 196608,
+      "timed_steps": 12,
+      "tokens_per_second": 187354.72903370764,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-92m.yaml",
+      "free_before_bytes": 13763936256,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.04369824593110631,
+      "micro_batch": 16,
+      "parameters": 91843584,
+      "peak_allocated_bytes": 3131000832,
+      "peak_reserved_bytes": 3353346048,
+      "precision": "bf16",
+      "seconds": 0.5243789511732757,
+      "target_tokens": 49152,
+      "timed_steps": 12,
+      "tokens_per_second": 93733.73948367775,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-92m.yaml",
+      "free_before_bytes": 13778681856,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.08103009782886754,
+      "micro_batch": 32,
+      "parameters": 91843584,
+      "peak_allocated_bytes": 4967057408,
+      "peak_reserved_bytes": 5335154688,
+      "precision": "bf16",
+      "seconds": 0.9723611739464104,
+      "target_tokens": 98304,
+      "timed_steps": 12,
+      "tokens_per_second": 101098.23657502167,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    },
+    {
+      "config": "configs/pretrain-92m.yaml",
+      "free_before_bytes": 13750763520,
+      "lineage": {
+        "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+        "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+        "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+        "train_input_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+        "validation_input_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543"
+      },
+      "mean_step_seconds": 0.16729671583743766,
+      "micro_batch": 64,
+      "parameters": 91843584,
+      "peak_allocated_bytes": 8557938688,
+      "peak_reserved_bytes": 9359589376,
+      "precision": "bf16",
+      "seconds": 2.007560590049252,
+      "target_tokens": 196608,
+      "timed_steps": 12,
+      "tokens_per_second": 97933.78141338019,
+      "total_bytes": 16748249088,
+      "warmup_steps": 6
+    }
+  ]
+}

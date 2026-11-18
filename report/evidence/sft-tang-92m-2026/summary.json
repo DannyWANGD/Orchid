@@ -1,0 +1,32 @@
+{
+  "best_checkpoint": "checkpoints/sft/sft-tang-92m-2026/best.pt",
+  "best_sha256": "9e6895e98b4fa224ca03935a72e52fd16aafc6f6a3adeee4c326ce5c4667b1d1",
+  "cursor": {
+    "epoch": 5,
+    "rows": 0,
+    "step": 460,
+    "target_tokens": 366125,
+    "train_seconds": 9.636283774394542
+  },
+  "device": "cuda",
+  "initialization": {
+    "kind": "pretrain_best",
+    "path": "checkpoints/pretrain/pretrain-tang-92m/best.pt",
+    "sha256": "145d50143aeb95992276dff9e178434dee43d56706b385808d1b01f4671874a9",
+    "source_run_id": "pretrain-tang-92m",
+    "source_step": 870
+  },
+  "invocation_wall_seconds": 68.26727429684252,
+  "last_checkpoint": "checkpoints/sft/sft-tang-92m-2026/last.pt",
+  "parameters": 91843584,
+  "precision": "bf16",
+  "run_id": "sft-tang-92m-2026",
+  "stage": "sft",
+  "stop_reason": "epoch_budget",
+  "validation": {
+    "best_nll": 4.40101858116058,
+    "best_step": 368,
+    "patience_best": 4.40101858116058,
+    "stale": 1
+  }
+}

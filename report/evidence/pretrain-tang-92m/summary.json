@@ -1,0 +1,29 @@
+{
+  "best_checkpoint": "checkpoints/pretrain/pretrain-tang-92m/best.pt",
+  "best_sha256": "145d50143aeb95992276dff9e178434dee43d56706b385808d1b01f4671874a9",
+  "cursor": {
+    "epoch": 10,
+    "rows": 0,
+    "step": 870,
+    "target_tokens": 28487670,
+    "train_seconds": 269.7544957168866
+  },
+  "device": "cuda",
+  "initialization": {
+    "kind": "random_init",
+    "seed": 2026
+  },
+  "invocation_wall_seconds": 330.63112160214223,
+  "last_checkpoint": "checkpoints/pretrain/pretrain-tang-92m/last.pt",
+  "parameters": 91843584,
+  "precision": "bf16",
+  "run_id": "pretrain-tang-92m",
+  "stage": "pretrain",
+  "stop_reason": "epoch_budget",
+  "validation": {
+    "best_nll": 4.683052292771946,
+    "best_step": 870,
+    "patience_best": 4.683052292771946,
+    "stale": 0
+  }
+}
