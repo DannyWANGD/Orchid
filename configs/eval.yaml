@@ -1,0 +1,24 @@
+task: configs/task.yaml
+data: configs/data.yaml
+runtime: {device: cuda, precision: fp32, cpu_threads: 2}
+sampling: {temperature: 0.8, top_k: 50, top_p: 1.0, max_new_tokens: 64}
+seeds: [11, 22, 33]
+prompt_config:
+  version: orchid-holdout-v1
+  main: data/prompts/main.txt
+  edge: data/prompts/edge.json
+  materialized: artifacts/eval_prompts.json
+  reference_count: 100
+  selection_seed: 328
+  blind_count: 30
+rhyme:
+  url: https://raw.githubusercontent.com/rbnyng/pingshui_rhyme/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json
+  sha256: 42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c
+  path: data/raw/pingshui.json
+models:
+  R0: checkpoints/pretrain/pretrain-tang-v1/random.pt
+  R1: checkpoints/pretrain/pretrain-tang-v1/best.pt
+  R2-2026: checkpoints/sft/sft-tang-2026/best.pt
+  R2-2027: checkpoints/sft/sft-tang-2027/best.pt
+  R2-2028: checkpoints/sft/sft-tang-2028/best.pt
+selected: R2-2027

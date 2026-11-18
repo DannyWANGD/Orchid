@@ -1,0 +1,8 @@
+[
+  {"keywords": ["龘"], "case": "oov"},
+  {"keywords": ["青山", "𰻞"], "case": "oov"},
+  {"keywords": [], "case": "empty"},
+  {"keywords": ["月", "月"], "case": "duplicate"},
+  {"keywords": ["春江花月夜"], "case": "long_word"},
+  {"keywords": ["山", "水", "月", "雲"], "case": "too_many"}
+]

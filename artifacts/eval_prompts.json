@@ -1,0 +1,2298 @@
+{
+  "blind": {
+    "prompt_ids": [
+      "M002",
+      "M016",
+      "M001",
+      "M013",
+      "M015",
+      "M005",
+      "M004",
+      "M008",
+      "M009",
+      "M006",
+      "M028",
+      "M027",
+      "M024",
+      "M020",
+      "M019",
+      "M026",
+      "M018",
+      "M025",
+      "M033",
+      "M032",
+      "M049",
+      "M037",
+      "M039",
+      "M043",
+      "M042",
+      "M041",
+      "M047",
+      "M044",
+      "M038",
+      "M034"
+    ],
+    "sample_seed": 11
+  },
+  "edge_sha256": "822b8f45da854a64fad770a18a9bc478b4a5ac78559a83c5c4e5c40731e4f89f",
+  "main_sha256": "d4be8e7bf80b8c53a00c6febc3f42bdd6ebc626f47aedbc9b621e365f42d34d0",
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  },
+  "sampling_seeds": [
+    11,
+    22,
+    33
+  ],
+  "selection_seed": 328,
+  "sft_stats_sha256": "78dcdb375965ff6a4adba3021a9ad68396ad50fc08e7b2025ea833e1fad826af",
+  "suites": {
+    "edge": [
+      {
+        "case": "oov",
+        "id": "X001",
+        "keywords": [
+          "龘"
+        ],
+        "oov": [
+          "龘"
+        ],
+        "train_combo": false,
+        "train_keyword_counts": [
+          0
+        ]
+      },
+      {
+        "case": "oov",
+        "id": "X002",
+        "keywords": [
+          "青山",
+          "𰻞"
+        ],
+        "oov": [
+          "𰻞"
+        ],
+        "train_combo": false,
+        "train_keyword_counts": [
+          20,
+          0
+        ]
+      },
+      {
+        "case": "empty",
+        "id": "X003",
+        "keywords": [],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": []
+      },
+      {
+        "case": "duplicate",
+        "id": "X004",
+        "keywords": [
+          "月",
+          "月"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          140,
+          140
+        ]
+      },
+      {
+        "case": "long_word",
+        "id": "X005",
+        "keywords": [
+          "春江花月夜"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          0
+        ]
+      },
+      {
+        "case": "too_many",
+        "id": "X006",
+        "keywords": [
+          "山",
+          "水",
+          "月",
+          "雲"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          188,
+          159,
+          140,
+          110
+        ]
+      }
+    ],
+    "main": [
+      {
+        "id": "M001",
+        "keywords": [
+          "霜"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          33
+        ]
+      },
+      {
+        "id": "M002",
+        "keywords": [
+          "孤舟"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2
+        ]
+      },
+      {
+        "id": "M003",
+        "keywords": [
+          "梧桐"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          5
+        ]
+      },
+      {
+        "id": "M004",
+        "keywords": [
+          "秋雨"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          6
+        ]
+      },
+      {
+        "id": "M005",
+        "keywords": [
+          "明月"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          33
+        ]
+      },
+      {
+        "id": "M006",
+        "keywords": [
+          "故鄉"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          8
+        ]
+      },
+      {
+        "id": "M007",
+        "keywords": [
+          "青山"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          20
+        ]
+      },
+      {
+        "id": "M008",
+        "keywords": [
+          "落葉"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          8
+        ]
+      },
+      {
+        "id": "M009",
+        "keywords": [
+          "蓮葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          9
+        ]
+      },
+      {
+        "id": "M010",
+        "keywords": [
+          "飛雪"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          3
+        ]
+      },
+      {
+        "id": "M011",
+        "keywords": [
+          "春風"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          46
+        ]
+      },
+      {
+        "id": "M012",
+        "keywords": [
+          "白雲"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          20
+        ]
+      },
+      {
+        "id": "M013",
+        "keywords": [
+          "落日"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          8
+        ]
+      },
+      {
+        "id": "M014",
+        "keywords": [
+          "雁"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          16
+        ]
+      },
+      {
+        "id": "M015",
+        "keywords": [
+          "月影"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          3
+        ]
+      },
+      {
+        "id": "M016",
+        "keywords": [
+          "清霜"
+        ],
+        "oov": [],
+        "train_combo": true,
+        "train_keyword_counts": [
+          2
+        ]
+      },
+      {
+        "id": "M017",
+        "keywords": [
+          "霜",
+          "孤舟"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          33,
+          2
+        ]
+      },
+      {
+        "id": "M018",
+        "keywords": [
+          "白露",
+          "落葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          3,
+          8
+        ]
+      },
+      {
+        "id": "M019",
+        "keywords": [
+          "殘月",
+          "古道"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          2
+        ]
+      },
+      {
+        "id": "M020",
+        "keywords": [
+          "雁",
+          "秋水"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          16,
+          6
+        ]
+      },
+      {
+        "id": "M021",
+        "keywords": [
+          "楊柳",
+          "春雨"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          10,
+          2
+        ]
+      },
+      {
+        "id": "M022",
+        "keywords": [
+          "桃花",
+          "溪水"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          5
+        ]
+      },
+      {
+        "id": "M023",
+        "keywords": [
+          "明月",
+          "竹林"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          33,
+          8
+        ]
+      },
+      {
+        "id": "M024",
+        "keywords": [
+          "空山",
+          "風柳"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          1
+        ]
+      },
+      {
+        "id": "M025",
+        "keywords": [
+          "飛雪",
+          "青山"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          3,
+          20
+        ]
+      },
+      {
+        "id": "M026",
+        "keywords": [
+          "南山",
+          "煙波"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          3
+        ]
+      },
+      {
+        "id": "M027",
+        "keywords": [
+          "斜陽",
+          "竹"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          3,
+          46
+        ]
+      },
+      {
+        "id": "M028",
+        "keywords": [
+          "高樓",
+          "殘月"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          3,
+          2
+        ]
+      },
+      {
+        "id": "M029",
+        "keywords": [
+          "白雲",
+          "溪水"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          20,
+          5
+        ]
+      },
+      {
+        "id": "M030",
+        "keywords": [
+          "竹林",
+          "晴"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          25
+        ]
+      },
+      {
+        "id": "M031",
+        "keywords": [
+          "夜雨",
+          "鄉夢"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          5,
+          2
+        ]
+      },
+      {
+        "id": "M032",
+        "keywords": [
+          "溪水",
+          "蓮葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          5,
+          9
+        ]
+      },
+      {
+        "id": "M033",
+        "keywords": [
+          "清風",
+          "桂花"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          2
+        ]
+      },
+      {
+        "id": "M034",
+        "keywords": [
+          "孤舟",
+          "春雨",
+          "煙波"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "M035",
+        "keywords": [
+          "古道",
+          "雁",
+          "落葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          16,
+          8
+        ]
+      },
+      {
+        "id": "M036",
+        "keywords": [
+          "落日",
+          "霞",
+          "青山"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          9,
+          20
+        ]
+      },
+      {
+        "id": "M037",
+        "keywords": [
+          "桂花",
+          "明月",
+          "燈"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          33,
+          17
+        ]
+      },
+      {
+        "id": "M038",
+        "keywords": [
+          "秋雨",
+          "梧桐",
+          "故鄉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          6,
+          5,
+          8
+        ]
+      },
+      {
+        "id": "M039",
+        "keywords": [
+          "楊柳",
+          "春風",
+          "蓮葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          10,
+          46,
+          9
+        ]
+      },
+      {
+        "id": "M040",
+        "keywords": [
+          "殘月",
+          "白露",
+          "竹"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          3,
+          46
+        ]
+      },
+      {
+        "id": "M041",
+        "keywords": [
+          "飛雪",
+          "松",
+          "清霜"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          3,
+          39,
+          2
+        ]
+      },
+      {
+        "id": "M042",
+        "keywords": [
+          "青山",
+          "雨聲",
+          "葉"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          20,
+          3,
+          48
+        ]
+      },
+      {
+        "id": "M043",
+        "keywords": [
+          "白雲",
+          "空山",
+          "月影"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          20,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "M044",
+        "keywords": [
+          "竹林",
+          "春雨",
+          "落花"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          2,
+          12
+        ]
+      },
+      {
+        "id": "M045",
+        "keywords": [
+          "古道",
+          "落日",
+          "歸路"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          8,
+          2
+        ]
+      },
+      {
+        "id": "M046",
+        "keywords": [
+          "雲山",
+          "夜雨",
+          "孤舟"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          5,
+          2
+        ]
+      },
+      {
+        "id": "M047",
+        "keywords": [
+          "楓",
+          "秋水",
+          "殘月"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          5,
+          6,
+          2
+        ]
+      },
+      {
+        "id": "M048",
+        "keywords": [
+          "荷花",
+          "清風",
+          "月影"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          5,
+          8,
+          3
+        ]
+      },
+      {
+        "id": "M049",
+        "keywords": [
+          "孤舟",
+          "斜陽",
+          "江"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          3,
+          127
+        ]
+      },
+      {
+        "id": "M050",
+        "keywords": [
+          "南山",
+          "小雨",
+          "月影"
+        ],
+        "oov": [],
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          0,
+          3
+        ]
+      }
+    ],
+    "reference": [
+      {
+        "group_id": "115c1de98d5e99663bc8c333",
+        "id": "T001",
+        "keywords": [
+          "船"
+        ],
+        "oov": [],
+        "poem_id": "115c1de98d5e99663bc8c333",
+        "train_combo": true,
+        "train_keyword_counts": [
+          35
+        ]
+      },
+      {
+        "group_id": "6dfeed95c2aafd7512f9ee62",
+        "id": "T002",
+        "keywords": [
+          "鳥"
+        ],
+        "oov": [],
+        "poem_id": "6dfeed95c2aafd7512f9ee62",
+        "train_combo": true,
+        "train_keyword_counts": [
+          41
+        ]
+      },
+      {
+        "group_id": "ad0bbf36e5105b15476d4c02",
+        "id": "T003",
+        "keywords": [
+          "雷"
+        ],
+        "oov": [],
+        "poem_id": "ad0bbf36e5105b15476d4c02",
+        "train_combo": true,
+        "train_keyword_counts": [
+          3
+        ]
+      },
+      {
+        "group_id": "3484273b3d431199329b6659",
+        "id": "T004",
+        "keywords": [
+          "月",
+          "燈",
+          "杏花"
+        ],
+        "oov": [],
+        "poem_id": "3484273b3d431199329b6659",
+        "train_combo": false,
+        "train_keyword_counts": [
+          140,
+          17,
+          8
+        ]
+      },
+      {
+        "group_id": "c4dfca1e9b7fda69a3f8c1be",
+        "id": "T005",
+        "keywords": [
+          "泉",
+          "山",
+          "花"
+        ],
+        "oov": [],
+        "poem_id": "c4dfca1e9b7fda69a3f8c1be",
+        "train_combo": false,
+        "train_keyword_counts": [
+          23,
+          188,
+          168
+        ]
+      },
+      {
+        "group_id": "6fb95227ba0bb08a29e0daa9",
+        "id": "T006",
+        "keywords": [
+          "寒"
+        ],
+        "oov": [],
+        "poem_id": "6fb95227ba0bb08a29e0daa9",
+        "train_combo": true,
+        "train_keyword_counts": [
+          100
+        ]
+      },
+      {
+        "group_id": "ec5d98fabe520cdd327d0703",
+        "id": "T007",
+        "keywords": [
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "ec5d98fabe520cdd327d0703",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197
+        ]
+      },
+      {
+        "group_id": "89c0dd86e73d126c2b8a4727",
+        "id": "T008",
+        "keywords": [
+          "煙"
+        ],
+        "oov": [],
+        "poem_id": "89c0dd86e73d126c2b8a4727",
+        "train_combo": true,
+        "train_keyword_counts": [
+          49
+        ]
+      },
+      {
+        "group_id": "f09948eaf64407f7a2a8d2e0",
+        "id": "T009",
+        "keywords": [
+          "苔",
+          "空林",
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "f09948eaf64407f7a2a8d2e0",
+        "train_combo": false,
+        "train_keyword_counts": [
+          16,
+          2,
+          269
+        ]
+      },
+      {
+        "group_id": "5403ab65e491128356d0d2f1",
+        "id": "T010",
+        "keywords": [
+          "日",
+          "山"
+        ],
+        "oov": [],
+        "poem_id": "5403ab65e491128356d0d2f1",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269,
+          188
+        ]
+      },
+      {
+        "group_id": "e4e4d9143ac2d67492f99ac7",
+        "id": "T011",
+        "keywords": [
+          "暮",
+          "煙"
+        ],
+        "oov": [],
+        "poem_id": "e4e4d9143ac2d67492f99ac7",
+        "train_combo": false,
+        "train_keyword_counts": [
+          57,
+          49
+        ]
+      },
+      {
+        "group_id": "5b4ccd724208ef928c52d49d",
+        "id": "T012",
+        "keywords": [
+          "海"
+        ],
+        "oov": [],
+        "poem_id": "5b4ccd724208ef928c52d49d",
+        "train_combo": true,
+        "train_keyword_counts": [
+          60
+        ]
+      },
+      {
+        "group_id": "cb700189db2a3fe9fa59fecd",
+        "id": "T013",
+        "keywords": [
+          "青山",
+          "雲山",
+          "青雲"
+        ],
+        "oov": [],
+        "poem_id": "cb700189db2a3fe9fa59fecd",
+        "train_combo": false,
+        "train_keyword_counts": [
+          20,
+          2,
+          4
+        ]
+      },
+      {
+        "group_id": "221c1bb421f418be5ea8cdad",
+        "id": "T014",
+        "keywords": [
+          "月",
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "221c1bb421f418be5ea8cdad",
+        "train_combo": true,
+        "train_keyword_counts": [
+          140,
+          269
+        ]
+      },
+      {
+        "group_id": "210ddee1be63fe91851735d1",
+        "id": "T015",
+        "keywords": [
+          "秋",
+          "船"
+        ],
+        "oov": [],
+        "poem_id": "210ddee1be63fe91851735d1",
+        "train_combo": false,
+        "train_keyword_counts": [
+          92,
+          35
+        ]
+      },
+      {
+        "group_id": "a2f584c61877d1caa7cb6ab8",
+        "id": "T016",
+        "keywords": [
+          "星",
+          "煙"
+        ],
+        "oov": [],
+        "poem_id": "a2f584c61877d1caa7cb6ab8",
+        "train_combo": false,
+        "train_keyword_counts": [
+          24,
+          49
+        ]
+      },
+      {
+        "group_id": "06e309c02bb1156e4c8d3e6c",
+        "id": "T017",
+        "keywords": [
+          "鴈",
+          "雪",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "06e309c02bb1156e4c8d3e6c",
+        "train_combo": false,
+        "train_keyword_counts": [
+          15,
+          59,
+          140
+        ]
+      },
+      {
+        "group_id": "8064f45b29cd6461d5663106",
+        "id": "T018",
+        "keywords": [
+          "夜"
+        ],
+        "oov": [],
+        "poem_id": "8064f45b29cd6461d5663106",
+        "train_combo": true,
+        "train_keyword_counts": [
+          154
+        ]
+      },
+      {
+        "group_id": "2f4283e51205128708c6e528",
+        "id": "T019",
+        "keywords": [
+          "柳",
+          "春"
+        ],
+        "oov": [],
+        "poem_id": "2f4283e51205128708c6e528",
+        "train_combo": false,
+        "train_keyword_counts": [
+          34,
+          145
+        ]
+      },
+      {
+        "group_id": "93c5396d5cb69a6520350860",
+        "id": "T020",
+        "keywords": [
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "93c5396d5cb69a6520350860",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269
+        ]
+      },
+      {
+        "group_id": "9da4d10a7547d8a88a8d0251",
+        "id": "T021",
+        "keywords": [
+          "夜"
+        ],
+        "oov": [],
+        "poem_id": "9da4d10a7547d8a88a8d0251",
+        "train_combo": true,
+        "train_keyword_counts": [
+          154
+        ]
+      },
+      {
+        "group_id": "b26050091a7452b979643dd8",
+        "id": "T022",
+        "keywords": [
+          "桃"
+        ],
+        "oov": [],
+        "poem_id": "b26050091a7452b979643dd8",
+        "train_combo": true,
+        "train_keyword_counts": [
+          15
+        ]
+      },
+      {
+        "group_id": "f2e96a294364f814fcd853fa",
+        "id": "T023",
+        "keywords": [
+          "葉",
+          "霜",
+          "寒"
+        ],
+        "oov": [],
+        "poem_id": "f2e96a294364f814fcd853fa",
+        "train_combo": false,
+        "train_keyword_counts": [
+          48,
+          33,
+          100
+        ]
+      },
+      {
+        "group_id": "3133a627eb02d2c409d09405",
+        "id": "T024",
+        "keywords": [
+          "霜",
+          "水",
+          "煙"
+        ],
+        "oov": [],
+        "poem_id": "3133a627eb02d2c409d09405",
+        "train_combo": false,
+        "train_keyword_counts": [
+          33,
+          159,
+          49
+        ]
+      },
+      {
+        "group_id": "35fef1c845ce7ad78377fc2e",
+        "id": "T025",
+        "keywords": [
+          "水",
+          "煙",
+          "橋"
+        ],
+        "oov": [],
+        "poem_id": "35fef1c845ce7ad78377fc2e",
+        "train_combo": false,
+        "train_keyword_counts": [
+          159,
+          49,
+          12
+        ]
+      },
+      {
+        "group_id": "8a22ed7d6bfd96907b15d156",
+        "id": "T026",
+        "keywords": [
+          "湖",
+          "江"
+        ],
+        "oov": [],
+        "poem_id": "8a22ed7d6bfd96907b15d156",
+        "train_combo": true,
+        "train_keyword_counts": [
+          24,
+          127
+        ]
+      },
+      {
+        "group_id": "2fb01a7a2a4cdaa28a056f57",
+        "id": "T027",
+        "keywords": [
+          "日",
+          "暮"
+        ],
+        "oov": [],
+        "poem_id": "2fb01a7a2a4cdaa28a056f57",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269,
+          57
+        ]
+      },
+      {
+        "group_id": "d2662ca7d633c94a0820c6bc",
+        "id": "T028",
+        "keywords": [
+          "花",
+          "船"
+        ],
+        "oov": [],
+        "poem_id": "d2662ca7d633c94a0820c6bc",
+        "train_combo": false,
+        "train_keyword_counts": [
+          168,
+          35
+        ]
+      },
+      {
+        "group_id": "315bc208f52f4bf9e0c4e7cc",
+        "id": "T029",
+        "keywords": [
+          "花",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "315bc208f52f4bf9e0c4e7cc",
+        "train_combo": true,
+        "train_keyword_counts": [
+          168,
+          140
+        ]
+      },
+      {
+        "group_id": "bba9e285ca0b14bf19313a62",
+        "id": "T030",
+        "keywords": [
+          "舟"
+        ],
+        "oov": [],
+        "poem_id": "bba9e285ca0b14bf19313a62",
+        "train_combo": true,
+        "train_keyword_counts": [
+          30
+        ]
+      },
+      {
+        "group_id": "deb1677af2ae14e9d935531f",
+        "id": "T031",
+        "keywords": [
+          "煙",
+          "花",
+          "枝"
+        ],
+        "oov": [],
+        "poem_id": "deb1677af2ae14e9d935531f",
+        "train_combo": false,
+        "train_keyword_counts": [
+          49,
+          168,
+          55
+        ]
+      },
+      {
+        "group_id": "d31ce4a03b599ebe2056a40d",
+        "id": "T032",
+        "keywords": [
+          "草"
+        ],
+        "oov": [],
+        "poem_id": "ed35e137a88969f6d6b0e16c",
+        "train_combo": true,
+        "train_keyword_counts": [
+          73
+        ]
+      },
+      {
+        "group_id": "1513b9350af1a13430abf5bf",
+        "id": "T033",
+        "keywords": [
+          "門",
+          "月色"
+        ],
+        "oov": [],
+        "poem_id": "1513b9350af1a13430abf5bf",
+        "train_combo": false,
+        "train_keyword_counts": [
+          94,
+          2
+        ]
+      },
+      {
+        "group_id": "b94235eae01fb9282f7f5544",
+        "id": "T034",
+        "keywords": [
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "b94235eae01fb9282f7f5544",
+        "train_combo": true,
+        "train_keyword_counts": [
+          140
+        ]
+      },
+      {
+        "group_id": "66aa95c42e69aa1829af58e4",
+        "id": "T035",
+        "keywords": [
+          "溪"
+        ],
+        "oov": [],
+        "poem_id": "66aa95c42e69aa1829af58e4",
+        "train_combo": true,
+        "train_keyword_counts": [
+          39
+        ]
+      },
+      {
+        "group_id": "6c9c07d60a7c64cab9ac1582",
+        "id": "T036",
+        "keywords": [
+          "山",
+          "海"
+        ],
+        "oov": [],
+        "poem_id": "6c9c07d60a7c64cab9ac1582",
+        "train_combo": true,
+        "train_keyword_counts": [
+          188,
+          60
+        ]
+      },
+      {
+        "group_id": "d39e5f90b4f7f2eb75bfab80",
+        "id": "T037",
+        "keywords": [
+          "月",
+          "蓮",
+          "江"
+        ],
+        "oov": [],
+        "poem_id": "d39e5f90b4f7f2eb75bfab80",
+        "train_combo": false,
+        "train_keyword_counts": [
+          140,
+          25,
+          127
+        ]
+      },
+      {
+        "group_id": "c7619613c69983b80afc2d6a",
+        "id": "T038",
+        "keywords": [
+          "江"
+        ],
+        "oov": [],
+        "poem_id": "c7619613c69983b80afc2d6a",
+        "train_combo": true,
+        "train_keyword_counts": [
+          127
+        ]
+      },
+      {
+        "group_id": "4c58bde734189ca243a69ff6",
+        "id": "T039",
+        "keywords": [
+          "春",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "4c58bde734189ca243a69ff6",
+        "train_combo": true,
+        "train_keyword_counts": [
+          145,
+          140
+        ]
+      },
+      {
+        "group_id": "9b7d48cf4897df5274eae4ac",
+        "id": "T040",
+        "keywords": [
+          "葉"
+        ],
+        "oov": [],
+        "poem_id": "9b7d48cf4897df5274eae4ac",
+        "train_combo": true,
+        "train_keyword_counts": [
+          48
+        ]
+      },
+      {
+        "group_id": "c0933586c35c0c5224a662c9",
+        "id": "T041",
+        "keywords": [
+          "春風",
+          "山"
+        ],
+        "oov": [],
+        "poem_id": "c0933586c35c0c5224a662c9",
+        "train_combo": true,
+        "train_keyword_counts": [
+          46,
+          188
+        ]
+      },
+      {
+        "group_id": "4d1e955249a7fdc93a48e601",
+        "id": "T042",
+        "keywords": [
+          "春",
+          "暮",
+          "落日"
+        ],
+        "oov": [],
+        "poem_id": "4d1e955249a7fdc93a48e601",
+        "train_combo": false,
+        "train_keyword_counts": [
+          145,
+          57,
+          8
+        ]
+      },
+      {
+        "group_id": "e5dc86743a280928d5488221",
+        "id": "T043",
+        "keywords": [
+          "舟",
+          "水",
+          "湖"
+        ],
+        "oov": [],
+        "poem_id": "e5dc86743a280928d5488221",
+        "train_combo": false,
+        "train_keyword_counts": [
+          30,
+          159,
+          24
+        ]
+      },
+      {
+        "group_id": "262889adeb3803030438fc59",
+        "id": "T044",
+        "keywords": [
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "262889adeb3803030438fc59",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197
+        ]
+      },
+      {
+        "group_id": "e9d863f14d278e5e8a0f6624",
+        "id": "T045",
+        "keywords": [
+          "泉",
+          "石"
+        ],
+        "oov": [],
+        "poem_id": "e9d863f14d278e5e8a0f6624",
+        "train_combo": true,
+        "train_keyword_counts": [
+          23,
+          58
+        ]
+      },
+      {
+        "group_id": "5d48429efd99b7be7a834e4d",
+        "id": "T046",
+        "keywords": [
+          "風",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "5d48429efd99b7be7a834e4d",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197,
+          140
+        ]
+      },
+      {
+        "group_id": "f74fc7a7d3fb81e0685865b7",
+        "id": "T047",
+        "keywords": [
+          "寺",
+          "山"
+        ],
+        "oov": [],
+        "poem_id": "f74fc7a7d3fb81e0685865b7",
+        "train_combo": false,
+        "train_keyword_counts": [
+          17,
+          188
+        ]
+      },
+      {
+        "group_id": "a5153ba71ed450f56891822b",
+        "id": "T048",
+        "keywords": [
+          "水",
+          "海",
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "a5153ba71ed450f56891822b",
+        "train_combo": false,
+        "train_keyword_counts": [
+          159,
+          60,
+          197
+        ]
+      },
+      {
+        "group_id": "0519c421abf1d4b5b354f9d1",
+        "id": "T049",
+        "keywords": [
+          "東風"
+        ],
+        "oov": [],
+        "poem_id": "0519c421abf1d4b5b354f9d1",
+        "train_combo": true,
+        "train_keyword_counts": [
+          7
+        ]
+      },
+      {
+        "group_id": "066f68eaa9c62769d46baf2a",
+        "id": "T050",
+        "keywords": [
+          "春日"
+        ],
+        "oov": [],
+        "poem_id": "066f68eaa9c62769d46baf2a",
+        "train_combo": true,
+        "train_keyword_counts": [
+          8
+        ]
+      },
+      {
+        "group_id": "b97250616e5766d324b281fe",
+        "id": "T051",
+        "keywords": [
+          "煙",
+          "山",
+          "暮"
+        ],
+        "oov": [],
+        "poem_id": "b97250616e5766d324b281fe",
+        "train_combo": false,
+        "train_keyword_counts": [
+          49,
+          188,
+          57
+        ]
+      },
+      {
+        "group_id": "2d50673567b4e9fc4447d6b1",
+        "id": "T052",
+        "keywords": [
+          "日",
+          "嶺"
+        ],
+        "oov": [],
+        "poem_id": "2d50673567b4e9fc4447d6b1",
+        "train_combo": false,
+        "train_keyword_counts": [
+          269,
+          17
+        ]
+      },
+      {
+        "group_id": "5ce88f6e6b1876bcaa3052dc",
+        "id": "T053",
+        "keywords": [
+          "夕陽",
+          "煙"
+        ],
+        "oov": [],
+        "poem_id": "5ce88f6e6b1876bcaa3052dc",
+        "train_combo": false,
+        "train_keyword_counts": [
+          11,
+          49
+        ]
+      },
+      {
+        "group_id": "3096f85ad6949af6a3f2d88c",
+        "id": "T054",
+        "keywords": [
+          "竹"
+        ],
+        "oov": [],
+        "poem_id": "3096f85ad6949af6a3f2d88c",
+        "train_combo": true,
+        "train_keyword_counts": [
+          46
+        ]
+      },
+      {
+        "group_id": "ba842f0f073d98ba8eb39764",
+        "id": "T055",
+        "keywords": [
+          "草堂"
+        ],
+        "oov": [],
+        "poem_id": "ba842f0f073d98ba8eb39764",
+        "train_combo": true,
+        "train_keyword_counts": [
+          2
+        ]
+      },
+      {
+        "group_id": "7930500f56a375f452557dcb",
+        "id": "T056",
+        "keywords": [
+          "門",
+          "秋"
+        ],
+        "oov": [],
+        "poem_id": "7930500f56a375f452557dcb",
+        "train_combo": true,
+        "train_keyword_counts": [
+          94,
+          92
+        ]
+      },
+      {
+        "group_id": "4471c788768d5574b54f31fd",
+        "id": "T057",
+        "keywords": [
+          "江",
+          "門",
+          "明月"
+        ],
+        "oov": [],
+        "poem_id": "4471c788768d5574b54f31fd",
+        "train_combo": false,
+        "train_keyword_counts": [
+          127,
+          94,
+          33
+        ]
+      },
+      {
+        "group_id": "5246eda239d6de68698cbae0",
+        "id": "T058",
+        "keywords": [
+          "暖"
+        ],
+        "oov": [],
+        "poem_id": "5246eda239d6de68698cbae0",
+        "train_combo": true,
+        "train_keyword_counts": [
+          7
+        ]
+      },
+      {
+        "group_id": "294332edda8da28a26e3d50d",
+        "id": "T059",
+        "keywords": [
+          "風",
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "294332edda8da28a26e3d50d",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197,
+          269
+        ]
+      },
+      {
+        "group_id": "0127a343d5e899b8fe8e39f4",
+        "id": "T060",
+        "keywords": [
+          "浪"
+        ],
+        "oov": [],
+        "poem_id": "0127a343d5e899b8fe8e39f4",
+        "train_combo": true,
+        "train_keyword_counts": [
+          29
+        ]
+      },
+      {
+        "group_id": "717e2ff3f0fad987dd6539e6",
+        "id": "T061",
+        "keywords": [
+          "臺"
+        ],
+        "oov": [],
+        "poem_id": "717e2ff3f0fad987dd6539e6",
+        "train_combo": true,
+        "train_keyword_counts": [
+          47
+        ]
+      },
+      {
+        "group_id": "f7ff3cdea585b223dbc21529",
+        "id": "T062",
+        "keywords": [
+          "水"
+        ],
+        "oov": [],
+        "poem_id": "f7ff3cdea585b223dbc21529",
+        "train_combo": true,
+        "train_keyword_counts": [
+          159
+        ]
+      },
+      {
+        "group_id": "ee540b23ac26187cf86be8e3",
+        "id": "T063",
+        "keywords": [
+          "溪"
+        ],
+        "oov": [],
+        "poem_id": "ee540b23ac26187cf86be8e3",
+        "train_combo": true,
+        "train_keyword_counts": [
+          39
+        ]
+      },
+      {
+        "group_id": "4f2f3c8b10fda792f7c111ee",
+        "id": "T064",
+        "keywords": [
+          "閣",
+          "青山",
+          "晴"
+        ],
+        "oov": [],
+        "poem_id": "4f2f3c8b10fda792f7c111ee",
+        "train_combo": false,
+        "train_keyword_counts": [
+          27,
+          20,
+          25
+        ]
+      },
+      {
+        "group_id": "00c7a8d0164e27f583606c62",
+        "id": "T065",
+        "keywords": [
+          "秋色"
+        ],
+        "oov": [],
+        "poem_id": "00c7a8d0164e27f583606c62",
+        "train_combo": false,
+        "train_keyword_counts": [
+          3
+        ]
+      },
+      {
+        "group_id": "83c57318e629bf92a8a848cf",
+        "id": "T066",
+        "keywords": [
+          "日",
+          "花"
+        ],
+        "oov": [],
+        "poem_id": "83c57318e629bf92a8a848cf",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269,
+          168
+        ]
+      },
+      {
+        "group_id": "798b36f9788e5afa509af6c3",
+        "id": "T067",
+        "keywords": [
+          "夜"
+        ],
+        "oov": [],
+        "poem_id": "798b36f9788e5afa509af6c3",
+        "train_combo": true,
+        "train_keyword_counts": [
+          154
+        ]
+      },
+      {
+        "group_id": "e5b130b95c7ac9e827c1a0e5",
+        "id": "T068",
+        "keywords": [
+          "山",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "e5b130b95c7ac9e827c1a0e5",
+        "train_combo": true,
+        "train_keyword_counts": [
+          188,
+          140
+        ]
+      },
+      {
+        "group_id": "c0b30defd24fe6816c349454",
+        "id": "T069",
+        "keywords": [
+          "石"
+        ],
+        "oov": [],
+        "poem_id": "c0b30defd24fe6816c349454",
+        "train_combo": true,
+        "train_keyword_counts": [
+          58
+        ]
+      },
+      {
+        "group_id": "963a8572a74eb72860831f29",
+        "id": "T070",
+        "keywords": [
+          "行人",
+          "燈"
+        ],
+        "oov": [],
+        "poem_id": "963a8572a74eb72860831f29",
+        "train_combo": false,
+        "train_keyword_counts": [
+          6,
+          17
+        ]
+      },
+      {
+        "group_id": "73fc1b779f3b1b59fca0c170",
+        "id": "T071",
+        "keywords": [
+          "江",
+          "夏"
+        ],
+        "oov": [],
+        "poem_id": "73fc1b779f3b1b59fca0c170",
+        "train_combo": false,
+        "train_keyword_counts": [
+          127,
+          9
+        ]
+      },
+      {
+        "group_id": "90e9de0bdb6649cb0cf0c064",
+        "id": "T072",
+        "keywords": [
+          "曉"
+        ],
+        "oov": [],
+        "poem_id": "90e9de0bdb6649cb0cf0c064",
+        "train_combo": true,
+        "train_keyword_counts": [
+          39
+        ]
+      },
+      {
+        "group_id": "6b83c39d17f2e87195f81967",
+        "id": "T073",
+        "keywords": [
+          "花",
+          "春",
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "6b83c39d17f2e87195f81967",
+        "train_combo": false,
+        "train_keyword_counts": [
+          168,
+          145,
+          269
+        ]
+      },
+      {
+        "group_id": "acae59662d338f3b9a9e2989",
+        "id": "T074",
+        "keywords": [
+          "春風"
+        ],
+        "oov": [],
+        "poem_id": "acae59662d338f3b9a9e2989",
+        "train_combo": true,
+        "train_keyword_counts": [
+          46
+        ]
+      },
+      {
+        "group_id": "2682f38a4dc5281e5ed43049",
+        "id": "T075",
+        "keywords": [
+          "雲"
+        ],
+        "oov": [],
+        "poem_id": "2682f38a4dc5281e5ed43049",
+        "train_combo": true,
+        "train_keyword_counts": [
+          110
+        ]
+      },
+      {
+        "group_id": "d607a76c6262422b9d8670ab",
+        "id": "T076",
+        "keywords": [
+          "陽"
+        ],
+        "oov": [],
+        "poem_id": "d607a76c6262422b9d8670ab",
+        "train_combo": true,
+        "train_keyword_counts": [
+          59
+        ]
+      },
+      {
+        "group_id": "1c63d6e050fc14dc79752a46",
+        "id": "T077",
+        "keywords": [
+          "春",
+          "陽",
+          "泉"
+        ],
+        "oov": [],
+        "poem_id": "1c63d6e050fc14dc79752a46",
+        "train_combo": false,
+        "train_keyword_counts": [
+          145,
+          59,
+          23
+        ]
+      },
+      {
+        "group_id": "131ee2c06913ba01aafd03fe",
+        "id": "T078",
+        "keywords": [
+          "霜"
+        ],
+        "oov": [],
+        "poem_id": "131ee2c06913ba01aafd03fe",
+        "train_combo": true,
+        "train_keyword_counts": [
+          33
+        ]
+      },
+      {
+        "group_id": "d6dfff4e102e107e5a045835",
+        "id": "T079",
+        "keywords": [
+          "日",
+          "雲"
+        ],
+        "oov": [],
+        "poem_id": "d6dfff4e102e107e5a045835",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269,
+          110
+        ]
+      },
+      {
+        "group_id": "7f8087505fd96d16646ed5ff",
+        "id": "T080",
+        "keywords": [
+          "山寺",
+          "夏",
+          "秋"
+        ],
+        "oov": [],
+        "poem_id": "7f8087505fd96d16646ed5ff",
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          9,
+          92
+        ]
+      },
+      {
+        "group_id": "f5de48e169d531909141441b",
+        "id": "T081",
+        "keywords": [
+          "寒"
+        ],
+        "oov": [],
+        "poem_id": "f5de48e169d531909141441b",
+        "train_combo": true,
+        "train_keyword_counts": [
+          100
+        ]
+      },
+      {
+        "group_id": "f041020d20669c9bd900673a",
+        "id": "T082",
+        "keywords": [
+          "雨"
+        ],
+        "oov": [],
+        "poem_id": "f041020d20669c9bd900673a",
+        "train_combo": true,
+        "train_keyword_counts": [
+          42
+        ]
+      },
+      {
+        "group_id": "3a29d6d117ca81b7b7a72794",
+        "id": "T083",
+        "keywords": [
+          "暮"
+        ],
+        "oov": [],
+        "poem_id": "3a29d6d117ca81b7b7a72794",
+        "train_combo": true,
+        "train_keyword_counts": [
+          57
+        ]
+      },
+      {
+        "group_id": "9d74e2d1f5d02421296606e9",
+        "id": "T084",
+        "keywords": [
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "9d74e2d1f5d02421296606e9",
+        "train_combo": true,
+        "train_keyword_counts": [
+          269
+        ]
+      },
+      {
+        "group_id": "2814174519b67e61da95fe19",
+        "id": "T085",
+        "keywords": [
+          "河",
+          "東風"
+        ],
+        "oov": [],
+        "poem_id": "2814174519b67e61da95fe19",
+        "train_combo": false,
+        "train_keyword_counts": [
+          52,
+          7
+        ]
+      },
+      {
+        "group_id": "999cffe6f14644654fcc4033",
+        "id": "T086",
+        "keywords": [
+          "江"
+        ],
+        "oov": [],
+        "poem_id": "999cffe6f14644654fcc4033",
+        "train_combo": true,
+        "train_keyword_counts": [
+          127
+        ]
+      },
+      {
+        "group_id": "266171dfc9935c277ee4359c",
+        "id": "T087",
+        "keywords": [
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "266171dfc9935c277ee4359c",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197
+        ]
+      },
+      {
+        "group_id": "529379fa104cd6c556bd4886",
+        "id": "T088",
+        "keywords": [
+          "花落",
+          "苔"
+        ],
+        "oov": [],
+        "poem_id": "529379fa104cd6c556bd4886",
+        "train_combo": false,
+        "train_keyword_counts": [
+          8,
+          16
+        ]
+      },
+      {
+        "group_id": "e9a048480ade0da1656d7855",
+        "id": "T089",
+        "keywords": [
+          "月",
+          "花"
+        ],
+        "oov": [],
+        "poem_id": "e9a048480ade0da1656d7855",
+        "train_combo": true,
+        "train_keyword_counts": [
+          140,
+          168
+        ]
+      },
+      {
+        "group_id": "11652cb9f9502151756e05fb",
+        "id": "T090",
+        "keywords": [
+          "梅花",
+          "早梅",
+          "燕"
+        ],
+        "oov": [],
+        "poem_id": "11652cb9f9502151756e05fb",
+        "train_combo": false,
+        "train_keyword_counts": [
+          1,
+          1,
+          22
+        ]
+      },
+      {
+        "group_id": "98b24f2da86438d49b492ccb",
+        "id": "T091",
+        "keywords": [
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "98b24f2da86438d49b492ccb",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197
+        ]
+      },
+      {
+        "group_id": "acfc018bd3b47aafbd944763",
+        "id": "T092",
+        "keywords": [
+          "葉",
+          "日"
+        ],
+        "oov": [],
+        "poem_id": "acfc018bd3b47aafbd944763",
+        "train_combo": true,
+        "train_keyword_counts": [
+          48,
+          269
+        ]
+      },
+      {
+        "group_id": "4e780bfa151dae1c76ee5362",
+        "id": "T093",
+        "keywords": [
+          "山",
+          "寒",
+          "窗"
+        ],
+        "oov": [],
+        "poem_id": "4e780bfa151dae1c76ee5362",
+        "train_combo": false,
+        "train_keyword_counts": [
+          188,
+          100,
+          32
+        ]
+      },
+      {
+        "group_id": "5a28a65ac43b97d481dbc498",
+        "id": "T094",
+        "keywords": [
+          "冬",
+          "蕉"
+        ],
+        "oov": [],
+        "poem_id": "5a28a65ac43b97d481dbc498",
+        "train_combo": false,
+        "train_keyword_counts": [
+          11,
+          3
+        ]
+      },
+      {
+        "group_id": "b96c5d3eab37dd417f28af20",
+        "id": "T095",
+        "keywords": [
+          "城郭"
+        ],
+        "oov": [],
+        "poem_id": "b96c5d3eab37dd417f28af20",
+        "train_combo": false,
+        "train_keyword_counts": [
+          3
+        ]
+      },
+      {
+        "group_id": "06e5de23acd27deb8a77c784",
+        "id": "T096",
+        "keywords": [
+          "水",
+          "月"
+        ],
+        "oov": [],
+        "poem_id": "06e5de23acd27deb8a77c784",
+        "train_combo": true,
+        "train_keyword_counts": [
+          159,
+          140
+        ]
+      },
+      {
+        "group_id": "5fe69efefe32774903cc5252",
+        "id": "T097",
+        "keywords": [
+          "水"
+        ],
+        "oov": [],
+        "poem_id": "5fe69efefe32774903cc5252",
+        "train_combo": true,
+        "train_keyword_counts": [
+          159
+        ]
+      },
+      {
+        "group_id": "167f4b0ea56d4e0c22387322",
+        "id": "T098",
+        "keywords": [
+          "風"
+        ],
+        "oov": [],
+        "poem_id": "167f4b0ea56d4e0c22387322",
+        "train_combo": true,
+        "train_keyword_counts": [
+          197
+        ]
+      },
+      {
+        "group_id": "76585ea258d6b6d6955681eb",
+        "id": "T099",
+        "keywords": [
+          "柳"
+        ],
+        "oov": [],
+        "poem_id": "76585ea258d6b6d6955681eb",
+        "train_combo": true,
+        "train_keyword_counts": [
+          34
+        ]
+      },
+      {
+        "group_id": "1ecd79cab01f65427987c94a",
+        "id": "T100",
+        "keywords": [
+          "青天",
+          "鳥"
+        ],
+        "oov": [],
+        "poem_id": "1ecd79cab01f65427987c94a",
+        "train_combo": false,
+        "train_keyword_counts": [
+          2,
+          41
+        ]
+      }
+    ]
+  },
+  "swaps": {
+    "M001": "M014",
+    "M002": "M006",
+    "M003": "M012",
+    "M004": "M015",
+    "M005": "M002",
+    "M006": "M003",
+    "M007": "M005",
+    "M008": "M015",
+    "M009": "M005",
+    "M010": "M011",
+    "M011": "M007",
+    "M012": "M007",
+    "M013": "M002",
+    "M014": "M001",
+    "M015": "M002",
+    "M016": "M011",
+    "M017": "M027",
+    "M018": "M031",
+    "M019": "M023",
+    "M020": "M027",
+    "M021": "M033",
+    "M022": "M028",
+    "M023": "M021",
+    "M024": "M031",
+    "M025": "M019",
+    "M026": "M022",
+    "M027": "M017",
+    "M028": "M023",
+    "M029": "M031",
+    "M030": "M020",
+    "M031": "M023",
+    "M032": "M023",
+    "M033": "M022",
+    "M034": "M048",
+    "M035": "M036",
+    "M036": "M041",
+    "M037": "M035",
+    "M038": "M048",
+    "M039": "M048",
+    "M040": "M036",
+    "M041": "M049",
+    "M042": "M040",
+    "M043": "M034",
+    "M044": "M038",
+    "M045": "M039",
+    "M046": "M043",
+    "M047": "M035",
+    "M048": "M039",
+    "M049": "M040",
+    "M050": "M045"
+  },
+  "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+  "version": "orchid-holdout-v1"
+}
