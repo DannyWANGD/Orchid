@@ -45,3 +45,14 @@ done
 ```
 
 每轮在验证集中记录正文 NLL 与固定条件样例。本次实测的演示权重是 `checkpoints/sft/sft-tang-2027/best.pt`；选择规则与三个种子见 [微调实测](report/finetuning.md)。
+
+基线冻结自动评估与模型交付：
+
+```bash
+python -E scripts/evaluate.py --config configs/eval.yaml --device cpu --output runs/fixed-eval-v1
+python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --output dist/orchid-14m
+python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cpu --json
+python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cuda --json
+```
+
+`--constrain-form` 只强制字数、标点和停止，默认关闭。CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对照固定设备。无 CUDA 时可用 `--device cpu`。本地权重不进 Git；可从检查点重新导出，`dist/orchid-14m/bundle.json` 记录权重、字表和配置哈希。详见 [封存评估](report/evaluation_baseline.md) 和 [盲评说明](report/blind_review/README.md)。

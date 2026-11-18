@@ -15,7 +15,7 @@ from matplotlib.ticker import MaxNLocator
 if not __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from orchid.io import read_jsonl
+from orchid.io import read_json, read_jsonl
 
 STYLE = {"font.family": "DejaVu Sans", "font.size": 10, "axes.spines.top": False,
          "axes.spines.right": False, "svg.fonttype": "none", "svg.hashsalt": "orchid-v1", "pdf.fonttype": 42}
@@ -96,6 +96,38 @@ def architecture(output):
         save(fig, output)
 
 
+def writing_comparison(metrics_path, output):
+    m = read_json(metrics_path)
+    summary = m["summary"]
+    selected = m["selected"]
+    names = [n for n in ("R1", selected, "R2-K", "R3") if n in summary]
+    captions = {"R1": "Pretraining", selected: "After SFT", "R2-K": "Swapped input", "R3": "Forced form"}
+    keys = {"format_ok": "Four × five", "keywords_ok": "All keywords", "joint_ok": "Both"}
+    data = [{"model": n, "score": k, **summary[n]["main"]["overall"][k]}
+            for n in names for k in keys]
+    with plt.rc_context(STYLE):
+        fig, axes = plt.subplots(1, 3, figsize=(8.2, 3.5), sharey=True, layout="constrained")
+        for ax, (metric, title) in zip(axes, keys.items()):
+            samples = [r for r in data if r["score"] == metric]
+            values = [100*r["rate"] for r in samples]
+            bars = ax.bar(range(len(values)), values, width=.65, color=PALETTE[:len(values)])
+            for b, row in zip(bars, samples):
+                ax.text(b.get_x()+b.get_width()/2, max(1.0,b.get_height()+1.4), str(row["count"]),
+                        fontsize=8, ha="center", va="bottom")
+            ax.set_title(title)
+            ax.set_ylim(0,112)
+            ax.set_yticks(range(0,101,25))
+            ax.set_xticks(range(len(names)), [captions[n] for n in names], rotation=28, ha="right", fontsize=8)
+            ax.grid(axis="y",color="#e5e8ea",lw=.7)
+            ax.set_axisbelow(True)
+        axes[0].set_ylabel("Share of requests on independent prompts (%)")
+        save(fig, output)
+    with output.with_suffix(".csv").open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=("model", "score", "count", "total", "rate"), lineterminator="\n")
+        w.writeheader()
+        w.writerows(data)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="kind", required=True)
@@ -104,11 +136,16 @@ def main():
     tr.add_argument("--output", type=Path, required=True)
     ar = commands.add_parser("architecture", help="Draw the default GPT architecture.")
     ar.add_argument("--output", type=Path, required=True)
+    comp = commands.add_parser("comparison", help="Render task results from a completed metrics JSON.")
+    comp.add_argument("--metrics", type=Path, required=True)
+    comp.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.kind == "history":
         histories(args.metrics, args.output)
-    else:
+    elif args.kind == "architecture":
         architecture(args.output)
+    else:
+        writing_comparison(args.metrics, args.output)
 
 
 if __name__ == "__main__":

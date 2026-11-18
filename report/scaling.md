@@ -17,3 +17,7 @@
 用第 13 轮权重做两组、各三种子的 SFT。原峰值学习率 3e-4、上限 5 轮时，最佳集中在第 2 轮，验证 NLL 4.138–4.157；峰值 1.5e-4、上限 30 轮时，实际跑到 4–5 轮后提前停，最佳集中于 1–2 轮，验证 NLL 4.018–4.032。仅增加重复轮次无法解决条件覆盖，控制指标还需要单独核对。
 
 训练量使用有效目标 token 数一起报告。作为量级参照，[Llama 3 技术报告](https://arxiv.org/abs/2407.21783)用 15.6T 个文本 token 描述其旗舰模型预训练；[Hoffmann 等](https://arxiv.org/abs/2203.15556)研究参数与数据量的计算分配，[Muennighoff 等](https://papers.neurips.cc/paper_files/paper/2023/hash/9d89448b63ce1e2e8dc7af72c984c196-Abstract-Conference.html)针对数据有限时的重复训练。上述结果不规定 Orchid 的轮数；这里以实际曲线选择权重。
+
+## 同题验证的长训结果
+
+固定 90 道验证题，三次采样，共 270 次。92M 的 10 轮预训练接 SFT 是 88/270；13 轮预训练、峰值 3e-4 的 SFT 三个种子分别 63、79、68/270；改为峰值 1.5e-4 并拉长调度则为 32、41、48/270。后一组的正文 NLL 更低，关键词联合率却更差。结果支持区分自然续写与精确按题写作，后续交付选择按[预先登记的验证联合率](../docs/selection_protocol.md)并核对复现。[逐条输出](evidence/scale-validation-long/generations.jsonl)、[指标](evidence/scale-validation-long/metrics.json)。

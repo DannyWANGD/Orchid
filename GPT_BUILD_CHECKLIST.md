@@ -83,7 +83,7 @@ python -c "import torch; print(torch.__version__, torch.version.cuda, torch.cuda
 
 ## 3. 组织工程并登记开源借用
 
-以下为**计划创建**的结构，目前不表示这些程序已经存在：
+项目的主要实现和产物结构如下：
 
 ```text
 Orchid/
@@ -119,7 +119,7 @@ Orchid/
 ```
 
 - [ ] ENG-01 建立上述核心模块和统一入口，训练程序使用 `if __name__ == "__main__"`，导入模块时不启动训练或下载。
-- [ ] ENG-02 配置文件覆盖模型、数据路径、种子、训练和采样参数；运行时保存最终解析后的配置，不能只保存默认配置。
+- [x] ENG-02 配置文件覆盖模型、数据路径、种子、训练和采样参数；运行时保存最终解析后的配置，不能只保存默认配置。
 - [x] ENG-03 每次运行使用独立 `run_id`；记录代码提交或源码摘要、配置哈希、数据清单哈希、tokenizer 哈希与环境版本。
 - [x] ENG-04 `.gitignore` 排除原始数据、处理缓存、大检查点及运行目录；脚本、配置和清单可提交。
 - [x] ENG-05 建立 [开源借用登记](THIRD_PARTY_NOTICES.md)：源码引用、数据版本、具体用途、改动和许可证。
@@ -308,7 +308,7 @@ token IDs
 - [x] SFT-07 核对预训练检查点与 tokenizer/config 哈希，加载自己的 `pretrain/best`；新建微调优化器与学习率计划，保存初始化检查点的标识。
 - [x] SFT-08 按第 7 节初始配置微调，优先观察固定条件下的验证正文 NLL、格式与关键词表现；验证集选择检查点，测试集留到选择完成后使用。
 - [x] SFT-09 至少从同一个预训练检查点运行 3 个 SFT 训练种子，例如 `2026/2027/2028`；若只完成 1 次则注明证据限制。共享预训练的重复不能表述为三次独立从零训练。
-- [ ] SFT-10 保留微调前后在同一条件、同一采样设置下的输出；检查条件相关性是否改善，以及重复、照抄或语言质量是否退化。
+- [x] SFT-10 保留微调前后在同一条件、同一采样设置下的输出；检查条件相关性是否改善，以及重复、照抄或语言质量是否退化。
 
 参考书第 7 章可用于理解数据整理，但其所检查的基础 `custom_collate_fn` 主要屏蔽 padding，未实现本项目要求的全部 prompt 损失屏蔽，且示例会加载现成 GPT-2 权重。因此需要按本节改造。[已核对的微调代码](https://github.com/rasbt/LLMs-from-scratch/blob/0311973e2c974b9e0223933103dc400c7a536179/ch07/01_main-chapter-code/gpt_instruction_finetuning.py)
 
@@ -337,7 +337,7 @@ token IDs
 - [x] EVAL-05 实现第 10.2 节的解析和指标。只评模型新生成的内容；额外说明、数字、英文字母或控制标记记为不合规。原始指标不使用补标点、裁切、重试或从多首里挑选的结果。
 - [x] EVAL-06 对格式合格输出，查预训练与 SFT 的所有训练正文：标记整诗精确重复、完整四句连续出现在长诗、和训练集五言四句的近重复（规则同 DATA-06）。记录命中的 `poem_id`、原文位置与判定理由；此检查只覆盖已知训练材料。
 - [ ] EVAL-07 从主测试按词数分层，用固定种子预抽至少 30 条诗题，每题使用相同预定采样种子的 R1/R2 输出配对。两名评阅者独立评分，看诗题与匿名原始输出；打乱两首呈现顺序，不筛掉错格或漏词作品。按第 10.4 节汇总。
-- [ ] EVAL-08 实测每首诗耗时、生成 tokens/s 和显存峰值；统一 prompt/输出预算，GPU 计时同步并区分预热与正式测量。CPU 推理另外记录。
+- [x] EVAL-08 实测每首诗耗时、生成 tokens/s 和显存峰值；统一 prompt/输出预算，GPU 计时同步并区分预热与正式测量。CPU 推理另外记录。
 - [x] EVAL-09 对比例指标同时保存分子、分母；多个 SFT 训练种子先各自算指标，再汇总均值与标准差。若给区间，按 prompt 分组重采样，不能把同 prompt 的多次采样当成完全独立输入。
 - [x] EVAL-10 将机器可读指标写入 `metrics.json`，逐条样例写入 JSONL；结果带 checkpoint、数据/tokenizer 哈希、prompt 集版本与生成配置。
 - [x] EVAL-11 汇总成功与失败案例：格式错误、漏关键词、语义牵强、重复、照抄、OOV、过早 EOS 等，解释可能原因，不只展示最好样例。
@@ -384,29 +384,31 @@ token IDs
 
 ## 11. 本地推理与可复现交付
 
-- [ ] INFER-01 实现独立 `generate.py`，参数包括检查点、关键词、体裁、device、种子、temperature、top-k/top-p 与最大新 token 数；加载模型所对应的 tokenizer/config。
-- [ ] INFER-02 实现自回归采样：只取最后位置 logits，按参数筛选并重归一化，采样后追加 token；`temperature=0` 明确走 greedy 分支，避免除零。
-- [ ] INFER-03 检查关键词个数、字数、字形规范、未登录字和上下文预算，给出拒绝原因；区分正常 EOS 和达到生成上限，不能无声截掉条件。
-- [ ] INFER-04 使用 `model.eval()` 与 `torch.inference_mode()`，关闭所有 dropout；移除显示用控制标记时不修改模型生成的正文。
-- [ ] INFER-05 支持 `--device cpu` 的 FP32 推理与 GPU 推理，输出加载耗时和生成耗时；若 GPU 不可用，给出明确提示或记录回退，不能误报 GPU 测速。
-- [ ] INFER-06 如果增加强制四句、强制标点或押韵约束，增加显式开关，保留原始解码模式并单独评估；不能把强制格式当成模型自行学会格式。
-- [ ] INFER-07 打包最小推理目录：模型权重、config、tokenizer、版本说明、运行命令和校验值，在新进程中加载测试。
-- [ ] INFER-08 在 README 中给出环境检查、数据处理、预训练、续训、SFT、评估和推理命令；每条命令需实际跑过，并注明预期产物。
+已验证封装权重在新进程中使用 CPU 与 CUDA 推理。固定 2 道预热、10 道计时的[实测](report/evidence/infer-benchmark-14m.json)另注明 GPU 同时有训练进程，不用来定性判断独占加速比。
 
-以下是**未来程序应支持的入口示例，程序实现前不可直接运行**：
+- [x] INFER-01 实现独立 `generate.py`，参数包括检查点、关键词、体裁、device、种子、temperature、top-k/top-p 与最大新 token 数；加载模型所对应的 tokenizer/config。
+- [x] INFER-02 实现自回归采样：只取最后位置 logits，按参数筛选并重归一化，采样后追加 token；`temperature=0` 明确走 greedy 分支，避免除零。
+- [x] INFER-03 检查关键词个数、字数、字形规范、未登录字和上下文预算，给出拒绝原因；区分正常 EOS 和达到生成上限，不能无声截掉条件。
+- [x] INFER-04 使用 `model.eval()` 与 `torch.inference_mode()`，关闭所有 dropout；移除显示用控制标记时不修改模型生成的正文。
+- [x] INFER-05 支持 `--device cpu` 的 FP32 推理与 GPU 推理，输出加载耗时和生成耗时；若 GPU 不可用，给出明确提示或记录回退，不能误报 GPU 测速。
+- [x] INFER-06 如果增加强制四句、强制标点或押韵约束，增加显式开关，保留原始解码模式并单独评估；不能把强制格式当成模型自行学会格式。
+- [x] INFER-07 打包最小推理目录：模型权重、config、tokenizer、版本说明、运行命令和校验值，在新进程中加载测试。
+- [x] INFER-08 在 README 中给出环境检查、数据处理、预训练、续训、SFT、评估和推理命令；每条命令需实际跑过，并注明预期产物。
+
+入口命令详见 [README](README.md)。以下是 14M 基线的调用：
 
 ```bash
 python scripts/prepare_data.py --config configs/data.yaml
 python scripts/build_tokenizer.py --config configs/data.yaml
-python scripts/pretrain.py --config configs/pretrain.yaml
-python scripts/pretrain.py --config configs/pretrain.yaml --resume checkpoints/pretrain/last.pt
+python scripts/pretrain.py --config configs/pretrain.yaml --run-id pretrain-tang-v1 --stop-after 87
+python scripts/pretrain.py --config configs/pretrain.yaml --resume checkpoints/pretrain/pretrain-tang-v1/last.pt
 python scripts/build_sft_data.py --config configs/sft.yaml
-python scripts/finetune.py --config configs/sft.yaml --init checkpoints/pretrain/best.pt
-python scripts/evaluate.py --config configs/eval.yaml
-python scripts/generate.py --checkpoint checkpoints/sft/best.pt --keywords 春 雨 --device cuda
+python scripts/finetune.py --config configs/sft.yaml --init checkpoints/pretrain/pretrain-tang-v1/best.pt --seed 2027 --run-id sft-tang-2027
+python scripts/evaluate.py --config configs/eval.yaml --device cpu
+python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --keywords 春 雨 --device cuda
 ```
 
-在正式 README 中，示例路径需替换为真实运行得到的路径；多个 SFT 种子的最佳模型由验证集选择，不通过测试集挑选。
+多个 SFT 种子的最佳模型由验证集选择。重复实验请换新的运行 ID，并相应更新评估配置中的 checkpoint 路径。
 
 ## 12. 必做完成后再考虑的增强任务
 

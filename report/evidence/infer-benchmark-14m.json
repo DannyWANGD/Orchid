@@ -1,0 +1,37 @@
+{
+  "benchmarks": {
+    "cpu": {
+      "device": "cpu",
+      "load_seconds": 0.1419173909816891,
+      "median_seconds": 0.11746068799402565,
+      "peak_allocated_bytes": null,
+      "precision": "fp32",
+      "target_steps": 250,
+      "timed_requests": 10,
+      "tokens_per_second": 213.91737673770936,
+      "warmup_requests": 2
+    },
+    "cuda": {
+      "device": "cuda",
+      "load_seconds": 0.4326162419747561,
+      "median_seconds": 0.12219177652150393,
+      "peak_allocated_bytes": 65228288,
+      "precision": "fp32",
+      "target_steps": 250,
+      "timed_requests": 10,
+      "tokens_per_second": 213.19262716380237,
+      "warmup_requests": 2
+    }
+  },
+  "checkpoint": "dist/orchid-14m",
+  "checkpoint_sha256": "94f6e655dff666fe8957d339276ad29f7ec0a98e0998ed70bdac0fdc7ecbfbc3",
+  "cpu_threads": 2,
+  "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+  "sample_seed": 11,
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  }
+}
