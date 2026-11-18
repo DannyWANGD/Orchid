@@ -66,7 +66,7 @@
           "愁心對明月",
           "不見鷓鴣飛"
         ],
-        "load_seconds": 0.7541107139550149,
+        "load_seconds": 0.751260390970856,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -80,7 +80,7 @@
           "微",
           "飛"
         ],
-        "seconds": 2.4033225420862436,
+        "seconds": 2.4029568338301033,
         "stop": "eos"
       }
     },
@@ -150,7 +150,7 @@
           "一宿秋風前",
           "蕭蕭征馬鞍"
         ],
-        "load_seconds": 1.019635139964521,
+        "load_seconds": 1.0225285410415381,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -164,7 +164,7 @@
           "寒",
           "鞍"
         ],
-        "seconds": 0.3489956269040704,
+        "seconds": 0.34638625592924654,
         "stop": "eos"
       }
     }
@@ -184,18 +184,20 @@
       "source_step": 384,
       "version": 1
     },
-    "bytes": 351617686,
-    "file_count": 294,
+    "bytes": 351625873,
+    "file_count": 296,
     "zip": "dist/Orchid-course-prosody.zip",
-    "zip_sha256": "c15a1c2c3401b08d05855f0fbdb81c31533bdc3803691f568a4edfa54f91865d"
+    "zip_sha256": "1648d9a675eaa9883f9435ed0e308ad4e2a0d14bdc2bf4c28e0c1e62cb4e0e63"
   },
   "raw_parity": {
     "identical": true,
     "prompt_id": "M001",
     "seed": 11
   },
+  "review_summary_sha256": "33e013c649905f0d1f2a1a8b0872f2bd2bb0b070b3d26506d4cb58d1348a94b9",
   "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
   "scope": "Fresh extraction with local installed dependencies",
-  "unittest_summary": "----------------------------------------------------------------------\nRan 17 tests in 0.802s\n\nOK",
+  "tone_diagnostics_replay": true,
+  "unittest_summary": "----------------------------------------------------------------------\nRan 17 tests in 0.800s\n\nOK",
   "without_training_data": true
 }
