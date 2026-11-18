@@ -110,6 +110,69 @@ class EvalTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "changed prompt or poem"):
                 aggregate()
 
+    def test_v2_review_gates_and_paired_denominators(self):
+        with TemporaryDirectory() as td:
+            p = Path(td)
+            protocol, generations = p / "protocol.json", p / "generations.jsonl"
+            write_json(protocol, {"blind": {"prompt_ids": ["M1", "M2"], "sample_seed": 11}})
+            poems_and_scores = [
+                ("M1", "before", "江流水冷，舟橫一岸。", ("3", "3", "NA", "NA")),
+                ("M1", "after", "青山靜，流水清。孤舟遠，月將明。", ("5", "3", "3", "4")),
+                ("M2", "before", "江遠岸，月流水。明漁火，夜船空。", ("2", "2", "3", "NA")),
+                ("M2", "after", "山間月，海邊潮。忽炊煙，秋壑靜。", ("4", "4", "2", "NA")),
+            ]
+            write_jsonl(generations, (
+                {"suite": "main", "prompt_id": i, "sampling_seed": 11, "keywords": ["江", "月"],
+                 "model": m, "generated": poem} for i, m, poem, _ in poems_and_scores
+            ))
+            folder = p / "blind"
+            names = make_packets(generations, protocol, folder, ["before", "after"], rubric_version="v2")
+            templates = [folder / f for f in names]
+            returns = [p / f for f in names]
+            by_text = {poem: scores for _, _, poem, scores in poems_and_scores}
+            for i, (src, dst) in enumerate(zip(templates, returns)):
+                rows = read_form(src)
+                for row in rows:
+                    scores = list(by_text[row["output"]])
+                    self.assertEqual(row["coherence"], "NA" if scores[2] == "NA" else "")
+                    if i == 1 and scores[3] != "NA":
+                        scores[3] = "5"
+                    row.update(dict(zip(DIMENSIONS, scores)))
+                write_csv(dst, rows)
+
+            def aggregate():
+                return score_reviews(generations, protocol, folder / "private_key.json",
+                                     templates, returns, p / "result.json")
+
+            result = aggregate()
+            self.assertEqual(result["provenance"]["rubric_version"], "v2")
+            self.assertEqual(result["means_and_distributions"]["before"]["imagery"],
+                             {"mean": None, "distribution": {}, "rated": 0, "total": 4})
+            self.assertEqual(result["means_and_distributions"]["after"]["imagery"]["rated"], 2)
+            self.assertEqual(result["differences"]["coherence"]["paired"], 1)
+            self.assertEqual(result["differences"]["imagery"],
+                             {"mean": None, "by_pair": {}, "paired": 0, "total_pairs": 2})
+            self.assertEqual(result["both_reviewers_rated"]["imagery"], 1)
+
+            rows = read_form(returns[0])
+            too_short = next(row for row in rows if row["coherence"] == "NA")
+            too_short["coherence"] = "1"
+            write_csv(returns[0], rows)
+            with self.assertRaisesRegex(ValueError, "coherence must be NA"):
+                aggregate()
+            too_short["coherence"] = "NA"
+            low_fluency = next(row for row in rows if row["fluency"] == "2")
+            low_fluency["imagery"] = "2"
+            write_csv(returns[0], rows)
+            with self.assertRaisesRegex(ValueError, "imagery must be NA"):
+                aggregate()
+            low_fluency["imagery"] = "NA"
+            high_readability = next(row for row in rows if row["imagery"] == "4")
+            high_readability["imagery"] = "NA"
+            write_csv(returns[0], rows)
+            with self.assertRaisesRegex(ValueError, "invalid imagery score"):
+                aggregate()
+
 
 if __name__=="__main__":
     unittest.main()

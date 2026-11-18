@@ -1,0 +1,34 @@
+{
+  "coherence_by_model": {
+    "R1": {
+      "four_parsed_lines": 1,
+      "parsed_line_distribution": {
+        "0": 26,
+        "2": 3,
+        "4": 1
+      },
+      "total": 30
+    },
+    "R2-2027": {
+      "four_parsed_lines": 30,
+      "parsed_line_distribution": {
+        "4": 30
+      },
+      "total": 30
+    }
+  },
+  "coherence_paired": {
+    "both_four_parsed_lines": 1,
+    "total_pairs": 30
+  },
+  "generation_sha256": "52b35164724be11642d08e94d44675eb0eb9f711f45ce6e2c01cdef243667b61",
+  "packets": {
+    "reviewer_1.zip": "421b70f3ff77d1dd7cc89ba2ff3a6af1dce291cc7583e424460fa46a37fff33b",
+    "reviewer_2.zip": "0e62c2fd8856381b9a7ec79a90f48e044539f0ae7e2a0c3d32dec42aa6549758"
+  },
+  "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+  "rubric_sha256": "6e7513ab41cc124ef53acd15b76d76c8736d6af076701eecbf072625b1637023",
+  "rubric_version": "v2",
+  "scope": "Format applicability only on the same frozen 14M blind pairs; no v2 ratings were collected",
+  "v1_receipts_revalidated": true
+}

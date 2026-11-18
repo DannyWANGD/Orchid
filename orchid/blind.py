@@ -2,17 +2,30 @@
 
 from collections import Counter
 import csv
+from hashlib import sha256
 from io import BytesIO, StringIO
 import random
 from statistics import mean
 from zipfile import ZIP_DEFLATED, ZipFile
 
-from .io import read_json, read_jsonl, sha256_file, write_bytes, write_json
+from .io import ROOT, read_json, read_jsonl, sha256_file, write_bytes, write_json
+from .metrics import parse_poem
 
 
 DIMENSIONS = ("relevance", "fluency", "coherence", "imagery")
 HEAD = ("anonymous_id", "pair_id", "display_order", "keywords", "output", *DIMENSIONS, "notes")
 FIXED_FIELDS = HEAD[:5]
+RUBRICS = {
+    "v1": ROOT / "report/blind_review/reviewer_guide.md",
+    "v2": ROOT / "report/blind_review/reviewer_guide_v2.md",
+}
+
+
+def unrated_dimensions(text, rubric_version):
+    """Prefill only the ratings that the poem structure makes inapplicable."""
+    if rubric_version == "v2" and len(parse_poem(text)) != 4:
+        return {"coherence": "NA", "imagery": "NA"}
+    return {}
 
 
 def write_csv(path, records):
@@ -42,7 +55,13 @@ def source_pairs(generations, blind, models):
     return index
 
 
-def make_packets(generations, protocol, output, models, *, seed=20261118):
+def make_packets(generations, protocol, output, models, *, seed=None, rubric_version="v1"):
+    if rubric_version not in RUBRICS:
+        raise ValueError(f"Unknown review rubric: {rubric_version}")
+    rubric_info = ({"rubric_version": rubric_version, "rubric_sha256": sha256_file(RUBRICS[rubric_version])}
+                   if rubric_version == "v2" else {})
+    if seed is None:
+        seed = 20261119 if rubric_version == "v2" else 20261118
     blind = read_json(protocol)["blind"]
     index = source_pairs(generations, blind, models)
     if output.exists():
@@ -65,7 +84,8 @@ def make_packets(generations, protocol, output, models, *, seed=20261118):
             key[anonymous] = {"pair_id":pair,"source_prompt":i,"model":m,
                               "empty": not row["generated"].strip()}
             records[pair].append({"anonymous_id":anonymous,"pair_id":pair,
-                                  "keywords":"、".join(row["keywords"]), "output":row["generated"]})
+                                  "keywords":"、".join(row["keywords"]), "output":row["generated"],
+                                  **unrated_dimensions(row["generated"], rubric_version)})
     versions = ("reviewer_1.csv", "reviewer_2.csv")
     for version in versions:
         rows = []
@@ -78,10 +98,11 @@ def make_packets(generations, protocol, output, models, *, seed=20261118):
         write_csv(output/version, rows)
     key_path=output/"private_key.json"
     write_json(key_path, {"models":models,"items":key,"prompt_sha256":sha256_file(protocol),
-                         "generation_sha256":sha256_file(generations),"sample_seed":blind["sample_seed"]})
+                         "generation_sha256":sha256_file(generations),"sample_seed":blind["sample_seed"],
+                         **rubric_info})
     write_json(output/"ratings_status.json", {"expected_reviewers":2,"received":0,
               "pairs_per_reviewer":len(pairs),"rating_scale":[1,5],"blind_seed":seed,
-              "source_key_sha256":sha256_file(key_path)})
+              "source_key_sha256":sha256_file(key_path), **rubric_info})
     return versions
 
 
@@ -106,6 +127,11 @@ def normalized_fields(row):
 def verified_templates(generations, protocol, key_path, templates):
     """Check organizer templates against the originally frozen prompts and generations."""
     data = read_json(key_path)
+    version = data.get("rubric_version", "v1")
+    if version not in RUBRICS:
+        raise ValueError(f"Unknown review rubric: {version}")
+    if version == "v2" and data.get("rubric_sha256") != sha256_file(RUBRICS[version]):
+        raise ValueError("Version 2 rubric does not match the frozen review")
     if (data["prompt_sha256"] != sha256_file(protocol)
             or data["generation_sha256"] != sha256_file(generations)):
         raise ValueError("Blind key does not match the frozen prompts and generations")
@@ -138,8 +164,9 @@ def verified_templates(generations, protocol, key_path, templates):
                     or r["output"].replace("\r\n", "\n") != source["generated"].replace("\r\n", "\n")
                     or entry["empty"] != (not source["generated"].strip())):
                 raise ValueError(f"{path}: changed prompt or poem for {anon}")
-            if any(r[k].strip() for k in (*DIMENSIONS, "notes")):
-                raise ValueError(f"{path}: organizer template must be blank")
+            initial = unrated_dimensions(source["generated"], version)
+            if any(r[k].strip() != initial.get(k, "") for k in (*DIMENSIONS, "notes")):
+                raise ValueError(f"{path}: organizer template contains edited rating fields")
             order.setdefault(r["pair_id"], []).append(r["display_order"])
             expected[anon] = normalized_fields(r)
         if expected.keys() != key.keys() or any(sorted(items) != ["1", "2"] for items in order.values()):
@@ -150,6 +177,10 @@ def verified_templates(generations, protocol, key_path, templates):
 
 def export_reviewer_zips(generations, protocol, key_path, templates, rubric, output):
     data, _ = verified_templates(generations, protocol, key_path, templates)
+    rubric = rubric or RUBRICS[data.get("rubric_version", "v1")]
+    content = rubric.read_bytes()
+    if data.get("rubric_version") == "v2" and sha256(content).hexdigest() != data["rubric_sha256"]:
+        raise ValueError("Use the rubric that was frozen with this review")
     if output.exists():
         raise FileExistsError(f"Choose a new reviewer package directory: {output}")
     output.mkdir(parents=True)
@@ -157,7 +188,7 @@ def export_reviewer_zips(generations, protocol, key_path, templates, rubric, out
     for i, path in enumerate(templates, 1):
         buf = BytesIO()
         with ZipFile(buf, "w", compression=ZIP_DEFLATED) as z:
-            z.writestr("评分说明.md", rubric.read_bytes())
+            z.writestr("评分说明.md", content)
             z.writestr(f"reviewer_{i}.csv", path.read_bytes())
         dest = output / f"reviewer_{i}.zip"
         write_bytes(dest, buf.getvalue())
@@ -166,7 +197,7 @@ def export_reviewer_zips(generations, protocol, key_path, templates, rubric, out
             "packets": {p.name: sha256_file(p) for p in files}}
 
 
-def parse_reviews(path, key, reviewer_id, template):
+def parse_reviews(path, key, reviewer_id, template, *, rubric_version="v1"):
     rows={}
     for r in read_form(path):
         i=r["anonymous_id"]
@@ -174,39 +205,53 @@ def parse_reviews(path, key, reviewer_id, template):
             raise ValueError(f"{path}: invalid or repeated review ID {i}")
         if normalized_fields(r) != template[i]:
             raise ValueError(f"{path}: original prompt, output, or presentation fields changed at {i}")
-        ratings=[]
+        ratings = {}
+        initial = unrated_dimensions(r["output"], rubric_version)
         for dim in DIMENSIONS:
             score = r[dim].strip()
+            blocked_imagery = (rubric_version == "v2" and dim == "imagery"
+                               and min(ratings["fluency"], ratings["coherence"] or 0) < 3)
+            if dim in initial or blocked_imagery:
+                if score != "NA":
+                    raise ValueError(f"{path}: {dim} must be NA at {i}")
+                ratings[dim] = None
+                continue
             if score not in ("1","2","3","4","5"):
                 raise ValueError(f"{path}: missing or invalid {dim} score at {i}")
             rating=int(score)
             if key[i]["empty"] and rating!=1:
-                raise ValueError(f"Empty output must score 1 in every dimension: {i}")
-            ratings.append(rating)
-        rows[i]={"anonymous_id":i,"reviewer":reviewer_id,**dict(zip(DIMENSIONS,ratings)),
+                raise ValueError(f"Empty output must score 1 on its applicable dimensions: {i}")
+            ratings[dim] = rating
+        rows[i]={"anonymous_id":i,"reviewer":reviewer_id,**ratings,
                  "notes":r["notes"]}
     if rows.keys()!=key.keys():
         raise ValueError(f"{path}: expected {len(key)} reviewed items; got {len(rows)}")
     return rows
 
 
-def rating_summary(reviewed, pairs, models, grouped):
+def rating_summary(reviewed, pairs, models, grouped, *, rubric_version="v1"):
     scores = {}
     for model in models:
         ids = [grouped[pair, model] for pair in pairs]
         scores[model] = {}
         for dim in DIMENSIONS:
             values = [review[anonymous][dim] for review in reviewed for anonymous in ids]
-            scores[model][dim] = {"mean": mean(values), "distribution": dict(Counter(values))}
+            rated = [n for n in values if n is not None]
+            scores[model][dim] = {"mean": mean(rated) if rated else None, "distribution": dict(Counter(rated))}
+            if rubric_version == "v2":
+                scores[model][dim].update(rated=len(rated), total=len(values))
 
     differences = {}
     for dim in DIMENSIONS:
-        by_pair = {
-            pair: mean(review[grouped[pair, models[1]]][dim] - review[grouped[pair, models[0]]][dim]
-                       for review in reviewed)
-            for pair in pairs
-        }
-        differences[dim] = {"mean": mean(by_pair.values()), "by_pair": by_pair}
+        by_pair = {}
+        for pair in pairs:
+            matched = [(review[grouped[pair, models[0]]][dim], review[grouped[pair, models[1]]][dim])
+                       for review in reviewed]
+            if all(before is not None and after is not None for before, after in matched):
+                by_pair[pair] = mean(after - before for before, after in matched)
+        differences[dim] = {"mean": mean(by_pair.values()) if by_pair else None, "by_pair": by_pair}
+        if rubric_version == "v2":
+            differences[dim].update(paired=len(by_pair), total_pairs=len(pairs))
     return {"means_and_distributions": scores, "differences": differences}
 
 
@@ -218,12 +263,21 @@ def score_reviews(generations, protocol, key_path, templates, files, output,
         raise ValueError("Declare each reviewer as human or ai in template order")
     data, checked = verified_templates(generations, protocol, key_path, templates)
     key, models = data["items"], data["models"]
-    reviewed = [parse_reviews(path, key, n, template)
+    version = data.get("rubric_version", "v1")
+    reviewed = [parse_reviews(path, key, n, template, rubric_version=version)
                 for n, (path, template) in enumerate(zip(files, checked), 1)]
     pairs = sorted({r["pair_id"] for r in key.values()})
     grouped = {(r["pair_id"], r["model"]): i for i, r in key.items()}
-    large = [{"anonymous_id": i, "dimension": d, "ratings": [rev[i][d] for rev in reviewed]}
-             for i in key for d in DIMENSIONS if abs(reviewed[0][i][d] - reviewed[1][i][d]) >= 2]
+    large = []
+    both_rated = dict.fromkeys(DIMENSIONS, 0)
+    for i in key:
+        for dim in DIMENSIONS:
+            left, right = (review[i][dim] for review in reviewed)
+            if left is None or right is None:
+                continue
+            both_rated[dim] += 1
+            if abs(left - right) >= 2:
+                large.append({"anonymous_id": i, "dimension": dim, "ratings": [left, right]})
     human_count = reviewer_kinds.count("human")
     value = {
         "provenance": {
@@ -237,13 +291,16 @@ def score_reviews(generations, protocol, key_path, templates, files, output,
         "reviewers": 2, "human_reviewers": human_count, "ai_reviewers": 2 - human_count,
         "pairs": len(pairs), "dimensions": list(DIMENSIONS), "models": models,
         "ratings_by_reviewer": [
-            {"reviewer": n, "kind": kind, **rating_summary([review], pairs, models, grouped)}
+            {"reviewer": n, "kind": kind, **rating_summary([review], pairs, models, grouped, rubric_version=version)}
             for n, (kind, review) in enumerate(zip(reviewer_kinds, reviewed), 1)
         ],
         "disagreements_two_or_more": large, "empty_items": sum(r["empty"] for r in key.values()),
         "individual_scores": [v for reviewer in reviewed for v in reviewer.values()],
     }
+    if version == "v2":
+        value["provenance"].update(rubric_version=version, rubric_sha256=data["rubric_sha256"])
+        value["both_reviewers_rated"] = both_rated
     if human_count == 2:
-        value.update(rating_summary(reviewed, pairs, models, grouped))
+        value.update(rating_summary(reviewed, pairs, models, grouped, rubric_version=version))
     write_json(output, value)
     return value

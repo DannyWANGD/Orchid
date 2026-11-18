@@ -18,8 +18,10 @@ def main():
     make.add_argument("--protocol",type=Path,default=Path("artifacts/eval_prompts.json"))
     make.add_argument("--output",type=Path,required=True)
     make.add_argument("--models",nargs=2,default=["R1","R2-2027"])
+    make.add_argument("--rubric-version", choices=("v1", "v2"), default="v1",
+                      help="Use v2 for new reviews; v1 reproduces historical packets")
     distribute=cmd.add_parser("distribute")
-    distribute.add_argument("--rubric",type=Path,default=Path("report/blind_review/reviewer_guide.md"))
+    distribute.add_argument("--rubric",type=Path,help="Defaults to the guide frozen with the organizer key")
     aggregate=cmd.add_parser("aggregate")
     aggregate.add_argument("--ratings",type=Path,nargs=2,required=True)
     aggregate.add_argument("--reviewer-kinds", nargs=2, choices=("human", "ai"), default=("human", "human"),
@@ -33,7 +35,7 @@ def main():
     a=p.parse_args()
     try:
         if a.action=="make":
-            print(make_packets(a.generations,a.protocol,a.output,a.models))
+            print(make_packets(a.generations,a.protocol,a.output,a.models,rubric_version=a.rubric_version))
         elif a.action=="distribute":
             print(export_reviewer_zips(a.generations,a.protocol,a.key,a.templates,a.rubric,a.output))
         else:

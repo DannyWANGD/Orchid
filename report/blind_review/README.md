@@ -1,14 +1,41 @@
 # 诗歌盲评：组织者说明
 
-**14M 已收到 1/2 份真人回件，另有一份 AI 盲评。** 第 2 份真人回件的 60 条匿名 ID 和 240 个评分均通过校验，本机备份为 `reviewer_2_completed.csv`。AI 回件使用第 1 份匿名表，另行归档。交给同版另一位真人评阅者的是 [14M 评阅者 1 独立材料](../../dist/orchid-blind-14m/reviewer_1.zip)。
+## 新一轮用 v2 量表
 
-**原 92M 收到 0/2 份回件。** [92M 评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) 和 [92M 评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip) 各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。评阅者评切题、通顺、连贯、意象与意境，四项各 1～5 分。[评分说明](reviewer_guide.md)
+同一批 14M 封存诗题和原诗已重排匿名编号与呈现顺序。v2 的切题看语义，可读性看表达能否理解，连贯性只评可解析的四句，意境只在可读性和连贯性各达到 3 分时评。小于门槛的项目为 `NA`。新版目前没有回件。[v2 评分说明](reviewer_guide_v2.md) · [评阅者 1 材料](../../dist/orchid-blind-14m-v2/reviewer_1.zip) · [评阅者 2 材料](../../dist/orchid-blind-14m-v2/reviewer_2.zip)
+
+首次重建 v2 或把新回件存入 `runs/poetry-blind-v2/` 后汇总，分别使用以下命令。重建时选择新目录保留原表。仍需保存每个来源各自的覆盖率和结果。
+
+```bash
+python -E scripts/blind_review.py make \
+    --generations report/evidence/fixed-eval-v1/generations.jsonl \
+    --rubric-version v2 --output runs/poetry-blind-v2
+python -E scripts/blind_review.py distribute \
+    --generations report/evidence/fixed-eval-v1/generations.jsonl \
+    --key runs/poetry-blind-v2/private_key.json \
+    --templates runs/poetry-blind-v2/reviewer_1.csv runs/poetry-blind-v2/reviewer_2.csv \
+    --output dist/orchid-blind-14m-v2
+python -E scripts/blind_review.py aggregate \
+    --generations report/evidence/fixed-eval-v1/generations.jsonl \
+    --key runs/poetry-blind-v2/private_key.json \
+    --templates runs/poetry-blind-v2/reviewer_1.csv runs/poetry-blind-v2/reviewer_2.csv \
+    --ratings runs/poetry-blind-v2/reviewer_1_completed.csv runs/poetry-blind-v2/reviewer_2_completed.csv \
+    --output runs/review_v2_14m.json
+```
+
+汇总中的 `rated / total` 是数值评分数和全部输出数，`paired / total_pairs` 是一对两首均有数值的题数和全部题数。若汇总两位真人，配对差仅采用两位在该题均可比较的记录。没有配对的维度显示 `null`。如回件含 AI，按顺序声明 `--reviewer-kinds`，并保留各来源的结果。
+
+## 旧版 v1 记录
+
+**14M 有一份真人回件和一份 AI 盲评。** 两份各 60 条匿名 ID 和 240 个评分均通过校验。真人备份为 `reviewer_2_completed.csv`。现有评分对应 [v1 量表](reviewer_guide.md)。
+
+**原 92M 的 v1 材料尚无回件。** 两位各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。[原 92M 评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) · [原 92M 评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip)
 
 评阅者仅需各自的 ZIP，并在查看结果前独立完成。14M 回件放在本目录，原 92M 回件放在 `expanded/`，均用 `reviewer_1_completed.csv` 和 `reviewer_2_completed.csv` 命名。回件保存在本机，课程包使用空白表。按同一版本汇总，组织者确认两位独立完成。新押韵版已完成自动对照，已有评分对应旧轮次的原诗。[押韵改进实测](../prosody_optimization.md)
 
 把[五言格律抽查表](meter_review.md)单独交给熟悉诗律的读者，表中提供八首完整原诗。同一位读者若也参与质量盲评，请先交匿名评分 CSV，再做格律抽查。格律回件保存为本目录的 `meter_review_completed.md`。
 
-## 重建表与单独分发包
+### 重建 v1 表与单独分发包
 
 以下命令从封存的 92M 原始输出重建本地私有映射与表。使用新目录，避免覆盖已经存在的材料；现有的映射若仍在，可以直接跳到汇总。
 
@@ -26,7 +53,7 @@ python -E scripts/blind_review.py distribute \
     --output dist/orchid-blind-92m-recreated
 ```
 
-## 回收与汇总
+### 回收与汇总 v1
 
 材料是空表时不产生评分结果。汇总会核对封存生成文件、诗题清单、私有映射、原始表及回件，确保评分对象、题目和原始文本一致。有缺项、无效分数或被改写的输出时先人工查明，保留两名评阅者各自的原始分和说明。
 

@@ -77,7 +77,7 @@ CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对�
 python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --device cpu --constrain-keywords --json
 ```
 
-评阅者收到的是各自的匿名诗、题目及评分说明。14M 已核验一份真人回件和一份 AI 参照，旧 92M 仍待回件。汇总命令会校验同版本两份表的 60 个匿名 ID 及 1～5 分评分，并保存各评阅者的分布。[盲评说明](report/blind_review/README.md)
+评阅者收到的是各自的匿名诗、题目及评分说明。14M 的 v1 归档一份真人回件和一份 AI 参照，v2 匿名包用于新一轮。汇总会核对同版本两份表，并按维度保存评分分布及适用数。[盲评说明](report/blind_review/README.md)
 
 报告源文件 [Markdown](report/experiment_report.md)，可读版 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，从仓库根目录运行 `python -E scripts/build_report.py` 重建 PDF。
 

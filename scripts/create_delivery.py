@@ -21,7 +21,7 @@ ROOT_FILES = ("README.md", "GPT_BUILD_CHECKLIST.md", "Problem.md", "THIRD_PARTY_
 REPORT_FILES = ("experiment_report.md", "Orchid课程报告.pdf", "pretraining.md", "finetuning.md",
                 "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md", "prosody_source_audit.md",
                 "prosody_optimization.md")
-BLIND_DOCS = ("README.md", "reviewer_guide.md", "meter_review.md", "ratings_status.json",
+BLIND_DOCS = ("README.md", "reviewer_guide.md", "reviewer_guide_v2.md", "meter_review.md", "ratings_status.json",
               "expanded/ratings_status.json")
 
 
