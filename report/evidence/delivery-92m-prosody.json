@@ -67,7 +67,7 @@
           "愁心對明月",
           "不見鷓鴣飛"
         ],
-        "load_seconds": 0.7345377991441637,
+        "load_seconds": 0.7433623990509659,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -81,7 +81,7 @@
           "微",
           "飛"
         ],
-        "seconds": 2.435748656047508,
+        "seconds": 2.4139417719561607,
         "stop": "eos"
       }
     },
@@ -151,7 +151,7 @@
           "一宿秋風前",
           "蕭蕭征馬鞍"
         ],
-        "load_seconds": 1.0026348170358688,
+        "load_seconds": 0.9926639150362462,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -165,12 +165,13 @@
           "寒",
           "鞍"
         ],
-        "seconds": 0.3451979660894722,
+        "seconds": 0.3467768409755081,
         "stop": "eos"
       }
     }
   },
   "contains_private_review_or_keys": false,
+  "final_acceptance_sha256": "118546493dbc3fcda30b10f632d78d001d77fe71dd30d978193c37779e1d3b7e",
   "original_blank_reviewer_templates": 4,
   "package": {
     "bundle": {
@@ -185,10 +186,10 @@
       "source_step": 384,
       "version": 1
     },
-    "bytes": 351634547,
-    "file_count": 299,
+    "bytes": 351636498,
+    "file_count": 300,
     "zip": "dist/Orchid-course-prosody.zip",
-    "zip_sha256": "b920750af7fb7e47b12e86add76d8085582a61918fbdaa87dbed30aee1902d37"
+    "zip_sha256": "398d96a4474593761990a4e7374ec2534ea74b2789555959ca1411a4db6d8f4e"
   },
   "raw_parity": {
     "identical": true,
@@ -199,7 +200,7 @@
   "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
   "scope": "Fresh extraction with local installed dependencies",
   "tone_diagnostics_replay": true,
-  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.813s\n\nOK",
+  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.816s\n\nOK",
   "v2_review_packets_replayed": true,
   "without_training_data": true
 }

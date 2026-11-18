@@ -1,0 +1,304 @@
+{
+  "checklist_completed": 119,
+  "checklist_sha256": "33ac721baf4c077966b5de11c02ff7bfbabf9e3a3dfcfdb313621f8f26f59e4e",
+  "checklist_total": 119,
+  "confirmed_review_methods": {
+    "metre": "eight archived independent AI case reviews accepted by the user",
+    "quality": "one human v1 ballot with an independent AI reference"
+  },
+  "fresh_runtime": {
+    "cuda_device": "NVIDIA GeForce RTX 4080 SUPER",
+    "cuda_forward_backward": true,
+    "dependency_pins": 182,
+    "torch": "2.14.1+cu126",
+    "unit_tests": 18
+  },
+  "groups": {
+    "DATA": {
+      "evidence": [
+        "artifacts/data_manifest.json",
+        "artifacts/split_manifest.json",
+        "artifacts/data_stats.json",
+        "artifacts/tang-song/expansion_stats.json",
+        "docs/data_contract.md",
+        "docs/corpus_audit.md"
+      ],
+      "tasks": [
+        "DATA-01",
+        "DATA-02",
+        "DATA-03",
+        "DATA-04",
+        "DATA-05",
+        "DATA-06",
+        "DATA-07",
+        "DATA-08",
+        "DATA-09",
+        "DATA-10",
+        "DATA-11",
+        "DATA-12"
+      ]
+    },
+    "ENG": {
+      "evidence": [
+        ".gitignore",
+        "README.md",
+        "orchid/runner.py",
+        "configs/model.yaml",
+        "THIRD_PARTY_NOTICES.md",
+        "report/evidence/pretrain-tang-v1/run.json"
+      ],
+      "tasks": [
+        "ENG-01",
+        "ENG-02",
+        "ENG-03",
+        "ENG-04",
+        "ENG-05",
+        "ENG-06"
+      ]
+    },
+    "ENV": {
+      "evidence": [
+        "requirements.txt",
+        "scripts/check_env.py",
+        "artifacts/environment.json",
+        "report/evidence/independent-acceptance.json",
+        ".vscode/settings.example.json"
+      ],
+      "tasks": [
+        "ENV-01",
+        "ENV-02",
+        "ENV-03",
+        "ENV-04",
+        "ENV-05",
+        "ENV-06",
+        "ENV-07",
+        "ENV-08"
+      ]
+    },
+    "EVAL": {
+      "evidence": [
+        "artifacts/eval_prompts.json",
+        "report/evidence/fixed-eval-v1/metrics.json",
+        "report/evidence/retained-expanded-eval-v1/metrics.json",
+        "report/evidence/blind-ai-reference-14m.json",
+        "report/evaluation_baseline.md"
+      ],
+      "tasks": [
+        "EVAL-01",
+        "EVAL-02",
+        "EVAL-03",
+        "EVAL-04",
+        "EVAL-05",
+        "EVAL-06",
+        "EVAL-07",
+        "EVAL-08",
+        "EVAL-09",
+        "EVAL-10",
+        "EVAL-11",
+        "EVAL-12",
+        "EVAL-13",
+        "EVAL-14"
+      ]
+    },
+    "FINAL": {
+      "evidence": [
+        "docs/local_delivery.md",
+        "report/evaluation_baseline.md",
+        "report/prosody_source_audit.md",
+        "report/evidence/independent-acceptance.json"
+      ],
+      "tasks": [
+        "FINAL-01",
+        "FINAL-02",
+        "FINAL-03",
+        "FINAL-04",
+        "FINAL-05",
+        "FINAL-06",
+        "FINAL-07",
+        "FINAL-08"
+      ]
+    },
+    "INFER": {
+      "evidence": [
+        "scripts/generate.py",
+        "orchid/inference.py",
+        "orchid/prosody_decode.py",
+        "docs/local_delivery.md",
+        "report/evidence/infer-benchmark-92m.json",
+        "tests/test_prosody.py"
+      ],
+      "tasks": [
+        "INFER-01",
+        "INFER-02",
+        "INFER-03",
+        "INFER-04",
+        "INFER-05",
+        "INFER-06",
+        "INFER-07",
+        "INFER-08"
+      ]
+    },
+    "MODEL": {
+      "evidence": [
+        "orchid/model.py",
+        "configs/model.yaml",
+        "configs/model-92m.yaml",
+        "artifacts/training_checks.json",
+        "docs/model_implementation.md",
+        "tests/test_model.py"
+      ],
+      "tasks": [
+        "MODEL-01",
+        "MODEL-02",
+        "MODEL-03",
+        "MODEL-04",
+        "MODEL-05",
+        "MODEL-06",
+        "MODEL-07",
+        "MODEL-08",
+        "MODEL-09",
+        "MODEL-10",
+        "MODEL-11"
+      ]
+    },
+    "OPT": {
+      "evidence": [
+        "docs/scale_protocol.md",
+        "docs/prosody_protocol.md",
+        "report/prosody_source_audit.md",
+        "report/evidence/meter-prosody.json",
+        "report/evidence/prosody-study/test/metrics.json"
+      ],
+      "tasks": [
+        "OPT-01",
+        "OPT-02",
+        "OPT-03"
+      ]
+    },
+    "PRE": {
+      "evidence": [
+        "report/pretraining.md",
+        "report/evidence/pretrain-tang-v1/checkpoints.json",
+        "report/evidence/pretrain-tang-v1/samples.jsonl",
+        "report/evidence/pretrain-tang-v1/summary.json",
+        "report/figures/pretrain.csv"
+      ],
+      "tasks": [
+        "PRE-01",
+        "PRE-02",
+        "PRE-03",
+        "PRE-04",
+        "PRE-05",
+        "PRE-06",
+        "PRE-07",
+        "PRE-08"
+      ]
+    },
+    "REPORT": {
+      "evidence": [
+        "report/experiment_report.md",
+        "report/Orchid课程报告.pdf",
+        "scripts/build_report.py",
+        "scripts/plot_results.py",
+        "report/figures/manifest.json",
+        "THIRD_PARTY_NOTICES.md",
+        "report/evidence/independent-acceptance.json"
+      ],
+      "tasks": [
+        "REPORT-01",
+        "REPORT-02",
+        "REPORT-03",
+        "REPORT-04",
+        "REPORT-05",
+        "REPORT-06",
+        "REPORT-07",
+        "REPORT-08",
+        "REPORT-09"
+      ]
+    },
+    "SCOPE": {
+      "evidence": [
+        "Problem.md",
+        "configs/task.yaml",
+        "report/experiment_report.md",
+        "THIRD_PARTY_NOTICES.md"
+      ],
+      "tasks": [
+        "SCOPE-01",
+        "SCOPE-02",
+        "SCOPE-03",
+        "SCOPE-04"
+      ]
+    },
+    "SFT": {
+      "evidence": [
+        "docs/sft_audit.md",
+        "artifacts/sft_stats.json",
+        "artifacts/sft_mask_example.json",
+        "report/evidence/sft-tang-2026/run.json",
+        "report/evidence/sft-tang-2027/run.json",
+        "report/evidence/sft-tang-2028/run.json",
+        "report/finetuning.md"
+      ],
+      "tasks": [
+        "SFT-01",
+        "SFT-02",
+        "SFT-03",
+        "SFT-04",
+        "SFT-05",
+        "SFT-06",
+        "SFT-07",
+        "SFT-08",
+        "SFT-09",
+        "SFT-10"
+      ]
+    },
+    "TOK": {
+      "evidence": [
+        "orchid/tokenizer.py",
+        "orchid/data.py",
+        "artifacts/tokenizer.json",
+        "artifacts/token_stats.json",
+        "artifacts/sft_mask_example.json",
+        "tests/test_data.py"
+      ],
+      "tasks": [
+        "TOK-01",
+        "TOK-02",
+        "TOK-03",
+        "TOK-04",
+        "TOK-05",
+        "TOK-06",
+        "TOK-07",
+        "TOK-08"
+      ]
+    },
+    "TRAIN": {
+      "evidence": [
+        "orchid/training.py",
+        "orchid/runner.py",
+        "artifacts/training_checks.json",
+        "report/evidence/pretrain-tang-v1/metrics.jsonl",
+        "tests/test_training.py"
+      ],
+      "tasks": [
+        "TRAIN-01",
+        "TRAIN-02",
+        "TRAIN-03",
+        "TRAIN-04",
+        "TRAIN-05",
+        "TRAIN-06",
+        "TRAIN-07",
+        "TRAIN-08",
+        "TRAIN-09",
+        "TRAIN-10"
+      ]
+    }
+  },
+  "inference_bundle_sha256": "38b5f791a2562336729ae706fb0a072e7900c4cd355acd4f2f6e48cbd2a021f0",
+  "meter_replayed": [
+    "14M baseline",
+    "92M expanded baseline",
+    "92M prosody decoder modes"
+  ]
+}

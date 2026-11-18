@@ -31,7 +31,7 @@ python -E scripts/blind_review.py aggregate \
 
 只收到一份时可用 `summarize` 核验。它使用相同的封存文件、私有映射和模板，增加 `--rating`、`--reviewer 1` 或 `2`、`--reviewer-kind human` 或 `ai`。输出只有分布、适用数与配对差的汇总。
 
-格律抽查使用单独的[五言格律抽查表](meter_review.md)。表中提供八首原诗。同一位读者若也参与质量盲评，请先交匿名评分 CSV，再做格律抽查。格律回件保存为本目录的 `meter_review_completed.md`。
+格律验收采用提交者确认的八首独立 AI 个案复核。原诗与待核问题可从备查表对照。[复核结果](../prosody_source_audit.md#8-首样例的-ai-格律复核) · [五言格律抽查表](meter_review.md)
 
 ## v1 材料与回件位置
 

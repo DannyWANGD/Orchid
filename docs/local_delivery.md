@@ -8,6 +8,8 @@
 
 新版课程包使用 92M 韵律续训权重、离线韵表和默认四句五字押韵解码。解压至独立目录后，用 `--checkpoint model` 即可生成。课程包使用空白评分表。[新版课程包](../dist/Orchid-course-prosody.zip) · [新版解压验收](../report/evidence/delivery-92m-prosody.json)
 
+结项验收核对了清单的 119 个条目。实测包括 182 个依赖固定项、CUDA 前后向和 18 项测试。语料的源文件哈希、两套数据划分、训练字表、检查点哈希和封存评估已核对。主评阅使用确认的真人 v1 回件与同版 AI 参照，格律采用八首独立 AI 复核。每组条目的证据索引在[结项记录](../report/evidence/final-acceptance.json)。
+
 原 92M 唐宋版作为旧评阅和实验对应的留档。在独立环境，归档可在 CPU 加载原始模式，也可在 CUDA 跑原版字数和关键词约束。[原课程包](../dist/Orchid-course.zip) · [原归档校验](../report/evidence/delivery-92m.json) · [原解压验收](../report/evidence/delivery-92m-extraction.json)
 
 真人评阅者只使用各自的[独立评分包](../report/blind_review/README.md)。课程 ZIP 含解盲后的自动评估和可复现源码，用于课程交付，不用作盲评发放材料。

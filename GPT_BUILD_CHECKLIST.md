@@ -427,7 +427,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --
 | 交互界面 | 使用已验证的推理入口，显示关键词和采样设置；只增加实际需要的依赖 | 界面工作挤占训练与报告时间 |
 
 - [x] OPT-01 按本机预算选定规模、诗料及韵律增强，逐项核对假设、对照、指标和预算。按提交者要求先行完成增量实验，在主对照收齐后核验试验范围与结论。押韵续训使用等预算随机对照，推理解码用同一权重消融，扩容和诗料的合并变化均有记录。[扩容及增强台账](docs/scale_protocol.md#增强范围与实际预算opt-01) · [押韵改进方案](docs/prosody_protocol.md)
-- [ ] OPT-02 格律实验分别报告基本字数、韵部和平仄指标，记录规则未覆盖或有争议的样例；请有相关知识的人抽查。基线、扩容版及新版四种解码的自动诊断均已完成，另有 8 首的 AI 格律复核。独立读者回件待收。[AI 格律复核](report/prosody_source_audit.md#8-首样例的-ai-格律复核) · [新版格律诊断](report/prosody_optimization.md#平仄常格诊断) · [抽查表](report/blind_review/meter_review.md)
+- [x] OPT-02 格律实验分别报告字数、韵部和平仄，记录多音、异体及常格变通等规则边界。提交者确认采用已归档的 8 首独立 AI 格律复核。八首原诗与来源已核对，14M、原 92M 和新版四种解码的严格诊断已从封存生成记录重跑一致。[AI 格律复核](report/prosody_source_audit.md#8-首样例的-ai-格律复核) · [新版格律诊断](report/prosody_optimization.md#平仄常格诊断) · [抽查原文](report/blind_review/meter_review.md)
 - [x] OPT-03 报告同语料等训练量的规模对照、唐宋三种子微调和同模型的解码对照；如实记录扩容版未稳定超过短训版的条件命中。
 
 ## 13. 课程报告、图表和提交材料
