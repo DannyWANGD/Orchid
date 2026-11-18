@@ -9,24 +9,27 @@ if not __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from orchid.io import read_jsonl, sha256_file, write_json
-from orchid.metrics import rhyme_table
+from orchid.metrics import PINGSHUI_PATH, bundled_rhyme_table, rhyme_table
 from orchid.prosody import template_score
 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--generations",type=Path,required=True)
-    p.add_argument("--rhymes",type=Path,default=Path("data/raw/pingshui.json"))
+    p.add_argument("--rhymes",type=Path)
     p.add_argument("--suite",default="main")
+    p.add_argument("--group-by",choices=("model","mode"),default="model")
     p.add_argument("--output",type=Path,required=True)
     a=p.parse_args()
-    table=rhyme_table(a.rhymes)
+    table=rhyme_table(a.rhymes) if a.rhymes else bundled_rhyme_table()
     result={}
     seen=Counter()
     for row in read_jsonl(a.generations):
         if row["suite"]!=a.suite:
             continue
-        name=row["model"]
+        name=row.get(a.group_by)
+        if not name:
+            p.error(f"Suite {a.suite} has a generation without {a.group_by}")
         seen[name]+=1
         r=result.setdefault(name,{"tone":Counter(),"tone_rhyme":Counter(),"examples":{}})
         if not row["format_ok"]:
@@ -44,9 +47,12 @@ def main():
         for k in ("tone","tone_rhyme"):
             for s in ("pass","fail","unknown"):
                 r[k].setdefault(s,0)
-    write_json(a.output,{"source_sha256":sha256_file(a.generations),"rhyme_sha256":sha256_file(a.rhymes),
+    if not result:
+        p.error(f"No generations for suite {a.suite}")
+    write_json(a.output,{"source_sha256":sha256_file(a.generations),
+                         "rhyme_sha256":sha256_file(a.rhymes or PINGSHUI_PATH),
                          "scope":"exact canonical five-character tone templates; no historical exceptions",
-                         "suite":a.suite,"models":result})
+                         "suite":a.suite, a.group_by + "s":result})
     for name,r in result.items():
         print(name,r["shape"],dict(r["tone"]),dict(r["tone_rhyme"]))
 

@@ -427,7 +427,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --
 | 交互界面 | 使用已验证的推理入口，显示关键词和采样设置；只增加实际需要的依赖 | 界面工作挤占训练与报告时间 |
 
 - [ ] OPT-01 完成必做闭环后，按剩余时间只选择少量增强；每项记录假设、对照、指标和预算，不同时堆叠多个变量。已按回件反馈优先做押韵与字数，完成双支续训及约束消融，必做盲评仍待同版第二份。[此前扩容台账](docs/scale_protocol.md#增强范围与实际预算opt-01) · [押韵改进方案](docs/prosody_protocol.md)
-- [ ] OPT-02 格律实验分别报告基本字数、韵部和平仄指标，记录规则未覆盖或有争议的样例；请有相关知识的人抽查。[自动诊断与文献复核](report/prosody_source_audit.md)已完成，仍待独立读者[抽查](report/blind_review/meter_review.md)。
+- [ ] OPT-02 格律实验分别报告基本字数、韵部和平仄指标，记录规则未覆盖或有争议的样例；请有相关知识的人抽查。基线、扩容版及新版四种解码的自动诊断均已完成，独立读者回件待收。[文献复核](report/prosody_source_audit.md) · [新版格律诊断](report/prosody_optimization.md#平仄常格诊断) · [抽查表](report/blind_review/meter_review.md)
 - [x] OPT-03 报告同语料等训练量的规模对照、唐宋三种子微调和同模型的解码对照；如实记录扩容版未稳定超过短训版的条件命中。
 
 ## 13. 课程报告、图表和提交材料

@@ -29,6 +29,19 @@
 
 测试采用原先封存的 50 道新题，每题 3 个采样种子，权重在此之前锁定。原 92M 的同题历史结果按异字规则重新计为 56/150，新权重自由生成是 92/150。两词、三词题各有 51 次试验，新权重自由生成仍各为 0 次全用词。默认版的两组都到 51/51，所需词组由解码约束保证。默认版 150 首中未检测到重复整句或与训练集整首、长诗片段及近重复的匹配。规则计数既不能衡量意境，也不能判定每个用词读起来自然，最新版的诗意、连贯和平仄仍需人工评价。[测试指标](evidence/prosody-study/test/metrics.json) · [逐条生成](evidence/prosody-study/test/generations.jsonl)
 
+## 平仄常格诊断
+
+对同一批封存输出逐字复查四种五言常格。上平、下平记为平；上、去、入记为仄。一个字的可能读法均保留。押首句韵的常格还检查第一句与偶句的同韵和韵脚字是否各异。平仄分母是对应模式中已写成四句五字的数量。[王力《诗律》](https://www.aisixiang.com/data/98039.html) · [逐模式诊断数据](evidence/meter-prosody.json)
+
+| 生成方式 | 五言四句 | 偶句异字同韵 | 逐字平仄合／不合／待判 | 平仄、按常格押韵合／不合／待判 |
+|---|---:|---:|---:|---:|
+| 自由生成 | 148/150 | 92/150 | 0／126／22 | 0／131／17 |
+| 只限制外形 | 150/150 | 93/150 | 0／129／21 | 0／133／17 |
+| 限制外形和押韵 | 150/150 | 150/150 | 1／127／22 | 1／130／19 |
+| 默认，加入关键词和候选排序 | 150/150 | 150/150 | 1／143／6 | 1／146／3 |
+
+默认模式的 M028／种子 22「古路斜陽下，高樓遠樹邊。登樓殘月暮，一一是秋天。」匹配仄起首句不入韵，韵脚「邊／天」。M001／种子 11「霜蟹肥堪釀，霜螯美可烹。一千頭上雪，三百首陽英。」有可确认的共同平声韵脚，仍不匹配逐字常格。读音歧义和可变通的字位见专项抽查，严格常格数据保持原规则。[格律抽查表](blind_review/meter_review.md)
+
 ## 本地复现
 
 运行前准备 [唐宋 92M](../README.md#单卡扩容92m-唐宋版) 的数据和原权重。使用新的运行 ID 和输出目录复跑，单独保留历史证据。
@@ -44,6 +57,8 @@ python -E scripts/evaluate_prosody.py validation --original dist/orchid-92m \
     --rhyme checkpoints/sft/sft-prosody-rhyme-repeat/last.pt --output runs/prosody-repeat/validation
 python -E scripts/evaluate_prosody.py test \
     --selection runs/prosody-repeat/validation/metrics.json --output runs/prosody-repeat/test
+python -E scripts/evaluate_meter.py --generations runs/prosody-repeat/test/generations.jsonl \
+    --suite test --group-by mode --output runs/prosody-repeat/test/meter.json
 python -E scripts/generate.py --checkpoint dist/orchid-92m-prosody --keywords 秋雨 孤舟 --json
 ```
 
