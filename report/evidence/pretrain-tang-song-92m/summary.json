@@ -1,0 +1,29 @@
+{
+  "best_checkpoint": "checkpoints/pretrain/pretrain-tang-song-92m/best.pt",
+  "best_sha256": "90ee0bd6ca869380134ed20fa13ce9960bda803684ab2b266654886ac864b514",
+  "cursor": {
+    "epoch": 10,
+    "rows": 36096,
+    "step": 5922,
+    "target_tokens": 193758254,
+    "train_seconds": 1842.249499741476
+  },
+  "device": "cuda",
+  "initialization": {
+    "kind": "random_init",
+    "seed": 2026
+  },
+  "invocation_wall_seconds": 1298.7674096520059,
+  "last_checkpoint": "checkpoints/pretrain/pretrain-tang-song-92m/last.pt",
+  "parameters": 91843584,
+  "precision": "bf16",
+  "run_id": "pretrain-tang-song-92m",
+  "stage": "pretrain",
+  "stop_reason": "validation_patience",
+  "validation": {
+    "best_nll": 3.88049637911093,
+    "best_step": 5076,
+    "patience_best": 3.88049637911093,
+    "stale": 3
+  }
+}

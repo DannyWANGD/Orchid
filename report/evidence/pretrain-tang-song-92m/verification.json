@@ -1,0 +1,34 @@
+{
+  "best": {
+    "best": true,
+    "epoch": 9,
+    "event": "validation",
+    "invocation_wall_seconds": 1023.4624506749678,
+    "sampling_accuracy": null,
+    "stale": 0,
+    "step": 5076,
+    "tokens_seen": 166066074,
+    "validation": {
+      "nll": 3.88049637911093,
+      "ppl": 48.448257806831954,
+      "target_tokens": 158708
+    }
+  },
+  "last": {
+    "best": false,
+    "epoch": 10,
+    "event": "validation",
+    "invocation_wall_seconds": 1297.9011530908756,
+    "sampling_accuracy": null,
+    "stale": 3,
+    "step": 5922,
+    "tokens_seen": 193758254,
+    "validation": {
+      "nll": 3.8994482927668264,
+      "ppl": 49.37520093421991,
+      "target_tokens": 158708
+    }
+  },
+  "source_summary_sha256": "0a81ca8af729aa79fa37837be57d28550f1034c47ef36cc5267d0d2d3e7241b8",
+  "verified_steps_continuous": 5922
+}
