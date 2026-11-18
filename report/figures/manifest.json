@@ -1,0 +1,9 @@
+{
+  "figures": [
+    {"id": "architecture", "path_pdf": "architecture.pdf", "path_svg": "architecture.svg", "caption": "Orchid 基线中的两次预归一化、残差和输出权重共享。", "section": "模型结构", "source": "configs/model.yaml; scripts/plot_results.py architecture"},
+    {"id": "pretrain", "path_pdf": "pretrain.pdf", "path_svg": "pretrain.svg", "path_csv": "pretrain.csv", "caption": "14M 预训练 NLL；横轴为累计有效目标，不把 padding 算在内。", "section": "预训练", "source": "evidence/pretrain-tang-v1/metrics.jsonl; scripts/plot_results.py history"},
+    {"id": "sft", "path_pdf": "sft.pdf", "path_svg": "sft.svg", "path_csv": "sft.csv", "caption": "14M 的三个 SFT 种子共用同一预训练权重。", "section": "监督微调", "source": "evidence/sft-tang-{2026,2027,2028}/metrics.jsonl; scripts/plot_results.py history"},
+    {"id": "scale-length", "path_pdf": "scale-length.pdf", "path_svg": "scale-length.svg", "path_csv": "scale-length.csv", "caption": "固定唐诗语料的不同预算和参数规模；长训在验证反弹后早停。", "section": "预训练", "source": "evidence/pretrain-tang-*/metrics.jsonl; scripts/plot_results.py history"},
+    {"id": "test-baseline", "path_pdf": "test-baseline.pdf", "path_svg": "test-baseline.svg", "path_csv": "test-baseline.csv", "caption": "14M 基线主测试，每组 50 题×3 个采样种子；柱顶写次数。", "section": "固定测试", "source": "evidence/fixed-eval-v1/metrics.json; scripts/plot_results.py comparison"}
+  ]
+}

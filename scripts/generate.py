@@ -29,6 +29,8 @@ def main():
     parser.add_argument("--max-new-tokens", type=int, default=64)
     parser.add_argument("--constrain-form", action="store_true",
                         help="Force four five-character lines; does not ensure keyword use or rhyme")
+    parser.add_argument("--constrain-keywords", action="store_true",
+                        help="Force the form and place each keyword in a line; may sound less natural")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
     torch.set_num_threads(2)
@@ -38,17 +40,20 @@ def main():
         if args.form != poem.task.form:
             raise ValueError("The requested form does not match the checkpoint")
         words = poem.task.validate_keywords(args.keywords)
-        result = poem.tokens(words, spec, args.seed, constrain_form=args.constrain_form)
+        result = poem.tokens(words, spec, args.seed, constrain_form=args.constrain_form,
+                             constrain_keywords=args.constrain_keywords)
     except (ValueError, OSError) as exc:
         parser.error(str(exc))
     if args.json:
         print(json_text({**result, **judge_format_keywords(result["generated"], words),
                          "keywords": words, "device": str(poem.device), "load_seconds": poem.load_seconds,
-                         "constrained_form": args.constrain_form, "model_hash": poem.checkpoint_sha256}))
+                         "constrained_form": args.constrain_form or args.constrain_keywords,
+                         "constrained_keywords": args.constrain_keywords, "model_hash": poem.checkpoint_sha256}))
     else:
         print(result["generated"])
         print(f"{poem.device} · load {poem.load_seconds:.3f}s · generate {result['seconds']:.3f}s · "
-              f"{result['stop']}" + (" · format constrained" if args.constrain_form else ""), file=sys.stderr)
+              f"{result['stop']}" + (" · keywords and form constrained" if args.constrain_keywords else
+                                    " · form constrained" if args.constrain_form else ""), file=sys.stderr)
 
 
 if __name__ == "__main__":

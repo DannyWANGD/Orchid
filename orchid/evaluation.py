@@ -48,11 +48,11 @@ def ratio(count, total):
 
 
 def score_row(poet, spec, row, sampling_seed, suite, model_name, train_matches, rhymes,
-              *, replacement=None, constrain_form=False):
+              *, replacement=None, constrain_form=False, constrain_keywords=False):
     words = row["keywords"]
     try:
         out = poet.tokens(words if replacement is None else replacement, spec, sampling_seed,
-                          constrain_form=constrain_form)
+                          constrain_form=constrain_form, constrain_keywords=constrain_keywords)
         out["error"] = None
     except ValueError as exc:
         out = {"generated": "", "generated_ids": [], "stop": "rejected",
@@ -65,7 +65,8 @@ def score_row(poet, spec, row, sampling_seed, suite, model_name, train_matches, 
         "input_keywords": words if replacement is None else replacement,
         "case": row.get("case"), "poem_id": row.get("poem_id"),
         "train_combo": row["train_combo"], "train_keyword_counts": row["train_keyword_counts"],
-        "oov": row["oov"], "sampling_seed": sampling_seed, "constrained_form": constrain_form,
+        "oov": row["oov"], "sampling_seed": sampling_seed,
+        "constrained_form": constrain_form or constrain_keywords, "constrained_keywords": constrain_keywords,
         **out, **quality, **rh, "train_matches": match,
     }
 
@@ -265,6 +266,10 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
                            for row in full_main for seed in seeds]
             provenance["R2-K"] = {**provenance[name], "control": "swap keywords; score against original"}
             provenance["R3"] = {**provenance[name], "control": "force punctuation, line lengths and EOS"}
+            if cfg.get("keyword_constraint_control", False):
+                cases["R3-K"] = [score_row(poet, sampling, tags(row), seed, "main", "R3-K", match_index, rhymes,
+                                           constrain_keywords=True) for row in full_main for seed in seeds]
+                provenance["R3-K"] = {**provenance[name], "control": "force form and one word in each of separate lines"}
             if not smoke:
                 benchmarks["selected"] = benchmark(poet, ps["suites"]["main"], sampling, seeds[0])
         print(f"{name}: {len(cases[name])} requests, reference NLL {reference[name]['nll']:.5f}", flush=True)
@@ -293,7 +298,10 @@ def run_eval(cfg, output, *, device_override=None, smoke=False, variants_only=Fa
                            "n_seeds": len(vals), "by_run": dict(zip(names,values))}
     contrasts = {}
     if selected in cases and "R1" in cases:
-        for a, b in [("R1",selected), ("R2-K",selected), (selected,"R3")]:
+        comparisons = [("R1",selected), ("R2-K",selected), (selected,"R3")]
+        if "R3-K" in cases:
+            comparisons.append((selected,"R3-K"))
+        for a, b in comparisons:
             contrasts[f"{b} - {a}"] = {key: sample_mean_delta(
                 [r for r in cases[a] if r["suite"] == "main"], [r for r in cases[b] if r["suite"] == "main"], key)
                 for key in ("format_ok","keywords_ok","joint_ok")}

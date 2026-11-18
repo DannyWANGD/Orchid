@@ -1,0 +1,322 @@
+{
+  "models": {
+    "R0": {
+      "examples": {},
+      "shape": {
+        "count": 0,
+        "total": 24
+      },
+      "tone": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      },
+      "tone_rhyme": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R1": {
+      "examples": {},
+      "shape": {
+        "count": 0,
+        "total": 150
+      },
+      "tone": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      },
+      "tone_rhyme": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2026": {
+      "examples": {
+        "tone/fail": {
+          "generated": "自然山中夜，無奈我如秋。不是歸山月，相逢結白雲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 22,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "曉閣清風起，清光亂日紅。時人何所見，不覺故人間。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "曉閣清風起，清光亂日紅。時人何所見，不覺故人間。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 147,
+        "total": 150
+      },
+      "tone": {
+        "fail": 135,
+        "pass": 0,
+        "unknown": 12
+      },
+      "tone_rhyme": {
+        "fail": 147,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2027": {
+      "examples": {
+        "tone/fail": {
+          "generated": "白首黃金地，孤舟一夜時。我居人世事，何處見西陵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "歲菊多秋氣，新秋復早流。君將飛燕闕，空負百年聲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M003",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "白首黃金地，孤舟一夜時。我居人世事，何處見西陵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 142,
+        "total": 150
+      },
+      "tone": {
+        "fail": 135,
+        "pass": 0,
+        "unknown": 7
+      },
+      "tone_rhyme": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2028": {
+      "examples": {
+        "tone/fail": {
+          "generated": "自報西南國，千年始暮潮。從來一夜月，不見百花來。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "去雁來將斷，秋雲欲待流。不知無奈別，莫遣別鄉心。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M014",
+          "rhyme": "fail",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "自報西南國，千年始暮潮。從來一夜月，不見百花來。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "水岸清江遠，秋山水氣平。不知音信斷，應是待秋蟬。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M035",
+          "rhyme": "unknown",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 143,
+        "total": 150
+      },
+      "tone": {
+        "fail": 135,
+        "pass": 0,
+        "unknown": 8
+      },
+      "tone_rhyme": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 1
+      }
+    },
+    "R2-K": {
+      "examples": {
+        "tone/fail": {
+          "generated": "獨隨煙水路，愁向水中寒。只對南園裏，知君幾日心。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "歲菊多秋氣，新秋復早流。君將飛燕闕，空負百年聲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M006",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "獨隨煙水路，愁向水中寒。只對南園裏，知君幾日心。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 141,
+        "total": 150
+      },
+      "tone": {
+        "fail": 137,
+        "pass": 0,
+        "unknown": 4
+      },
+      "tone_rhyme": {
+        "fail": 141,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R3": {
+      "examples": {
+        "tone/fail": {
+          "generated": "白首黃金地，孤舟一夜時。我居人世事，何處見西陵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "歲菊多秋氣，新秋復早流。君將飛燕闕，空負百年聲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M003",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "白首黃金地，孤舟一夜時。我居人世事，何處見西陵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 150,
+        "total": 150
+      },
+      "tone": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 8
+      },
+      "tone_rhyme": {
+        "fail": 150,
+        "pass": 0,
+        "unknown": 0
+      }
+    }
+  },
+  "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+  "scope": "exact canonical five-character tone templates; no historical exceptions",
+  "source_sha256": "52b35164724be11642d08e94d44675eb0eb9f711f45ce6e2c01cdef243667b61",
+  "suite": "main"
+}

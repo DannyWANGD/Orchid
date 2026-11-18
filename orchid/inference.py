@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 from pathlib import Path
+import random
 from time import perf_counter
 
 import torch
@@ -10,6 +11,7 @@ from .corpus import IS_HAN_LINE
 from .data import prompt_ids
 from .generation import Sampling, sample_tokens
 from .io import read_json, sha256_file
+from .metrics import judge_format_keywords
 from .model import GPT, GPTConfig
 from .supervision import Task
 from .tokenizer import EOS, CharacterTokenizer
@@ -26,13 +28,25 @@ class Poet:
     checkpoint_sha256: str
     load_seconds: float
 
-    def tokens(self, keywords, sampling: Sampling, seed, *, constrain_form=False):
+    def tokens(self, keywords, sampling: Sampling, seed, *, constrain_form=False, constrain_keywords=False):
         words = self.task.validate_keywords(keywords)
         prefix = prompt_ids(self.tokenizer, words)
-        if constrain_form:
+        if constrain_form or constrain_keywords:
             allowed_han = tuple(i for i, c in enumerate(self.tokenizer.vocab) if IS_HAN_LINE.fullmatch(c))
+            fixed = {}
+            if constrain_keywords:
+                # Put each word in a separate sentence so all keywords fit even
+                # when the caller requests three two-character words.
+                positions = random.Random(seed).sample(range(self.task.lines), len(words))
+                for line, keyword in zip(positions, words):
+                    ids = self.tokenizer.encode(keyword, strict=True)
+                    offset = (self.task.chars_per_line - len(ids)) // 2
+                    for i, token_id in enumerate(ids):
+                        fixed[6 * line + offset + i] = token_id
 
             def allowed_at(step, _):
+                if step in fixed:
+                    return (fixed[step],)
                 if step == 24:
                     return (EOS,)
                 if step % 6 == 5:
@@ -48,7 +62,10 @@ class Poet:
         ids, stop = sample_tokens(self.model, prefix, sampling, seed, allowed_at=allowed_at)
         synchronize(self.device)
         elapsed = perf_counter() - t0
-        return {"generated": self.tokenizer.decode(ids), "generated_ids": ids,
+        text = self.tokenizer.decode(ids)
+        if constrain_keywords and (stop != "eos" or not judge_format_keywords(text, words)["joint_ok"]):
+            raise RuntimeError("The keyword-constrained decoder failed its output invariant")
+        return {"generated": text, "generated_ids": ids,
                 "stop": stop, "seconds": elapsed, "generated_steps": len(ids) + (stop == "eos")}
 
 
