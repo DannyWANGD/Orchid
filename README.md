@@ -14,3 +14,12 @@ python -I scripts/check_env.py --require-cuda --verify-pins --output artifacts/e
 ```
 
 如果是新建的空环境，激活后先运行 `python -m pip install -r requirements.txt`。`check_env.py` 会写出版本、显卡、BF16 能力和 CUDA 前向/反向检查结果；只使用 CPU 时去掉 `--require-cuda`。VS Code 工作区默认选择 `.venv/bin/python`；若编辑器已记住其他解释器，在「Python: Select Interpreter」中切换。
+
+从仓库根目录获取和准备语料：
+
+```bash
+python -E scripts/prepare_data.py --config configs/data.yaml
+python -E scripts/build_tokenizer.py --config configs/data.yaml
+```
+
+首次运行下载原始唐诗到 `data/raw/tang/`。添加 `--offline` 可用本地已校验的分片复跑。同一快照和配置重建 `data/processed/`，其中包含三个独立诗集与 token 流；`artifacts/` 保存源文件清单、冻结的划分、字表和统计。训练只学习 train 的 8,582 个 token（含保留标记）；验证和测试里的生僻字可以变成 `<unk>`，比例见 [token 统计](artifacts/token_stats.json)。

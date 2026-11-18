@@ -1,0 +1,139 @@
+{
+  "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+  "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+  "splits": {
+    "test": {
+      "body_and_punctuation_tokens": 148124,
+      "poem_file_sha256": "3deb282e6e85803bc1ba904fd9e9a6ebb7c9d547917912e38db2f09ff05aef04",
+      "poems": 2550,
+      "stream_tokens": 153224,
+      "token_file_sha256": "d378c27521bd103630195e1f7062508cfa7e9eb76ac2afa1e4bba2f7a88c2064",
+      "top_unk": [
+        [
+          "襹",
+          3
+        ],
+        [
+          "婥",
+          2
+        ],
+        [
+          "䬘",
+          2
+        ],
+        [
+          "霋",
+          2
+        ],
+        [
+          "纷",
+          2
+        ],
+        [
+          "駰",
+          2
+        ],
+        [
+          "嚗",
+          2
+        ],
+        [
+          "喌",
+          2
+        ],
+        [
+          "䍽",
+          2
+        ],
+        [
+          "瑲",
+          1
+        ],
+        [
+          "鈌",
+          1
+        ],
+        [
+          "邱",
+          1
+        ]
+      ],
+      "unk_count": 75,
+      "unk_fraction": 0.0005063325322027491,
+      "unk_types": 65
+    },
+    "train": {
+      "body_and_punctuation_tokens": 2756706,
+      "poem_file_sha256": "eef6808c50e223939fcc7bcce0f6114015ec9235391473dadc3bb17d035872ac",
+      "poems": 46031,
+      "stream_tokens": 2848768,
+      "token_file_sha256": "62d31ba3d7c8b7372e0865807d94aeaaf7592713b13cb765d67f77c6910499a1",
+      "top_unk": [],
+      "unk_count": 0,
+      "unk_fraction": 0.0,
+      "unk_types": 0
+    },
+    "validation": {
+      "body_and_punctuation_tokens": 153595,
+      "poem_file_sha256": "71a91679e0a4c02e32737dab4b9f4c27062571dc2ffa6479bdbd8349b3f2637a",
+      "poems": 2557,
+      "stream_tokens": 158709,
+      "token_file_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543",
+      "top_unk": [
+        [
+          "嘎",
+          3
+        ],
+        [
+          "淰",
+          2
+        ],
+        [
+          "夬",
+          2
+        ],
+        [
+          "闟",
+          2
+        ],
+        [
+          "吶",
+          2
+        ],
+        [
+          "戙",
+          2
+        ],
+        [
+          "繃",
+          2
+        ],
+        [
+          "堋",
+          2
+        ],
+        [
+          "邱",
+          2
+        ],
+        [
+          "趵",
+          2
+        ],
+        [
+          "咥",
+          2
+        ],
+        [
+          "皡",
+          1
+        ]
+      ],
+      "unk_count": 116,
+      "unk_fraction": 0.0007552329177382076,
+      "unk_types": 104
+    }
+  },
+  "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+  "vocab_size": 8582
+}

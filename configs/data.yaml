@@ -1,0 +1,12 @@
+# Paths are relative to the directory from which the commands run.
+source:
+  repo: chinese-poetry/chinese-poetry
+  revision: b8594f81a89752241442f2ce267d6f66f96704ee
+  directory: 全唐诗
+  tang_shards: 58
+paths:
+  raw: data/raw/tang
+  processed: data/processed
+  artifacts: artifacts
+seed: 2026
+split: {train: 0.90, validation: 0.05, test: 0.05}
