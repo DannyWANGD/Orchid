@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+/.vscode/browse.vc.db*
+/.vscode/c_cpp_properties.json
+/data/raw/
+/data/processed/
+/runs/
+/checkpoints/
+/dist/
+/artifacts/*.pt
+/artifacts/*.npy

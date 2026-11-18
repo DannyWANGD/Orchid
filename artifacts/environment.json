@@ -1,0 +1,41 @@
+{
+  "python": "3.11.16",
+  "python_expected": "3.11.16",
+  "platform": "Linux",
+  "architecture": "x86_64",
+  "isolated_python_path": true,
+  "torch": "2.14.1+cu126",
+  "cuda_build": "12.6",
+  "cuda_available": true,
+  "driver": "560.35.05",
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4080 SUPER",
+    "memory_bytes": 16748249088,
+    "capability": [
+      8,
+      9
+    ]
+  },
+  "bf16_native": true,
+  "cuda_forward_backward": true,
+  "packages": {
+    "torch": "2.14.1+cu126",
+    "triton": "3.8.0",
+    "cuda-toolkit": "12.6.3",
+    "cuda-bindings": "12.9.7",
+    "nvidia-cudnn-cu12": "9.10.2.21",
+    "numpy": "2.4.6",
+    "PyYAML": "6.0.3",
+    "regex": "2026.9.29",
+    "matplotlib": "3.11.2",
+    "tqdm": "4.70.1"
+  },
+  "pip_check": {
+    "ok": true,
+    "output": "No broken requirements found."
+  },
+  "pinned_requirements": {
+    "count": 182,
+    "mismatches": {}
+  }
+}
