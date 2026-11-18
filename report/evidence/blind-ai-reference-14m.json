@@ -1,4 +1,16 @@
 {
+  "acceptance": {
+    "blind_sampling_seed": 11,
+    "human_form_confirmed_by_reviewer": true,
+    "independent_ai_reference_reviewer": 1,
+    "primary_human_reviewer": 2,
+    "primary_rubric": "v1",
+    "prompts_by_keyword_count": {
+      "1": 10,
+      "2": 10,
+      "3": 10
+    }
+  },
   "ai_reviewers": 1,
   "empty_items": 0,
   "generation_sha256": "52b35164724be11642d08e94d44675eb0eb9f711f45ce6e2c01cdef243667b61",

@@ -67,7 +67,7 @@
           "愁心對明月",
           "不見鷓鴣飛"
         ],
-        "load_seconds": 0.7502728498075157,
+        "load_seconds": 0.7345377991441637,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -81,7 +81,7 @@
           "微",
           "飛"
         ],
-        "seconds": 2.397271740017459,
+        "seconds": 2.435748656047508,
         "stop": "eos"
       }
     },
@@ -151,7 +151,7 @@
           "一宿秋風前",
           "蕭蕭征馬鞍"
         ],
-        "load_seconds": 1.0015398389659822,
+        "load_seconds": 1.0026348170358688,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -165,7 +165,7 @@
           "寒",
           "鞍"
         ],
-        "seconds": 0.34531842707656324,
+        "seconds": 0.3451979660894722,
         "stop": "eos"
       }
     }
@@ -185,21 +185,21 @@
       "source_step": 384,
       "version": 1
     },
-    "bytes": 351633624,
+    "bytes": 351634547,
     "file_count": 299,
     "zip": "dist/Orchid-course-prosody.zip",
-    "zip_sha256": "c257bd8115da318aaab0d32b702d7030fe5c49aebc107fd8b4dc529d04939187"
+    "zip_sha256": "b920750af7fb7e47b12e86add76d8085582a61918fbdaa87dbed30aee1902d37"
   },
   "raw_parity": {
     "identical": true,
     "prompt_id": "M001",
     "seed": 11
   },
-  "review_summary_sha256": "33e013c649905f0d1f2a1a8b0872f2bd2bb0b070b3d26506d4cb58d1348a94b9",
+  "review_summary_sha256": "ecd624e7d7a1954cd2807d13a25776a8e7cba856efdaa57d8c45f35e48d2d40e",
   "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
   "scope": "Fresh extraction with local installed dependencies",
   "tone_diagnostics_replay": true,
-  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.814s\n\nOK",
+  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.813s\n\nOK",
   "v2_review_packets_replayed": true,
   "without_training_data": true
 }

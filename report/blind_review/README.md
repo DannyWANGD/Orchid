@@ -1,8 +1,12 @@
 # 诗歌盲评：组织者说明
 
-## 新一轮用 v2 量表
+## 已完成的 14M v1 主对照
 
-同一批 14M 封存诗题和原诗已重排匿名编号与呈现顺序。v2 的切题看语义，可读性看表达能否理解，连贯性只评可解析的四句，意境只在可读性和连贯性各达到 3 分时评。小于门槛的项目为 `NA`。第 1 份 AI 回件的 60 条已校验，原件保存在 `runs/poetry-blind-v2/reviewer_1_ai_completed.csv`。v2 真人回件待收。[v2 评分说明](reviewer_guide_v2.md) · [AI 汇总](../evidence/blind-v2-ai-14m.json) · [评阅者 1 材料](../../dist/orchid-blind-14m-v2/reviewer_1.zip) · [评阅者 2 材料](../../dist/orchid-blind-14m-v2/reviewer_2.zip)
+提交者确认沿用原第 2 份真人评分。第 1 份由独立 AI 子 agent 按同一 v1 量表完成，两份对应相同的 30 道匿名原输出配对，各有 240 个通过校验的评分。主报告采用真人评分，并报告 AI 参照及评分差异。[v1 同量表结果](../evaluation_baseline.md#一位真人与一位-ai-的盲评结果)
+
+## v2 量表复核
+
+同一批 14M 封存诗题和原诗已重排匿名编号与呈现顺序。v2 的切题看语义，可读性看表达能否理解，连贯性只评可解析的四句，意境只在可读性和连贯性各达到 3 分时评。小于门槛的项目为 `NA`。第 1 份 AI 回件的 60 条已校验，原件保存在 `runs/poetry-blind-v2/reviewer_1_ai_completed.csv`。v2 用于复核这些规则的适用范围。[v2 评分说明](reviewer_guide_v2.md) · [AI 汇总](../evidence/blind-v2-ai-14m.json) · [评阅者 1 材料](../../dist/orchid-blind-14m-v2/reviewer_1.zip) · [评阅者 2 材料](../../dist/orchid-blind-14m-v2/reviewer_2.zip)
 
 首次重建 v2 或把新回件存入 `runs/poetry-blind-v2/` 后汇总，分别使用以下命令。重建时选择新目录保留原表。仍需保存每个来源各自的覆盖率和结果。
 
@@ -29,9 +33,9 @@ python -E scripts/blind_review.py aggregate \
 
 格律抽查使用单独的[五言格律抽查表](meter_review.md)。表中提供八首原诗。同一位读者若也参与质量盲评，请先交匿名评分 CSV，再做格律抽查。格律回件保存为本目录的 `meter_review_completed.md`。
 
-## 旧版 v1 记录
+## v1 材料与回件位置
 
-**14M 有一份真人回件和一份 AI 盲评。** 两份各 60 条匿名 ID 和 240 个评分均通过校验。真人备份为 `reviewer_2_completed.csv`。现有评分对应 [v1 量表](reviewer_guide.md)。
+14M 真人备份为 `reviewer_2_completed.csv`。[v1 量表](reviewer_guide.md)
 
 **原 92M 的 v1 材料尚无回件。** 两位各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。[原 92M 评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) · [原 92M 评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip)
 

@@ -318,7 +318,7 @@ token IDs
 
 ### 10.1 比较对象与固定协议
 
-已完成 14M 封存测试、92M 扩容版同尺寸微调前后对照，以及 92M 韵律续训和解码消融。两轮原始生成各有 30 组匿名材料，14M 已收到一份真人回件和一份 AI 盲评，各自分数已核验并分别报告。[14M 封存测试](report/evaluation_baseline.md) · [92M 扩容对照](report/evaluation_expanded.md) · [押韵改进实测](report/prosody_optimization.md) · [评阅进度](report/blind_review/README.md)
+已完成 14M 封存测试、92M 扩容版同尺寸微调前后对照，以及 92M 韵律续训和解码消融。14M 主对照采用提交者确认的 v1 真人回件，并保留同量表的独立 AI 参照。v2 有另外一份 AI 评阅，用于检查新版评分规则的适用范围。[14M 封存测试](report/evaluation_baseline.md) · [92M 扩容对照](report/evaluation_expanded.md) · [押韵改进实测](report/prosody_optimization.md) · [评阅进度](report/blind_review/README.md)
 
 | 编号 | 对象 | 用途 |
 |---|---|---|
@@ -336,7 +336,7 @@ token IDs
 - [x] EVAL-04 在同一组监督验证/测试样本上，对 R1/R2 计算相同正文+EOS 掩码的 NLL；与预训练文本流的 NLL 分表展示，避免混用统计口径。
 - [x] EVAL-05 实现第 10.2 节的解析和指标。只评模型新生成的内容；额外说明、数字、英文字母或控制标记记为不合规。原始指标不使用补标点、裁切、重试或从多首里挑选的结果。
 - [x] EVAL-06 对格式合格输出，查预训练与 SFT 的所有训练正文：标记整诗精确重复、完整四句连续出现在长诗、和训练集五言四句的近重复（规则同 DATA-06）。记录命中的 `poem_id`、原文位置与判定理由；此检查只覆盖已知训练材料。
-- [ ] EVAL-07 从主测试按词数分层，用固定种子预抽至少 30 条诗题，每题使用相同预定采样种子的 R1/R2 输出配对。两名评阅者独立评分，看诗题与匿名原始输出；打乱两首呈现顺序，不筛掉错格或漏词作品。按第 10.4 节汇总。v2 第 1 份 AI 回件已校验 60 行，真人回件待收。v1 归档一份真人回件和一份 AI 盲评。[v2 单份汇总](report/evidence/blind-v2-ai-14m.json) · [分发包与回件校验](report/blind_review/README.md)
+- [x] EVAL-07 从主测试按词数分层，用固定种子预抽 30 条诗题，每档词数 10 条。两个模型按同一预定采样种子配对，并保留错格和漏词输出，呈现顺序独立打乱。按提交者的安排由一位真人与一位独立 AI 评阅，两份 v1 回件各 60 条、240 项均通过校验。真人确认原回件为准，AI 分数用于参照。[同量表主对照](report/evaluation_baseline.md#一位真人与一位-ai-的盲评结果) · [分发包与回件校验](report/blind_review/README.md)
 - [x] EVAL-08 实测每首诗耗时、生成 tokens/s 和显存峰值；统一 prompt/输出预算，GPU 计时同步并区分预热与正式测量。CPU 推理另外记录。
 - [x] EVAL-09 对比例指标同时保存分子、分母；多个 SFT 训练种子先各自算指标，再汇总均值与标准差。若给区间，按 prompt 分组重采样，不能把同 prompt 的多次采样当成完全独立输入。
 - [x] EVAL-10 将机器可读指标写入 `metrics.json`，逐条样例写入 JSONL；结果带 checkpoint、数据/tokenizer 哈希、prompt 集版本与生成配置。
@@ -369,7 +369,7 @@ token IDs
 
 ### 10.4 人工盲评：诗写得怎么样
 
-评分维度采用多项独立判断的设计。v2 说明了各维度适用的输出范围。可评分项取 1～5，2 和 4 为相邻描述之间。逐字命中、句长和押韵保留自动统计。[Zhang 与 Lapata，EMNLP 2014](https://aclanthology.org/D14-1074/) · [v2 评分说明及校准例](report/blind_review/reviewer_guide_v2.md)
+14M 主对照使用提交者确认的 v1 真人成绩。同版 AI 回件单列参照，两个来源各报配对差。下表用于后续 v2 评阅。可评分项取 1～5，2 和 4 为相邻描述之间。逐字命中、句长和押韵保留自动统计。[v1 评分说明](report/blind_review/reviewer_guide.md) · [v2 评分说明及校准例](report/blind_review/reviewer_guide_v2.md) · [Zhang 与 Lapata，EMNLP 2014](https://aclanthology.org/D14-1074/)
 
 | 维度 | 1 分 | 3 分 | 5 分 |
 |---|---|---|---|
@@ -426,7 +426,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --
 | 推理优化 | KV cache、SDPA、编译或量化分别验证质量和速度 | 位置索引、mask、精度差异可能导致错误 |
 | 交互界面 | 使用已验证的推理入口，显示关键词和采样设置；只增加实际需要的依赖 | 界面工作挤占训练与报告时间 |
 
-- [ ] OPT-01 完成必做闭环后，按剩余时间只选择少量增强；每项记录假设、对照、指标和预算，不同时堆叠多个变量。已按回件反馈优先做押韵与字数，完成双支续训及约束消融，必做盲评仍待新版回件。[此前扩容台账](docs/scale_protocol.md#增强范围与实际预算opt-01) · [押韵改进方案](docs/prosody_protocol.md)
+- [x] OPT-01 按本机预算选定规模、诗料及韵律增强，逐项核对假设、对照、指标和预算。按提交者要求先行完成增量实验，在主对照收齐后核验试验范围与结论。押韵续训使用等预算随机对照，推理解码用同一权重消融，扩容和诗料的合并变化均有记录。[扩容及增强台账](docs/scale_protocol.md#增强范围与实际预算opt-01) · [押韵改进方案](docs/prosody_protocol.md)
 - [ ] OPT-02 格律实验分别报告基本字数、韵部和平仄指标，记录规则未覆盖或有争议的样例；请有相关知识的人抽查。基线、扩容版及新版四种解码的自动诊断均已完成，另有 8 首的 AI 格律复核。独立读者回件待收。[AI 格律复核](report/prosody_source_audit.md#8-首样例的-ai-格律复核) · [新版格律诊断](report/prosody_optimization.md#平仄常格诊断) · [抽查表](report/blind_review/meter_review.md)
 - [x] OPT-03 报告同语料等训练量的规模对照、唐宋三种子微调和同模型的解码对照；如实记录扩容版未稳定超过短训版的条件命中。
 
@@ -468,7 +468,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --
 - [x] FINAL-02 预训练确实从随机初始化开始，有真实训练日志和本项目检查点。
 - [x] FINAL-03 微调确实加载本项目预训练权重，监督数据、prompt 掩码和有效标签已核对。
 - [x] FINAL-04 全局测试诗作未进入任何训练阶段，tokenizer 未使用验证/测试内容学习字表。
-- [ ] FINAL-05 有相同协议下的微调前后对照：独立诗题的联合成功率、偶句同韵诊断、人工分项评分及训练正文匹配；报告失败案例，约束解码收益单列。自动项与案例已完成，等待 EVAL-07 的 v2 评阅回件。
+- [x] FINAL-05 有相同协议下的微调前后对照。14M 封存测试包含独立诗题的联合成功率、偶句同韵诊断、提交者确认的 v1 人工分项评分及训练正文匹配。报告保留失败案例并单列约束解码收益。[封存测试及人工对照](report/evaluation_baseline.md) · [韵律与解码消融](report/prosody_optimization.md)
 - [x] FINAL-06 推理包可在新进程加载，README 的命令、路径、依赖和下载入口已逐项验证。
 - [x] FINAL-07 报告覆盖 35%/20%/20%/20%/5% 各项，全部图表数字能追溯到实际运行。
 - [x] FINAL-08 开源来源、固定版本、许可证和资源网址齐全；未完成的增强和未验证结论明确标注。
