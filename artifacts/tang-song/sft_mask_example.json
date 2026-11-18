@@ -1,0 +1,262 @@
+{
+  "keywords": [
+    "長夏",
+    "陰",
+    "林"
+  ],
+  "poem_id": "0012610a32d654b20df68ac4",
+  "positions": [
+    {
+      "input": "<bos>",
+      "input_id": 2,
+      "label_id": -100,
+      "position": 0,
+      "target": null
+    },
+    {
+      "input": "<wujue>",
+      "input_id": 4,
+      "label_id": -100,
+      "position": 1,
+      "target": null
+    },
+    {
+      "input": "<kw>",
+      "input_id": 5,
+      "label_id": -100,
+      "position": 2,
+      "target": null
+    },
+    {
+      "input": "長",
+      "input_id": 7437,
+      "label_id": -100,
+      "position": 3,
+      "target": null
+    },
+    {
+      "input": "夏",
+      "input_id": 1296,
+      "label_id": -100,
+      "position": 4,
+      "target": null
+    },
+    {
+      "input": "<kwsep>",
+      "input_id": 6,
+      "label_id": -100,
+      "position": 5,
+      "target": null
+    },
+    {
+      "input": "陰",
+      "input_id": 7532,
+      "label_id": -100,
+      "position": 6,
+      "target": null
+    },
+    {
+      "input": "<kwsep>",
+      "input_id": 6,
+      "label_id": -100,
+      "position": 7,
+      "target": null
+    },
+    {
+      "input": "林",
+      "input_id": 2904,
+      "label_id": -100,
+      "position": 8,
+      "target": null
+    },
+    {
+      "input": "<sep>",
+      "input_id": 7,
+      "label_id": 2071,
+      "position": 9,
+      "target": "恢"
+    },
+    {
+      "input": "恢",
+      "input_id": 2071,
+      "label_id": 821,
+      "position": 10,
+      "target": "台"
+    },
+    {
+      "input": "台",
+      "input_id": 821,
+      "label_id": 4332,
+      "position": 11,
+      "target": "當"
+    },
+    {
+      "input": "當",
+      "input_id": 4332,
+      "label_id": 7437,
+      "position": 12,
+      "target": "長"
+    },
+    {
+      "input": "長",
+      "input_id": 7437,
+      "label_id": 1296,
+      "position": 13,
+      "target": "夏"
+    },
+    {
+      "input": "夏",
+      "input_id": 1296,
+      "label_id": 8373,
+      "position": 14,
+      "target": "，"
+    },
+    {
+      "input": "，",
+      "input_id": 8373,
+      "label_id": 1631,
+      "position": 15,
+      "target": "山"
+    },
+    {
+      "input": "山",
+      "input_id": 1631,
+      "label_id": 2845,
+      "position": 16,
+      "target": "木"
+    },
+    {
+      "input": "木",
+      "input_id": 2845,
+      "label_id": 4465,
+      "position": 17,
+      "target": "盡"
+    },
+    {
+      "input": "盡",
+      "input_id": 4465,
+      "label_id": 2267,
+      "position": 18,
+      "target": "成"
+    },
+    {
+      "input": "成",
+      "input_id": 2267,
+      "label_id": 7532,
+      "position": 19,
+      "target": "陰"
+    },
+    {
+      "input": "陰",
+      "input_id": 7532,
+      "label_id": 8,
+      "position": 20,
+      "target": "。"
+    },
+    {
+      "input": "。",
+      "input_id": 8,
+      "label_id": 5702,
+      "position": 21,
+      "target": "良"
+    },
+    {
+      "input": "良",
+      "input_id": 5702,
+      "label_id": 5745,
+      "position": 22,
+      "target": "苗"
+    },
+    {
+      "input": "苗",
+      "input_id": 5745,
+      "label_id": 2676,
+      "position": 23,
+      "target": "方"
+    },
+    {
+      "input": "方",
+      "input_id": 2676,
+      "label_id": 4884,
+      "position": 24,
+      "target": "競"
+    },
+    {
+      "input": "競",
+      "input_id": 4884,
+      "label_id": 5770,
+      "position": 25,
+      "target": "茂"
+    },
+    {
+      "input": "茂",
+      "input_id": 5770,
+      "label_id": 8373,
+      "position": 26,
+      "target": "，"
+    },
+    {
+      "input": "，",
+      "input_id": 8373,
+      "label_id": 2097,
+      "position": 27,
+      "target": "悠"
+    },
+    {
+      "input": "悠",
+      "input_id": 2097,
+      "label_id": 920,
+      "position": 28,
+      "target": "哉"
+    },
+    {
+      "input": "哉",
+      "input_id": 920,
+      "label_id": 2904,
+      "position": 29,
+      "target": "林"
+    },
+    {
+      "input": "林",
+      "input_id": 2904,
+      "label_id": 188,
+      "position": 30,
+      "target": "下"
+    },
+    {
+      "input": "下",
+      "input_id": 188,
+      "label_id": 1997,
+      "position": 31,
+      "target": "心"
+    },
+    {
+      "input": "心",
+      "input_id": 1997,
+      "label_id": 8,
+      "position": 32,
+      "target": "。"
+    },
+    {
+      "input": "。",
+      "input_id": 8,
+      "label_id": 3,
+      "position": 33,
+      "target": "<eos>"
+    }
+  ],
+  "prompt_len": 10,
+  "response": "恢台當長夏，山木盡成陰。良苗方競茂，悠哉林下心。",
+  "task": {
+    "chars_per_line": 5,
+    "form": "wujue",
+    "keywords": {
+      "max": 3,
+      "max_chars": 2,
+      "min": 1,
+      "min_chars": 1
+    },
+    "lines": 4,
+    "script": "source_traditional"
+  }
+}

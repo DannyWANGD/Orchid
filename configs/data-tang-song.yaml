@@ -1,0 +1,6 @@
+tang: configs/data.yaml
+song: configs/song.yaml
+paths:
+  raw: data/raw
+  processed: data/processed/tang-song
+  artifacts: artifacts/tang-song

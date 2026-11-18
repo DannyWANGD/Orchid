@@ -1,0 +1,97 @@
+{
+  "exact_song_duplicates": 656,
+  "exclusion_examples": {
+    "exact_tang_body": [
+      {
+        "author": "朱存",
+        "file": "poet.song.0.json",
+        "id": "69cf5a0e-55c2-41ee-8bb8-812ce5637d84",
+        "index": 14,
+        "text": "五城樓雉各相望山水英靈宅帝王此地定由天造險古來長恃作金湯",
+        "title": "金陵覽古 石頭城"
+      },
+      {
+        "author": "朱存",
+        "file": "poet.song.0.json",
+        "id": "66aabafa-fa03-48fc-b156-5aaba996837c",
+        "index": 17,
+        "text": "滿目江山異洛陽昔人何必重悲傷倘能戮力扶王室當自新亭復故鄉",
+        "title": "金陵覽古 新亭"
+      },
+      {
+        "author": "李濤",
+        "file": "poet.song.0.json",
+        "id": "1032f3ab-ec36-4a5a-9839-e9d540052a17",
+        "index": 34,
+        "text": "走却坐禪客移將不動尊世間顛倒事八萬四千門",
+        "title": "題泥水關不動尊院"
+      }
+    ],
+    "heldout_edit_distance_leq_2": [
+      {
+        "author": "朱存",
+        "file": "poet.song.0.json",
+        "id": "818a2cb4-0025-4139-bfc0-efb9c51c6e87",
+        "index": 23,
+        "text": "雷轟疊鼓火翻旗三翼翩翩試水師驚起黑龍眠不得狂風猛雨下多時",
+        "title": "金陵覽古 後湖"
+      },
+      {
+        "author": "釋延壽",
+        "file": "poet.song.0.json",
+        "id": "1415febf-ba51-4ad9-9075-ff34eb160644",
+        "index": 151,
+        "text": "松蘿高鎮夏長寒透出羣峰畫恐難造化功成彰五德洞天雲散露花冠",
+        "title": "金鷄峰"
+      },
+      {
+        "author": "徐鉉",
+        "file": "poet.song.0.json",
+        "id": "d044ac98-8850-46f4-922d-8f469b6cdf4d",
+        "index": 362,
+        "text": "從來未面李先生借我西窗卧月明二十三家同願識素騾何日暫還城",
+        "title": "游方山宿李道士房"
+      }
+    ],
+    "shared_three_consecutive_lines": [
+      {
+        "author": "幸夤遜",
+        "file": "poet.song.0.json",
+        "id": "f70f9128-5221-4bdc-9dbf-63492c40e826",
+        "index": 4,
+        "text": "因登巨石知來處勃勃元生綠蘚痕靜即等閑藏草木動時頃刻徧乾坤橫天未必朋元惡捧日還曾瑞至尊不獨朝朝在巫峽楚王何事謾勞魂",
+        "title": "雲"
+      },
+      {
+        "author": "釋延壽",
+        "file": "poet.song.0.json",
+        "id": "5f2f7a0a-2bee-4292-93d7-1dea538483f4",
+        "index": 85,
+        "text": "心地須教合死灰藏機泯跡絕梯媒芳蘭祇爲因香折良木多從被直摧寒逼花枝紅未吐日融水面綠全開支頤獨坐經窗下一片雲閒入戶來",
+        "title": "山居詩  其五"
+      },
+      {
+        "author": "釋延壽",
+        "file": "poet.song.0.json",
+        "id": "c5001c22-037a-4e64-865e-3306ade1716d",
+        "index": 116,
+        "text": "抱拙藏鋒過暮年高名何必指前賢祇於心上標空界誰說壺中別有天鬰密遠林停宿霧蕭騷疏竹埽寒烟從茲不更移瓶錫身外無餘意了然",
+        "title": "山居詩  其三六"
+      }
+    ]
+  },
+  "raw": 254248,
+  "rejected_exact_tang_body": 254,
+  "rejected_heldout_edit_distance_leq_2": 16,
+  "rejected_invalid_paragraphs": 25,
+  "rejected_missing_glyph": 1642,
+  "rejected_non_han_content": 797,
+  "rejected_shared_three_consecutive_lines": 68,
+  "rule": "tang-song-train-only-v1",
+  "song_four_five": 13048,
+  "song_kept": 250790,
+  "tang_train": 46031,
+  "train_tokens": 18451787,
+  "train_total": 296821,
+  "validation_test_unchanged": true
+}

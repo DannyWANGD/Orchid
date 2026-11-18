@@ -1,0 +1,20 @@
+{
+  "rule": "tang-song-train-only-v1",
+  "song_source_sha256": "e48f78a2e4191ba565d2fc55aca3239e6f6ad0d7a7a83d40647c5485ba16c8de",
+  "source": {
+    "song": {
+      "directory": "全唐诗",
+      "repo": "chinese-poetry/chinese-poetry",
+      "revision": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "song_shards": 255
+    },
+    "tang": {
+      "directory": "全唐诗",
+      "repo": "chinese-poetry/chinese-poetry",
+      "revision": "b8594f81a89752241442f2ce267d6f66f96704ee",
+      "tang_shards": 58
+    }
+  },
+  "tang_data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+  "tang_holdout_policy": "Tang validation and test bytes unchanged; Song train additions only."
+}

@@ -10,3 +10,5 @@ Orchid 的训练与推理代码独立实现。以下登记区分思路参考与�
 | [rbnyng：繁体平水韵 JSON](https://github.com/rbnyng/pingshui_rhyme/blob/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json) | 只用于评估偶句韵脚，保留每字全部可能韵部；不复制分类器 | [MIT 项目及来源说明](https://github.com/rbnyng/pingshui_rhyme/tree/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0)，数据整理自[维基文库《平水韻》](https://zh.wikisource.org/zh-hant/%E5%B9%B3%E6%B0%B4%E9%9F%BB) |
 
 第 15 节的诗歌生成论文用于方法与指标设计，固定来源和数据处理范围见 [数据约定](docs/data_contract.md)。
+
+唐宋扩容版另用同一 chinese-poetry 提交的 `poet.song.*.json`，实际取得日期 2026-11-18。宋诗只用于训练，并应用唐诗留出集的泄漏筛查；具体用途、规则与版本在 [数据约定](docs/data_contract.md)。

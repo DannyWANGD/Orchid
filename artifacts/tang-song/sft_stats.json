@@ -1,0 +1,63 @@
+{
+  "data_manifest_sha256": "c9c3f54d59bf80cee65332b3d5427a87c3718864772b803f4fb36f372e33610a",
+  "frozen_holdout": {
+    "data_config": "configs/data.yaml",
+    "sft_stats_sha256": "78dcdb375965ff6a4adba3021a9ad68396ad50fc08e7b2025ea833e1fad826af",
+    "splits": {
+      "test": "d2bc07ecbd723295e34c2e153075b14f4763102e9a55d5ca9b9eef55a5737d16",
+      "validation": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3"
+    }
+  },
+  "lexicon_sha256": "556fd137334424bac691f0ea5b838ba13b230083fbb5bfc7b389bd060590af9d",
+  "rule": "orchid-imagery-contiguous-one-per-poem-v1",
+  "split_manifest_sha256": "986346b1e9a8382a62c2c6f5fae9c2e25f168f0589510945df30ffd15ec556c0",
+  "splits": {
+    "test": {
+      "candidates": 183,
+      "excluded": {
+        "no_match": 26
+      },
+      "file_sha256": "d2bc07ecbd723295e34c2e153075b14f4763102e9a55d5ca9b9eef55a5737d16",
+      "keyword_count": {
+        "1": 77,
+        "2": 51,
+        "3": 29
+      },
+      "keyword_oov": 0,
+      "pairs": 157,
+      "response_has_oov": 3
+    },
+    "train": {
+      "candidates": 16468,
+      "excluded": {
+        "no_match": 3298,
+        "response_oov": 776
+      },
+      "file_sha256": "afd289f98bee816427d377862546082fc06305e0d184c2abe5212ba1413542e0",
+      "keyword_count": {
+        "1": 6230,
+        "2": 4061,
+        "3": 2103
+      },
+      "keyword_oov": 0,
+      "pairs": 12394,
+      "response_has_oov": 0
+    },
+    "validation": {
+      "candidates": 188,
+      "excluded": {
+        "no_match": 22
+      },
+      "file_sha256": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3",
+      "keyword_count": {
+        "1": 66,
+        "2": 59,
+        "3": 41
+      },
+      "keyword_oov": 0,
+      "pairs": 166,
+      "response_has_oov": 3
+    }
+  },
+  "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163"
+}

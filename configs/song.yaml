@@ -1,0 +1,8 @@
+source:
+  repo: chinese-poetry/chinese-poetry
+  revision: b8594f81a89752241442f2ce267d6f66f96704ee
+  directory: 全唐诗
+  song_shards: 255
+paths:
+  raw: data/raw/song
+  artifacts: artifacts/tang-song

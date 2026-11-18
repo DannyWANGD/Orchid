@@ -15,3 +15,11 @@
 先全局分组（相同正文、已识别近重复及四句连续内嵌），再用种子 `2026` 按约 `90/5/5` 一次划分。词表只看 train 文本，窗口与监督配对继承所属诗作的集合，不跨集合拼接。近重复规则覆盖有限；评估另外检查生成诗与训练诗全体的匹配。
 
 实验产物关联 `data_manifest.json`、`split_manifest.json`、`data_stats.json` 和 tokenizer 哈希。论文分数、样本文本、调试小批次不替代真实运行结果。只有实际在该快照上执行的训练与评估，才报告为实测。
+
+## 唐宋扩容实验
+
+唐诗基线保持原实验不变。新增 [同一固定提交的宋诗](https://github.com/chinese-poetry/chinese-poetry/tree/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97)，只读取 255 个 `poet.song.*.json` 分片。保留 250,790 首宋诗，宋诗只进 train。全套 train 共 296,821 首、18,451,787 个含标点及 BOS/EOS 的 token。训练保留唐诗字表，约 0.374% 的扩展正文 token 为未登录字。主要为了同字表比较两条曲线；不表示新模型认识所有宋诗用字。
+
+过滤全部 254 条与唐诗完全相同的宋诗记录、16 条与保留诗两编辑以内的同长度正文、68 条与留出诗共享三个连续诗句的记录；代码也检查双向嵌入（见 [扩容统计](../artifacts/tang-song/expansion_stats.json)）。无法排除规则之外的异文。唐诗两套留出正文、token 流和监督配对全部通过逐字节 SHA-256 对照。微调训练集扩大至 12,394 对；剔除 776 条带未登录正文字符的匹配诗，不把未知字当作写作目标。
+
+复现与来源：[扩容配置](../configs/data-tang-song.yaml)、[宋诗文件清单](../artifacts/tang-song/song_source.json)、[划分清单](../artifacts/tang-song/split_manifest.json)、[训练 token 统计](../artifacts/tang-song/token_stats.json)、[监督统计](../artifacts/tang-song/sft_stats.json)。宋词、元曲和现代评论仍不引入。人工题的模型特定标签覆盖率分别按唐诗、唐宋训练样本统计。

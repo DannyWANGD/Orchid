@@ -1,0 +1,189 @@
+{
+  "data_manifest_sha256": "c9c3f54d59bf80cee65332b3d5427a87c3718864772b803f4fb36f372e33610a",
+  "split_manifest_sha256": "986346b1e9a8382a62c2c6f5fae9c2e25f168f0589510945df30ffd15ec556c0",
+  "splits": {
+    "test": {
+      "body_and_punctuation_tokens": 148124,
+      "poem_file_sha256": "3deb282e6e85803bc1ba904fd9e9a6ebb7c9d547917912e38db2f09ff05aef04",
+      "poems": 2550,
+      "stream_tokens": 153224,
+      "token_file_sha256": "d378c27521bd103630195e1f7062508cfa7e9eb76ac2afa1e4bba2f7a88c2064",
+      "top_unk": [
+        [
+          "襹",
+          3
+        ],
+        [
+          "婥",
+          2
+        ],
+        [
+          "䬘",
+          2
+        ],
+        [
+          "霋",
+          2
+        ],
+        [
+          "纷",
+          2
+        ],
+        [
+          "駰",
+          2
+        ],
+        [
+          "嚗",
+          2
+        ],
+        [
+          "喌",
+          2
+        ],
+        [
+          "䍽",
+          2
+        ],
+        [
+          "瑲",
+          1
+        ],
+        [
+          "鈌",
+          1
+        ],
+        [
+          "邱",
+          1
+        ]
+      ],
+      "unk_count": 75,
+      "unk_fraction": 0.0005063325322027491,
+      "unk_types": 65
+    },
+    "train": {
+      "body_and_punctuation_tokens": 17858145,
+      "poem_file_sha256": "0fc0d34bb5e5cdcf2ad7c032020dfa71803241aef236fac115a6bd68c9d297f0",
+      "poems": 296821,
+      "stream_tokens": 18451787,
+      "token_file_sha256": "24c026ee0f9ad745e87ebb88fc2cd6c84faa81afd3b339465c2f1ba01b54b9fc",
+      "top_unk": [
+        [
+          "顔",
+          6905
+        ],
+        [
+          "带",
+          6008
+        ],
+        [
+          "隠",
+          5951
+        ],
+        [
+          "况",
+          3697
+        ],
+        [
+          "鬰",
+          2123
+        ],
+        [
+          "鶑",
+          1580
+        ],
+        [
+          "閲",
+          1201
+        ],
+        [
+          "决",
+          1193
+        ],
+        [
+          "鳬",
+          1046
+        ],
+        [
+          "馿",
+          846
+        ],
+        [
+          "潜",
+          813
+        ],
+        [
+          "産",
+          657
+        ]
+      ],
+      "unk_count": 66770,
+      "unk_fraction": 0.003738910172361127,
+      "unk_types": 3707
+    },
+    "validation": {
+      "body_and_punctuation_tokens": 153595,
+      "poem_file_sha256": "71a91679e0a4c02e32737dab4b9f4c27062571dc2ffa6479bdbd8349b3f2637a",
+      "poems": 2557,
+      "stream_tokens": 158709,
+      "token_file_sha256": "8cd3aaab7937a769f29b798f1d18b262b0489d58d222395deec683591f315543",
+      "top_unk": [
+        [
+          "嘎",
+          3
+        ],
+        [
+          "淰",
+          2
+        ],
+        [
+          "夬",
+          2
+        ],
+        [
+          "闟",
+          2
+        ],
+        [
+          "吶",
+          2
+        ],
+        [
+          "戙",
+          2
+        ],
+        [
+          "繃",
+          2
+        ],
+        [
+          "堋",
+          2
+        ],
+        [
+          "邱",
+          2
+        ],
+        [
+          "趵",
+          2
+        ],
+        [
+          "咥",
+          2
+        ],
+        [
+          "皡",
+          1
+        ]
+      ],
+      "unk_count": 116,
+      "unk_fraction": 0.0007552329177382076,
+      "unk_types": 104
+    }
+  },
+  "tokenizer_from_tang_only": true,
+  "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163",
+  "vocab_size": 8582
+}

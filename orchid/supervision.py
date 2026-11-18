@@ -69,6 +69,16 @@ def build_supervision(data, settings, task: Task, context):
     paths = {"tokenizer": "tokenizer.json", "split_manifest": "split_manifest.json", "data_manifest": "data_manifest.json"}
     lineage = {f"{key}_sha256": verified(art / filename, token_stats[f"{key}_sha256"])
                for key, filename in paths.items()}
+    original = settings.get("frozen_holdout_data")
+    if original:
+        from .io import read_yaml
+
+        origin = read_yaml(Path(original))["paths"]
+        original_proc, original_art = Path(origin["processed"]), Path(origin["artifacts"])
+        original_stats = read_json(original_art / "sft_stats.json")
+        original_tokens = read_json(original_art / "token_stats.json")
+        if original_stats["tokenizer_sha256"] != lineage["tokenizer_sha256"]:
+            raise ValueError("Frozen supervision requires identical tokenizers")
     whitelist_file, stop_file = (Path(settings[k]) for k in ("whitelist", "stopwords"))
     stop = read_words(stop_file)
     whitelist = read_words(whitelist_file) - stop
@@ -86,7 +96,23 @@ def build_supervision(data, settings, task: Task, context):
     lex_file = art / "imagery_lexicon.json"
     write_json(lex_file, lexicon)
     stats = {"rule": RULE, "lexicon_sha256": sha256_file(lex_file), **lineage, "splits": {}}
+    if original:
+        stats["frozen_holdout"] = {
+            "data_config": original, "sft_stats_sha256": sha256_file(original_art / "sft_stats.json"),
+            "splits": {s: original_stats["splits"][s]["file_sha256"] for s in ("validation", "test")},
+        }
     for s in SPLITS:
+        file = proc / "sft" / f"{s}.jsonl"
+        if original and s != "train":
+            from .io import write_bytes
+
+            if token_stats["splits"][s] != original_tokens["splits"][s]:
+                raise ValueError(f"Frozen holdout poems changed for {s}")
+            frozen = original_proc / "sft" / f"{s}.jsonl"
+            verified(frozen, original_stats["splits"][s]["file_sha256"])
+            write_bytes(file, frozen.read_bytes())
+            stats["splits"][s] = original_stats["splits"][s]
+            continue
         rows, dropped, pairs, oov = (train if s == "train" else source_rows(proc, token_stats, s)), Counter(), [], 0
         for row in rows:
             assert is_wujue(row["lines"])
@@ -100,6 +126,9 @@ def build_supervision(data, settings, task: Task, context):
             text = canonical_poem(row["lines"])
             ids = prompt_ids(tok, selected, strict=True)
             target = tok.encode(text)
+            if s == "train" and tok.ids["<unk>"] in target:
+                dropped["response_oov"] += 1
+                continue
             if len(ids) + len(target) > context:
                 dropped["overlong"] += 1
                 continue
@@ -109,7 +138,6 @@ def build_supervision(data, settings, task: Task, context):
                           "form": task.form, "keywords": selected, "label_source": RULE,
                           "source": row["canonical_source"], "prompt": tok.decode(ids),
                           "response": text})
-        file = proc / "sft" / f"{s}.jsonl"
         write_jsonl(file, pairs)
         stats["splits"][s] = {"candidates": len(rows), "pairs": len(pairs), "excluded": dict(dropped),
                               "response_has_oov": oov, "keyword_oov": 0,
