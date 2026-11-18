@@ -1,6 +1,7 @@
 """Load a checked Orchid checkpoint or portable inference bundle."""
 
 from dataclasses import dataclass
+from functools import cached_property
 from pathlib import Path
 import random
 from time import perf_counter
@@ -11,8 +12,9 @@ from .corpus import IS_HAN_LINE
 from .data import prompt_ids
 from .generation import Sampling, sample_tokens
 from .io import read_json, sha256_file
-from .metrics import judge_format_keywords
+from .metrics import judge_format_keywords, rhyme_status
 from .model import GPT, GPTConfig
+from .prosody_decode import RhymeDecoder
 from .supervision import Task
 from .tokenizer import EOS, CharacterTokenizer
 from .training import load_checkpoint, synchronize
@@ -28,10 +30,20 @@ class Poet:
     checkpoint_sha256: str
     load_seconds: float
 
-    def tokens(self, keywords, sampling: Sampling, seed, *, constrain_form=False, constrain_keywords=False):
+    @cached_property
+    def rhyme_decoder(self):
+        return RhymeDecoder(self.tokenizer)
+
+    def tokens(self, keywords, sampling: Sampling, seed, *, constrain_form=False, constrain_keywords=False,
+               constrain_rhyme=False, candidates=4):
         words = self.task.validate_keywords(keywords)
         prefix = prompt_ids(self.tokenizer, words)
-        if constrain_form or constrain_keywords:
+        allowed_at = None
+        if constrain_rhyme:
+            decoder = self.rhyme_decoder
+            word_ids = [self.tokenizer.encode(word, strict=True) for word in words] if constrain_keywords else []
+            candidate_count = candidates if word_ids else 1
+        elif constrain_form or constrain_keywords:
             allowed_han = tuple(i for i, c in enumerate(self.tokenizer.vocab) if IS_HAN_LINE.fullmatch(c))
             fixed = {}
             if constrain_keywords:
@@ -55,18 +67,27 @@ class Poet:
 
             if sampling.max_new_tokens < 25:
                 raise ValueError("Format constraint requires a budget of at least 25 tokens")
-        else:
-            allowed_at = None
         synchronize(self.device)
         t0 = perf_counter()
-        ids, stop = sample_tokens(self.model, prefix, sampling, seed, allowed_at=allowed_at)
+        if constrain_rhyme:
+            ids, stop = decoder.generate(self.model, prefix, sampling, seed, word_ids, candidate_count)
+        else:
+            ids, stop = sample_tokens(self.model, prefix, sampling, seed, allowed_at=allowed_at)
         synchronize(self.device)
         elapsed = perf_counter() - t0
         text = self.tokenizer.decode(ids)
         if constrain_keywords and (stop != "eos" or not judge_format_keywords(text, words)["joint_ok"]):
             raise RuntimeError("The keyword-constrained decoder failed its output invariant")
+        prosody = {}
+        if constrain_rhyme:
+            quality = judge_format_keywords(text, words)
+            prosody = rhyme_status(quality["lines"], decoder.table)
+            if (not quality["canonical_punctuation"] or prosody["rhyme"] != "pass"
+                    or prosody["repeated_rhyme_char"]):
+                raise RuntimeError("The rhyme-constrained decoder failed its output invariant")
+            prosody["candidate_count"] = candidate_count
         return {"generated": text, "generated_ids": ids,
-                "stop": stop, "seconds": elapsed, "generated_steps": len(ids) + (stop == "eos")}
+                "stop": stop, "seconds": elapsed, "generated_steps": len(ids) + (stop == "eos"), **prosody}
 
 
 def verify_bundle(directory):

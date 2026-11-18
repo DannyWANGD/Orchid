@@ -31,7 +31,8 @@ def export(checkpoint, tokenizer, output):
         "Orchid inference bundle v1. Traditional characters; four lines of five characters.\n"
         "From the Orchid repository root with dependencies installed:\n"
         f"python -E scripts/generate.py --checkpoint {output} --keywords 春 雨 --device cpu\n"
-        "Use --device cuda for CUDA. Pass --constrain-form to force punctuation and line lengths.\n"
+        "Use --device cuda for CUDA. The course source includes the offline Pingshui rhyme table.\n"
+        "Use --mode raw for original model sampling.\n"
     ).encode())
     return verify_bundle(output)
 

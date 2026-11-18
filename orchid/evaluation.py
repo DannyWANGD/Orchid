@@ -48,11 +48,12 @@ def ratio(count, total):
 
 
 def score_row(poet, spec, row, sampling_seed, suite, model_name, train_matches, rhymes,
-              *, replacement=None, constrain_form=False, constrain_keywords=False):
+              *, replacement=None, constrain_form=False, constrain_keywords=False, constrain_rhyme=False):
     words = row["keywords"]
     try:
         out = poet.tokens(words if replacement is None else replacement, spec, sampling_seed,
-                          constrain_form=constrain_form, constrain_keywords=constrain_keywords)
+                          constrain_form=constrain_form, constrain_keywords=constrain_keywords,
+                          constrain_rhyme=constrain_rhyme)
         out["error"] = None
     except ValueError as exc:
         out = {"generated": "", "generated_ids": [], "stop": "rejected",
@@ -66,7 +67,8 @@ def score_row(poet, spec, row, sampling_seed, suite, model_name, train_matches, 
         "case": row.get("case"), "poem_id": row.get("poem_id"),
         "train_combo": row["train_combo"], "train_keyword_counts": row["train_keyword_counts"],
         "oov": row["oov"], "sampling_seed": sampling_seed,
-        "constrained_form": constrain_form or constrain_keywords, "constrained_keywords": constrain_keywords,
+        "constrained_form": constrain_form or constrain_keywords or constrain_rhyme,
+        "constrained_keywords": constrain_keywords,
         **out, **quality, **rh, "train_matches": match,
     }
 

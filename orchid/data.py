@@ -58,11 +58,13 @@ def response_item(tokenizer, keywords, response, *, strict=False):
 
 
 class Responses(Dataset):
-    def __init__(self, path, tokenizer, context, split):
+    def __init__(self, path, tokenizer, context, split, *, indices=None):
         self.items, self.excluded_overlong = [], 0
-        for row in read_jsonl(Path(path)):
+        for index, row in enumerate(read_jsonl(Path(path))):
             if row["split"] != split:
                 raise ValueError(f"Wrong split in {path}: {row['poem_id']}")
+            if indices is not None and index not in indices:
+                continue
             if not row["response"]:
                 raise ValueError(f"Empty response in {path}: {row['poem_id']}")
             item = response_item(tokenizer, row["keywords"], row["response"], strict=split == "train")

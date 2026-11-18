@@ -5,12 +5,15 @@ from unicodedata import normalize
 import regex
 
 from .corpus import HAN, is_wujue, canonical_poem
+from .io import ROOT, read_json, sha256_file
 
 
 PUNCT = r"[，。！？；,.!?;]"
 SEPARATOR = rf"(?:{PUNCT}\n?|\n)"
 PARSED = regex.compile(rf"{HAN}+(?:{SEPARATOR}{HAN}+)*{PUNCT}?")
 SPLIT_LINES = regex.compile(SEPARATOR)
+PINGSHUI_PATH = ROOT / "data/lexicon/pingshui.json"
+PINGSHUI_SHA256 = "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c"
 
 
 def parse_poem(text):
@@ -33,8 +36,6 @@ def judge_format_keywords(text, keywords):
 def rhyme_table(path):
     from collections import defaultdict
 
-    from .io import read_json
-
     map_ = defaultdict(set)
     for tone, divisions in read_json(path).items():
         for division in divisions.values():
@@ -42,6 +43,12 @@ def rhyme_table(path):
                 for char in regex.findall(HAN, "".join(strings)):
                     map_[char].add((tone, name))
     return map_
+
+
+def bundled_rhyme_table():
+    if sha256_file(PINGSHUI_PATH) != PINGSHUI_SHA256:
+        raise ValueError("The bundled Pingshui rhyme table failed its integrity check")
+    return rhyme_table(PINGSHUI_PATH)
 
 
 def rhyme_status(lines, table):

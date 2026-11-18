@@ -104,7 +104,8 @@ def render(text):
             if any(len(r)!=len(rows[0]) for r in rows):
                 raise ValueError("Ragged Markdown table")
             cols = len(rows[0])
-            out.append(r"\begin{center}\small\begin{tabularx}{\linewidth}{l"+(">{\raggedright\arraybackslash}X"* (cols-1))+"}")
+            columns = "l" + r">{\raggedright\arraybackslash}X" * (cols - 1)
+            out.append(r"\begin{center}\small\begin{tabularx}{\linewidth}{" + columns + "}")
             out.append(r"\toprule")
             out.append(" & ".join(r"\textbf{"+x+"}" for x in rows[0])+r"\\ \midrule")
             out.extend(" & ".join(row)+r"\\" for row in rows[1:])

@@ -47,6 +47,9 @@ def load_inputs(stage, cfg):
         "split_manifest_sha256": verified(a / "split_manifest.json", ts["split_manifest_sha256"]),
     }
     sets = {}
+    subset = cfg.get("training_subset")
+    if subset is not None and stage != "sft":
+        raise ValueError("Training subsets are supported only for SFT")
     if stage == "sft":
         ss = read_json(a / "sft_stats.json")
         if any(ss[k] != lineage[k] for k in lineage):
@@ -60,13 +63,22 @@ def load_inputs(stage, cfg):
         else:
             file = p / "sft" / f"{s}.jsonl"
             lineage[s + "_input_sha256"] = verified(file, ss["splits"][s]["file_sha256"])
-            sets[s] = Responses(file, tokenizer, context, s)
+            indices = None
+            if s == "train" and subset is not None:
+                from .sft_subset import training_subset
+                indices, lineage["training_subset"] = training_subset(file, seed=cfg["seed"], **subset)
+            sets[s] = Responses(file, tokenizer, context, s, indices=indices)
+            if indices is not None and len(sets[s]) != len(indices):
+                raise ValueError("Every selected training row must fit in the context")
     return tokenizer, a, lineage, resolved_model, sets
 
 
 def code_provenance(stage):
     sources = ("io", "data", "model", "runner", "training", "generation", "tokenizer")
     hashes = {f"orchid/{name}.py": sha256_file(ROOT / "orchid" / f"{name}.py") for name in sources}
+    if stage == "sft":
+        for name in ("sft_subset", "metrics"):
+            hashes[f"orchid/{name}.py"] = sha256_file(ROOT / "orchid" / f"{name}.py")
     cli = "pretrain" if stage == "pretrain" else "finetune"
     entry = ROOT / "scripts" / f"{cli}.py"
     if entry.exists():
@@ -148,8 +160,10 @@ def train(stage, args):
     if args.micro_batch is not None:
         cfg["training"]["micro_batch"] = args.micro_batch
     resume = load_checkpoint(args.resume) if args.resume else None
-    if resume and args.init:
-        raise ValueError("Specify either --resume (full state) or --init (weights only)")
+    init_sft = getattr(args, "init_sft", None)
+    init_path = args.init or init_sft
+    if resume and init_path:
+        raise ValueError("Specify either --resume (full state) or a weight initialization")
     device, prec = runtime_settings(cfg["runtime"])
     seed_everything(cfg["seed"], device, cfg["runtime"])
     tok, art, lineage, model_cfg, sets = load_inputs(stage, cfg)
@@ -163,16 +177,22 @@ def train(stage, args):
     if resume:
         initialization = resume["meta"]["initialization"]
     elif stage == "sft":
-        if not args.init:
-            raise ValueError("SFT requires --init with a best pretraining checkpoint")
-        src = load_checkpoint(args.init)
-        if (src["meta"]["stage"] != "pretrain" or src["meta"]["model"] != asdict(model_cfg)
-                or src["meta"]["initialization"]["kind"] != "random_init" or src["kind"] != "best"
-                or any(src["meta"]["lineage"][k] != lineage[k]
-                       for k in ("tokenizer_sha256", "data_manifest_sha256", "split_manifest_sha256"))):
-            raise ValueError("SFT requires this project's matching best pretraining checkpoint")
-        initialization = {"kind": "pretrain_best", "path": str(args.init),
-                          "sha256": sha256_file(args.init), "source_run_id": src["meta"]["run_id"],
+        if not init_path:
+            raise ValueError("SFT requires --init with a best pretraining checkpoint or --init-sft")
+        src = load_checkpoint(init_path)
+        source_meta = src["meta"]
+        required_stage = "sft" if init_sft else "pretrain"
+        required_lineage = ["tokenizer_sha256", "data_manifest_sha256", "split_manifest_sha256"]
+        if init_sft:
+            required_lineage.extend(("sft_stats_sha256", "train_input_sha256", "validation_input_sha256"))
+        if (source_meta["stage"] != required_stage or source_meta["model"] != asdict(model_cfg)
+                or src["kind"] != "best"
+                or (not init_sft and source_meta["initialization"]["kind"] != "random_init")
+                or (init_sft and source_meta["resolved"]["task_config"] != task)
+                or any(source_meta["lineage"].get(k) != lineage[k] for k in required_lineage)):
+            raise ValueError(f"SFT requires this project's matching best {required_stage} checkpoint")
+        initialization = {"kind": f"{required_stage}_best", "path": str(init_path),
+                          "sha256": sha256_file(init_path), "source_run_id": source_meta["run_id"],
                           "source_step": src["cursor"]["step"]}
     config = json.loads(json_text({
         **cfg, "model_config": asdict(model_cfg), "task_config": task,
@@ -240,7 +260,7 @@ def train(stage, args):
         run.mkdir(parents=True)
         write_json(run / "run.json", meta)
         write_json(run / "resolved_config.json", config)
-        if initialization["kind"] == "pretrain_best":
+        if stage == "sft":
             model.load_state_dict(src["model"])
             del src
         else:
@@ -350,7 +370,9 @@ def cli(stage):
     parser.add_argument("--stop-after", type=int, help="Save full state after this optimizer step; retain schedule horizon.")
     parser.add_argument("--resume", type=Path, help="Resume with matching data and resolved config from last.pt.")
     if stage == "sft":
-        parser.add_argument("--init", type=Path, help="This project's best pretraining checkpoint.")
-    parser.set_defaults(init=None)
+        init = parser.add_mutually_exclusive_group()
+        init.add_argument("--init", type=Path, help="This project's best pretraining checkpoint.")
+        init.add_argument("--init-sft", type=Path, help="A matching best SFT checkpoint, with a fresh optimizer.")
+    parser.set_defaults(init=None, init_sft=None)
     args = parser.parse_args()
     print(json_text(train(stage, args)))

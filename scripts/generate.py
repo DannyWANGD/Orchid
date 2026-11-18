@@ -27,12 +27,22 @@ def main():
     parser.add_argument("--top-k", type=int, default=50)
     parser.add_argument("--top-p", type=float, default=1.0)
     parser.add_argument("--max-new-tokens", type=int, default=64)
+    parser.add_argument("--mode", choices=("rhymed", "rhyme-only", "raw"),
+                        help="Default rhymed mode enforces four lines, keywords and distinct Pingshui rhymes")
+    parser.add_argument("--candidates", type=int, default=4,
+                        help="Number of keyword placements to generate and rank in rhymed mode (1–16)")
     parser.add_argument("--constrain-form", action="store_true",
-                        help="Force four five-character lines; does not ensure keyword use or rhyme")
+                        help="Use the form-only decoder from the original experiments")
     parser.add_argument("--constrain-keywords", action="store_true",
-                        help="Force the form and place each keyword in a line; may sound less natural")
+                        help="Use the original fixed-position keyword decoder")
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args()
+    if args.mode and (args.constrain_form or args.constrain_keywords):
+        parser.error("Choose --mode or the original --constrain-* options")
+    mode = args.mode or ("fixed-keywords" if args.constrain_keywords else
+                         "form" if args.constrain_form else "rhymed")
+    rhymed = mode in ("rhymed", "rhyme-only")
+    keywords_required = mode in ("rhymed", "fixed-keywords")
     torch.set_num_threads(2)
     try:
         spec = Sampling(args.temperature, args.top_k, args.top_p, args.max_new_tokens)
@@ -40,20 +50,22 @@ def main():
         if args.form != poem.task.form:
             raise ValueError("The requested form does not match the checkpoint")
         words = poem.task.validate_keywords(args.keywords)
-        result = poem.tokens(words, spec, args.seed, constrain_form=args.constrain_form,
-                             constrain_keywords=args.constrain_keywords)
+        result = poem.tokens(words, spec, args.seed, constrain_form=mode == "form",
+                             constrain_keywords=keywords_required, constrain_rhyme=rhymed,
+                             candidates=args.candidates)
     except (ValueError, OSError) as exc:
         parser.error(str(exc))
     if args.json:
         print(json_text({**result, **judge_format_keywords(result["generated"], words),
                          "keywords": words, "device": str(poem.device), "load_seconds": poem.load_seconds,
-                         "constrained_form": args.constrain_form or args.constrain_keywords,
-                         "constrained_keywords": args.constrain_keywords, "model_hash": poem.checkpoint_sha256}))
+                         "mode": mode, "constrained_form": mode != "raw", "constrained_rhyme": rhymed,
+                         "constrained_keywords": keywords_required, "model_hash": poem.checkpoint_sha256}))
     else:
-        print(result["generated"])
+        text = result["generated"]
+        print("\n".join(text[i:i + 6] for i in range(0, len(text), 6)) if rhymed else text)
+        rhyme = f" · 韻部 {'、'.join(result['ping_matches'])}" if rhymed else ""
         print(f"{poem.device} · load {poem.load_seconds:.3f}s · generate {result['seconds']:.3f}s · "
-              f"{result['stop']}" + (" · keywords and form constrained" if args.constrain_keywords else
-                                    " · form constrained" if args.constrain_form else ""), file=sys.stderr)
+              f"{mode} · {result['stop']}{rhyme}", file=sys.stderr)
 
 
 if __name__ == "__main__":

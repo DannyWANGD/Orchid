@@ -86,11 +86,14 @@ def make_packets(generations, protocol, output, models, *, seed=20261118):
 
 
 def read_form(path):
-    with path.open(encoding="utf-8-sig",newline="") as f:
-        reader = csv.DictReader(f)
-        if not reader.fieldnames or sorted(reader.fieldnames) != sorted(HEAD):
-            raise ValueError(f"{path}: expected the original review form columns")
-        rows = list(reader)
+    return parse_form_bytes(path.read_bytes(), path)
+
+
+def parse_form_bytes(content, path):
+    reader = csv.DictReader(StringIO(content.decode("utf-8-sig"), newline=""))
+    if not reader.fieldnames or sorted(reader.fieldnames) != sorted(HEAD):
+        raise ValueError(f"{path}: expected the original review form columns")
+    rows = list(reader)
     if any(None in r or None in r.values() for r in rows):
         raise ValueError(f"{path}: malformed review form row")
     return rows
