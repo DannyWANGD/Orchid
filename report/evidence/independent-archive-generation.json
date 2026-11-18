@@ -1,0 +1,56 @@
+{
+  "canonical_punctuation": true,
+  "constrained_form": true,
+  "constrained_keywords": true,
+  "device": "cpu",
+  "format_ok": true,
+  "generated": "古臺高閣上，高樹古城閑。遙白雲中盡，應青山水生。",
+  "generated_ids": [
+    812,
+    5642,
+    7996,
+    7453,
+    187,
+    8373,
+    7996,
+    3169,
+    812,
+    1177,
+    7446,
+    8,
+    7076,
+    4419,
+    7609,
+    201,
+    4465,
+    8373,
+    2236,
+    7654,
+    1631,
+    3358,
+    4291,
+    8
+  ],
+  "generated_steps": 25,
+  "joint_ok": true,
+  "keyword_hits": [
+    "青山",
+    "白雲"
+  ],
+  "keywords": [
+    "青山",
+    "白雲"
+  ],
+  "keywords_ok": true,
+  "lines": [
+    "古臺高閣上",
+    "高樹古城閑",
+    "遙白雲中盡",
+    "應青山水生"
+  ],
+  "load_seconds": 0.128121139947325,
+  "model_hash": "94f6e655dff666fe8957d339276ad29f7ec0a98e0998ed70bdac0fdc7ecbfbc3",
+  "parsed": true,
+  "seconds": 0.11308628087863326,
+  "stop": "eos"
+}

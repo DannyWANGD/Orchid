@@ -56,3 +56,17 @@ python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤
 ```
 
 `--constrain-form` 只强制字数、标点和停止，默认关闭。CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对照固定设备。无 CUDA 时可用 `--device cpu`。本地权重不进 Git；可从检查点重新导出，`dist/orchid-14m/bundle.json` 记录权重、字表和配置哈希。详见 [封存评估](report/evaluation_baseline.md) 和 [盲评说明](report/blind_review/README.md)。
+
+### 交付包与盲评
+
+本机 ZIP 示例：[14M 基线包](dist/Orchid-course-baseline.zip)。在新目录解压进入 `orchid-course/`，安装固定依赖后运行：
+
+```bash
+python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --device cpu --constrain-keywords --json
+```
+
+`--constrain-keywords` 同时固定五言四句外形和每个关键词的出现位置，不能保证押韵或用词自然。默认的无约束模式衡量的是模型原始能力。
+
+两份真人评分表位于 [report/blind_review](report/blind_review/README.md)。不要把结果页面或私有模型映射交给评阅者。汇总命令会校验两份表的 60 个匿名 ID 及 1～5 分评分。
+
+报告源文件 [Markdown](report/experiment_report.md)，可读版 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，从仓库根目录运行 `python -E scripts/build_report.py` 重建 PDF。
