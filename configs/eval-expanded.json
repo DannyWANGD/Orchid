@@ -1,0 +1,74 @@
+{
+  "data": "configs/data.yaml",
+  "expanded_models": {
+    "data": "configs/data-tang-song.yaml",
+    "names": [
+      "X-92M-TangSong-Pre",
+      "X-92M-TangSong-2026",
+      "X-92M-TangSong-2027",
+      "X-92M-TangSong-2028"
+    ]
+  },
+  "keyword_constraint_control": true,
+  "models": {
+    "R0": "checkpoints/pretrain/pretrain-tang-v1/random.pt",
+    "R1": "checkpoints/pretrain/pretrain-tang-v1/best.pt",
+    "R2-2026": "checkpoints/sft/sft-tang-2026/best.pt",
+    "R2-2027": "checkpoints/sft/sft-tang-2027/best.pt",
+    "R2-2028": "checkpoints/sft/sft-tang-2028/best.pt",
+    "X-42M": "checkpoints/sft/sft-tang-42m-2026/best.pt",
+    "X-92M-10": "checkpoints/sft/sft-tang-92m-2026/best.pt",
+    "X-92M-Tang-Long-2026": "checkpoints/sft/sft-tang-92m-26-2026/best.pt",
+    "X-92M-Tang-Long-2027": "checkpoints/sft/sft-tang-92m-26-2027/best.pt",
+    "X-92M-Tang-Long-2028": "checkpoints/sft/sft-tang-92m-26-2028/best.pt",
+    "X-92M-TangSong-2026": "checkpoints/sft/sft-tang-song-92m-2026/best.pt",
+    "X-92M-TangSong-2027": "checkpoints/sft/sft-tang-song-92m-2027/best.pt",
+    "X-92M-TangSong-2028": "checkpoints/sft/sft-tang-song-92m-2028/best.pt",
+    "X-92M-TangSong-Pre": "checkpoints/pretrain/pretrain-tang-song-92m/best.pt"
+  },
+  "paired_pretrain": "X-92M-TangSong-Pre",
+  "prompt_config": {
+    "blind_count": 30,
+    "edge": "data/prompts/edge.json",
+    "main": "data/prompts/main.txt",
+    "materialized": "artifacts/eval_prompts.json",
+    "reference_count": 100,
+    "selection_seed": 328,
+    "version": "orchid-holdout-v1"
+  },
+  "rhyme": {
+    "path": "data/raw/pingshui.json",
+    "sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+    "url": "https://raw.githubusercontent.com/rbnyng/pingshui_rhyme/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json"
+  },
+  "runtime": {
+    "cpu_threads": 2,
+    "device": "cuda",
+    "precision": "fp32"
+  },
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  },
+  "seed_groups": {
+    "TangSong_92M": [
+      "X-92M-TangSong-2026",
+      "X-92M-TangSong-2027",
+      "X-92M-TangSong-2028"
+    ],
+    "Tang_14M": [
+      "R2-2026",
+      "R2-2027",
+      "R2-2028"
+    ]
+  },
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "selected": "X-92M-TangSong-2028",
+  "task": "configs/task.yaml"
+}

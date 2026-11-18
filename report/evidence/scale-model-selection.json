@@ -1,0 +1,161 @@
+{
+  "device": "cpu",
+  "models": {
+    "sft-tang-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-2026/best.pt",
+      "joint_without_exact_or_embedded": 71,
+      "nll": 4.489127050192959,
+      "parameters": 14041344,
+      "seed": 2026,
+      "sha256": "bbdd79c9112bb05cd781b834923ea4e307e135a002b67ec6f52001b30d4eff89",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-matched/metrics.json",
+      "validation_predictions_sha256": "546ff37df474c204a8d00978b2b80f0517683eea36115f1542e185901e4657bb"
+    },
+    "sft-tang-42m-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-42m-2026/best.pt",
+      "joint_without_exact_or_embedded": 87,
+      "nll": 4.42766027979104,
+      "parameters": 42354688,
+      "seed": 2026,
+      "sha256": "8358d3036d4b413dae073a52b27d46f0db0e6bdfcf37e83ee6268dbcb7b8e5a7",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-matched/metrics.json",
+      "validation_predictions_sha256": "546ff37df474c204a8d00978b2b80f0517683eea36115f1542e185901e4657bb"
+    },
+    "sft-tang-92m-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-2026/best.pt",
+      "joint_without_exact_or_embedded": 88,
+      "nll": 4.400812297039721,
+      "parameters": 91843584,
+      "seed": 2026,
+      "sha256": "9e6895e98b4fa224ca03935a72e52fd16aafc6f6a3adeee4c326ce5c4667b1d1",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-26-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-26-2026/best.pt",
+      "joint_without_exact_or_embedded": 63,
+      "nll": 4.137417948159827,
+      "parameters": 91843584,
+      "seed": 2026,
+      "sha256": "436694f01d5778fe954b84ae34bc952d45fcee13e8d68ae6b882b8926b26a9aa",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-26-2027": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-26-2027/best.pt",
+      "joint_without_exact_or_embedded": 79,
+      "nll": 4.153976227174322,
+      "parameters": 91843584,
+      "seed": 2027,
+      "sha256": "0af8d45ebf5c28b3b30cb30f0f22290bfffd61db89a7ca59911148195002c3e9",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-26-2028": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-26-2028/best.pt",
+      "joint_without_exact_or_embedded": 68,
+      "nll": 4.157069194747741,
+      "parameters": 91843584,
+      "seed": 2028,
+      "sha256": "c7c5f132c4d996914a89243f78452a5862dccbee06b5ae62a41d97bb4f9ed021",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-more-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-more-2026/best.pt",
+      "joint_without_exact_or_embedded": 32,
+      "nll": 4.031581854762801,
+      "parameters": 91843584,
+      "seed": 2026,
+      "sha256": "5a83dbb99ebbcffe3ce3573f0a6496a77b2e754991bcecd11c54ea73252445d8",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-more-2027": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-more-2027/best.pt",
+      "joint_without_exact_or_embedded": 41,
+      "nll": 4.028387921804405,
+      "parameters": 91843584,
+      "seed": 2027,
+      "sha256": "ce098c3699a64c8e2ca262cf9f1ac08de012dbefa0c519dd354ea2e831778268",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-92m-more-2028": {
+      "checkpoint": "checkpoints/sft/sft-tang-92m-more-2028/best.pt",
+      "joint_without_exact_or_embedded": 48,
+      "nll": 4.017948645166604,
+      "parameters": 91843584,
+      "seed": 2028,
+      "sha256": "ccae003f26f261d9d1e9b99d7d9b37ea9933d496c2afe12117cfae834fcd1cfa",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-long/metrics.json",
+      "validation_predictions_sha256": "e703248f9851d349d4341fc7d1ecd5fb6c757753baf35a8bfc4ae0688608682e"
+    },
+    "sft-tang-song-92m-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2026/best.pt",
+      "joint_without_exact_or_embedded": 66,
+      "nll": 3.6486447695077184,
+      "parameters": 91843584,
+      "seed": 2026,
+      "sha256": "571185751898fecd84f33bb057ed6b372288823d0308d3c9381d4faced2fd61c",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-expanded/metrics.json",
+      "validation_predictions_sha256": "8547a794a69aa700212e8e58a6a2a6fc72c20c926f51029997ed179d4366ce29"
+    },
+    "sft-tang-song-92m-2027": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2027/best.pt",
+      "joint_without_exact_or_embedded": 79,
+      "nll": 3.6600150161191642,
+      "parameters": 91843584,
+      "seed": 2027,
+      "sha256": "61585ebd7748d7f3a1ddc9ba61bb3cd3f9254023edc10265d2aac0416b536b87",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-expanded/metrics.json",
+      "validation_predictions_sha256": "8547a794a69aa700212e8e58a6a2a6fc72c20c926f51029997ed179d4366ce29"
+    },
+    "sft-tang-song-92m-2028": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2028/best.pt",
+      "joint_without_exact_or_embedded": 95,
+      "nll": 3.6869194306522965,
+      "parameters": 91843584,
+      "seed": 2028,
+      "sha256": "a6d8470ed0f4cb7d6514402cb716fa31ca525344b7815bafa76fbbe94d88e232",
+      "total_requests": 270,
+      "validation_evidence": "runs/scale-validation-expanded/metrics.json",
+      "validation_predictions_sha256": "8547a794a69aa700212e8e58a6a2a6fc72c20c926f51029997ed179d4366ce29"
+    }
+  },
+  "precision": "fp32",
+  "rank": [
+    "sft-tang-song-92m-2028",
+    "sft-tang-92m-2026",
+    "sft-tang-42m-2026",
+    "sft-tang-song-92m-2027",
+    "sft-tang-92m-26-2027",
+    "sft-tang-2026",
+    "sft-tang-92m-26-2028",
+    "sft-tang-song-92m-2026",
+    "sft-tang-92m-26-2026",
+    "sft-tang-92m-more-2028",
+    "sft-tang-92m-more-2027",
+    "sft-tang-92m-more-2026"
+  ],
+  "rule": "maximum joint without exact/embedded train matches; ties NLL, size, run ID",
+  "sampling_seeds": [
+    11,
+    22,
+    33
+  ],
+  "selected_run": "sft-tang-song-92m-2028",
+  "validation_pairs_sha256": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3",
+  "validation_prompt_count": 90
+}

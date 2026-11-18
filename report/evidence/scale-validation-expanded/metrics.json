@@ -1,0 +1,2047 @@
+{
+  "cpu_threads": 4,
+  "device": "cpu",
+  "precision": "fp32",
+  "predictions_sha256": "8547a794a69aa700212e8e58a6a2a6fc72c20c926f51029997ed179d4366ce29",
+  "prompts": [
+    "001d94354dc92513610848a8",
+    "0251ee8e10e070abd4135aee",
+    "054a33eba92d01fadd3c4718",
+    "09c77e9ce680d48c843688c3",
+    "0b6b31cf0901df493351aebe",
+    "0d5726c13199221fe836e236",
+    "10545472141180e9a1e5cdf7",
+    "1140c7064bba7edd62d2e956",
+    "15f71c677cc9783e116a9a16",
+    "168383e1deb0f68c1d7931e2",
+    "17bee36288e9b79b807787fa",
+    "194f7eee9c1101c1d1ea9fcc",
+    "1a2c78ace6049ecbf20069fb",
+    "1af8a47cd9c2c20080e95b59",
+    "20eeda0d2555738ae097fbd7",
+    "241bbf9cf67792c8f7940c93",
+    "24c8a2a4cda20800d18a56f3",
+    "27cfdaee5c6991dd09c167e0",
+    "28637e4b5c5f1cec9f89cc0b",
+    "2b1fa2b50d92d4c614116069",
+    "2c4d8ccfb53c319ca8cf2f17",
+    "3020fad9024bf8c5eb72e0f8",
+    "33eaf3e7f866c6e7416d6e88",
+    "3470bdb1695b6fa229da232c",
+    "3594ff8af2ed9eac5c36a206",
+    "362ccc3bfcd7ea544870f385",
+    "37b2e62016774f178b7b768f",
+    "3b780544fd714c3a5c5d7a81",
+    "3db2bd0b95197242352112af",
+    "41d0c1cd34d7ed88479aaab3",
+    "425071bbd475590e9560d5ab",
+    "43d32dba91bca38b02ce0c47",
+    "49742a6b815880ee38b7fcca",
+    "498f7eb8d74d73e1cdb12c5e",
+    "4acb79109372a93e9f366f26",
+    "4f18c210787bcd651720cad3",
+    "5178ad23714cef91d59eb802",
+    "52a00a3c457eade5a844194a",
+    "584c054c327f541046883436",
+    "591c62ad26436f9622a7db9a",
+    "5a4e21a05c20014945b34a8d",
+    "606e9966cfd6f63948328717",
+    "63079394c0448a3315b3d462",
+    "67bac3f820fc97e168ce628a",
+    "6bd30d4c46175db45651d273",
+    "6c70b049449b2c5cec551f15",
+    "6c818faa454cc95b9a3ea733",
+    "71a6a4f2ec2891d79c0c4e42",
+    "7ab5a336df43dcc036ec99f1",
+    "7c0793e52866060bc0a648af",
+    "7f355027ea13539511fac2f6",
+    "818d68563a9856662af2ae7e",
+    "820ba428e401cc38d09af5e5",
+    "8512242d299a46f41bf1b14f",
+    "8d3a6a627dbc6b8163de28ec",
+    "8edbdd394f22e3375cc0d095",
+    "8ef088a7ea5622afad06e2b0",
+    "97c0bb374357b382c85a45f4",
+    "99b79540cfc7d00d65fe3c8e",
+    "a2674d2daa5df51492a13c6e",
+    "a4b83d9ee6b18547606158de",
+    "a7bdf554837f5de589bb3c1f",
+    "aad315f0406956f6efc11e1e",
+    "af99fd2a7a8f93e7e4b753a0",
+    "b165140a365c4e95d03df2d2",
+    "b27a9aa6d1dfb91d2f2951d5",
+    "b6661fffb3e1c5220a199013",
+    "b9fd312b02ade4ea3794e5b1",
+    "bbc548f4b2f51178585bc6ed",
+    "bd0855276896a116cd6eb8d8",
+    "bf34027d9fd6c03ed0caaca3",
+    "c034d8bddd086f0c6aca1ddb",
+    "c2f864c8c464e6eb9e326b57",
+    "c5bab9a587e1e5e52f09b081",
+    "cb87e2135af5f0f5947f2c1c",
+    "ce88544a72b500012bb8155a",
+    "d21d0cca8447b31e571fd608",
+    "d2e26ad8326a0bcbab2bb84a",
+    "d5199b00d65af8d53af0cb83",
+    "dab3530d149a254438b52f43",
+    "e057645ed00935885ce6d971",
+    "e24e230693b8f709d404d3f6",
+    "e3d775852c03ef60560c55e0",
+    "e693003beeb51f6444a3c816",
+    "e7388f1fc750b8c8d044063e",
+    "f09bf835e4e3df0c58332f8b",
+    "f0f59914d5926dca8510fc63",
+    "f64a79507df946c28a3599e6",
+    "fb74742d60dd6336e000a7e9",
+    "fc7294122812c730982609b2"
+  ],
+  "provenance": "measured validation only; no test scores used",
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  },
+  "seeds": [
+    11,
+    22,
+    33
+  ],
+  "summary": {
+    "sft-tang-song-92m-2026": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2026/best.pt",
+      "generation": {
+        "by_keyword_count": {
+          "1": {
+            "canonical_punctuation": {
+              "count": 108,
+              "rate": 0.972972972972973,
+              "total": 111
+            },
+            "format_ok": {
+              "count": 108,
+              "rate": 0.972972972972973,
+              "total": 111
+            },
+            "joint_ok": {
+              "count": 52,
+              "rate": 0.46846846846846846,
+              "total": 111
+            },
+            "keyword_coverage_micro": {
+              "count": 55,
+              "rate": 0.4954954954954955,
+              "total": 111
+            },
+            "keywords_ok": {
+              "count": 55,
+              "rate": 0.4954954954954955,
+              "total": 111
+            },
+            "parsed": {
+              "count": 111,
+              "rate": 1.0,
+              "total": 111
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 19,
+              "rate": 0.17592592592592593,
+              "total": 108
+            },
+            "requests": 111,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 74,
+                "rate": 0.6851851851851852,
+                "total": 108
+              },
+              "fail": 41,
+              "pass": 33,
+              "pass_among_decided": {
+                "count": 33,
+                "rate": 0.44594594594594594,
+                "total": 74
+              },
+              "repeated_char": 0,
+              "unknown": 34,
+              "unknown_causes": {
+                "ambiguous_reading": 29,
+                "missing_form": 5
+              }
+            },
+            "same_poem_across_prompts": 14,
+            "stop_reasons": {
+              "eos": 111
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              }
+            }
+          },
+          "2": {
+            "canonical_punctuation": {
+              "count": 84,
+              "rate": 0.9655172413793104,
+              "total": 87
+            },
+            "format_ok": {
+              "count": 84,
+              "rate": 0.9655172413793104,
+              "total": 87
+            },
+            "joint_ok": {
+              "count": 13,
+              "rate": 0.14942528735632185,
+              "total": 87
+            },
+            "keyword_coverage_micro": {
+              "count": 66,
+              "rate": 0.3793103448275862,
+              "total": 174
+            },
+            "keywords_ok": {
+              "count": 13,
+              "rate": 0.14942528735632185,
+              "total": 87
+            },
+            "parsed": {
+              "count": 87,
+              "rate": 1.0,
+              "total": 87
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 2,
+              "rate": 0.023809523809523808,
+              "total": 84
+            },
+            "requests": 87,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 61,
+                "rate": 0.7261904761904762,
+                "total": 84
+              },
+              "fail": 39,
+              "pass": 22,
+              "pass_among_decided": {
+                "count": 22,
+                "rate": 0.36065573770491804,
+                "total": 61
+              },
+              "repeated_char": 3,
+              "unknown": 23,
+              "unknown_causes": {
+                "ambiguous_reading": 23
+              }
+            },
+            "same_poem_across_prompts": 2,
+            "stop_reasons": {
+              "eos": 87
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 84
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 84
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 84
+              }
+            }
+          },
+          "3": {
+            "canonical_punctuation": {
+              "count": 70,
+              "rate": 0.9722222222222222,
+              "total": 72
+            },
+            "format_ok": {
+              "count": 70,
+              "rate": 0.9722222222222222,
+              "total": 72
+            },
+            "joint_ok": {
+              "count": 1,
+              "rate": 0.013888888888888888,
+              "total": 72
+            },
+            "keyword_coverage_micro": {
+              "count": 66,
+              "rate": 0.3055555555555556,
+              "total": 216
+            },
+            "keywords_ok": {
+              "count": 1,
+              "rate": 0.013888888888888888,
+              "total": 72
+            },
+            "parsed": {
+              "count": 72,
+              "rate": 1.0,
+              "total": 72
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 70
+            },
+            "requests": 72,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 48,
+                "rate": 0.6857142857142857,
+                "total": 70
+              },
+              "fail": 26,
+              "pass": 22,
+              "pass_among_decided": {
+                "count": 22,
+                "rate": 0.4583333333333333,
+                "total": 48
+              },
+              "repeated_char": 1,
+              "unknown": 22,
+              "unknown_causes": {
+                "ambiguous_reading": 18,
+                "missing_form": 4
+              }
+            },
+            "same_poem_across_prompts": 0,
+            "stop_reasons": {
+              "eos": 72
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 70
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 70
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 70
+              }
+            }
+          }
+        },
+        "new_combination_all_words_seen": {
+          "canonical_punctuation": {
+            "count": 105,
+            "rate": 0.9722222222222222,
+            "total": 108
+          },
+          "format_ok": {
+            "count": 105,
+            "rate": 0.9722222222222222,
+            "total": 108
+          },
+          "joint_ok": {
+            "count": 1,
+            "rate": 0.009259259259259259,
+            "total": 108
+          },
+          "keyword_coverage_micro": {
+            "count": 81,
+            "rate": 0.28125,
+            "total": 288
+          },
+          "keywords_ok": {
+            "count": 1,
+            "rate": 0.009259259259259259,
+            "total": 108
+          },
+          "parsed": {
+            "count": 108,
+            "rate": 1.0,
+            "total": 108
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 105
+          },
+          "requests": 108,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 75,
+              "rate": 0.7142857142857143,
+              "total": 105
+            },
+            "fail": 42,
+            "pass": 33,
+            "pass_among_decided": {
+              "count": 33,
+              "rate": 0.44,
+              "total": 75
+            },
+            "repeated_char": 3,
+            "unknown": 30,
+            "unknown_causes": {
+              "ambiguous_reading": 26,
+              "missing_form": 4
+            }
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {
+            "eos": 108
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            }
+          }
+        },
+        "new_word_in_prompt": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "oov": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "overall": {
+          "canonical_punctuation": {
+            "count": 262,
+            "rate": 0.9703703703703703,
+            "total": 270
+          },
+          "format_ok": {
+            "count": 262,
+            "rate": 0.9703703703703703,
+            "total": 270
+          },
+          "joint_ok": {
+            "count": 66,
+            "rate": 0.24444444444444444,
+            "total": 270
+          },
+          "keyword_coverage_micro": {
+            "count": 187,
+            "rate": 0.37325349301397204,
+            "total": 501
+          },
+          "keywords_ok": {
+            "count": 69,
+            "rate": 0.25555555555555554,
+            "total": 270
+          },
+          "parsed": {
+            "count": 270,
+            "rate": 1.0,
+            "total": 270
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 21,
+            "rate": 0.08015267175572519,
+            "total": 262
+          },
+          "requests": 270,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 183,
+              "rate": 0.6984732824427481,
+              "total": 262
+            },
+            "fail": 106,
+            "pass": 77,
+            "pass_among_decided": {
+              "count": 77,
+              "rate": 0.4207650273224044,
+              "total": 183
+            },
+            "repeated_char": 4,
+            "unknown": 79,
+            "unknown_causes": {
+              "ambiguous_reading": 70,
+              "missing_form": 9
+            }
+          },
+          "same_poem_across_prompts": 16,
+          "stop_reasons": {
+            "eos": 270
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 262
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 262
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 262
+            }
+          }
+        },
+        "seen_in_train": {
+          "canonical_punctuation": {
+            "count": 157,
+            "rate": 0.9691358024691358,
+            "total": 162
+          },
+          "format_ok": {
+            "count": 157,
+            "rate": 0.9691358024691358,
+            "total": 162
+          },
+          "joint_ok": {
+            "count": 65,
+            "rate": 0.4012345679012346,
+            "total": 162
+          },
+          "keyword_coverage_micro": {
+            "count": 106,
+            "rate": 0.49765258215962443,
+            "total": 213
+          },
+          "keywords_ok": {
+            "count": 68,
+            "rate": 0.41975308641975306,
+            "total": 162
+          },
+          "parsed": {
+            "count": 162,
+            "rate": 1.0,
+            "total": 162
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 21,
+            "rate": 0.1337579617834395,
+            "total": 157
+          },
+          "requests": 162,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 108,
+              "rate": 0.6878980891719745,
+              "total": 157
+            },
+            "fail": 64,
+            "pass": 44,
+            "pass_among_decided": {
+              "count": 44,
+              "rate": 0.4074074074074074,
+              "total": 108
+            },
+            "repeated_char": 1,
+            "unknown": 49,
+            "unknown_causes": {
+              "ambiguous_reading": 44,
+              "missing_form": 5
+            }
+          },
+          "same_poem_across_prompts": 16,
+          "stop_reasons": {
+            "eos": 162
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 157
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 157
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 157
+            }
+          }
+        }
+      },
+      "nll": {
+        "nll": 3.6486447695077184,
+        "ppl": 38.422559324708104,
+        "target_tokens": 4150
+      },
+      "parameters": 91843584,
+      "seed": 2026,
+      "sha256": "571185751898fecd84f33bb057ed6b372288823d0308d3c9381d4faced2fd61c"
+    },
+    "sft-tang-song-92m-2027": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2027/best.pt",
+      "generation": {
+        "by_keyword_count": {
+          "1": {
+            "canonical_punctuation": {
+              "count": 110,
+              "rate": 0.990990990990991,
+              "total": 111
+            },
+            "format_ok": {
+              "count": 110,
+              "rate": 0.990990990990991,
+              "total": 111
+            },
+            "joint_ok": {
+              "count": 68,
+              "rate": 0.6126126126126126,
+              "total": 111
+            },
+            "keyword_coverage_micro": {
+              "count": 68,
+              "rate": 0.6126126126126126,
+              "total": 111
+            },
+            "keywords_ok": {
+              "count": 68,
+              "rate": 0.6126126126126126,
+              "total": 111
+            },
+            "parsed": {
+              "count": 110,
+              "rate": 0.990990990990991,
+              "total": 111
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 21,
+              "rate": 0.19090909090909092,
+              "total": 110
+            },
+            "requests": 111,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 81,
+                "rate": 0.7363636363636363,
+                "total": 110
+              },
+              "fail": 41,
+              "pass": 40,
+              "pass_among_decided": {
+                "count": 40,
+                "rate": 0.49382716049382713,
+                "total": 81
+              },
+              "repeated_char": 3,
+              "unknown": 29,
+              "unknown_causes": {
+                "ambiguous_reading": 19,
+                "missing_form": 10
+              }
+            },
+            "same_poem_across_prompts": 15,
+            "stop_reasons": {
+              "eos": 111
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 110
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 110
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 110
+              }
+            }
+          },
+          "2": {
+            "canonical_punctuation": {
+              "count": 87,
+              "rate": 1.0,
+              "total": 87
+            },
+            "format_ok": {
+              "count": 87,
+              "rate": 1.0,
+              "total": 87
+            },
+            "joint_ok": {
+              "count": 11,
+              "rate": 0.12643678160919541,
+              "total": 87
+            },
+            "keyword_coverage_micro": {
+              "count": 66,
+              "rate": 0.3793103448275862,
+              "total": 174
+            },
+            "keywords_ok": {
+              "count": 11,
+              "rate": 0.12643678160919541,
+              "total": 87
+            },
+            "parsed": {
+              "count": 87,
+              "rate": 1.0,
+              "total": 87
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 3,
+              "rate": 0.034482758620689655,
+              "total": 87
+            },
+            "requests": 87,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 55,
+                "rate": 0.632183908045977,
+                "total": 87
+              },
+              "fail": 24,
+              "pass": 31,
+              "pass_among_decided": {
+                "count": 31,
+                "rate": 0.5636363636363636,
+                "total": 55
+              },
+              "repeated_char": 2,
+              "unknown": 32,
+              "unknown_causes": {
+                "ambiguous_reading": 30,
+                "missing_form": 2
+              }
+            },
+            "same_poem_across_prompts": 3,
+            "stop_reasons": {
+              "eos": 87
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 87
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 87
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 87
+              }
+            }
+          },
+          "3": {
+            "canonical_punctuation": {
+              "count": 69,
+              "rate": 0.9583333333333334,
+              "total": 72
+            },
+            "format_ok": {
+              "count": 69,
+              "rate": 0.9583333333333334,
+              "total": 72
+            },
+            "joint_ok": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 72
+            },
+            "keyword_coverage_micro": {
+              "count": 69,
+              "rate": 0.3194444444444444,
+              "total": 216
+            },
+            "keywords_ok": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 72
+            },
+            "parsed": {
+              "count": 72,
+              "rate": 1.0,
+              "total": 72
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 69
+            },
+            "requests": 72,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 52,
+                "rate": 0.7536231884057971,
+                "total": 69
+              },
+              "fail": 25,
+              "pass": 27,
+              "pass_among_decided": {
+                "count": 27,
+                "rate": 0.5192307692307693,
+                "total": 52
+              },
+              "repeated_char": 3,
+              "unknown": 17,
+              "unknown_causes": {
+                "ambiguous_reading": 16,
+                "missing_form": 1
+              }
+            },
+            "same_poem_across_prompts": 0,
+            "stop_reasons": {
+              "eos": 72
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 69
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 69
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 69
+              }
+            }
+          }
+        },
+        "new_combination_all_words_seen": {
+          "canonical_punctuation": {
+            "count": 105,
+            "rate": 0.9722222222222222,
+            "total": 108
+          },
+          "format_ok": {
+            "count": 105,
+            "rate": 0.9722222222222222,
+            "total": 108
+          },
+          "joint_ok": {
+            "count": 2,
+            "rate": 0.018518518518518517,
+            "total": 108
+          },
+          "keyword_coverage_micro": {
+            "count": 87,
+            "rate": 0.3020833333333333,
+            "total": 288
+          },
+          "keywords_ok": {
+            "count": 2,
+            "rate": 0.018518518518518517,
+            "total": 108
+          },
+          "parsed": {
+            "count": 108,
+            "rate": 1.0,
+            "total": 108
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 105
+          },
+          "requests": 108,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 80,
+              "rate": 0.7619047619047619,
+              "total": 105
+            },
+            "fail": 39,
+            "pass": 41,
+            "pass_among_decided": {
+              "count": 41,
+              "rate": 0.5125,
+              "total": 80
+            },
+            "repeated_char": 3,
+            "unknown": 25,
+            "unknown_causes": {
+              "ambiguous_reading": 23,
+              "missing_form": 2
+            }
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {
+            "eos": 108
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 105
+            }
+          }
+        },
+        "new_word_in_prompt": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "oov": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "overall": {
+          "canonical_punctuation": {
+            "count": 266,
+            "rate": 0.9851851851851852,
+            "total": 270
+          },
+          "format_ok": {
+            "count": 266,
+            "rate": 0.9851851851851852,
+            "total": 270
+          },
+          "joint_ok": {
+            "count": 79,
+            "rate": 0.29259259259259257,
+            "total": 270
+          },
+          "keyword_coverage_micro": {
+            "count": 203,
+            "rate": 0.405189620758483,
+            "total": 501
+          },
+          "keywords_ok": {
+            "count": 79,
+            "rate": 0.29259259259259257,
+            "total": 270
+          },
+          "parsed": {
+            "count": 269,
+            "rate": 0.9962962962962963,
+            "total": 270
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 24,
+            "rate": 0.09022556390977443,
+            "total": 266
+          },
+          "requests": 270,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 188,
+              "rate": 0.706766917293233,
+              "total": 266
+            },
+            "fail": 90,
+            "pass": 98,
+            "pass_among_decided": {
+              "count": 98,
+              "rate": 0.5212765957446809,
+              "total": 188
+            },
+            "repeated_char": 8,
+            "unknown": 78,
+            "unknown_causes": {
+              "ambiguous_reading": 65,
+              "missing_form": 13
+            }
+          },
+          "same_poem_across_prompts": 18,
+          "stop_reasons": {
+            "eos": 270
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 266
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 266
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 266
+            }
+          }
+        },
+        "seen_in_train": {
+          "canonical_punctuation": {
+            "count": 161,
+            "rate": 0.9938271604938271,
+            "total": 162
+          },
+          "format_ok": {
+            "count": 161,
+            "rate": 0.9938271604938271,
+            "total": 162
+          },
+          "joint_ok": {
+            "count": 77,
+            "rate": 0.47530864197530864,
+            "total": 162
+          },
+          "keyword_coverage_micro": {
+            "count": 116,
+            "rate": 0.5446009389671361,
+            "total": 213
+          },
+          "keywords_ok": {
+            "count": 77,
+            "rate": 0.47530864197530864,
+            "total": 162
+          },
+          "parsed": {
+            "count": 161,
+            "rate": 0.9938271604938271,
+            "total": 162
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 24,
+            "rate": 0.14906832298136646,
+            "total": 161
+          },
+          "requests": 162,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 108,
+              "rate": 0.6708074534161491,
+              "total": 161
+            },
+            "fail": 51,
+            "pass": 57,
+            "pass_among_decided": {
+              "count": 57,
+              "rate": 0.5277777777777778,
+              "total": 108
+            },
+            "repeated_char": 5,
+            "unknown": 53,
+            "unknown_causes": {
+              "ambiguous_reading": 42,
+              "missing_form": 11
+            }
+          },
+          "same_poem_across_prompts": 18,
+          "stop_reasons": {
+            "eos": 162
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 161
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 161
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 161
+            }
+          }
+        }
+      },
+      "nll": {
+        "nll": 3.6600150161191642,
+        "ppl": 38.86192642226923,
+        "target_tokens": 4150
+      },
+      "parameters": 91843584,
+      "seed": 2027,
+      "sha256": "61585ebd7748d7f3a1ddc9ba61bb3cd3f9254023edc10265d2aac0416b536b87"
+    },
+    "sft-tang-song-92m-2028": {
+      "checkpoint": "checkpoints/sft/sft-tang-song-92m-2028/best.pt",
+      "generation": {
+        "by_keyword_count": {
+          "1": {
+            "canonical_punctuation": {
+              "count": 108,
+              "rate": 0.972972972972973,
+              "total": 111
+            },
+            "format_ok": {
+              "count": 108,
+              "rate": 0.972972972972973,
+              "total": 111
+            },
+            "joint_ok": {
+              "count": 73,
+              "rate": 0.6576576576576577,
+              "total": 111
+            },
+            "keyword_coverage_micro": {
+              "count": 74,
+              "rate": 0.6666666666666666,
+              "total": 111
+            },
+            "keywords_ok": {
+              "count": 74,
+              "rate": 0.6666666666666666,
+              "total": 111
+            },
+            "parsed": {
+              "count": 111,
+              "rate": 1.0,
+              "total": 111
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 21,
+              "rate": 0.19444444444444445,
+              "total": 108
+            },
+            "requests": 111,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 68,
+                "rate": 0.6296296296296297,
+                "total": 108
+              },
+              "fail": 34,
+              "pass": 34,
+              "pass_among_decided": {
+                "count": 34,
+                "rate": 0.5,
+                "total": 68
+              },
+              "repeated_char": 3,
+              "unknown": 40,
+              "unknown_causes": {
+                "ambiguous_reading": 28,
+                "missing_form": 12
+              }
+            },
+            "same_poem_across_prompts": 15,
+            "stop_reasons": {
+              "eos": 111
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 108
+              }
+            }
+          },
+          "2": {
+            "canonical_punctuation": {
+              "count": 86,
+              "rate": 0.9885057471264368,
+              "total": 87
+            },
+            "format_ok": {
+              "count": 86,
+              "rate": 0.9885057471264368,
+              "total": 87
+            },
+            "joint_ok": {
+              "count": 18,
+              "rate": 0.20689655172413793,
+              "total": 87
+            },
+            "keyword_coverage_micro": {
+              "count": 75,
+              "rate": 0.43103448275862066,
+              "total": 174
+            },
+            "keywords_ok": {
+              "count": 18,
+              "rate": 0.20689655172413793,
+              "total": 87
+            },
+            "parsed": {
+              "count": 87,
+              "rate": 1.0,
+              "total": 87
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 3,
+              "rate": 0.03488372093023256,
+              "total": 86
+            },
+            "requests": 87,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 69,
+                "rate": 0.8023255813953488,
+                "total": 86
+              },
+              "fail": 27,
+              "pass": 42,
+              "pass_among_decided": {
+                "count": 42,
+                "rate": 0.6086956521739131,
+                "total": 69
+              },
+              "repeated_char": 5,
+              "unknown": 17,
+              "unknown_causes": {
+                "ambiguous_reading": 11,
+                "missing_form": 6
+              }
+            },
+            "same_poem_across_prompts": 3,
+            "stop_reasons": {
+              "eos": 87
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 86
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 86
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 86
+              }
+            }
+          },
+          "3": {
+            "canonical_punctuation": {
+              "count": 71,
+              "rate": 0.9861111111111112,
+              "total": 72
+            },
+            "format_ok": {
+              "count": 71,
+              "rate": 0.9861111111111112,
+              "total": 72
+            },
+            "joint_ok": {
+              "count": 4,
+              "rate": 0.05555555555555555,
+              "total": 72
+            },
+            "keyword_coverage_micro": {
+              "count": 84,
+              "rate": 0.3888888888888889,
+              "total": 216
+            },
+            "keywords_ok": {
+              "count": 4,
+              "rate": 0.05555555555555555,
+              "total": 72
+            },
+            "parsed": {
+              "count": 72,
+              "rate": 1.0,
+              "total": 72
+            },
+            "rejected_by_case": {},
+            "repeat_occurrence": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 71
+            },
+            "requests": 72,
+            "rhyme": {
+              "decided_among_wellformed": {
+                "count": 50,
+                "rate": 0.704225352112676,
+                "total": 71
+              },
+              "fail": 21,
+              "pass": 29,
+              "pass_among_decided": {
+                "count": 29,
+                "rate": 0.58,
+                "total": 50
+              },
+              "repeated_char": 2,
+              "unknown": 21,
+              "unknown_causes": {
+                "ambiguous_reading": 11,
+                "missing_form": 10
+              }
+            },
+            "same_poem_across_prompts": 0,
+            "stop_reasons": {
+              "eos": 72
+            },
+            "train_matches": {
+              "exact": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 71
+              },
+              "longer_poem_fragments": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 71
+              },
+              "near": {
+                "count": 0,
+                "rate": 0.0,
+                "total": 71
+              }
+            }
+          }
+        },
+        "new_combination_all_words_seen": {
+          "canonical_punctuation": {
+            "count": 107,
+            "rate": 0.9907407407407407,
+            "total": 108
+          },
+          "format_ok": {
+            "count": 107,
+            "rate": 0.9907407407407407,
+            "total": 108
+          },
+          "joint_ok": {
+            "count": 6,
+            "rate": 0.05555555555555555,
+            "total": 108
+          },
+          "keyword_coverage_micro": {
+            "count": 105,
+            "rate": 0.3645833333333333,
+            "total": 288
+          },
+          "keywords_ok": {
+            "count": 6,
+            "rate": 0.05555555555555555,
+            "total": 108
+          },
+          "parsed": {
+            "count": 108,
+            "rate": 1.0,
+            "total": 108
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 107
+          },
+          "requests": 108,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 78,
+              "rate": 0.7289719626168224,
+              "total": 107
+            },
+            "fail": 29,
+            "pass": 49,
+            "pass_among_decided": {
+              "count": 49,
+              "rate": 0.6282051282051282,
+              "total": 78
+            },
+            "repeated_char": 4,
+            "unknown": 29,
+            "unknown_causes": {
+              "ambiguous_reading": 17,
+              "missing_form": 12
+            }
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {
+            "eos": 108
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 107
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 107
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 107
+            }
+          }
+        },
+        "new_word_in_prompt": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "oov": {
+          "canonical_punctuation": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "format_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "joint_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keyword_coverage_micro": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "keywords_ok": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "parsed": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 0,
+            "rate": null,
+            "total": 0
+          },
+          "requests": 0,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "fail": 0,
+            "pass": 0,
+            "pass_among_decided": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "repeated_char": 0,
+            "unknown": 0,
+            "unknown_causes": {}
+          },
+          "same_poem_across_prompts": 0,
+          "stop_reasons": {},
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            },
+            "near": {
+              "count": 0,
+              "rate": null,
+              "total": 0
+            }
+          }
+        },
+        "overall": {
+          "canonical_punctuation": {
+            "count": 265,
+            "rate": 0.9814814814814815,
+            "total": 270
+          },
+          "format_ok": {
+            "count": 265,
+            "rate": 0.9814814814814815,
+            "total": 270
+          },
+          "joint_ok": {
+            "count": 95,
+            "rate": 0.35185185185185186,
+            "total": 270
+          },
+          "keyword_coverage_micro": {
+            "count": 233,
+            "rate": 0.46506986027944114,
+            "total": 501
+          },
+          "keywords_ok": {
+            "count": 96,
+            "rate": 0.35555555555555557,
+            "total": 270
+          },
+          "parsed": {
+            "count": 270,
+            "rate": 1.0,
+            "total": 270
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 24,
+            "rate": 0.09056603773584905,
+            "total": 265
+          },
+          "requests": 270,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 187,
+              "rate": 0.7056603773584905,
+              "total": 265
+            },
+            "fail": 82,
+            "pass": 105,
+            "pass_among_decided": {
+              "count": 105,
+              "rate": 0.5614973262032086,
+              "total": 187
+            },
+            "repeated_char": 10,
+            "unknown": 78,
+            "unknown_causes": {
+              "ambiguous_reading": 50,
+              "missing_form": 28
+            }
+          },
+          "same_poem_across_prompts": 18,
+          "stop_reasons": {
+            "eos": 270
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 265
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 265
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 265
+            }
+          }
+        },
+        "seen_in_train": {
+          "canonical_punctuation": {
+            "count": 158,
+            "rate": 0.9753086419753086,
+            "total": 162
+          },
+          "format_ok": {
+            "count": 158,
+            "rate": 0.9753086419753086,
+            "total": 162
+          },
+          "joint_ok": {
+            "count": 89,
+            "rate": 0.5493827160493827,
+            "total": 162
+          },
+          "keyword_coverage_micro": {
+            "count": 128,
+            "rate": 0.6009389671361502,
+            "total": 213
+          },
+          "keywords_ok": {
+            "count": 90,
+            "rate": 0.5555555555555556,
+            "total": 162
+          },
+          "parsed": {
+            "count": 162,
+            "rate": 1.0,
+            "total": 162
+          },
+          "rejected_by_case": {},
+          "repeat_occurrence": {
+            "count": 24,
+            "rate": 0.1518987341772152,
+            "total": 158
+          },
+          "requests": 162,
+          "rhyme": {
+            "decided_among_wellformed": {
+              "count": 109,
+              "rate": 0.689873417721519,
+              "total": 158
+            },
+            "fail": 53,
+            "pass": 56,
+            "pass_among_decided": {
+              "count": 56,
+              "rate": 0.5137614678899083,
+              "total": 109
+            },
+            "repeated_char": 6,
+            "unknown": 49,
+            "unknown_causes": {
+              "ambiguous_reading": 33,
+              "missing_form": 16
+            }
+          },
+          "same_poem_across_prompts": 18,
+          "stop_reasons": {
+            "eos": 162
+          },
+          "train_matches": {
+            "exact": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 158
+            },
+            "longer_poem_fragments": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 158
+            },
+            "near": {
+              "count": 0,
+              "rate": 0.0,
+              "total": 158
+            }
+          }
+        }
+      },
+      "nll": {
+        "nll": 3.6869194306522965,
+        "ppl": 39.921675845199694,
+        "target_tokens": 4150
+      },
+      "parameters": 91843584,
+      "seed": 2028,
+      "sha256": "a6d8470ed0f4cb7d6514402cb716fa31ca525344b7815bafa76fbbe94d88e232"
+    }
+  },
+  "validation_pairs_sha256": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3"
+}

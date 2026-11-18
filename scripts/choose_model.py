@@ -63,6 +63,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--validation-runs",type=Path,nargs="+",required=True)
     p.add_argument("--base-eval",type=Path,default=Path("configs/eval.yaml"))
+    p.add_argument("--runs-dir",type=Path,default=Path("runs"),
+                   help="Training summaries used to verify the selected model's initialization")
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--eval-output",type=Path,required=True)
     a=p.parse_args()
@@ -85,7 +87,7 @@ def main():
     matched = [name for name,path in c["models"].items() if path==selection["checkpoint"]]
     c["selected"]=matched[0] if matched else "X-selected"
     c["models"][c["selected"]]=selection["checkpoint"]
-    summary = read_json(Path("runs") / selected / "summary.json")
+    summary = read_json(a.runs_dir / selected / "summary.json")
     parent = summary["initialization"]
     if parent["kind"] != "pretrain_best" or sha256_file(Path(parent["path"])) != parent["sha256"]:
         raise ValueError("Could not verify the selected model's own pretraining baseline")
