@@ -32,3 +32,16 @@ python -E scripts/pretrain.py --config configs/pretrain.yaml --resume checkpoint
 ```
 
 日志写入 `runs/pretrain-tang-v1/`；权重写入 `checkpoints/pretrain/pretrain-tang-v1/{random,best,last}.pt`。重新运行实验时使用新的 `--run-id`。详见 [预训练实测](report/pretraining.md)。
+
+从上述最佳权重派生监督数据并运行三个微调种子：
+
+```bash
+python -E scripts/build_sft_data.py --config configs/sft.yaml
+for seed in 2026 2027 2028; do
+    python -E scripts/finetune.py --config configs/sft.yaml \
+        --init checkpoints/pretrain/pretrain-tang-v1/best.pt \
+        --seed "$seed" --run-id "sft-tang-$seed"
+done
+```
+
+每轮在验证集中记录正文 NLL 与固定条件样例。本次实测的演示权重是 `checkpoints/sft/sft-tang-2027/best.pt`；选择规则与三个种子见 [微调实测](report/finetuning.md)。

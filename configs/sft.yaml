@@ -7,7 +7,7 @@ training:
   epochs: 5
   micro_batch: 32
   accumulation: 1
-  lr: 0.00003
+  lr: 0.0003  # selected on the validation-only pilot
   min_lr_fraction: 0.1
   warmup_fraction: 0.03
   weight_decay: 0.1
@@ -17,3 +17,15 @@ training:
   eval_every: 0
   patience: 3
   min_improvement: 0.0001
+supervision:
+  whitelist: data/lexicon/imagery.txt
+  stopwords: data/lexicon/stopwords.txt
+  min_train_poems: 2
+  seed: 2026
+sampling:
+  temperature: 0.8
+  top_k: 50
+  top_p: 1.0
+  max_new_tokens: 64
+  seed: 11
+  validation_count: 30

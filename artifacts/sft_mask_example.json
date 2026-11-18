@@ -1,0 +1,262 @@
+{
+  "keywords": [
+    "橋",
+    "谷",
+    "好風"
+  ],
+  "poem_id": "001455d67bd669d0306980dd",
+  "positions": [
+    {
+      "input": "<bos>",
+      "input_id": 2,
+      "label_id": -100,
+      "position": 0,
+      "target": null
+    },
+    {
+      "input": "<wujue>",
+      "input_id": 4,
+      "label_id": -100,
+      "position": 1,
+      "target": null
+    },
+    {
+      "input": "<kw>",
+      "input_id": 5,
+      "label_id": -100,
+      "position": 2,
+      "target": null
+    },
+    {
+      "input": "橋",
+      "input_id": 3175,
+      "label_id": -100,
+      "position": 3,
+      "target": null
+    },
+    {
+      "input": "<kwsep>",
+      "input_id": 6,
+      "label_id": -100,
+      "position": 4,
+      "target": null
+    },
+    {
+      "input": "谷",
+      "input_id": 6644,
+      "label_id": -100,
+      "position": 5,
+      "target": null
+    },
+    {
+      "input": "<kwsep>",
+      "input_id": 6,
+      "label_id": -100,
+      "position": 6,
+      "target": null
+    },
+    {
+      "input": "好",
+      "input_id": 1343,
+      "label_id": -100,
+      "position": 7,
+      "target": null
+    },
+    {
+      "input": "風",
+      "input_id": 7792,
+      "label_id": -100,
+      "position": 8,
+      "target": null
+    },
+    {
+      "input": "<sep>",
+      "input_id": 7,
+      "label_id": 7262,
+      "position": 9,
+      "target": "金"
+    },
+    {
+      "input": "金",
+      "input_id": 7262,
+      "label_id": 6644,
+      "position": 10,
+      "target": "谷"
+    },
+    {
+      "input": "谷",
+      "input_id": 6644,
+      "label_id": 1121,
+      "position": 11,
+      "target": "園"
+    },
+    {
+      "input": "園",
+      "input_id": 1121,
+      "label_id": 201,
+      "position": 12,
+      "target": "中"
+    },
+    {
+      "input": "中",
+      "input_id": 201,
+      "label_id": 2947,
+      "position": 13,
+      "target": "柳"
+    },
+    {
+      "input": "柳",
+      "input_id": 2947,
+      "label_id": 8373,
+      "position": 14,
+      "target": "，"
+    },
+    {
+      "input": "，",
+      "input_id": 8373,
+      "label_id": 2730,
+      "position": 15,
+      "target": "春"
+    },
+    {
+      "input": "春",
+      "input_id": 2730,
+      "label_id": 343,
+      "position": 16,
+      "target": "來"
+    },
+    {
+      "input": "來",
+      "input_id": 343,
+      "label_id": 304,
+      "position": 17,
+      "target": "似"
+    },
+    {
+      "input": "似",
+      "input_id": 304,
+      "label_id": 5666,
+      "position": 18,
+      "target": "舞"
+    },
+    {
+      "input": "舞",
+      "input_id": 5666,
+      "label_id": 5583,
+      "position": 19,
+      "target": "腰"
+    },
+    {
+      "input": "腰",
+      "input_id": 5583,
+      "label_id": 8,
+      "position": 20,
+      "target": "。"
+    },
+    {
+      "input": "。",
+      "input_id": 8,
+      "label_id": 318,
+      "position": 21,
+      "target": "何"
+    },
+    {
+      "input": "何",
+      "input_id": 318,
+      "label_id": 1210,
+      "position": 22,
+      "target": "堪"
+    },
+    {
+      "input": "堪",
+      "input_id": 1210,
+      "label_id": 1343,
+      "position": 23,
+      "target": "好"
+    },
+    {
+      "input": "好",
+      "input_id": 1343,
+      "label_id": 7792,
+      "position": 24,
+      "target": "風"
+    },
+    {
+      "input": "風",
+      "input_id": 7792,
+      "label_id": 2761,
+      "position": 25,
+      "target": "景"
+    },
+    {
+      "input": "景",
+      "input_id": 2761,
+      "label_id": 8373,
+      "position": 26,
+      "target": "，"
+    },
+    {
+      "input": "，",
+      "input_id": 8373,
+      "label_id": 4110,
+      "position": 27,
+      "target": "獨"
+    },
+    {
+      "input": "獨",
+      "input_id": 4110,
+      "label_id": 187,
+      "position": 28,
+      "target": "上"
+    },
+    {
+      "input": "上",
+      "input_id": 187,
+      "label_id": 3472,
+      "position": 29,
+      "target": "洛"
+    },
+    {
+      "input": "洛",
+      "input_id": 3472,
+      "label_id": 7541,
+      "position": 30,
+      "target": "陽"
+    },
+    {
+      "input": "陽",
+      "input_id": 7541,
+      "label_id": 3175,
+      "position": 31,
+      "target": "橋"
+    },
+    {
+      "input": "橋",
+      "input_id": 3175,
+      "label_id": 8,
+      "position": 32,
+      "target": "。"
+    },
+    {
+      "input": "。",
+      "input_id": 8,
+      "label_id": 3,
+      "position": 33,
+      "target": "<eos>"
+    }
+  ],
+  "prompt_len": 10,
+  "response": "金谷園中柳，春來似舞腰。何堪好風景，獨上洛陽橋。",
+  "task": {
+    "chars_per_line": 5,
+    "form": "wujue",
+    "keywords": {
+      "max": 3,
+      "max_chars": 2,
+      "min": 1,
+      "min_chars": 1
+    },
+    "lines": 4,
+    "script": "source_traditional"
+  }
+}

@@ -1,0 +1,2 @@
+# Exclude low-information markers even if later added to the whitelist.
+一 不 無 有 之 亦 何 與 而 其 是 來 去 此 中 下 上 我 人 君 知

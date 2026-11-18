@@ -1,0 +1,123 @@
+{
+  "checkpoint_selection": "Among the registered SFT seeds, lowest full validation response+EOS NLL",
+  "learning_rate_selection": "Compare end-of-run joint hits in the fixed 30 validation prompts (seed 2026); 0.0003 over 0.00003. No test accessed by training.",
+  "runs": [
+    {
+      "best_checkpoint": "checkpoints/sft/sft-tang-2026/best.pt",
+      "best_sampling": {
+        "format_ok": 29,
+        "joint_ok": 13,
+        "keywords_ok": 13,
+        "n": 30
+      },
+      "best_sha256": "bbdd79c9112bb05cd781b834923ea4e307e135a002b67ec6f52001b30d4eff89",
+      "initial_sampling": {
+        "format_ok": 0,
+        "joint_ok": 0,
+        "keywords_ok": 0,
+        "n": 30
+      },
+      "run_id": "sft-tang-2026",
+      "seed": 2026,
+      "train_seconds": 2.35115680960007,
+      "validation_best": {
+        "nll": 4.489261298122176,
+        "ppl": 89.05563600916336,
+        "target_tokens": 4150
+      },
+      "validation_initial": {
+        "nll": 5.728427381400603,
+        "ppl": 307.48533080227025,
+        "target_tokens": 4150
+      }
+    },
+    {
+      "best_checkpoint": "checkpoints/sft/sft-tang-2027/best.pt",
+      "best_sampling": {
+        "format_ok": 30,
+        "joint_ok": 14,
+        "keywords_ok": 14,
+        "n": 30
+      },
+      "best_sha256": "e9893c79d1dc891fe968b8715d5f78b71f337c0b716d41189673c983fb34c6de",
+      "initial_sampling": {
+        "format_ok": 0,
+        "joint_ok": 0,
+        "keywords_ok": 0,
+        "n": 30
+      },
+      "run_id": "sft-tang-2027",
+      "seed": 2027,
+      "train_seconds": 2.297059021424502,
+      "validation_best": {
+        "nll": 4.488456987128201,
+        "ppl": 88.98403638009007,
+        "target_tokens": 4150
+      },
+      "validation_initial": {
+        "nll": 5.728427381400603,
+        "ppl": 307.48533080227025,
+        "target_tokens": 4150
+      }
+    },
+    {
+      "best_checkpoint": "checkpoints/sft/sft-tang-2028/best.pt",
+      "best_sampling": {
+        "format_ok": 30,
+        "joint_ok": 12,
+        "keywords_ok": 12,
+        "n": 30
+      },
+      "best_sha256": "7b36c2edf82d82afa8d0a0974c745e32defa2f5e5671f160dcdf0e5aa7ec65b6",
+      "initial_sampling": {
+        "format_ok": 0,
+        "joint_ok": 0,
+        "keywords_ok": 0,
+        "n": 30
+      },
+      "run_id": "sft-tang-2028",
+      "seed": 2028,
+      "train_seconds": 2.3760686363093555,
+      "validation_best": {
+        "nll": 4.490579172157379,
+        "ppl": 89.17307748908928,
+        "target_tokens": 4150
+      },
+      "validation_initial": {
+        "nll": 5.728427381400603,
+        "ppl": 307.48533080227025,
+        "target_tokens": 4150
+      }
+    }
+  ],
+  "selected": {
+    "best_checkpoint": "checkpoints/sft/sft-tang-2027/best.pt",
+    "best_sampling": {
+      "format_ok": 30,
+      "joint_ok": 14,
+      "keywords_ok": 14,
+      "n": 30
+    },
+    "best_sha256": "e9893c79d1dc891fe968b8715d5f78b71f337c0b716d41189673c983fb34c6de",
+    "initial_sampling": {
+      "format_ok": 0,
+      "joint_ok": 0,
+      "keywords_ok": 0,
+      "n": 30
+    },
+    "run_id": "sft-tang-2027",
+    "seed": 2027,
+    "train_seconds": 2.297059021424502,
+    "validation_best": {
+      "nll": 4.488456987128201,
+      "ppl": 88.98403638009007,
+      "target_tokens": 4150
+    },
+    "validation_initial": {
+      "nll": 5.728427381400603,
+      "ppl": 307.48533080227025,
+      "target_tokens": 4150
+    }
+  },
+  "shared_pretrain_sha256": "e4fd1f0c3a73bbfaaab9b145dafb64cf7f56d09a14be52ffc7593280ed928d7e"
+}

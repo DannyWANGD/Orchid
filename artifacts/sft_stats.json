@@ -1,0 +1,54 @@
+{
+  "data_manifest_sha256": "aa94ff50b1baa75d42716965b45f2269dfdbf79e4ef0469d5db6b2f9d4d562c7",
+  "lexicon_sha256": "85226c405f88519df2d4940465be7244cb2d38baf4ea61f9a58e79cc508bfed1",
+  "rule": "orchid-imagery-contiguous-one-per-poem-v1",
+  "split_manifest_sha256": "e8a1e5e0c27a870f1b4ffc1ce2b4d472f302647e36df94988e23262df9c39012",
+  "splits": {
+    "test": {
+      "candidates": 183,
+      "excluded": {
+        "no_match": 26
+      },
+      "file_sha256": "d2bc07ecbd723295e34c2e153075b14f4763102e9a55d5ca9b9eef55a5737d16",
+      "keyword_count": {
+        "1": 77,
+        "2": 51,
+        "3": 29
+      },
+      "keyword_oov": 0,
+      "pairs": 157,
+      "response_has_oov": 3
+    },
+    "train": {
+      "candidates": 3420,
+      "excluded": {
+        "no_match": 491
+      },
+      "file_sha256": "5c3a4098036ff8a7653a1f08f19a376f2e08edcbfc2d3a64e9e378b208f80e18",
+      "keyword_count": {
+        "1": 1396,
+        "2": 1011,
+        "3": 522
+      },
+      "keyword_oov": 0,
+      "pairs": 2929,
+      "response_has_oov": 0
+    },
+    "validation": {
+      "candidates": 188,
+      "excluded": {
+        "no_match": 22
+      },
+      "file_sha256": "644e5544c767f218b2d7863570fd8781643245e56ccc8fb17f7e36309141ffe3",
+      "keyword_count": {
+        "1": 66,
+        "2": 59,
+        "3": 41
+      },
+      "keyword_oov": 0,
+      "pairs": 166,
+      "response_has_oov": 3
+    }
+  },
+  "tokenizer_sha256": "fcb281c2a3350aa67760726f473af279e79d62463d53ea2361798cbe46de4163"
+}
