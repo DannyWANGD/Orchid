@@ -61,6 +61,15 @@
       "path_svg": "sft-tang-song.svg",
       "section": "扩容微调",
       "source": "evidence/sft-tang-song-92m-{2026,2027,2028}/metrics.jsonl"
+    },
+    {
+      "caption": "CUDA 封存测试；同一个 92M 唐宋模型在 SFT 前后的自发命中，以及两个规则解码对照。",
+      "id": "test-expanded",
+      "path_csv": "test-expanded.csv",
+      "path_pdf": "test-expanded.pdf",
+      "path_svg": "test-expanded.svg",
+      "section": "扩容比较",
+      "source": "evidence/retained-expanded-eval-v1/metrics.json"
     }
   ]
 }

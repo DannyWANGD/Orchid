@@ -1,0 +1,56 @@
+{
+  "canonical_punctuation": true,
+  "constrained_form": true,
+  "constrained_keywords": true,
+  "device": "cpu",
+  "format_ok": true,
+  "generated": "清溪上下看，寒水中間得。魚孤舟不進，鷺鷥霜葉沒。",
+  "generated_ids": [
+    3577,
+    3637,
+    187,
+    188,
+    4489,
+    8373,
+    1552,
+    3358,
+    201,
+    7448,
+    1976,
+    8,
+    8062,
+    1498,
+    5667,
+    189,
+    7052,
+    8373,
+    8225,
+    8216,
+    7630,
+    5885,
+    3406,
+    8
+  ],
+  "generated_steps": 25,
+  "joint_ok": true,
+  "keyword_hits": [
+    "霜",
+    "孤舟"
+  ],
+  "keywords": [
+    "霜",
+    "孤舟"
+  ],
+  "keywords_ok": true,
+  "lines": [
+    "清溪上下看",
+    "寒水中間得",
+    "魚孤舟不進",
+    "鷺鷥霜葉沒"
+  ],
+  "load_seconds": 0.7380999708548188,
+  "model_hash": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30",
+  "parsed": true,
+  "seconds": 0.5872748850379139,
+  "stop": "eos"
+}

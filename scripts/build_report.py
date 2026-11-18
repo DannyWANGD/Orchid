@@ -14,7 +14,7 @@ PREAMBLE = r"""
 \setCJKmainfont{Noto Serif CJK SC}
 \setCJKsansfont{Noto Sans CJK SC}
 \setCJKmonofont{Noto Sans CJK SC}
-\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage[a4paper,hmargin=24mm,vmargin=21mm]{geometry}
 \usepackage{graphicx,booktabs,tabularx,hyperref}
 \usepackage{xcolor}
 \hypersetup{colorlinks=true,linkcolor=blue!42!black,urlcolor=blue!50!black}
@@ -88,9 +88,7 @@ def render(text):
                     raise ValueError(f"Use a relative path in figures: {path}")
                 out.extend([r"\begin{center}",r"\includegraphics[width=0.96\linewidth]{"+str(path)+"}",
                             r"\par{\small "+tex(figure.content)+"}",r"\end{center}"])
-            elif not children:
-                pass
-            else:
+            elif children:
                 out.append(inline(children)+"\n")
             i+=3
         elif token.type=="table_open":

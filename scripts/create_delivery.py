@@ -1,6 +1,7 @@
 """Build and verify a local course ZIP with one inference bundle and source."""
 
 import argparse
+import hashlib
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import sys
@@ -17,7 +18,7 @@ PROJECT_DIRS = ("orchid", "scripts", "configs", "docs", "tests", "data/lexicon",
 ROOT_FILES = ("README.md", "GPT_BUILD_CHECKLIST.md", "Problem.md", "THIRD_PARTY_NOTICES.md", "requirements.txt",
               ".python-version", ".gitignore")
 REPORT_FILES = ("experiment_report.md", "Orchid课程报告.pdf", "pretraining.md", "finetuning.md",
-                "scaling.md", "evaluation_baseline.md")
+                "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md")
 
 
 def make_zip(output, bundle):
@@ -48,7 +49,8 @@ def make_zip(output, bundle):
             for name in ("weights.pt", "tokenizer.json", "config.json", "bundle.json"):
                 add(bundle/name, "model/"+name)
             for filename in sorted((ROOT/"report/evidence").rglob("*")):
-                if filename.is_file() and filename.suffix in (".json", ".jsonl", ".csv"):
+                if (filename.is_file() and filename.suffix in (".json", ".jsonl", ".csv")
+                        and not filename.name.startswith("delivery-")):
                     add(filename, filename.relative_to(ROOT))
             z.writestr("orchid-course/QUICKSTART.txt",
                        "Orchid course delivery. Extract the whole zip to preserve source/module paths.\n"
@@ -64,7 +66,6 @@ def make_zip(output, bundle):
             if issue:
                 raise IOError(f"Corrupt archive entry: {issue}")
             for name,digest in meta["files"].items():
-                import hashlib
                 with archive.open(f"orchid-course/model/{name}") as f:
                     if hashlib.file_digest(f,"sha256").hexdigest()!=digest:
                         raise ValueError(f"{name} changed while packaging")

@@ -1,0 +1,11 @@
+{
+  "blind_seed": 20261118,
+  "expected_reviewers": 2,
+  "pairs_per_reviewer": 30,
+  "rating_scale": [
+    1,
+    5
+  ],
+  "received": 0,
+  "source_key_sha256": "69c397f47bf403605a971f2e08e1743e5e0ee5e1ea27539fc2bf4c25fe03322c"
+}

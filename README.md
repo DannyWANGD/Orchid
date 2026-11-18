@@ -70,3 +70,31 @@ python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --devi
 两份真人评分表位于 [report/blind_review](report/blind_review/README.md)。不要把结果页面或私有模型映射交给评阅者。汇总命令会校验两份表的 60 个匿名 ID 及 1～5 分评分。
 
 报告源文件 [Markdown](report/experiment_report.md)，可读版 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，从仓库根目录运行 `python -E scripts/build_report.py` 重建 PDF。
+
+### 单卡扩容：92M 唐宋版
+
+扩容使用同一公开唐诗与宋诗快照，验证和测试仍是固定唐诗集合。应先完整跑通上面的基础数据与监督构建。
+
+```bash
+python -E scripts/download_song.py --config configs/song.yaml
+python -E scripts/prepare_tang_song.py --config configs/data-tang-song.yaml
+python -E scripts/build_sft_data.py --config configs/sft-tang-song.yaml
+python -E scripts/pretrain.py --config configs/pretrain-tang-song.yaml --run-id pretrain-tang-song-92m
+for seed in 2026 2027 2028; do
+    python -E scripts/finetune.py --config configs/sft-tang-song.yaml \
+        --init checkpoints/pretrain/pretrain-tang-song-92m/best.pt \
+        --seed "$seed" --run-id "sft-tang-song-92m-$seed"
+done
+```
+
+预训练每半轮验证，最多 16 轮，连续三次无改善时早停。本次在第 9 轮保存最佳、第 10.5 轮停，实际优化约 31 分钟；途中能直接用同一配置加 `--resume checkpoints/pretrain/pretrain-tang-song-92m/last.pt` 恢复。三个 SFT 种子各实跑 4 轮。交付模型是固定验证题选出的种子 2028：
+
+```bash
+python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-song-92m-2028/best.pt --output dist/orchid-92m
+python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cpu --json
+python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cuda --constrain-keywords
+```
+
+如要复跑多模型冻结对照，使用 `python -E scripts/evaluate.py --config configs/eval-expanded.json --device cuda --output runs/retained-expanded-eval-v1`；该配置同时登记 14M/42M/92M 对照的本地权重。只查看现成结果无需训练。每个运行 ID 的配置、成绩与 checkpoint 哈希在 [report/evidence](report/evidence/)。
+
+交付文件：[92M 本地 ZIP](dist/Orchid-course.zip) · [封存测试](report/evaluation_expanded.md) · [课程 PDF](report/Orchid课程报告.pdf)。在新目录解压 ZIP 后，`model/` 是 92M 交付权重；可直接用上一节的推理方式。源码和训练数据的固定下载地址同时附在包内。大的数据与 checkpoint 目录只存本机。两份 92M [盲评表](report/blind_review/README.md)仍待独立评阅者填写。

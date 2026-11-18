@@ -1,0 +1,991 @@
+{
+  "models": {
+    "R0": {
+      "examples": {},
+      "shape": {
+        "count": 0,
+        "total": 24
+      },
+      "tone": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      },
+      "tone_rhyme": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R1": {
+      "examples": {},
+      "shape": {
+        "count": 0,
+        "total": 150
+      },
+      "tone": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      },
+      "tone_rhyme": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2026": {
+      "examples": {
+        "tone/fail": {
+          "generated": "一去青山樹，三年一去春。一遊相送酒，一入海中塵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "一步三千里，三朝一夜風。秋風吹落葉，不見白頭人。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "一去青山樹，三年一去春。一遊相送酒，一入海中塵。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 145,
+        "total": 150
+      },
+      "tone": {
+        "fail": 140,
+        "pass": 0,
+        "unknown": 5
+      },
+      "tone_rhyme": {
+        "fail": 145,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2027": {
+      "examples": {
+        "tone/fail": {
+          "generated": "自愛芳芳色，春歸玉樹清。一種山中雨，春來雪滿枝。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "曉浦涼初宿，雲峰月未眠。人心江上月，欲待月中秋。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M004",
+          "rhyme": "fail",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "自愛芳芳色，春歸玉樹清。一種山中雨，春來雪滿枝。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 144,
+        "total": 150
+      },
+      "tone": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 2
+      },
+      "tone_rhyme": {
+        "fail": 144,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-2028": {
+      "examples": {
+        "tone/fail": {
+          "generated": "玉池猶未足，玉蘂不成啼。誰恨來相送，空餘有路知。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M001",
+          "rhyme": "unknown",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "昔是遊人日，君隨漢水流。無言芳草樹，不見菊花中。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M005",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "玉池猶未足，玉蘂不成啼。誰恨來相送，空餘有路知。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M001",
+          "rhyme": "unknown",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 149,
+        "total": 150
+      },
+      "tone": {
+        "fail": 144,
+        "pass": 0,
+        "unknown": 5
+      },
+      "tone_rhyme": {
+        "fail": 149,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "R2-K": {
+      "examples": {
+        "tone/fail": {
+          "generated": "雁南飛雁遠，燕北征雁哀。雁起情何在，鴻來書不來。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M005",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "雁南飛雁遠，燕北征雁哀。雁起情何在，鴻來書不來。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M005",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 149,
+        "total": 150
+      },
+      "tone": {
+        "fail": 135,
+        "pass": 0,
+        "unknown": 14
+      },
+      "tone_rhyme": {
+        "fail": 137,
+        "pass": 0,
+        "unknown": 12
+      }
+    },
+    "R3": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜天水寒冷，秋到骨毛冷。一秋江上寒，霜葉已蕭颯。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜天水寒冷，秋到骨毛冷。一秋江上寒，霜葉已蕭颯。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 150,
+        "total": 150
+      },
+      "tone": {
+        "fail": 141,
+        "pass": 0,
+        "unknown": 9
+      },
+      "tone_rhyme": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 8
+      }
+    },
+    "R3-K": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜天水寒冷，秋到骨毛冷。一秋江上寒，霜葉霜中冷。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "山青山色重，溪落日光遲。獨有霞衣客，悠悠獨自持。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M036",
+          "rhyme": "unknown",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜天水寒冷，秋到骨毛冷。一秋江上寒，霜葉霜中冷。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "山青山色重，溪落日光遲。獨有霞衣客，悠悠獨自持。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M036",
+          "rhyme": "unknown",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 150,
+        "total": 150
+      },
+      "tone": {
+        "fail": 149,
+        "pass": 0,
+        "unknown": 1
+      },
+      "tone_rhyme": {
+        "fail": 149,
+        "pass": 0,
+        "unknown": 1
+      }
+    },
+    "X-42M": {
+      "examples": {
+        "tone/fail": {
+          "generated": "秋山夜雨濕，雨久秋江上。秋雨有餘雨，秋風還有色。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "白石三千里，青山一萬家。爲君來往事，不見長相尋。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M007",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "秋山夜雨濕，雨久秋江上。秋雨有餘雨，秋風還有色。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        }
+      },
+      "shape": {
+        "count": 145,
+        "total": 150
+      },
+      "tone": {
+        "fail": 137,
+        "pass": 0,
+        "unknown": 8
+      },
+      "tone_rhyme": {
+        "fail": 145,
+        "pass": 0,
+        "unknown": 0
+      }
+    },
+    "X-92M-10": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜火長楊苑，霜霜滿地牛。寒楊白雪盡，白日白楊楊。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "白首望長亭，青山雪滿空。不知何處得，莫道有行人。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M010",
+          "rhyme": "fail",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_first_rhyme"
+          ],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜火長楊苑，霜霜滿地牛。寒楊白雪盡，白日白楊楊。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "高庭望遠水，遠客獨來時。欲盡山中月，猶應笑畫眉。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M028",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 149,
+        "total": 150
+      },
+      "tone": {
+        "fail": 143,
+        "pass": 0,
+        "unknown": 6
+      },
+      "tone_rhyme": {
+        "fail": 148,
+        "pass": 0,
+        "unknown": 1
+      }
+    },
+    "X-92M-Tang-Long-2026": {
+      "examples": {
+        "tone/fail": {
+          "generated": "玉井冰霜盡，金盆露影斜。誰憐鳳凰殿，不見鳳皇家。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/pass": {
+          "generated": "北陌春風裏，東山暮景閑。花明堪醉醉，笑下柳陰山。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M024",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "pass",
+          "tone_certain": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "pass"
+        },
+        "tone/unknown": {
+          "generated": "三春春雪滿，一夜逐風多。一笑春風至，千年對此歌。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M011",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "玉井冰霜盡，金盆露影斜。誰憐鳳凰殿，不見鳳皇家。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/pass": {
+          "generated": "北陌春風裏，東山暮景閑。花明堪醉醉，笑下柳陰山。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M024",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "pass",
+          "tone_certain": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "pass"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "三春春雪滿，一夜逐風多。一笑春風至，千年對此歌。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M011",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 144,
+        "total": 150
+      },
+      "tone": {
+        "fail": 126,
+        "pass": 1,
+        "unknown": 17
+      },
+      "tone_rhyme": {
+        "fail": 129,
+        "pass": 1,
+        "unknown": 14
+      }
+    },
+    "X-92M-Tang-Long-2027": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜天蒼龍起，月魄白龍驚。獨立三千里，天漢白雲中。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "別淚隨江鳥，悠悠向隴頭。悠悠東海雁，不覺是歸秋。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜天蒼龍起，月魄白龍驚。獨立三千里，天漢白雲中。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "別淚隨江鳥，悠悠向隴頭。悠悠東海雁，不覺是歸秋。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 22,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 138,
+        "total": 150
+      },
+      "tone": {
+        "fail": 122,
+        "pass": 0,
+        "unknown": 16
+      },
+      "tone_rhyme": {
+        "fail": 125,
+        "pass": 0,
+        "unknown": 13
+      }
+    },
+    "X-92M-Tang-Long-2028": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜鬢髪如霜，霜霜白似霜。夜長徒自去，驚斷李陵霜。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/pass": {
+          "generated": "獨步青山裏，青山白草生。青雲無限路，白首有清聲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M012",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "pass",
+          "tone_certain": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "pass"
+        },
+        "tone/unknown": {
+          "generated": "柳映黃金殿，梨花雪滿枝。不知風雪意，吹盡酒樓時。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M010",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜鬢髪如霜，霜霜白似霜。夜長徒自去，驚斷李陵霜。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M001",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/pass": {
+          "generated": "獨步青山裏，青山白草生。青雲無限路，白首有清聲。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M012",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "pass",
+          "tone_certain": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "pass"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "柳映黃金殿，梨花雪滿枝。不知風雪意，吹盡酒樓時。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M010",
+          "rhyme": "pass",
+          "seed": 11,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 141,
+        "total": 150
+      },
+      "tone": {
+        "fail": 126,
+        "pass": 3,
+        "unknown": 12
+      },
+      "tone_rhyme": {
+        "fail": 131,
+        "pass": 2,
+        "unknown": 8
+      }
+    },
+    "X-92M-TangSong-2026": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜降紅梨熟，風飛白稻香。何人得真意，同上古人鄉。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "unknown",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "三五年前別，相逢又隔門。相逢不相識，爲道故鄉魂。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M006",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜降紅梨熟，風飛白稻香。何人得真意，同上古人鄉。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "unknown",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "三五年前別，相逢又隔門。相逢不相識，爲道故鄉魂。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M006",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ze_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 147,
+        "total": 150
+      },
+      "tone": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 5
+      },
+      "tone_rhyme": {
+        "fail": 142,
+        "pass": 0,
+        "unknown": 5
+      }
+    },
+    "X-92M-TangSong-2027": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜嚴冰玉立，風勁角冠寒。獨有西鄰伴，相看萬里心。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "秋風爲我落，草木爲誰明。落日無人去，孤雲獨自行。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M018",
+          "rhyme": "unknown",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜嚴冰玉立，風勁角冠寒。獨有西鄰伴，相看萬里心。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "秋風爲我落，草木爲誰明。落日無人去，孤雲獨自行。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M018",
+          "rhyme": "unknown",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 148,
+        "total": 150
+      },
+      "tone": {
+        "fail": 138,
+        "pass": 0,
+        "unknown": 10
+      },
+      "tone_rhyme": {
+        "fail": 139,
+        "pass": 0,
+        "unknown": 9
+      }
+    },
+    "X-92M-TangSong-2028": {
+      "examples": {
+        "tone/fail": {
+          "generated": "霜天水寒霜，風壑松聲細。坐想此時時，不知吟思倦。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        },
+        "tone_rhyme/fail": {
+          "generated": "霜天水寒霜，風壑松聲細。坐想此時時，不知吟思倦。",
+          "missing_tone_mapping": false,
+          "prompt_id": "M001",
+          "rhyme": "fail",
+          "seed": 11,
+          "tone": "fail",
+          "tone_certain": [],
+          "tone_possible": [],
+          "tone_rhyme": "fail"
+        },
+        "tone_rhyme/unknown": {
+          "generated": "江陵江上雪，行子念征夫。爲問江南守，江南一長鬚。",
+          "missing_tone_mapping": true,
+          "prompt_id": "M002",
+          "rhyme": "pass",
+          "seed": 33,
+          "tone": "unknown",
+          "tone_certain": [],
+          "tone_possible": [
+            "ping_start_no_first_rhyme"
+          ],
+          "tone_rhyme": "unknown"
+        }
+      },
+      "shape": {
+        "count": 149,
+        "total": 150
+      },
+      "tone": {
+        "fail": 140,
+        "pass": 0,
+        "unknown": 9
+      },
+      "tone_rhyme": {
+        "fail": 141,
+        "pass": 0,
+        "unknown": 8
+      }
+    },
+    "X-92M-TangSong-Pre": {
+      "examples": {},
+      "shape": {
+        "count": 0,
+        "total": 150
+      },
+      "tone": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      },
+      "tone_rhyme": {
+        "fail": 0,
+        "pass": 0,
+        "unknown": 0
+      }
+    }
+  },
+  "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+  "scope": "exact canonical five-character tone templates; no historical exceptions",
+  "source_sha256": "8ffeb79059e2986d448d7ebf726ff415a100eb3fdd9dfa5630ba344751ac0ae6",
+  "suite": "main"
+}

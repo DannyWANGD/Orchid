@@ -5,3 +5,5 @@
 课程的源码、配置、可编辑报告和图表在 Git；本机下载入口是 `dist/` 下的 ZIP。它包含必要权重、配置、字表和校验清单，不依赖该工作目录的训练数据做推理。完整唐诗和宋诗用数据清单中的公开固定 URL 取得。没有把大 checkpoint 写入 Git，也没有将项目上传到外部服务；如课程提交需要同学可访问的外部链接，提交者可把 ZIP 放到自己的私有网盘后填写。
 
 14M 基线包的本机入口：[Orchid-course-baseline.zip](../dist/Orchid-course-baseline.zip)。其中权重、字表、配置与归档内容都已逐项校验；在独立目录解压后可用 `--checkpoint model`，无需训练数据。[归档校验](../report/evidence/delivery-baseline.json)与[解压后生成记录](../report/evidence/independent-archive-generation.json)可复查。
+
+正式交付使用 [Orchid-course.zip](../dist/Orchid-course.zip) 的 92M 唐宋版。已在独立环境解压：在没有原始语料和训练 checkpoint 的条件下，CPU 可加载原始模式，CUDA 可跑带字数和关键词约束的模式，全部单元测试通过。[归档校验](../report/evidence/delivery-92m.json)和[解压验收](../report/evidence/delivery-92m-extraction.json)。

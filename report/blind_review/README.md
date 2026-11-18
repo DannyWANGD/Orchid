@@ -19,3 +19,26 @@ python -E scripts/blind_review.py aggregate \
     --ratings reviewer_1_completed.csv reviewer_2_completed.csv \
     --output runs/human_review_results.json
 ```
+
+如只安排一轮评分，优先使用 `expanded/reviewer_1.csv` 与 `expanded/reviewer_2.csv`：它们比较交付的 92M 模型在同一预训练权重的微调前后，仍是冻结的 30 道题和匿名的 60 条输出。14M 基线的上层两份表可以作为附加实验。不要交叉混用两套表。扩容版表单完成后，把文件放在此目录的 `expanded/`，以 `reviewer_1_completed.csv`、`reviewer_2_completed.csv` 命名；汇总时对应的模型映射为本机 `runs/poetry-blind-expanded/private_key.json`。
+
+若需要重建扩容版映射与空表：
+
+```bash
+python -E scripts/blind_review.py make \
+    --generations report/evidence/retained-expanded-eval-v1/generations.jsonl \
+    --models X-92M-TangSong-Pre X-92M-TangSong-2028 \
+    --output runs/poetry-blind-expanded-recreated
+```
+
+收到两份填好的扩容表后，在仓库根目录运行：
+
+```bash
+python -E scripts/blind_review.py aggregate \
+    --key runs/poetry-blind-expanded/private_key.json \
+    --ratings report/blind_review/expanded/reviewer_1_completed.csv \
+              report/blind_review/expanded/reviewer_2_completed.csv \
+    --output runs/human_review_expanded.json
+```
+
+只把评分表和评分锚点发给两位评阅者。格律抽查是另一项工作；建议在盲评交回后，用[抽查示例](meter_review.md)请熟悉诗律的读者确认。

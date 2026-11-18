@@ -5,7 +5,7 @@
 | 数据 | 来源、固定版本及取得方式 | 实验用途 |
 |---|---|---|
 | 唐诗 JSON | 公开复用：[chinese-poetry 固定提交](https://github.com/chinese-poetry/chinese-poetry/tree/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97)，按提交 URL 读取 `poet.tang.0.json` 至 `poet.tang.57000.json`；2026-11-18 已只读复核 | 以整首诗为单位划分预训练与 SFT 的共同 train/validation/test，标签由冻结规则派生 |
-| 独立诗题 | 人工编写若干无参考诗的 1～3 词组合，确定模型后封存并固定版本 | 主测试；绝不进入训练或超参数选择 |
+| 独立诗题 | Codex 编写 50 道不带参考诗的 1～3 词组合，遇到训练中的组合和未登录字按冻结规则登记，全表在任何测试生成前提交 | 主测试；绝不进入训练或超参数选择 |
 | 平水韵表 | [固定版本繁体 JSON](https://github.com/rbnyng/pingshui_rhyme/blob/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json)，SHA-256 见清单 §10.3 | 仅做偶句同平声韵的评价，不输入训练程序 |
 
 训练数据保留源字形和来源索引。正文按 Unicode NFC 和 §4.2 的句读规则初筛，将保留句子的标点统一为逗号、句号交替（末句一律句号），保留原始标点以便查对。不从长诗截出四句充作监督答案；来源缺字和夹注另存复核。不另引入宋诗、宋词、元曲和《唐诗三百首》选本；标题与作者只用于回查。许可与来源见 [第三方登记](../THIRD_PARTY_NOTICES.md)。

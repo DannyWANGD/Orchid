@@ -1,0 +1,16 @@
+model,score,count,total,rate
+X-92M-TangSong-Pre,format_ok,0,150,0.0
+X-92M-TangSong-Pre,keywords_ok,0,150,0.0
+X-92M-TangSong-Pre,joint_ok,0,150,0.0
+X-92M-TangSong-2028,format_ok,149,150,0.9933333333333333
+X-92M-TangSong-2028,keywords_ok,20,150,0.13333333333333333
+X-92M-TangSong-2028,joint_ok,20,150,0.13333333333333333
+R2-K,format_ok,149,150,0.9933333333333333
+R2-K,keywords_ok,1,150,0.006666666666666667
+R2-K,joint_ok,1,150,0.006666666666666667
+R3,format_ok,150,150,1.0
+R3,keywords_ok,20,150,0.13333333333333333
+R3,joint_ok,20,150,0.13333333333333333
+R3-K,format_ok,150,150,1.0
+R3-K,keywords_ok,150,150,1.0
+R3-K,joint_ok,150,150,1.0
