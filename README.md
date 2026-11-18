@@ -13,7 +13,7 @@ python -m pip check
 python -I scripts/check_env.py --require-cuda --verify-pins --output artifacts/environment.json
 ```
 
-如果是新建的空环境，激活后先运行 `python -m pip install -r requirements.txt`。`check_env.py` 会写出版本、显卡、BF16 能力和 CUDA 前向/反向检查结果；只使用 CPU 时去掉 `--require-cuda`。VS Code 工作区默认选择 `.venv/bin/python`；若编辑器已记住其他解释器，在「Python: Select Interpreter」中切换。
+如果是新建的空环境，激活后先运行 `python -m pip install -r requirements.txt`。`check_env.py` 会写出版本、显卡、BF16 能力和 CUDA 前向/反向检查结果；只使用 CPU 时去掉 `--require-cuda`。VS Code 可参考 [工作区设置模板](.vscode/settings.example.json)，在「Python: Select Interpreter」中选择 `.venv/bin/python`。如果 ROS 2 扩展自动写回 Python 3.10 的分析路径，可在 Orchid 工作区单独停用该扩展；运行命令用 `python -E` 避开 Python 环境变量。
 
 从仓库根目录获取和准备语料：
 

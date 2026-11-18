@@ -1,0 +1,19 @@
+model: configs/model.yaml
+data: configs/data.yaml
+task: configs/task.yaml
+seed: 2026
+runtime: {device: cuda, precision: bf16, deterministic: false, cpu_threads: 2, fp32_matmul_precision: highest}
+training:
+  epochs: 5
+  micro_batch: 32
+  accumulation: 1
+  lr: 0.00003
+  min_lr_fraction: 0.1
+  warmup_fraction: 0.03
+  weight_decay: 0.1
+  betas: [0.9, 0.95]
+  eps: 1.0e-8
+  grad_clip: 1.0
+  eval_every: 0
+  patience: 3
+  min_improvement: 0.0001

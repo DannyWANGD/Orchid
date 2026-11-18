@@ -65,7 +65,7 @@ CUDA Toolkit、bindings、cuDNN 等组件的版本号不要求全部相同，应
 - [x] ENV-03 从依赖文档移除旧 CUDA 13 库的固定项，保留原有其他工具依赖；没有卸载现有环境中的残留包。
 - [x] ENV-04 检查固定项与本地版本一致，并通过当前环境中的依赖检查和不安装软件的解析检查。
 - [x] ENV-05 `scripts/check_env.py` 验证版本与 BF16 能力，实测证据见 [环境记录](artifacts/environment.json)。
-- [x] ENV-06 VS Code 默认使用 `.venv/bin/python`，移除工作区 ROS Python 3.10 分析路径；README 提供终端隔离命令。
+- [x] ENV-06 提供选择 `.venv/bin/python` 的工作区模板和隔离 ROS 的实测命令；扩展重写的本地设置不入库。
 - [x] ENV-07 2026-11-18 从空的 Python 3.11.16 venv 执行 `pip install -r requirements.txt`，182 个固定项、`pip check` 和 CUDA 前向/反向均通过。
 - [x] ENV-08 基线沿用现有依赖；后续仅在实际使用新工具时增加并固定版本。
 
@@ -120,10 +120,10 @@ Orchid/
 
 - [ ] ENG-01 建立上述核心模块和统一入口，训练程序使用 `if __name__ == "__main__"`，导入模块时不启动训练或下载。
 - [ ] ENG-02 配置文件覆盖模型、数据路径、种子、训练和采样参数；运行时保存最终解析后的配置，不能只保存默认配置。
-- [ ] ENG-03 每次运行使用独立 `run_id`；记录代码提交或源码摘要、配置哈希、数据清单哈希、tokenizer 哈希与环境版本。
+- [x] ENG-03 每次运行使用独立 `run_id`；记录代码提交或源码摘要、配置哈希、数据清单哈希、tokenizer 哈希与环境版本。
 - [x] ENG-04 `.gitignore` 排除原始数据、处理缓存、大检查点及运行目录；脚本、配置和清单可提交。
 - [x] ENG-05 建立 [开源借用登记](THIRD_PARTY_NOTICES.md)：源码引用、数据版本、具体用途、改动和许可证。
-- [ ] ENG-06 以 `LLMs-from-scratch` 第 2～5、7 章为主要学习参考，借鉴 nanoGPT 的配置、训练日志与采样组织方式，不混用两个项目的 tokenizer 和检查点格式。
+- [x] ENG-06 以 `LLMs-from-scratch` 第 2～5、7 章为主要学习参考，借鉴 nanoGPT 的配置、训练日志与采样组织方式，不混用两个项目的 tokenizer 和检查点格式。
 
 已核对的开源快照：
 
@@ -194,6 +194,8 @@ nanoGPT 作者已在 README 中于 2025 年 11 月标注项目较旧并转向 na
 
 ### 6.1 基线结构
 
+实现与实测见 [模型说明](docs/model_implementation.md) 和 [训练检查记录](artifacts/training_checks.json)；实际字表 8,582，参数量 14,041,344。
+
 ```text
 token IDs
   → token embedding + learned position embedding
@@ -219,17 +221,17 @@ token IDs
 
 按上表且权重共享，参数量为 `384 × V + 10,745,856`，`V` 为实际词表大小；例如 `V=8000` 时为 `13,817,856`。这是配置推导值，完成实现后还要由程序统计确认。主参考：[GPT 教学实现](https://github.com/rasbt/LLMs-from-scratch/blob/0311973e2c974b9e0223933103dc400c7a536179/ch04/01_main-chapter-code/gpt.py)。
 
-- [ ] MODEL-01 使用 `nn.Module`、`nn.Embedding`、线性层、自动微分等 PyTorch 组件搭建模型，初始化时不加载现成大模型权重。固定初始化方案：嵌入/线性层权重可采用 `N(0, 0.02)`、bias 为 0、LayerNorm scale 为 1/shift 为 0；共享权重只初始化一次，额外的残差投影缩放如启用则记录。
-- [ ] MODEL-02 验证多头拆分与合并维度，检查 `d_model % n_head == 0`，在报告解释 `QKᵀ / sqrt(head_dim)`、softmax 和 V 加权。
-- [ ] MODEL-03 实现下三角因果注意力；给出“修改未来 token，不改变此前位置 logits”的自动检查，测试时关闭 dropout。
-- [ ] MODEL-04 实现位置索引与最大长度检查，越界时明确报错；解释 token embedding 与 position embedding 各自的作用。
-- [ ] MODEL-05 实现两次 Pre-LayerNorm、两条残差、GELU 前馈网络和最终归一化；将结构、维度与配置对应起来。
-- [ ] MODEL-06 实现输出权重共享，检查两处引用确实为同一个参数，优化器不会重复登记该参数。
-- [ ] MODEL-07 输入原始 logits 计算交叉熵，先不做 softmax；flatten 时保持 logits 与 labels 对齐，`ignore_index=-100`。[交叉熵接口](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html)
-- [ ] MODEL-08 如果使用 SDPA 加速，检查布尔掩码语义：SDPA 的 `True` 表示允许关注。无 padding 时可用 `is_causal=True`；需要自定义掩码时，将 causal 与有效 key 位置合成 `attn_mask`，设置 `is_causal=False`，并避免真实 token 的注意力行被全部屏蔽。推理显式传 `dropout_p=0.0`。[SDPA 文档](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html)
-- [ ] MODEL-09 做少量关键机制检查：输出形状、因果性、padding 标签不计损失、手写小样例损失一致、保存加载后输出一致。
-- [ ] MODEL-10 在仅用于调试的 16～32 首训练诗上尝试过拟合，确认损失明显下降、可复现部分样本；该调试结果单独标注，不能作为泛化成绩。
-- [ ] MODEL-11 输出实际参数量、参数 dtype 和前向/反向峰值显存；先跑通 FP32 小批次，再启用混合精度。
+- [x] MODEL-01 使用 `nn.Module`、`nn.Embedding`、线性层、自动微分等 PyTorch 组件搭建模型，初始化时不加载现成大模型权重。固定初始化方案：嵌入/线性层权重可采用 `N(0, 0.02)`、bias 为 0、LayerNorm scale 为 1/shift 为 0；共享权重只初始化一次，额外的残差投影缩放如启用则记录。
+- [x] MODEL-02 验证多头拆分与合并维度，检查 `d_model % n_head == 0`，在报告解释 `QKᵀ / sqrt(head_dim)`、softmax 和 V 加权。
+- [x] MODEL-03 实现下三角因果注意力；给出“修改未来 token，不改变此前位置 logits”的自动检查，测试时关闭 dropout。
+- [x] MODEL-04 实现位置索引与最大长度检查，越界时明确报错；解释 token embedding 与 position embedding 各自的作用。
+- [x] MODEL-05 实现两次 Pre-LayerNorm、两条残差、GELU 前馈网络和最终归一化；将结构、维度与配置对应起来。
+- [x] MODEL-06 实现输出权重共享，检查两处引用确实为同一个参数，优化器不会重复登记该参数。
+- [x] MODEL-07 输入原始 logits 计算交叉熵，先不做 softmax；flatten 时保持 logits 与 labels 对齐，`ignore_index=-100`。[交叉熵接口](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html)
+- [x] MODEL-08 如果使用 SDPA 加速，检查布尔掩码语义：SDPA 的 `True` 表示允许关注。无 padding 时可用 `is_causal=True`；需要自定义掩码时，将 causal 与有效 key 位置合成 `attn_mask`，设置 `is_causal=False`，并避免真实 token 的注意力行被全部屏蔽。推理显式传 `dropout_p=0.0`。[SDPA 文档](https://docs.pytorch.org/docs/2.14/generated/torch.nn.functional.scaled_dot_product_attention.html)
+- [x] MODEL-09 做少量关键机制检查：输出形状、因果性、padding 标签不计损失、手写小样例损失一致、保存加载后输出一致。
+- [x] MODEL-10 在仅用于调试的 16～32 首训练诗上尝试过拟合，确认损失明显下降、可复现部分样本；该调试结果单独标注，不能作为泛化成绩。
+- [x] MODEL-11 输出实际参数量、参数 dtype 和前向/反向峰值显存；先跑通 FP32 小批次，再启用混合精度。
 
 **产物：**`model.py`、模型配置、参数量表、架构图和关键机制检查结果。**验收：**因果性与损失检查通过，调试小集合可学习，随机初始化来源可追溯。
 
@@ -253,16 +255,16 @@ token IDs
 
 以上数值是起点，不是效果保证。若达到完整 256 长度，预训练每优化步最多处理 `32 × 4 × 256 = 32768` 个目标 token；padding 等屏蔽位置需扣除。总步数根据实际训练 token、微批量和累积步数计算，学习率调度记录的单位为**优化步**。
 
-- [ ] TRAIN-01 实现 `zero_grad → forward → loss → backward → clip → optimizer.step → scheduler.step`，梯度累积窗口内只在正确时机清零与更新。
-- [ ] TRAIN-02 按有效目标 token 总数归一化损失；梯度累积时处理各微批有效长度差异和最后一个不足窗口，避免把所有批次平均值等权相加。
-- [ ] TRAIN-03 先检查 `torch.cuda.is_bf16_supported()`；使用 `torch.amp.autocast("cuda", dtype=torch.bfloat16)`，参数维持合适的主精度。若改 FP16，使用 GradScaler，裁剪前先 unscale。[AMP 文档](https://docs.pytorch.org/docs/2.14/amp.html)
-- [ ] TRAIN-04 支持 CPU FP32 调试；混合精度、SDPA 或 `torch.compile` 分别启用和验证，保存每项开关，避免同时改多项后无法定位差异。
-- [ ] TRAIN-05 固定 Python、NumPy、PyTorch 和数据加载的种子；记录确定性设置及精度设置，说明跨硬件或版本不保证逐位相同。[复现说明](https://docs.pytorch.org/docs/2.14/notes/randomness.html)
-- [ ] TRAIN-06 验证时 `model.eval()` 和无梯度推理；累计整套验证集的有效 token 损失，再恢复 `model.train()`。损失异常、NaN/Inf 或零有效标签时立即保存诊断并停止该次运行。
-- [ ] TRAIN-07 日志至少保存：epoch、优化步、有效 tokens seen、训练/验证 NLL、学习率、梯度 norm、tokens/s、显存峰值和耗时；区分有效 token 与填充位置。
-- [ ] TRAIN-08 检查点包括：模型、优化器、调度器、需要时的 scaler、epoch/step、随机数状态、数据顺序/位置、配置、词表哈希和数据清单哈希。`best`、`last` 分开保存；将 NumPy 等随机数状态转换为可兼容保存/加载的 tensor 或基础类型，并验证当前版本 `torch.load` 的加载选项与保存格式匹配。[检查点教程](https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html)
-- [ ] TRAIN-09 做一次短程中断与恢复检查：优化步、学习率、数据位置和日志连续；固定条件下与未中断运行比较，记录数值容差。仅加载权重属于重新开始训练，不能冒称完整续训。
-- [ ] TRAIN-10 用 50 步预热和约 200 步计时估算速度，GPU 计时前后同步；据此计算完整运行时间与磁盘需求，再决定正式训练预算。
+- [x] TRAIN-01 实现 `zero_grad → forward → loss → backward → clip → optimizer.step → scheduler.step`，梯度累积窗口内只在正确时机清零与更新。
+- [x] TRAIN-02 按有效目标 token 总数归一化损失；梯度累积时处理各微批有效长度差异和最后一个不足窗口，避免把所有批次平均值等权相加。
+- [x] TRAIN-03 先检查 `torch.cuda.is_bf16_supported()`；使用 `torch.amp.autocast("cuda", dtype=torch.bfloat16)`，参数维持合适的主精度。若改 FP16，使用 GradScaler，裁剪前先 unscale。[AMP 文档](https://docs.pytorch.org/docs/2.14/amp.html)
+- [x] TRAIN-04 支持 CPU FP32 调试；混合精度、SDPA 或 `torch.compile` 分别启用和验证，保存每项开关，避免同时改多项后无法定位差异。
+- [x] TRAIN-05 固定 Python、NumPy、PyTorch 和数据加载的种子；记录确定性设置及精度设置，说明跨硬件或版本不保证逐位相同。[复现说明](https://docs.pytorch.org/docs/2.14/notes/randomness.html)
+- [x] TRAIN-06 验证时 `model.eval()` 和无梯度推理；累计整套验证集的有效 token 损失，再恢复 `model.train()`。损失异常、NaN/Inf 或零有效标签时立即保存诊断并停止该次运行。
+- [x] TRAIN-07 日志至少保存：epoch、优化步、有效 tokens seen、训练/验证 NLL、学习率、梯度 norm、tokens/s、显存峰值和耗时；区分有效 token 与填充位置。
+- [x] TRAIN-08 检查点包括：模型、优化器、调度器、需要时的 scaler、epoch/step、随机数状态、数据顺序/位置、配置、词表哈希和数据清单哈希。`best`、`last` 分开保存；将 NumPy 等随机数状态转换为可兼容保存/加载的 tensor 或基础类型，并验证当前版本 `torch.load` 的加载选项与保存格式匹配。[检查点教程](https://docs.pytorch.org/tutorials/beginner/saving_loading_models.html)
+- [x] TRAIN-09 做一次短程中断与恢复检查：优化步、学习率、数据位置和日志连续；固定条件下与未中断运行比较，记录数值容差。仅加载权重属于重新开始训练，不能冒称完整续训。
+- [x] TRAIN-10 用 50 步预热和约 200 步计时估算速度，GPU 计时前后同步；据此计算完整运行时间与磁盘需求，再决定正式训练预算。
 
 **产物：**可配置训练循环、日志、检查点、续训检查记录。**验收：**短程训练稳定、验证口径正确、中断后可恢复，不依赖手工改代码继续训练。
 
@@ -448,7 +450,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/best.pt --keywords 春 �
 
 ### 14.2 结束前逐项确认
 
-- [ ] FINAL-01 自建 GPT 的结构、配置和实际参数量明确，核心机制能解释并有检查证据。
+- [x] FINAL-01 自建 GPT 的结构、配置和实际参数量明确，核心机制能解释并有检查证据。
 - [ ] FINAL-02 预训练确实从随机初始化开始，有真实训练日志和本项目检查点。
 - [ ] FINAL-03 微调确实加载本项目预训练权重，监督数据、prompt 掩码和有效标签已核对。
 - [ ] FINAL-04 全局测试诗作未进入任何训练阶段，tokenizer 未使用验证/测试内容学习字表。

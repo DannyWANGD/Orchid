@@ -3,6 +3,5 @@
     "terminal.integrated.env.linux": {
         "PYTHONPATH": null
     },
-    "python.analysis.extraPaths": [],
-    "ROS2.distro": "humble"
+    "python.analysis.extraPaths": []
 }
