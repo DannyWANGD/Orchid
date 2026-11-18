@@ -49,12 +49,13 @@
       "平孤舟楫處",
       "秋色霜天威"
     ],
-    "load_seconds": 1.0164135398808867,
+    "load_seconds": 1.0121764990035444,
     "model_hash": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30",
     "parsed": true,
-    "seconds": 0.19386425707489252,
+    "seconds": 0.19698293809778988,
     "stop": "eos"
   },
+  "frozen_reviewer_packets_rebuilt_and_verified": true,
   "model": {
     "files": {
       "config.json": "e29689712c9625aec080e1c7412bcbcaf2d7d8c43f658829b503effa622ed104",
@@ -114,14 +115,14 @@
       "魚躍石間鳴",
       "人行天外直"
     ],
-    "load_seconds": 0.7603521170094609,
+    "load_seconds": 0.7599794091656804,
     "model_hash": "6f57c091fd694880cbc8ce018a87aa47cc7959764a26da557cadb10dbf67ac30",
     "parsed": true,
-    "seconds": 0.569366083946079,
+    "seconds": 0.572358202887699,
     "stop": "eos"
   },
-  "report_pdf_sha256": "d775506307151df3625217c1dc1919bf60ac2502ec7d0eef2d3ff4673b622f13",
+  "report_pdf_sha256": "e07950962dc2db5e265e13685583ee466313c8af393caaf316a3685a62d49053",
   "test": "Fresh ZIP extraction with independently installed requirements, no training data present",
-  "tests_passed": 13,
-  "zip_sha256": "65e139b6f26dffcba83a901639b8fa54a0706ed0e079fcf45a47abcee2eeb706"
+  "tests_passed": 14,
+  "zip_sha256": "e81081a34bc2f3ef2e9dd4fff7589accadf713fb0525d4f2fa2d0e768fbbee96"
 }
