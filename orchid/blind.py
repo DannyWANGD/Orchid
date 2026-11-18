@@ -255,6 +255,36 @@ def rating_summary(reviewed, pairs, models, grouped, *, rubric_version="v1"):
     return {"means_and_distributions": scores, "differences": differences}
 
 
+def pair_index(key):
+    grouped = {(entry["pair_id"], entry["model"]): i for i, entry in key.items()}
+    return sorted({pair for pair, _ in grouped}), grouped
+
+
+def summarize_review(generations, protocol, key_path, templates, file, output, *, reviewer, kind):
+    """Validate one returned form and save aggregates without item IDs or comments."""
+    if reviewer not in (1, 2) or kind not in ("human", "ai"):
+        raise ValueError("Declare template 1 or 2 and a human or AI reviewer")
+    data, checked = verified_templates(generations, protocol, key_path, templates)
+    key, models = data["items"], data["models"]
+    version = data.get("rubric_version", "v1")
+    review = parse_reviews(file, key, reviewer, checked[reviewer - 1], rubric_version=version)
+    pairs, grouped = pair_index(key)
+    result = rating_summary([review], pairs, models, grouped, rubric_version=version)
+    for comparison in result["differences"].values():
+        del comparison["by_pair"]
+    value = {
+        "provenance": {
+            "rubric_version": version, "rubric_sha256": data.get("rubric_sha256"),
+            "generation_sha256": data["generation_sha256"], "prompt_sha256": data["prompt_sha256"],
+            "form_sha256": sha256_file(file), "template_sha256": sha256_file(templates[reviewer - 1]),
+        },
+        "reviewer": reviewer, "reviewer_kind": kind, "pairs": len(pairs), "outputs": len(review),
+        "models": models, "dimensions": list(DIMENSIONS), **result,
+    }
+    write_json(output, value)
+    return value
+
+
 def score_reviews(generations, protocol, key_path, templates, files, output,
                   *, reviewer_kinds=("human", "human")):
     if len(files) != 2 or len({sha256_file(f) for f in files}) != 2:
@@ -266,8 +296,7 @@ def score_reviews(generations, protocol, key_path, templates, files, output,
     version = data.get("rubric_version", "v1")
     reviewed = [parse_reviews(path, key, n, template, rubric_version=version)
                 for n, (path, template) in enumerate(zip(files, checked), 1)]
-    pairs = sorted({r["pair_id"] for r in key.values()})
-    grouped = {(r["pair_id"], r["model"]): i for i, r in key.items()}
+    pairs, grouped = pair_index(key)
     large = []
     both_rated = dict.fromkeys(DIMENSIONS, 0)
     for i in key:

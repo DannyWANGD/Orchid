@@ -29,6 +29,6 @@
   "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
   "rubric_sha256": "6e7513ab41cc124ef53acd15b76d76c8736d6af076701eecbf072625b1637023",
   "rubric_version": "v2",
-  "scope": "Format applicability only on the same frozen 14M blind pairs; no v2 ratings were collected",
+  "scope": "Format applicability on the frozen 14M blind pairs, without using review scores",
   "v1_receipts_revalidated": true
 }

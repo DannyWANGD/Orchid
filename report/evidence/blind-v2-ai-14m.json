@@ -1,0 +1,132 @@
+{
+  "differences": {
+    "coherence": {
+      "mean": -2,
+      "paired": 1,
+      "total_pairs": 30
+    },
+    "fluency": {
+      "mean": -0.16666666666666666,
+      "paired": 30,
+      "total_pairs": 30
+    },
+    "imagery": {
+      "mean": null,
+      "paired": 0,
+      "total_pairs": 30
+    },
+    "relevance": {
+      "mean": 0.7666666666666667,
+      "paired": 30,
+      "total_pairs": 30
+    }
+  },
+  "dimensions": [
+    "relevance",
+    "fluency",
+    "coherence",
+    "imagery"
+  ],
+  "means_and_distributions": {
+    "R1": {
+      "coherence": {
+        "distribution": {
+          "4": 1
+        },
+        "mean": 4,
+        "rated": 1,
+        "total": 30
+      },
+      "fluency": {
+        "distribution": {
+          "2": 10,
+          "3": 8,
+          "4": 10,
+          "5": 2
+        },
+        "mean": 3.1333333333333333,
+        "rated": 30,
+        "total": 30
+      },
+      "imagery": {
+        "distribution": {
+          "4": 1
+        },
+        "mean": 4,
+        "rated": 1,
+        "total": 30
+      },
+      "relevance": {
+        "distribution": {
+          "1": 18,
+          "2": 8,
+          "3": 4
+        },
+        "mean": 1.5333333333333334,
+        "rated": 30,
+        "total": 30
+      }
+    },
+    "R2-2027": {
+      "coherence": {
+        "distribution": {
+          "2": 8,
+          "3": 13,
+          "4": 8,
+          "5": 1
+        },
+        "mean": 3.066666666666667,
+        "rated": 30,
+        "total": 30
+      },
+      "fluency": {
+        "distribution": {
+          "2": 5,
+          "3": 21,
+          "4": 4
+        },
+        "mean": 2.966666666666667,
+        "rated": 30,
+        "total": 30
+      },
+      "imagery": {
+        "distribution": {
+          "2": 1,
+          "3": 12,
+          "4": 7
+        },
+        "mean": 3.3,
+        "rated": 20,
+        "total": 30
+      },
+      "relevance": {
+        "distribution": {
+          "1": 5,
+          "2": 15,
+          "3": 7,
+          "4": 2,
+          "5": 1
+        },
+        "mean": 2.3,
+        "rated": 30,
+        "total": 30
+      }
+    }
+  },
+  "models": [
+    "R1",
+    "R2-2027"
+  ],
+  "outputs": 60,
+  "pairs": 30,
+  "provenance": {
+    "form_sha256": "a583186af7d5042f4862a4046a465978d184e5e2c6208f030a33e287bc8d7108",
+    "generation_sha256": "52b35164724be11642d08e94d44675eb0eb9f711f45ce6e2c01cdef243667b61",
+    "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+    "rubric_sha256": "6e7513ab41cc124ef53acd15b76d76c8736d6af076701eecbf072625b1637023",
+    "rubric_version": "v2",
+    "template_sha256": "49206feea5c3484291c756376ff256034388714294d73faae6f4773c8d045bbf"
+  },
+  "reviewer": 1,
+  "reviewer_kind": "ai"
+}

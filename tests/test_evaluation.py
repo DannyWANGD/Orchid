@@ -2,7 +2,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from orchid.blind import DIMENSIONS, make_packets, read_form, score_reviews, write_csv
+from orchid.blind import DIMENSIONS, make_packets, read_form, score_reviews, summarize_review, write_csv
 from orchid.evaluation import sample_mean_delta
 from orchid.io import write_json, write_jsonl
 from orchid.metrics import TrainMatches, judge_format_keywords, rhyme_status
@@ -153,6 +153,13 @@ class EvalTests(unittest.TestCase):
             self.assertEqual(result["differences"]["imagery"],
                              {"mean": None, "by_pair": {}, "paired": 0, "total_pairs": 2})
             self.assertEqual(result["both_reviewers_rated"]["imagery"], 1)
+
+            single = summarize_review(generations, protocol, folder / "private_key.json", templates,
+                                      returns[0], p / "single.json", reviewer=1, kind="ai")
+            self.assertEqual((single["reviewer_kind"], single["outputs"]), ("ai", 4))
+            self.assertEqual(single["differences"]["imagery"],
+                             {"mean": None, "paired": 0, "total_pairs": 2})
+            self.assertNotIn("individual_scores", single)
 
             rows = read_form(returns[0])
             too_short = next(row for row in rows if row["coherence"] == "NA")

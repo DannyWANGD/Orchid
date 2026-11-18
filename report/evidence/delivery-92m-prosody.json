@@ -1,4 +1,5 @@
 {
+  "ai_v2_summary_sha256": "b96478de422470dc937c1b911f46a4c74a3cee305e6bfa6919f6b18ce2941d4b",
   "constrained_samples": {
     "cpu": {
       "command": [
@@ -66,7 +67,7 @@
           "愁心對明月",
           "不見鷓鴣飛"
         ],
-        "load_seconds": 0.7466790920589119,
+        "load_seconds": 0.7502728498075157,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -80,7 +81,7 @@
           "微",
           "飛"
         ],
-        "seconds": 2.39015779690817,
+        "seconds": 2.397271740017459,
         "stop": "eos"
       }
     },
@@ -150,7 +151,7 @@
           "一宿秋風前",
           "蕭蕭征馬鞍"
         ],
-        "load_seconds": 0.991529081016779,
+        "load_seconds": 1.0015398389659822,
         "mode": "rhymed",
         "model_hash": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
         "parsed": true,
@@ -164,7 +165,7 @@
           "寒",
           "鞍"
         ],
-        "seconds": 0.35583291994407773,
+        "seconds": 0.34531842707656324,
         "stop": "eos"
       }
     }
@@ -184,10 +185,10 @@
       "source_step": 384,
       "version": 1
     },
-    "bytes": 351632110,
-    "file_count": 298,
+    "bytes": 351633624,
+    "file_count": 299,
     "zip": "dist/Orchid-course-prosody.zip",
-    "zip_sha256": "20d576a42affe4c5ba8b73f948e1dd7259bb4bd05e8dec54cce356b87dc0c3ac"
+    "zip_sha256": "c257bd8115da318aaab0d32b702d7030fe5c49aebc107fd8b4dc529d04939187"
   },
   "raw_parity": {
     "identical": true,
@@ -198,7 +199,7 @@
   "rhyme_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
   "scope": "Fresh extraction with local installed dependencies",
   "tone_diagnostics_replay": true,
-  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.805s\n\nOK",
+  "unittest_summary": "----------------------------------------------------------------------\nRan 18 tests in 0.814s\n\nOK",
   "v2_review_packets_replayed": true,
   "without_training_data": true
 }
