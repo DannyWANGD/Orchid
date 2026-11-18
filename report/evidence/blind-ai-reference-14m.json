@@ -1,0 +1,199 @@
+{
+  "ai_reviewers": 1,
+  "empty_items": 0,
+  "generation_sha256": "52b35164724be11642d08e94d44675eb0eb9f711f45ce6e2c01cdef243667b61",
+  "human_reviewers": 1,
+  "outputs_per_reviewer": 60,
+  "pairs_per_reviewer": 30,
+  "protocol_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+  "ratings_by_reviewer": [
+    {
+      "kind": "ai",
+      "means_and_distributions": {
+        "R1": {
+          "coherence": {
+            "distribution": {
+              "1": 1,
+              "2": 9,
+              "3": 17,
+              "4": 3
+            },
+            "mean": 2.7333333333333334
+          },
+          "fluency": {
+            "distribution": {
+              "1": 1,
+              "2": 14,
+              "3": 13,
+              "4": 2
+            },
+            "mean": 2.533333333333333
+          },
+          "imagery": {
+            "distribution": {
+              "2": 13,
+              "3": 14,
+              "4": 3
+            },
+            "mean": 2.6666666666666665
+          },
+          "relevance": {
+            "distribution": {
+              "1": 21,
+              "2": 7,
+              "3": 2
+            },
+            "mean": 1.3666666666666667
+          }
+        },
+        "R2-2027": {
+          "coherence": {
+            "distribution": {
+              "2": 12,
+              "3": 14,
+              "4": 4
+            },
+            "mean": 2.7333333333333334
+          },
+          "fluency": {
+            "distribution": {
+              "2": 16,
+              "3": 14
+            },
+            "mean": 2.466666666666667
+          },
+          "imagery": {
+            "distribution": {
+              "2": 9,
+              "3": 18,
+              "4": 3
+            },
+            "mean": 2.8
+          },
+          "relevance": {
+            "distribution": {
+              "1": 10,
+              "2": 11,
+              "3": 6,
+              "4": 3
+            },
+            "mean": 2.066666666666667
+          }
+        }
+      },
+      "paired_mean_differences": {
+        "coherence": 0,
+        "fluency": -0.06666666666666667,
+        "imagery": 0.13333333333333333,
+        "relevance": 0.7
+      }
+    },
+    {
+      "kind": "human",
+      "means_and_distributions": {
+        "R1": {
+          "coherence": {
+            "distribution": {
+              "1": 28,
+              "2": 2
+            },
+            "mean": 1.0666666666666667
+          },
+          "fluency": {
+            "distribution": {
+              "1": 22,
+              "3": 3,
+              "4": 4,
+              "5": 1
+            },
+            "mean": 1.7333333333333334
+          },
+          "imagery": {
+            "distribution": {
+              "1": 11,
+              "2": 2,
+              "3": 7,
+              "4": 6,
+              "5": 4
+            },
+            "mean": 2.6666666666666665
+          },
+          "relevance": {
+            "distribution": {
+              "1": 17,
+              "2": 2,
+              "3": 4,
+              "4": 3,
+              "5": 4
+            },
+            "mean": 2.1666666666666665
+          }
+        },
+        "R2-2027": {
+          "coherence": {
+            "distribution": {
+              "2": 6,
+              "3": 3,
+              "4": 14,
+              "5": 7
+            },
+            "mean": 3.7333333333333334
+          },
+          "fluency": {
+            "distribution": {
+              "1": 1,
+              "2": 8,
+              "3": 11,
+              "4": 6,
+              "5": 4
+            },
+            "mean": 3.1333333333333333
+          },
+          "imagery": {
+            "distribution": {
+              "3": 7,
+              "4": 9,
+              "5": 14
+            },
+            "mean": 4.233333333333333
+          },
+          "relevance": {
+            "distribution": {
+              "3": 3,
+              "4": 6,
+              "5": 21
+            },
+            "mean": 4.6
+          }
+        }
+      },
+      "paired_mean_differences": {
+        "coherence": 2.6666666666666665,
+        "fluency": 1.4,
+        "imagery": 1.5666666666666667,
+        "relevance": 2.433333333333333
+      }
+    }
+  ],
+  "review_sources": [
+    {
+      "context": "fresh Codex subagent context, blank anonymized form and rubric",
+      "form_sha256": "9e2f9ab52c1d814182db806d036971436b28e2ae2c6c3bb0bb0e25b723f3fc46",
+      "kind": "ai",
+      "reviewer": 1
+    },
+    {
+      "context": "received and matched the frozen anonymized form",
+      "kind": "human",
+      "reviewer": 2
+    }
+  ],
+  "rubric_sha256": "594e6f9c57a40293ac3578447c410f2e7c0e49d8235ed5fddc1810b6c13ede9c",
+  "study": "14M frozen poetry review, one returned human form and one blinded AI form",
+  "two_or_more_point_gaps": {
+    "coherence": 36,
+    "fluency": 19,
+    "imagery": 22,
+    "relevance": 34
+  }
+}

@@ -190,35 +190,60 @@ def parse_reviews(path, key, reviewer_id, template):
     return rows
 
 
-def score_reviews(generations, protocol, key_path, templates, files, output):
-    if len(files)!=2 or len({sha256_file(f) for f in files})!=2:
+def rating_summary(reviewed, pairs, models, grouped):
+    scores = {}
+    for model in models:
+        ids = [grouped[pair, model] for pair in pairs]
+        scores[model] = {}
+        for dim in DIMENSIONS:
+            values = [review[anonymous][dim] for review in reviewed for anonymous in ids]
+            scores[model][dim] = {"mean": mean(values), "distribution": dict(Counter(values))}
+
+    differences = {}
+    for dim in DIMENSIONS:
+        by_pair = {
+            pair: mean(review[grouped[pair, models[1]]][dim] - review[grouped[pair, models[0]]][dim]
+                       for review in reviewed)
+            for pair in pairs
+        }
+        differences[dim] = {"mean": mean(by_pair.values()), "by_pair": by_pair}
+    return {"means_and_distributions": scores, "differences": differences}
+
+
+def score_reviews(generations, protocol, key_path, templates, files, output,
+                  *, reviewer_kinds=("human", "human")):
+    if len(files) != 2 or len({sha256_file(f) for f in files}) != 2:
         raise ValueError("Provide two distinct, independently completed review files")
+    if len(reviewer_kinds) != 2 or any(k not in ("human", "ai") for k in reviewer_kinds):
+        raise ValueError("Declare each reviewer as human or ai in template order")
     data, checked = verified_templates(generations, protocol, key_path, templates)
-    key, models=data["items"],data["models"]
-    reviewed=[parse_reviews(path,key,n,template) for n,(path,template) in enumerate(zip(files, checked),1)]
-    result={}
-    for m in models:
-        ids=[i for i,r in key.items() if r["model"]==m]
-        result[m]={d:{"mean":mean(rs), "distribution":dict(Counter(rs))}
-                   for d in DIMENSIONS
-                   for rs in [[rev[i][d] for rev in reviewed for i in ids]]}
-    pairs=sorted({r["pair_id"] for r in key.values()})
-    grouped={ (r["pair_id"],r["model"]):i for i,r in key.items() }
-    delta={d:[mean(rev[grouped[p,models[1]]][d]-rev[grouped[p,models[0]]][d] for rev in reviewed)
-                for p in pairs] for d in DIMENSIONS}
-    large=[{"anonymous_id":i,"dimension":d,"ratings":[rev[i][d] for rev in reviewed]}
-           for i in key for d in DIMENSIONS if abs(reviewed[0][i][d]-reviewed[1][i][d]) >= 2]
-    value={
-        "provenance":{"mode":"independent human ratings supplied by reviewer",
-                      "inputs":{str(f):sha256_file(f) for f in files}, "key_sha256":sha256_file(key_path),
-                      "template_sha256":[sha256_file(f) for f in templates],
-                      "prompt_sha256":data["prompt_sha256"], "generation_sha256":data["generation_sha256"],
-                      "independence":"Organizer assigns each form to a different reviewer; not inferred from CSVs"},
-        "reviewers":2,"pairs":len(pairs),"dimensions":list(DIMENSIONS),"models":models,
-        "means_and_distributions":result,"differences":{d:{"mean":mean(v),"by_pair":dict(zip(pairs,v))}
-                                                        for d,v in delta.items()},
-        "disagreements_two_or_more":large,"empty_items":sum(r["empty"] for r in key.values()),
-        "individual_scores":[v for reviewer in reviewed for v in reviewer.values()],
+    key, models = data["items"], data["models"]
+    reviewed = [parse_reviews(path, key, n, template)
+                for n, (path, template) in enumerate(zip(files, checked), 1)]
+    pairs = sorted({r["pair_id"] for r in key.values()})
+    grouped = {(r["pair_id"], r["model"]): i for i, r in key.items()}
+    large = [{"anonymous_id": i, "dimension": d, "ratings": [rev[i][d] for rev in reviewed]}
+             for i in key for d in DIMENSIONS if abs(reviewed[0][i][d] - reviewed[1][i][d]) >= 2]
+    human_count = reviewer_kinds.count("human")
+    value = {
+        "provenance": {
+            "mode": "two human ratings" if human_count == 2 else "AI-assisted supplementary ratings",
+            "inputs": {str(f): sha256_file(f) for f in files},
+            "key_sha256": sha256_file(key_path),
+            "template_sha256": [sha256_file(f) for f in templates],
+            "prompt_sha256": data["prompt_sha256"], "generation_sha256": data["generation_sha256"],
+            "independence": "Reviewer types and independence are declared by the organizer",
+        },
+        "reviewers": 2, "human_reviewers": human_count, "ai_reviewers": 2 - human_count,
+        "pairs": len(pairs), "dimensions": list(DIMENSIONS), "models": models,
+        "ratings_by_reviewer": [
+            {"reviewer": n, "kind": kind, **rating_summary([review], pairs, models, grouped)}
+            for n, (kind, review) in enumerate(zip(reviewer_kinds, reviewed), 1)
+        ],
+        "disagreements_two_or_more": large, "empty_items": sum(r["empty"] for r in key.values()),
+        "individual_scores": [v for reviewer in reviewed for v in reviewer.values()],
     }
-    write_json(output,value)
+    if human_count == 2:
+        value.update(rating_summary(reviewed, pairs, models, grouped))
+    write_json(output, value)
     return value

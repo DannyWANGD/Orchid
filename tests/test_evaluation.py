@@ -87,6 +87,15 @@ class EvalTests(unittest.TestCase):
             self.assertEqual(result["empty_items"], 2)
             self.assertEqual(result["pairs"], 2)
 
+            mixed = score_reviews(generations, protocol, folder/"private_key.json", blank, returned, output,
+                                  reviewer_kinds=("human", "ai"))
+            self.assertEqual(mixed["human_reviewers"], 1)
+            self.assertEqual(mixed["ai_reviewers"], 1)
+            self.assertNotIn("means_and_distributions", mixed)
+            self.assertNotIn("differences", mixed)
+            self.assertEqual([(r["kind"], r["differences"]["fluency"]["mean"])
+                              for r in mixed["ratings_by_reviewer"]], [("human", 2), ("ai", 3)])
+
             altered = read_form(returned[0])
             altered[0]["output"] += "改"
             write_csv(returned[0], altered)

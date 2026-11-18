@@ -22,6 +22,8 @@ def main():
     distribute.add_argument("--rubric",type=Path,default=Path("report/blind_review/reviewer_guide.md"))
     aggregate=cmd.add_parser("aggregate")
     aggregate.add_argument("--ratings",type=Path,nargs=2,required=True)
+    aggregate.add_argument("--reviewer-kinds", nargs=2, choices=("human", "ai"), default=("human", "human"),
+                           help="Reviewer types in the same order as --templates and --ratings")
     for action in (distribute, aggregate):
         action.add_argument("--generations",type=Path,required=True)
         action.add_argument("--protocol",type=Path,default=Path("artifacts/eval_prompts.json"))
@@ -35,8 +37,13 @@ def main():
         elif a.action=="distribute":
             print(export_reviewer_zips(a.generations,a.protocol,a.key,a.templates,a.rubric,a.output))
         else:
-            print(score_reviews(a.generations,a.protocol,a.key,a.templates,a.ratings,a.output)
-                  ["means_and_distributions"])
+            results = score_reviews(a.generations, a.protocol, a.key, a.templates, a.ratings, a.output,
+                                    reviewer_kinds=a.reviewer_kinds)
+            if "means_and_distributions" in results:
+                print(results["means_and_distributions"])
+            else:
+                for item in results["ratings_by_reviewer"]:
+                    print(f"Reviewer {item['reviewer']} ({item['kind']}): {item['means_and_distributions']}")
     except (ValueError, OSError) as exc:
         p.error(str(exc))
 
