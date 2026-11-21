@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="用 1 至 3 个关键词，比较 Orchid 的自由生成和偶句押韵生成。">
+  <title>Orchid · 五言诗生成</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="examples.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="masthead">
+      <div>
+        <h1>Orchid</h1>
+        <p>以词成诗</p>
+      </div>
+      <p class="subtitle">从零训练的五言诗<br>给定一至三个词，比较两种写法。</p>
+    </header>
+    <section class="input-panel" aria-label="生成诗作">
+      <form id="poem-form">
+        <div class="field keywords">
+          <label for="keywords">关键词</label>
+          <input id="keywords" value="霜 孤舟" maxlength="24" required autocomplete="off">
+        </div>
+        <div class="field seed">
+          <label for="seed">种子</label>
+          <input id="seed" type="number" value="11" min="0" max="4294967295" step="1" required>
+        </div>
+        <div class="field rank">
+          <label for="ranking">押韵候选排序</label>
+          <select id="ranking" disabled>
+            <option value="original">原排序</option>
+            <option value="repeat-aware">减少隔位重字</option>
+          </select>
+        </div>
+        <button type="submit" id="produce">查看诗作</button>
+      </form>
+      <div class="under-form">
+        <div id="examples" class="examples" aria-label="封存诗题"></div>
+        <p id="status" role="status" aria-live="polite">每词一至二字，用空格或顿号分开。</p>
+      </div>
+    </section>
+    <div id="poems" class="poems" aria-busy="false">
+      <section class="poem-card free" aria-labelledby="free-heading">
+        <h2 id="free-heading">自由生成</h2>
+        <p id="raw-poem" class="poem" lang="zh-Hant"></p>
+        <dl id="raw-details" class="details"></dl>
+      </section>
+      <section class="poem-card constrained" aria-labelledby="rhymed-heading">
+        <h2 id="rhymed-heading">五言四句 · 偶句押韵</h2>
+        <p id="rhymed-poem" class="poem" lang="zh-Hant"></p>
+        <dl id="rhymed-details" class="details"></dl>
+      </section>
+    </div>
+    <footer>
+      <p id="source"></p>
+      <p>原词覆盖按字面统计。语义切题、可读性、连贯性与意境另行评阅。</p>
+    </footer>
+    <noscript>请启用 JavaScript 查看诗作。</noscript>
+  </main>
+</body>
+</html>

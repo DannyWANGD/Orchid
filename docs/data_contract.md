@@ -6,7 +6,7 @@
 |---|---|---|
 | 唐诗 JSON | 公开复用：[chinese-poetry 固定提交](https://github.com/chinese-poetry/chinese-poetry/tree/b8594f81a89752241442f2ce267d6f66f96704ee/%E5%85%A8%E5%94%90%E8%AF%97)，按提交 URL 读取 `poet.tang.0.json` 至 `poet.tang.57000.json`；2026-11-18 已只读复核 | 以整首诗为单位划分预训练与 SFT 的共同 train/validation/test，标签由冻结规则派生 |
 | 独立诗题 | Codex 编写 50 道不带参考诗的 1～3 词组合，遇到训练中的组合和未登录字按冻结规则登记，全表在任何测试生成前提交 | 主测试；绝不进入训练或超参数选择 |
-| 平水韵表 | [固定版本繁体 JSON](https://github.com/rbnyng/pingshui_rhyme/blob/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json)，SHA-256 见清单 §10.3 | 仅做偶句同平声韵的评价，不输入训练程序 |
+| 平水韵表 | [固定版本繁体 JSON](https://github.com/rbnyng/pingshui_rhyme/blob/0d6b05a932ff1828d8403e7a0de67dd1f6bd81d0/pingshui_rhyme/data/organized_ping_ze_rhyme_dict.json)，SHA-256 见清单 §10.3 | 早期用于偶句评价。后续用于韵律续训的训练集抽样和推理解码 |
 
 训练数据保留源字形和来源索引。正文按 Unicode NFC 和 §4.2 的句读规则初筛，将保留句子的标点统一为逗号、句号交替（末句一律句号），保留原始标点以便查对。不从长诗截出四句充作监督答案；来源缺字和夹注另存复核。不另引入宋诗、宋词、元曲和《唐诗三百首》选本；标题与作者只用于回查。许可与来源见 [第三方登记](../THIRD_PARTY_NOTICES.md)。
 
@@ -23,3 +23,7 @@
 过滤全部 254 条与唐诗完全相同的宋诗记录、16 条与保留诗两编辑以内的同长度正文、68 条与留出诗共享三个连续诗句的记录；代码也检查双向嵌入（见 [扩容统计](../artifacts/tang-song/expansion_stats.json)）。无法排除规则之外的异文。唐诗两套留出正文、token 流和监督配对全部通过逐字节 SHA-256 对照。微调训练集扩大至 12,394 对；剔除 776 条带未登录正文字符的匹配诗，不把未知字当作写作目标。
 
 复现与来源：[扩容配置](../configs/data-tang-song.yaml)、[宋诗文件清单](../artifacts/tang-song/song_source.json)、[划分清单](../artifacts/tang-song/split_manifest.json)、[训练 token 统计](../artifacts/tang-song/token_stats.json)、[监督统计](../artifacts/tang-song/sft_stats.json)。宋词、元曲和现代评论仍不引入。人工题的模型特定标签覆盖率分别按唐诗、唐宋训练样本统计。
+
+## 排序补测
+
+[补充题](../data/prompts/ranking_challenge.json)为实跑前编排的 36 道无参考诗题。一、二、三词各 12 道，词集合与主测试题互异，全部通过训练字表检查。它们只用于对比同一权重的候选排序与候选数。两种四候选排序使用相同输入、候选布局与种子，新增的隔位重字惩罚权重预先设定。逐条输出、输入指纹、数值及按题配对统计见[排序证据](../report/evidence/ranking-ablation-20261121/)。

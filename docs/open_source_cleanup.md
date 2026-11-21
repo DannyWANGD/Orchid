@@ -45,3 +45,7 @@ python -E scripts/create_delivery.py \
 ```
 
 按[快速开始](../README.md#试用-92m-生成模型)安装并验证 CPU 或 CUDA 推理。无需启动训练即可复测生成速度。完整规则复测先按 README 的唐诗预处理、字表、唐诗监督集、宋诗快照、唐宋处理与监督集步骤准备数据，然后用[评估命令](../report/release_evaluation.md#复跑命令)重放封存测试。新训权重按[训练与选模](../report/prosody_optimization.md#本地复现)生成自己的验证和测试证据。
+
+## 展示与报告更新
+
+新版源码加入 `demo/`、回环服务、隔位重字排序、36 道补测题、92M AI 盲评汇总和 LaTeX 工程。离线网页使用冻结样例，实时页与命令行共用原推理代码。新版导出为 `Orchid-source-demo.zip` 和 `Orchid-model-kit-demo.zip`，模型包同时附带演示与报告源码。署名封面使用独立的 `cover.local.tex`，已由 Git 和模型包的文件筛选规则排除。编译、补测和图表记录见[报告构建说明](../report/latex/README.md)。

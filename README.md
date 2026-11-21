@@ -4,9 +4,19 @@ Orchid 是一个从随机初始化训练的字符级 GPT。课程任务是给定
 
 课程要求见 [Problem.md](Problem.md)，进度和验收标准见 [GPT_BUILD_CHECKLIST.md](GPT_BUILD_CHECKLIST.md)。[数据约定](docs/data_contract.md)说明语料和测试边界；具体参考及许可证见 [第三方登记](THIRD_PARTY_NOTICES.md)。
 
+## 展示与项目报告
+
+直接打开 [demo/index.html](demo/index.html) 可查看四组封存样例。运行以下命令后，在浏览器打开 `http://127.0.0.1:8765/` 即可输入自选关键词，对照自由与押韵生成。
+
+```bash
+python -E scripts/serve_demo.py --checkpoint dist/orchid-92m-prosody --device cpu
+```
+
+解压模型包后使用 `--checkpoint model`。CLI 和实时页面均提供隔位重字排序，CLI 加 `--ranking repeat-aware` 即可使用。实测与 LaTeX 构建见[项目报告说明](report/latex/README.md)。
+
 ## 试用 92M 生成模型
 
-获取 `Orchid-model-kit.zip`，解压后进入 `orchid-course/`。模型包自带 92M 推理权重和离线韵表，用 Python 3.11.16 在 Linux x86_64 上即可运行。
+获取 `Orchid-model-kit-demo.zip`，解压后进入 `orchid-course/`。模型包自带 92M 推理权重和离线韵表，用 Python 3.11.16 在 Linux x86_64 上即可运行。
 
 ```bash
 python3.11 -m venv .venv
@@ -87,7 +97,7 @@ python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --devi
 
 评阅者收到的是各自的匿名诗、题目及评分说明。14M 主对照采用提交者确认的 v1 真人回件与同版 AI 参照。v2 已核验一份 AI 回件以复核量表。汇总核对同版本表，并按维度保存评分分布及适用数。[盲评说明](report/blind_review/README.md)
 
-报告源文件 [Markdown](report/experiment_report.md)，可读版 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，从仓库根目录运行 `python -E scripts/build_report.py` 重建 PDF。
+原课程结项报告保存在 [Markdown](report/experiment_report.md) 和 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，可运行 `python -E scripts/build_report.py` 重建该留档版本。最新版使用前文链接的 LaTeX 工程。
 
 ### 单卡扩容：92M 唐宋版
 

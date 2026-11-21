@@ -16,3 +16,4 @@ __pycache__/
 /report/blind_review/**/*_completed.csv
 /report/blind_review/**/private_key.json
 /report/blind_review/meter_review_completed.md
+/report/latex/cover.local.tex

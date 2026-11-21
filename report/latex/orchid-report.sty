@@ -1,0 +1,81 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{orchid-report}
+\RequirePackage[a4paper,left=25mm,right=25mm,top=23mm,bottom=24mm,headheight=24pt,headsep=16pt]{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{amsmath,amssymb,mathtools}
+\RequirePackage{graphicx,booktabs,tabularx,array,multirow}
+\RequirePackage{caption,fancyhdr,enumitem}
+\RequirePackage{fvextra}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{xurl}
+\RequirePackage[hypertexnames=false]{hyperref}
+
+\setmainfont{Georgia}
+\setsansfont{Georgia}
+\setmonofont{Courier New}[Scale=MatchLowercase]
+\defaultCJKfontfeatures{}
+\setCJKmainfont[
+  BoldFont=FandolSong-Bold.otf,
+  ItalicFont=FandolKai-Regular.otf
+]{FandolSong-Regular.otf}
+\defaultCJKfontfeatures{Script=CJK}
+\setCJKsansfont[BoldFont=FandolHei-Bold.otf]{FandolHei-Regular.otf}
+\setCJKmonofont{Noto Sans Mono CJK SC}[Scale=.92]
+\xeCJKsetup{AutoFallBack=true}
+\setCJKfallbackfamilyfont{\CJKrmdefault}{Noto Serif CJK SC}
+\newCJKfontfamily\versefont{Noto Serif CJK TC}
+
+\definecolor{ink}{HTML}{273732}
+\definecolor{pine}{HTML}{265344}
+\definecolor{muted}{HTML}{566763}
+\definecolor{line}{HTML}{CBD9D1}
+\definecolor{wash}{HTML}{F1F6F2}
+\definecolor{warm}{HTML}{F8F2E7}
+\definecolor{clay}{HTML}{8A4829}
+\color{ink}
+\hypersetup{colorlinks,linkcolor=pine,citecolor=pine,urlcolor=pine,pdfborder={0 0 0}}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{.40em plus .10em minus .09em}
+\setlength{\emergencystretch}{2.0em}
+\linespread{1.23}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setlist{leftmargin=2em,itemsep=.22em,topsep=.24em,parsep=.15em}
+\renewcommand{\arraystretch}{1.22}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\ctexset{
+  section={format=\Large\bfseries\color{pine},aftername=\enspace,beforeskip=18pt plus 4pt,afterskip=8pt},
+  subsection={format=\large\bfseries\color{ink},beforeskip=13pt plus 2pt,afterskip=4pt},
+  contentsname={目录},figurename={图},tablename={表},bibname={参考资料}
+}
+\captionsetup{font=small,labelfont={bf,color=pine},justification=raggedright,singlelinecheck=false,skip=7pt}
+\graphicspath{{figures/}}
+\setlength{\textfloatsep}{14pt plus 3pt minus 3pt}
+\setlength{\intextsep}{11pt plus 3pt minus 3pt}
+\renewcommand{\topfraction}{.87}
+\renewcommand{\bottomfraction}{.75}
+\renewcommand{\textfraction}{.12}
+\renewcommand{\floatpagefraction}{.79}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{pine} Orchid}
+\fancyhead[R]{\small\color{muted} 五言诗生成与韵律控制}
+\fancyfoot[C]{\small\color{muted}\thepage}
+\renewcommand{\headrulewidth}{.35pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{line}\leaders\hrule height\headrulewidth\hfill}}
+
+\newtcbox{\codechip}{on line,arc=1.4mm,boxrule=0pt,boxsep=0pt,
+  left=2.1pt,right=2.1pt,top=1.25pt,bottom=1.15pt,
+  colback=wash,coltext=pine,fontupper=\small\ttfamily}
+\newcommand{\code}[1]{\codechip{\detokenize{#1}}}
+\tcbset{consolestyle/.style={enhanced,breakable,arc=2.5mm,colback=wash,colframe=line,
+  boxrule=.5pt,left=3mm,right=3mm,top=1.8mm,bottom=1.8mm,before skip=9pt,after skip=9pt}}
+\newtcolorbox{poembox}{enhanced,arc=2.7mm,boxrule=.5pt,colback=warm,colframe=line,
+  left=5mm,right=5mm,top=2.8mm,bottom=3.2mm}
+\newcommand{\reportfigure}[3]{%
+  \begin{figure}[!htbp]\centering
+  \includegraphics[width=\linewidth]{#1}
+  \caption{#2}\label{#3}
+  \end{figure}%
+}

@@ -1,0 +1,87 @@
+\documentclass[UTF8,a4paper,zihao=-4,fontset=none]{ctexart}
+\usepackage{orchid-report}
+
+\newcommand{\reportauthor}{}
+\newcommand{\reportid}{}
+\newcommand{\reportclass}{}
+\newcommand{\reportprogram}{}
+\newcommand{\reportdate}{2026 年 11 月 21 日}
+\InputIfFileExists{cover.local.tex}{}{}
+\hypersetup{pdftitle={Orchid 从零训练的五言诗生成与韵律控制},pdfauthor={\reportauthor}}
+
+\begin{document}
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\setlength{\parindent}{0pt}
+\vspace*{16mm}
+{\color{pine}\large 课程项目报告\par}
+\vspace{13mm}
+{\fontsize{67}{74}\selectfont\color{ink} Orchid\par}
+\vspace{4mm}
+{\fontsize{23}{32}\selectfont\bfseries\color{pine} 从零训练的五言诗生成与韵律控制\par}
+\vspace{6mm}
+{\color{line}\rule{.56\textwidth}{.7pt}\par}
+\vspace{10mm}
+\noindent\begin{minipage}{.59\textwidth}
+  \begin{poembox}
+    \centering
+    {\versefont\Large
+    霜葉滿空落，\\[2pt]
+    悲心無處{\color{clay}尋}。\\[2pt]
+    孤舟寒夜水，\\[2pt]
+    獨自照秋{\color{clay}林}。\par}
+    \vspace{2mm}
+    {\small\color{muted}「霜、孤舟」实测输出\par
+    平水韵下平声十二侵\par}
+  \end{poembox}
+\end{minipage}\par
+\vfill
+\ifdefempty{\reportauthor}{}{%
+  {\large\bfseries\reportauthor\enspace \reportid\par}
+  \vspace{1.6mm}
+  {\color{muted}\reportclass\par
+  \reportprogram\par}
+  \vspace{5mm}
+}
+{\color{pine}\reportdate\par}
+\vspace*{10mm}
+\end{titlepage}
+
+\pagenumbering{Roman}
+\section*{摘要}
+\addcontentsline{toc}{section}{摘要}
+
+Orchid 是一个用公开唐宋诗从随机初始化开始训练的字符级 GPT。项目任务是在单张消费级显卡上完成语料清洗、分词、模型训练、专用微调和推理部署。输入为一至三个短关键词，目标为四句、每句五字的诗。工程采用诗作级分组划分，使完全重复、可检测近重复和长诗内嵌片段尽量留在同一集合。唐宋扩容沿用唐诗字表与冻结留出集，得到 296,821 首训练诗作。模型从约 14M 扩至 92M，训练代码保留因果多头注意力、残差连接、绝对位置嵌入和逐标记语言模型目标。
+
+在同一唐诗语料及约 2,849 万有效训练目标下，14M、42M、92M 的验证负对数似然分别为 4.9540、4.8151、4.6831。唐宋 92M 的最佳验证值达到 3.8805。随后用仅对诗文和结束符计损失的监督配对训练条件创作，再以来自同一初始化的普通续训组检验同韵样本的作用。最终权重在 50 道冻结新题、每题三次采样的自由模式下有 148/150 首符合四句五字，92/150 首可确认偶句异字同韵，17/150 首同时满足句式、押韵和原词覆盖。默认约束解码三项均达到 150/150。严格逐字平仄常格及相应押韵的联合判定有 1 首通过，说明偶句同韵覆盖了格律要求的一部分。
+
+补充实验固定权重、候选池和采样种子，对比两种候选排序。新加入的隔位重字惩罚在 36 道独立编排的新题上将有该类重复的输出从 13/108 降到 9/108。两份基于独立 AI 上下文的 v2 盲评均给出较高的切题增益，可读性变化方向不一致。项目提供同题对照 HTML、离线样例、常驻本地模型接口、可复跑的统计脚本与数据指纹。
+
+\vspace{.45em}
+\noindent\textbf{关键词}\quad 字符级语言模型、五言诗、条件生成、约束解码、平水韵
+
+\clearpage
+\begingroup
+\small\linespread{1.07}\selectfont
+\setlength{\parskip}{0pt}
+\tableofcontents
+\endgroup
+\clearpage
+\pagenumbering{arabic}
+
+\input{method.tex}
+\input{training.tex}
+\input{evaluation.tex}
+\input{deployment.tex}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{参考资料}
+\begingroup
+\footnotesize\linespread{1.04}\selectfont\raggedright
+\setlength{\parskip}{.17em}
+\bibliographystyle{unsrturl}
+\bibliography{references}
+\endgroup
+\end{document}

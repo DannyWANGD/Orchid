@@ -1,0 +1,268 @@
+{
+  "baseline_to_repeat_aware": {
+    "changed_outputs": 5,
+    "repeat_rate_paired_delta": {
+      "difference": -0.05555555555555555,
+      "paired_draws": 90,
+      "percentile95": [
+        -0.1111111111111111,
+        -0.011111111111111112
+      ],
+      "prompts": 90
+    }
+  },
+  "device": "cuda",
+  "generations_sha256": "cf09aebe54187384fec7c5c33580367589c773f4c47975dd2e3dc8ce2b3c5ffa",
+  "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+  "modes": {
+    "original": {
+      "by_keyword_count": {
+        "1": {
+          "all_rules": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "distinct_rhyme": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "form_ok": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "has_separated_repeat": {
+            "count": 6,
+            "rate": 0.16216216216216217,
+            "total": 37
+          },
+          "keywords_ok": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          }
+        },
+        "2": {
+          "all_rules": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "distinct_rhyme": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "form_ok": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "has_separated_repeat": {
+            "count": 3,
+            "rate": 0.10344827586206896,
+            "total": 29
+          },
+          "keywords_ok": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          }
+        },
+        "3": {
+          "all_rules": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "distinct_rhyme": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "form_ok": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "has_separated_repeat": {
+            "count": 3,
+            "rate": 0.125,
+            "total": 24
+          },
+          "keywords_ok": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          }
+        }
+      },
+      "counts": {
+        "all_rules": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "distinct_rhyme": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "form_ok": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "has_separated_repeat": {
+          "count": 12,
+          "rate": 0.13333333333333333,
+          "total": 90
+        },
+        "keywords_ok": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        }
+      },
+      "median_seconds": 0.20492771558929235,
+      "p95_seconds": 0.21742981695570052,
+      "repeat_instances": 13,
+      "requests": 90
+    },
+    "repeat-aware": {
+      "by_keyword_count": {
+        "1": {
+          "all_rules": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "distinct_rhyme": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "form_ok": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          },
+          "has_separated_repeat": {
+            "count": 5,
+            "rate": 0.13513513513513514,
+            "total": 37
+          },
+          "keywords_ok": {
+            "count": 37,
+            "rate": 1.0,
+            "total": 37
+          }
+        },
+        "2": {
+          "all_rules": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "distinct_rhyme": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "form_ok": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          },
+          "has_separated_repeat": {
+            "count": 2,
+            "rate": 0.06896551724137931,
+            "total": 29
+          },
+          "keywords_ok": {
+            "count": 29,
+            "rate": 1.0,
+            "total": 29
+          }
+        },
+        "3": {
+          "all_rules": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "distinct_rhyme": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "form_ok": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          },
+          "has_separated_repeat": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 24
+          },
+          "keywords_ok": {
+            "count": 24,
+            "rate": 1.0,
+            "total": 24
+          }
+        }
+      },
+      "counts": {
+        "all_rules": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "distinct_rhyme": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "form_ok": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        },
+        "has_separated_repeat": {
+          "count": 7,
+          "rate": 0.07777777777777778,
+          "total": 90
+        },
+        "keywords_ok": {
+          "count": 90,
+          "rate": 1.0,
+          "total": 90
+        }
+      },
+      "median_seconds": 0.20447230245918036,
+      "p95_seconds": 0.21757884183898568,
+      "repeat_instances": 7,
+      "requests": 90
+    }
+  },
+  "prompt_count": 90,
+  "prompt_source_sha256": "8b637dac00b68e1b9163aeaf11ab6e36ecf9a2af9702ae6183f03c1a092bb3b6",
+  "provenance": "Measured with matched prompts, seeds, checkpoint, and candidate pools for the two rankings.",
+  "rhyme_table_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+  "sampling": {
+    "max_new_tokens": 64,
+    "temperature": 0.8,
+    "top_k": 50,
+    "top_p": 1.0
+  },
+  "seeds": [
+    11
+  ],
+  "separated_repeat_weight": 0.18,
+  "split": "validation",
+  "torch": "2.14.1+cu126",
+  "weights_sha256": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59"
+}

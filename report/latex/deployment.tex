@@ -1,0 +1,65 @@
+\section{部署、演示与复现}
+\label{sec:deployment}
+
+\subsection{交互与运行方式}
+
+展示页让读者在同一个位置比较两首原文。输入限制为一至三个互异的短词，每词一至二字。界面同时展示偶句韵脚、韵部、字面命中与耗时，自动指标沿用冻结测试的口径。静态页面能够直接查看四组封存样例，现场演示可启动回环接口接收自选词。Python 进程启动时载入一次模型和字表，后续用同一模型顺序处理两种解码。参数合法性和字表检查在服务端再次执行，字表外字符、重复词等输入会返回提示。
+
+\reportfigure{demo.png}{Orchid 展示页的实际浏览器画面。同题「霜、孤舟」，自由生成的「閑／山」与默认生成的「尋／林」都能确认同韵。默认生成同时含两个原词。}{fig:demo}
+
+默认四候选模式在本机 CPU、两线程下的常驻中位耗时为 2.532 秒，在 RTX 4080 SUPER 为 0.198 秒，PyTorch 的峰值分配约为 370 MiB。相同权重的自由模式分别为 0.622 和 0.050 秒。这组速度实验每种模式、每设备预热两次再测 30 次，计时范围包含生成和排序，载入权重另测约 0.8 至 1.2 秒。展示接口在多次生成间保留模型。权重文件、字表和配置配套校验，CPU 可以只安装 CPU 构建依赖。
+
+\begin{tcolorbox}[consolestyle]
+\begin{Verbatim}[fontsize=\small,breaklines=true]
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-cpu.txt
+python -E scripts/serve_demo.py --checkpoint model --device cpu
+\end{Verbatim}
+\end{tcolorbox}
+
+上面的命令在解压的模型包根目录运行，随后浏览 \url{http://127.0.0.1:8765/}。仓库开发目录使用 \code{dist/orchid-92m-prosody} 作为检查点路径。离线查看只需打开 \code{demo/index.html}；选用新排序时可在实时服务页切换，CLI 则传 \code{--ranking repeat-aware}。测试涵盖有效输入的双诗生成、字表外输入和错误词数。本次复测使用的最终推理权重指纹以 \code{1613b489754c} 开头，完整值在模型包的 \code{bundle.json}。
+
+\subsection{复现路径与验收}
+
+复现分为生成已训练模型、重跑冻结评估及从头训练。第一条路径用模型包内权重和离线韵表即可试用，不需要原始唐宋诗。第二条路径先按仓库说明从固定清单构建数据和监督集，以供应训练重合检查；然后将推理包传给 \code{evaluate_prosody.py}。脚本确认推理包沿袭已选检查点，并检查验证与训练文件指纹。用同一 CUDA 条件逐条比对了 600 条冻结输出，又在独立目录重新下载 313 个分片，核对了两套语料、划分、字表和监督统计。第三条路径从语料开始运行 \code{pretrain.py}、\code{finetune.py} 和韵律续训，以本次训练的验证集合选择自己的权重。种子固定能方便同设备比对，CPU 与 CUDA 的采样文本可能有差异。
+
+\begin{tcolorbox}[consolestyle]
+\begin{Verbatim}[fontsize=\small,breaklines=true]
+python -E scripts/generate.py --checkpoint model --device cpu \
+  --keywords 霜 孤舟 --seed 11 --ranking repeat-aware --json
+python -E scripts/evaluate_ranking.py --split challenge \
+  --checkpoint model --device cuda --output runs/ranking-replay
+python -E -m unittest discover -s tests -v
+\end{Verbatim}
+\end{tcolorbox}
+
+工程整理将训练与报告依赖压到 44 个固定项，单独提供 13 项的 CPU 推理依赖。发布源码保留模型实现、冻结配置、数据获取命令、图表生成代码和汇总证据。组织者盲评表与回件保存在本机。旧零回件状态与早期演示快照已清理，正式训练日志与指纹继续用于比较，使同一结果能够从数值追溯到模型和原文。
+
+\begin{table}[!htbp]
+\centering
+\caption{复现所需的输入和入口。压缩包以项目提供的附件为准。}
+\label{tab:deliverables}
+\begin{tabularx}{\linewidth}{@{}p{.20\linewidth}Y Y@{}}
+\toprule
+使用目的 & 已整理材料 & 核对方法\\
+\midrule
+查看示例 & \texttt{demo/index.html} 与四组离线封存原诗 & 同题原文、韵脚、种子与耗时可见\\
+运行推理 & 92M 模型包、字表、韵表与 CPU/CUDA 依赖 & 核对 bundle 哈希，命令行与本地网页试用\\
+重跑实验 & 源码、配置、冻结诗题、训练日志、评分说明和汇总 & 对照机器可读记录及新排序逐条生成\\
+从头训练 & 固定公开唐宋诗版本与数据准备脚本，见参考资料 & 校验语料、分割、字表及监督数据指纹\\
+重建报告 & LaTeX 源码、矢量图、浏览器截图和图表脚本 & XeLaTeX 编译并检查目录、交叉引用与字体\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{总结、局限与项目体会}
+\label{sec:conclusion}
+
+本项目完成了从零训练的字符级 GPT、面向古诗的监督微调、韵律对照和可交互演示。模型扩容使固定语料上的验证损失下降，扩展唐宋语料进一步改善了同一留出集的预测。训练端的同韵样本续训增加了自由生成的偶句押韵。部署端的规则掩码保证了被测范围内的句式、押韵和字面用词。通过独立报告这两类结果，可以辨认哪些改善来自权重、哪些来自可控的生成过程。
+
+最显著的限制来自多词条件生成。即使采用 92M 权重和同韵续训，自由模式在两套测试的两词、三词输入上都没有覆盖全词。按提示落点约束会带来重复、语序牵强和意象断裂，重字排序只能处理其中一种。改进训练时，可从同一首诗中派生语义共现的多意象样本，配平一词、两词和三词题，保留同一预算的对照。下一轮评估应冻结另一批题，由真人独立审阅语义切题和表达，并保留不同版本评分的适用数。格律方面可单列严格式，无需把每首四句诗都标成合乎近体常格的绝句。
+
+课程实践中最有价值的体会是，评价目标需要和模型能力对应。预训练损失衡量对留出诗文的预测，监督损失衡量给定条件后对参考正文的拟合，写作任务还需要看真实抽样。只观察损失下降会错过两词与三词的明显退化，只看规则通过率也会错过一首诗读起来是否自然。项目中的人评反馈推动了 v2 量表，把字面命中和语义切题拆开，给连贯性和意境规定判定前提。这一调整和模型本身的改进同样重要。
+
+从工程角度，检查点记录了数据、权重和游标，使长时间训练可以中断后继续，也让评估结果能追溯到一个确切权重。单卡试验表明显存占用与有效吞吐并不同时提高。真正的复现检查来自在新环境重新安装依赖、构建数据、解压运行以及重放逐条输出。项目作者确定古诗方向、完成早期读者评阅并提出格律与量表修订。代码实现、实验试跑和报告整理使用了 AI 协助，文中 AI 评阅有独立标注。教学实现查阅了 Raschka 的课程仓库和 nanoGPT~\cite{rasbt,nanogpt}，模型结构与训练脚本均能在附件中核对。

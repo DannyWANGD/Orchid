@@ -13,6 +13,7 @@ from orchid.generation import Sampling
 from orchid.inference import load_poet
 from orchid.io import json_text
 from orchid.metrics import judge_format_keywords
+from orchid.prosody_decode import RANKINGS
 
 
 def main():
@@ -31,6 +32,8 @@ def main():
                         help="Default rhymed mode enforces four lines, keywords and distinct Pingshui rhymes")
     parser.add_argument("--candidates", type=int, default=4,
                         help="Number of keyword placements to generate and rank in rhymed mode (1–16)")
+    parser.add_argument("--ranking", choices=RANKINGS, default="original",
+                        help="Candidate ranking used in rhymed mode")
     parser.add_argument("--constrain-form", action="store_true",
                         help="Use the form-only decoder from the original experiments")
     parser.add_argument("--constrain-keywords", action="store_true",
@@ -52,13 +55,14 @@ def main():
         words = poem.task.validate_keywords(args.keywords)
         result = poem.tokens(words, spec, args.seed, constrain_form=mode == "form",
                              constrain_keywords=keywords_required, constrain_rhyme=rhymed,
-                             candidates=args.candidates)
+                             candidates=args.candidates, ranking=args.ranking)
     except (ValueError, OSError) as exc:
         parser.error(str(exc))
     if args.json:
         print(json_text({**result, **judge_format_keywords(result["generated"], words),
                          "keywords": words, "device": str(poem.device), "load_seconds": poem.load_seconds,
-                         "mode": mode, "constrained_form": mode != "raw", "constrained_rhyme": rhymed,
+                         "mode": mode, "ranking": args.ranking,
+                         "constrained_form": mode != "raw", "constrained_rhyme": rhymed,
                          "constrained_keywords": keywords_required, "model_hash": poem.checkpoint_sha256}))
     else:
         text = result["generated"]

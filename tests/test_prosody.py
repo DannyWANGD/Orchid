@@ -8,6 +8,7 @@ from orchid.generation import Sampling
 from orchid.inference import Poet
 from orchid.metrics import judge_format_keywords
 from orchid.model import GPT, GPTConfig
+from orchid.prosody_decode import separated_repeats
 from orchid.supervision import Task
 from orchid.tokenizer import CharacterTokenizer
 from scripts.create_delivery import public_files
@@ -42,14 +43,23 @@ class ProsodyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "outside the training vocabulary"):
             self.poet.tokens(["龘"], Sampling(), 3, constrain_rhyme=True)
 
+    def test_repeat_aware_ranking_preserves_rhyme_and_keywords(self):
+        self.assertEqual(separated_repeats(["煙波春渺渺", "春雨夜來雨"]), 1)
+        opts = {"constrain_rhyme": True, "constrain_keywords": True, "ranking": "repeat-aware"}
+        result = self.poet.tokens(["秋雨", "孤舟"], Sampling(max_new_tokens=25), 11, **opts)
+        self.assertTrue(judge_format_keywords(result["generated"], ["秋雨", "孤舟"])["joint_ok"])
+        self.assertEqual(result["rhyme"], "pass")
+        self.assertFalse(result["repeated_rhyme_char"])
+
     def test_release_excludes_private_blind_review_files(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             nested = root / "nested"
             nested.mkdir()
             for name in ("reviewer_1.csv", "reviewer_2.csv", "reviewer_1_ai_completed.csv",
-                         "private_key.json", "ratings_status.json", "meter_review_completed.md"):
+                         "private_key.json", "ratings_status.json", "meter_review_completed.md",
+                         "cover.local.tex"):
                 (nested / name).touch()
             (root / "linked.json").symlink_to(nested / "private_key.json")
-            self.assertEqual(list(public_files(root, (".csv", ".json", ".md"))),
+            self.assertEqual(list(public_files(root, (".csv", ".json", ".md", ".tex"))),
                              [nested / "ratings_status.json"])

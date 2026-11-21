@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from dataclasses import replace
+from itertools import groupby
 import random
 
 import torch
@@ -10,6 +11,10 @@ from .corpus import IS_HAN_LINE
 from .generation import sample_tokens
 from .metrics import bundled_rhyme_table
 from .tokenizer import EOS
+
+
+RANKINGS = ("original", "repeat-aware")
+SEPARATED_REPEAT_WEIGHT = 0.18
 
 
 class RhymeDecoder:
@@ -54,11 +59,13 @@ class RhymeDecoder:
         return sample_tokens(model, prompt, sampling, seed, allowed_at=allowed_at)
 
     @torch.inference_mode()
-    def generate(self, model, prompt, sampling, seed, word_ids, candidate_count):
+    def generate(self, model, prompt, sampling, seed, word_ids, candidate_count, ranking="original"):
         if sampling.max_new_tokens < 25:
             raise ValueError("Rhyme decoding requires a budget of at least 25 tokens")
         if not 1 <= candidate_count <= 16:
             raise ValueError("Rhyme decoding requires 1–16 candidates")
+        if ranking not in RANKINGS:
+            raise ValueError(f"Unknown candidate ranking: {ranking}")
         sampling = replace(sampling, max_new_tokens=25)
         rng = random.Random(seed)
         candidates = []
@@ -82,9 +89,25 @@ class RhymeDecoder:
         logits = model(batch[:, :-1])[:, len(prompt) - 1:]
         log_probs = logits.float().log_softmax(dim=-1)
         likelihood = log_probs.gather(-1, targets.unsqueeze(-1)).squeeze(-1).mean(-1).tolist()
-        best = max(range(len(candidates)),
-                   key=lambda i: likelihood[i] - repetition_penalty(candidates[i][0]))
+        scores = [score - repetition_penalty(candidate[0]) for score, candidate in zip(likelihood, candidates)]
+        if ranking == "repeat-aware":
+            scores = [
+                score - SEPARATED_REPEAT_WEIGHT * separated_repeats(
+                    candidate[0][start:start + 5] for start in range(0, 24, 6)
+                )
+                for score, candidate in zip(scores, candidates)
+            ]
+        best = max(range(len(candidates)), key=scores.__getitem__)
         return candidates[best]
+
+
+def separated_repeats(lines):
+    """Count same-line returns to a character after collapsing adjacent repetitions."""
+    total = 0
+    for line in lines:
+        runs = [char for char, _ in groupby(line)]
+        total += len(runs) - len(set(runs))
+    return total
 
 
 def repetition_penalty(ids):

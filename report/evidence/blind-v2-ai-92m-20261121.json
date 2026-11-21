@@ -1,0 +1,282 @@
+{
+  "ai_reviewers": 2,
+  "both_reviewers_rated": {
+    "coherence": 60,
+    "fluency": 60,
+    "imagery": 54,
+    "relevance": 60
+  },
+  "dimensions": [
+    "relevance",
+    "fluency",
+    "coherence",
+    "imagery"
+  ],
+  "disagreements_two_or_more_by_dimension": {
+    "coherence": 0,
+    "fluency": 0,
+    "imagery": 0,
+    "relevance": 0
+  },
+  "empty_items": 0,
+  "human_reviewers": 0,
+  "models": [
+    "raw",
+    "rhymed"
+  ],
+  "pairs": 30,
+  "provenance": {
+    "form_sha256": [
+      "5141ed1a5d79b3f059909abe2ceaedce28b226f0cbbb55c2684563ce35307ab9",
+      "e7aea2966bc27c16e049b703e488092c7028d91991f9488fdce8ead9e0b4d558"
+    ],
+    "generation_sha256": "2129e62bd9bf4fd839041640c2652c82b88f3bd46b25c3e5b80f9d3245d8d6a1",
+    "independence": "Two separate AI contexts saw only their own randomized v2 packet. Method identities were masked. These ratings are not human judgments.",
+    "key_sha256": "1b7dc665d561046165bd12d63991da0409ce479cf0b85a37e42dec5936027c3d",
+    "mode": "AI-assisted supplementary ratings",
+    "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+    "rubric_sha256": "6e7513ab41cc124ef53acd15b76d76c8736d6af076701eecbf072625b1637023",
+    "rubric_version": "v2",
+    "template_sha256": [
+      "f24af4b2490e691944d968f4823b6ed40ca01218cea5001fe8c1767455e88832",
+      "af0fe945dc171ddce850250f4c143d5e7984e6e7f493dc36e883ffa980743364"
+    ]
+  },
+  "ratings_by_reviewer": [
+    {
+      "differences": {
+        "coherence": {
+          "mean": 0.36666666666666664,
+          "paired": 30,
+          "total_pairs": 30
+        },
+        "fluency": {
+          "mean": 0.16666666666666666,
+          "paired": 30,
+          "total_pairs": 30
+        },
+        "imagery": {
+          "mean": 0.2,
+          "paired": 25,
+          "total_pairs": 30
+        },
+        "relevance": {
+          "mean": 1.6666666666666667,
+          "paired": 30,
+          "total_pairs": 30
+        }
+      },
+      "kind": "ai",
+      "means_and_distributions": {
+        "raw": {
+          "coherence": {
+            "distribution": {
+              "2": 5,
+              "3": 9,
+              "4": 8,
+              "5": 8
+            },
+            "mean": 3.6333333333333333,
+            "rated": 30,
+            "total": 30
+          },
+          "fluency": {
+            "distribution": {
+              "2": 4,
+              "3": 10,
+              "4": 12,
+              "5": 4
+            },
+            "mean": 3.533333333333333,
+            "rated": 30,
+            "total": 30
+          },
+          "imagery": {
+            "distribution": {
+              "3": 11,
+              "4": 12,
+              "5": 2
+            },
+            "mean": 3.64,
+            "rated": 25,
+            "total": 30
+          },
+          "relevance": {
+            "distribution": {
+              "1": 1,
+              "2": 5,
+              "3": 15,
+              "4": 3,
+              "5": 6
+            },
+            "mean": 3.2666666666666666,
+            "rated": 30,
+            "total": 30
+          }
+        },
+        "rhymed": {
+          "coherence": {
+            "distribution": {
+              "2": 1,
+              "3": 7,
+              "4": 13,
+              "5": 9
+            },
+            "mean": 4,
+            "rated": 30,
+            "total": 30
+          },
+          "fluency": {
+            "distribution": {
+              "2": 1,
+              "3": 11,
+              "4": 14,
+              "5": 4
+            },
+            "mean": 3.7,
+            "rated": 30,
+            "total": 30
+          },
+          "imagery": {
+            "distribution": {
+              "3": 9,
+              "4": 15,
+              "5": 5
+            },
+            "mean": 3.8620689655172415,
+            "rated": 29,
+            "total": 30
+          },
+          "relevance": {
+            "distribution": {
+              "3": 1,
+              "5": 29
+            },
+            "mean": 4.933333333333334,
+            "rated": 30,
+            "total": 30
+          }
+        }
+      },
+      "reviewer": 1
+    },
+    {
+      "differences": {
+        "coherence": {
+          "mean": 0.23333333333333334,
+          "paired": 30,
+          "total_pairs": 30
+        },
+        "fluency": {
+          "mean": -0.06666666666666667,
+          "paired": 30,
+          "total_pairs": 30
+        },
+        "imagery": {
+          "mean": 0.3076923076923077,
+          "paired": 26,
+          "total_pairs": 30
+        },
+        "relevance": {
+          "mean": 1.5,
+          "paired": 30,
+          "total_pairs": 30
+        }
+      },
+      "kind": "ai",
+      "means_and_distributions": {
+        "raw": {
+          "coherence": {
+            "distribution": {
+              "2": 4,
+              "3": 8,
+              "4": 7,
+              "5": 11
+            },
+            "mean": 3.8333333333333335,
+            "rated": 30,
+            "total": 30
+          },
+          "fluency": {
+            "distribution": {
+              "2": 2,
+              "3": 8,
+              "4": 9,
+              "5": 11
+            },
+            "mean": 3.966666666666667,
+            "rated": 30,
+            "total": 30
+          },
+          "imagery": {
+            "distribution": {
+              "3": 12,
+              "4": 8,
+              "5": 6
+            },
+            "mean": 3.769230769230769,
+            "rated": 26,
+            "total": 30
+          },
+          "relevance": {
+            "distribution": {
+              "2": 5,
+              "3": 14,
+              "4": 6,
+              "5": 5
+            },
+            "mean": 3.3666666666666667,
+            "rated": 30,
+            "total": 30
+          }
+        },
+        "rhymed": {
+          "coherence": {
+            "distribution": {
+              "2": 1,
+              "3": 5,
+              "4": 15,
+              "5": 9
+            },
+            "mean": 4.066666666666666,
+            "rated": 30,
+            "total": 30
+          },
+          "fluency": {
+            "distribution": {
+              "2": 1,
+              "3": 8,
+              "4": 14,
+              "5": 7
+            },
+            "mean": 3.9,
+            "rated": 30,
+            "total": 30
+          },
+          "imagery": {
+            "distribution": {
+              "3": 4,
+              "4": 19,
+              "5": 6
+            },
+            "mean": 4.068965517241379,
+            "rated": 29,
+            "total": 30
+          },
+          "relevance": {
+            "distribution": {
+              "3": 1,
+              "4": 2,
+              "5": 27
+            },
+            "mean": 4.866666666666666,
+            "rated": 30,
+            "total": 30
+          }
+        }
+      },
+      "reviewer": 2
+    }
+  ],
+  "reviewers": 2
+}

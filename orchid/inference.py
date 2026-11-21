@@ -35,7 +35,9 @@ class Poet:
         return RhymeDecoder(self.tokenizer)
 
     def tokens(self, keywords, sampling: Sampling, seed, *, constrain_form=False, constrain_keywords=False,
-               constrain_rhyme=False, candidates=4):
+               constrain_rhyme=False, candidates=4, ranking="original"):
+        if ranking != "original" and not (constrain_rhyme and constrain_keywords):
+            raise ValueError("Candidate ranking requires the rhymed keyword-constrained mode")
         words = self.task.validate_keywords(keywords)
         prefix = prompt_ids(self.tokenizer, words)
         allowed_at = None
@@ -70,7 +72,7 @@ class Poet:
         synchronize(self.device)
         t0 = perf_counter()
         if constrain_rhyme:
-            ids, stop = decoder.generate(self.model, prefix, sampling, seed, word_ids, candidate_count)
+            ids, stop = decoder.generate(self.model, prefix, sampling, seed, word_ids, candidate_count, ranking)
         else:
             ids, stop = sample_tokens(self.model, prefix, sampling, seed, allowed_at=allowed_at)
         synchronize(self.device)
