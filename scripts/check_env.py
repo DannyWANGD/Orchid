@@ -13,7 +13,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 KEY_PACKAGES = (
     "torch", "triton", "cuda-toolkit", "cuda-bindings", "nvidia-cudnn-cu12",
-    "numpy", "PyYAML", "regex", "matplotlib", "tqdm",
+    "numpy", "PyYAML", "regex", "matplotlib", "markdown-it-py",
 )
 
 
@@ -36,7 +36,7 @@ def pins(path):
     return expected
 
 
-def probe(verify_pins):
+def probe(verify_pins, requirements=ROOT / "requirements.txt"):
     import torch
 
     check = subprocess.run(
@@ -76,7 +76,7 @@ def probe(verify_pins):
         torch.cuda.synchronize()
         result["cuda_forward_backward"] = bool((x.grad == 128).all().item())
     if verify_pins:
-        expected = pins(ROOT / "requirements.txt")
+        expected = pins(requirements)
         missing = {p: {"expected": v, "actual": actual}
                    for p, v in expected.items() if (actual := version(p)) != v}
         result["pinned_requirements"] = {"count": len(expected), "mismatches": missing}
@@ -86,10 +86,12 @@ def probe(verify_pins):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify-pins", action="store_true")
+    parser.add_argument("--requirements", type=Path, default=ROOT / "requirements.txt",
+                        help="Pin file to check (use requirements-cpu.txt for the CPU build)")
     parser.add_argument("--require-cuda", action="store_true")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    result = probe(args.verify_pins)
+    result = probe(args.verify_pins, args.requirements)
     document = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

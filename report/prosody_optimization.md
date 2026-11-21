@@ -59,7 +59,10 @@ python -E scripts/evaluate_prosody.py test \
     --selection runs/prosody-repeat/validation/metrics.json --output runs/prosody-repeat/test
 python -E scripts/evaluate_meter.py --generations runs/prosody-repeat/test/generations.jsonl \
     --suite test --group-by mode --output runs/prosody-repeat/test/meter.json
+python -E scripts/package_model.py \
+    --checkpoint checkpoints/sft/sft-prosody-rhyme-repeat/last.pt \
+    --tokenizer artifacts/tang-song/tokenizer.json --output dist/orchid-92m-prosody
 python -E scripts/generate.py --checkpoint dist/orchid-92m-prosody --keywords 秋雨 孤舟 --json
 ```
 
-本机版从韵律续训的 `last.pt` 导出，权重与包的指纹见 [解压验收](evidence/delivery-92m-prosody.json)。课题的两个旧匿名评阅轮次继续用原诗和原评分。已登记的回件可用于 14M 原始模型对照。
+当前交付从通过选择规则的韵律续训 `last.pt` 导出。重新训练时，按验证输出中的 `selection.model` 选择要导出的实际权重。使用交付权重复测现有结果时，在准备唐宋语料后运行 `scripts/evaluate_prosody.py test`，传入封存的 `--selection report/evidence/prosody-study/validation/metrics.json`，再用 `--checkpoint model` 指定已解压的模型包。完整命令、速度和样例见[当前模型复测](release_evaluation.md)。权重与原课程包的指纹见[解压验收](evidence/delivery-92m-prosody.json)。

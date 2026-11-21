@@ -4,14 +4,13 @@ from pathlib import Path
 
 import torch
 
-from orchid.blind import DIMENSIONS, write_csv
 from orchid.generation import Sampling
 from orchid.inference import Poet
 from orchid.metrics import judge_format_keywords
 from orchid.model import GPT, GPTConfig
 from orchid.supervision import Task
 from orchid.tokenizer import CharacterTokenizer
-from scripts.create_delivery import blank_template
+from scripts.create_delivery import public_files
 
 
 class ProsodyTests(unittest.TestCase):
@@ -43,14 +42,14 @@ class ProsodyTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "outside the training vocabulary"):
             self.poet.tokens(["龘"], Sampling(), 3, constrain_rhyme=True)
 
-    def test_only_blank_review_snapshots_are_eligible_for_course_zip(self):
+    def test_release_excludes_private_blind_review_files(self):
         with tempfile.TemporaryDirectory() as folder:
-            path = Path(folder) / "reviewer_2.csv"
-            fields = dict(anonymous_id="sample", pair_id="pair", display_order="1",
-                          keywords="霜", output="秋霜", notes="", **dict.fromkeys(DIMENSIONS, ""))
-            write_csv(path, [fields])
-            self.assertEqual(blank_template(path), path.read_bytes())
-            write_csv(path, [{**fields, "notes": "review comment"}])
-            self.assertIsNone(blank_template(path))
-            write_csv(path, [{**fields, "relevance": "3"}])
-            self.assertIsNone(blank_template(path))
+            root = Path(folder)
+            nested = root / "nested"
+            nested.mkdir()
+            for name in ("reviewer_1.csv", "reviewer_2.csv", "reviewer_1_ai_completed.csv",
+                         "private_key.json", "ratings_status.json", "meter_review_completed.md"):
+                (nested / name).touch()
+            (root / "linked.json").symlink_to(nested / "private_key.json")
+            self.assertEqual(list(public_files(root, (".csv", ".json", ".md"))),
+                             [nested / "ratings_status.json"])

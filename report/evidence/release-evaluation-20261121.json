@@ -1,0 +1,433 @@
+{
+  "benchmark": {
+    "raw": {
+      "benchmarks": {
+        "cpu": {
+          "device": "cpu",
+          "load_seconds": 1.1172121840063483,
+          "median_seconds": 0.6220685684820637,
+          "p95_seconds": 0.757487601833418,
+          "peak_allocated_bytes": null,
+          "precision": "fp32",
+          "target_steps": 750,
+          "timed_requests": 30,
+          "tokens_per_second": 39.76315991757354,
+          "warmup_requests": 2
+        },
+        "cuda": {
+          "device": "cuda",
+          "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+          "load_seconds": 1.186965003842488,
+          "median_seconds": 0.04994434944819659,
+          "p95_seconds": 0.08994298498146236,
+          "peak_allocated_bytes": 377978368,
+          "precision": "fp32",
+          "target_steps": 754,
+          "timed_requests": 30,
+          "tokens_per_second": 415.1367650868412,
+          "warmup_requests": 2
+        }
+      },
+      "checkpoint": "dist/orchid-92m-prosody",
+      "checkpoint_sha256": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
+      "cpu_threads": 2,
+      "mode": "raw",
+      "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+      "python": "3.11.16",
+      "sample_seed": 11,
+      "sampling": {
+        "max_new_tokens": 64,
+        "temperature": 0.8,
+        "top_k": 50,
+        "top_p": 1.0
+      },
+      "torch": "2.14.1+cu126"
+    },
+    "rhymed": {
+      "benchmarks": {
+        "cpu": {
+          "device": "cpu",
+          "load_seconds": 0.7756934321951121,
+          "median_seconds": 2.5321136120473966,
+          "p95_seconds": 2.6255020960234106,
+          "peak_allocated_bytes": null,
+          "precision": "fp32",
+          "target_steps": 750,
+          "timed_requests": 30,
+          "tokens_per_second": 9.918169225191098,
+          "warmup_requests": 2
+        },
+        "cuda": {
+          "device": "cuda",
+          "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+          "load_seconds": 1.0976006069686264,
+          "median_seconds": 0.19788501702714711,
+          "p95_seconds": 0.2083874389063567,
+          "peak_allocated_bytes": 388192256,
+          "precision": "fp32",
+          "target_steps": 750,
+          "timed_requests": 30,
+          "tokens_per_second": 126.01145329126052,
+          "warmup_requests": 2
+        }
+      },
+      "checkpoint": "dist/orchid-92m-prosody",
+      "checkpoint_sha256": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
+      "cpu_threads": 2,
+      "mode": "rhymed",
+      "prompt_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+      "python": "3.11.16",
+      "sample_seed": 11,
+      "sampling": {
+        "max_new_tokens": 64,
+        "temperature": 0.8,
+        "top_k": 50,
+        "top_p": 1.0
+      },
+      "torch": "2.14.1+cu126"
+    }
+  },
+  "inference_edge_cases": [
+    {
+      "case": "oov",
+      "error": "Characters outside the training vocabulary: 龘",
+      "id": "X001",
+      "rejected": true
+    },
+    {
+      "case": "oov",
+      "error": "Characters outside the training vocabulary: 𰻞",
+      "id": "X002",
+      "rejected": true
+    },
+    {
+      "case": "empty",
+      "error": "Provide 1–3 distinct keywords",
+      "id": "X003",
+      "rejected": true
+    },
+    {
+      "case": "duplicate",
+      "error": "Provide 1–3 distinct keywords",
+      "id": "X004",
+      "rejected": true
+    },
+    {
+      "case": "long_word",
+      "error": "Expected 1–2 Han characters per keyword: '春江花月夜'",
+      "id": "X005",
+      "rejected": true
+    },
+    {
+      "case": "too_many",
+      "error": "Provide 1–3 distinct keywords",
+      "id": "X006",
+      "rejected": true
+    }
+  ],
+  "measured_on": "2026-11-21",
+  "platform": {
+    "cpu": "Intel Core i9-14900K",
+    "gpu": "NVIDIA GeForce RTX 4080 SUPER",
+    "gpu_driver": "560.35.05",
+    "os": "Ubuntu 22.04 x86_64",
+    "torch": "2.14.1+cu126"
+  },
+  "provenance": "Measured on the final Orchid 92M weights. Same pinned test prompts and decoding settings as the course archive.",
+  "qualitative_examples": {
+    "pairs": [
+      {
+        "keywords": [
+          "霜"
+        ],
+        "prompt_id": "M001",
+        "raw": "霜蟹肥堪釀，霜螯美可烹。一千頭上雪，三百首陽鯨。",
+        "rhymed": "霜蟹肥堪釀，霜螯美可烹。一千頭上雪，三百首陽英。",
+        "sampling_seed": 11
+      },
+      {
+        "keywords": [
+          "清霜"
+        ],
+        "prompt_id": "M016",
+        "raw": "清浄妙難測，寒碧照秋霜。夜深猶獨看，霜重月黄昏。",
+        "rhymed": "白雪滿山谷，清霜覆井梧。歲窮人事變，身老道心孤。",
+        "sampling_seed": 11
+      },
+      {
+        "keywords": [
+          "霜",
+          "孤舟"
+        ],
+        "prompt_id": "M017",
+        "raw": "一望長江闊，千尋古戍閑。煙波猶未定，不得上孤山。",
+        "rhymed": "霜葉滿空落，悲心無處尋。孤舟寒夜水，獨自照秋林。",
+        "sampling_seed": 11
+      },
+      {
+        "keywords": [
+          "清風",
+          "桂花"
+        ],
+        "prompt_id": "M033",
+        "raw": "清光分玉露，和氣入薰風。一是東皇力，人生樂事同。",
+        "rhymed": "桂花香滿山，半在清風前。不同凡草木，移取入幽泉。",
+        "sampling_seed": 11
+      },
+      {
+        "keywords": [
+          "孤舟",
+          "春雨",
+          "煙波"
+        ],
+        "prompt_id": "M034",
+        "raw": "春潮平地脈，曉氣入雲深。獨立蒼茫裏，無人識此心。",
+        "rhymed": "煙波春渺渺，寂寂孤舟閑。春雨夜來雨，空江寒葦山。",
+        "sampling_seed": 11
+      },
+      {
+        "keywords": [
+          "南山",
+          "小雨",
+          "月影"
+        ],
+        "prompt_id": "M050",
+        "raw": "北窗夜來雨，竹外一聲鐘。我自無心起，相看意自濃。",
+        "rhymed": "月影滿西山，烏啼南山前。小雨暗不出，破窗明遠煙。",
+        "sampling_seed": 11
+      }
+    ],
+    "selection": "First and last frozen prompt of each keyword count, seed 11. Case inspection without blinded ratings."
+  },
+  "quality": {
+    "archived_generations_sha256": "87c78887776a3a02b91856eaba33a9e61b03f0cf22101106bcac918696de0c74",
+    "bundle_precision": "fp32",
+    "generation_records_excluding_seconds_sha256": "3b0891ebc9b95d64bd02ecb325f4c5db71a5a8c34f70a03d1ad944f5ef62bdad",
+    "modes": {
+      "form": {
+        "counts": {
+          "all_rules": 17,
+          "distinct_rhyme": 93,
+          "format_ok": 150,
+          "keywords_ok": 25,
+          "repeated_line": 0
+        },
+        "distinct_confirmed_rhyme_groups": 23,
+        "distinct_generated_texts": 150,
+        "keyword_count_strata": {
+          "1": {
+            "keywords_ok": 25,
+            "requests": 48
+          },
+          "2": {
+            "keywords_ok": 0,
+            "requests": 51
+          },
+          "3": {
+            "keywords_ok": 0,
+            "requests": 51
+          }
+        },
+        "seconds": {
+          "p50": 0.05257472849916667,
+          "p95_nearest_rank": 0.05359628307633102
+        },
+        "tone_and_rhyme_literal_templates": {
+          "fail": 133,
+          "pass": 0,
+          "unknown": 17
+        },
+        "training_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      },
+      "raw": {
+        "counts": {
+          "all_rules": 17,
+          "distinct_rhyme": 92,
+          "format_ok": 148,
+          "keywords_ok": 25,
+          "repeated_line": 0
+        },
+        "distinct_confirmed_rhyme_groups": 23,
+        "distinct_generated_texts": 150,
+        "keyword_count_strata": {
+          "1": {
+            "keywords_ok": 25,
+            "requests": 48
+          },
+          "2": {
+            "keywords_ok": 0,
+            "requests": 51
+          },
+          "3": {
+            "keywords_ok": 0,
+            "requests": 51
+          }
+        },
+        "seconds": {
+          "p50": 0.03344309946987778,
+          "p95_nearest_rank": 0.0343694610055536
+        },
+        "tone_and_rhyme_literal_templates": {
+          "fail": 131,
+          "pass": 0,
+          "unknown": 17
+        },
+        "training_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 148
+          }
+        }
+      },
+      "rhyme-only": {
+        "counts": {
+          "all_rules": 25,
+          "distinct_rhyme": 150,
+          "format_ok": 150,
+          "keywords_ok": 25,
+          "repeated_line": 0
+        },
+        "distinct_confirmed_rhyme_groups": 25,
+        "distinct_generated_texts": 150,
+        "keyword_count_strata": {
+          "1": {
+            "keywords_ok": 25,
+            "requests": 48
+          },
+          "2": {
+            "keywords_ok": 0,
+            "requests": 51
+          },
+          "3": {
+            "keywords_ok": 0,
+            "requests": 51
+          }
+        },
+        "seconds": {
+          "p50": 0.05153158190660179,
+          "p95_nearest_rank": 0.052541408920660615
+        },
+        "tone_and_rhyme_literal_templates": {
+          "fail": 130,
+          "pass": 1,
+          "unknown": 19
+        },
+        "training_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      },
+      "rhymed": {
+        "counts": {
+          "all_rules": 150,
+          "distinct_rhyme": 150,
+          "format_ok": 150,
+          "keywords_ok": 150,
+          "repeated_line": 0
+        },
+        "distinct_confirmed_rhyme_groups": 24,
+        "distinct_generated_texts": 150,
+        "keyword_count_strata": {
+          "1": {
+            "keywords_ok": 48,
+            "requests": 48
+          },
+          "2": {
+            "keywords_ok": 51,
+            "requests": 51
+          },
+          "3": {
+            "keywords_ok": 51,
+            "requests": 51
+          }
+        },
+        "seconds": {
+          "p50": 0.19487572147045285,
+          "p95_nearest_rank": 0.2029701150022447
+        },
+        "tone_and_rhyme_literal_templates": {
+          "fail": 146,
+          "pass": 1,
+          "unknown": 3
+        },
+        "training_matches": {
+          "exact": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "longer_poem_fragments": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          },
+          "near": {
+            "count": 0,
+            "rate": 0.0,
+            "total": 150
+          }
+        }
+      }
+    },
+    "pingshui_sha256": "42bcfcd06ea040883fb8403f9ebdd4ff0db7a6183e03d0a5e6bf9f0e7bb7386c",
+    "prompt_protocol_sha256": "a516a8e3770c858319792809b3ae4bfeca03301bdafd9fbb118c6bc47541b327",
+    "prompts": 50,
+    "record_count": 600,
+    "replay_records_matching_archive_except_seconds": 600,
+    "sampling": {
+      "max_new_tokens": 64,
+      "temperature": 0.8,
+      "top_k": 50,
+      "top_p": 1.0
+    },
+    "seeds": [
+      11,
+      22,
+      33
+    ],
+    "test_device": "cuda",
+    "train_sha256": "0fc0d34bb5e5cdcf2ad7c032020dfa71803241aef236fac115a6bd68c9d297f0"
+  },
+  "source_checkpoint_sha256": "93b2a59caabe5f0628c33e861e7ba82259926e17a4c843993a795f170e1c14b2",
+  "weight_count": 91843584
+}

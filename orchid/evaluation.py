@@ -132,21 +132,23 @@ def sample_mean_delta(first, second, key, *, draws=1000):
             "percentile95": [boot[math.floor(.025*(draws-1))], boot[math.ceil(.975*(draws-1))]]}
 
 
-def benchmark(poet, prompts, sampling, seed):
-    slots = [p for p in prompts if not p["oov"]][:12]
+def benchmark(poet, prompts, sampling, seed, *, requests=10, **decode_options):
+    slots = [p for p in prompts if not p["oov"]][:requests + 2]
     if len(slots) < 3:
         raise ValueError("Benchmark requires at least three valid prompts")
     for p in slots[:2]:
-        poet.tokens(p["keywords"], sampling, seed)
+        poet.tokens(p["keywords"], sampling, seed, **decode_options)
     if poet.device.type == "cuda":
         torch.cuda.reset_peak_memory_stats(poet.device)
-    items = [poet.tokens(p["keywords"], sampling, seed) for p in slots[2:]]
+    items = [poet.tokens(p["keywords"], sampling, seed, **decode_options) for p in slots[2:]]
+    durations = sorted(r["seconds"] for r in items)
     memory = torch.cuda.max_memory_allocated(poet.device) if poet.device.type == "cuda" else None
     return {
         "device": str(poet.device), "precision": "fp32", "warmup_requests": 2,
         "timed_requests": len(items), "load_seconds": poet.load_seconds,
-        "median_seconds": median(r["seconds"] for r in items),
-        "tokens_per_second": sum(r["generated_steps"] for r in items)/sum(r["seconds"] for r in items),
+        "median_seconds": median(durations),
+        "p95_seconds": durations[math.ceil(.95 * len(durations)) - 1],
+        "tokens_per_second": sum(r["generated_steps"] for r in items)/sum(durations),
         "target_steps": sum(r["generated_steps"] for r in items), "peak_allocated_bytes": memory,
     }
 

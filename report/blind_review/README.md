@@ -6,7 +6,7 @@
 
 ## v2 量表复核
 
-同一批 14M 封存诗题和原诗已重排匿名编号与呈现顺序。v2 的切题看语义，可读性看表达能否理解，连贯性只评可解析的四句，意境只在可读性和连贯性各达到 3 分时评。小于门槛的项目为 `NA`。第 1 份 AI 回件的 60 条已校验，原件保存在 `runs/poetry-blind-v2/reviewer_1_ai_completed.csv`。v2 用于复核这些规则的适用范围。[v2 评分说明](reviewer_guide_v2.md) · [AI 汇总](../evidence/blind-v2-ai-14m.json) · [评阅者 1 材料](../../dist/orchid-blind-14m-v2/reviewer_1.zip) · [评阅者 2 材料](../../dist/orchid-blind-14m-v2/reviewer_2.zip)
+同一批 14M 封存诗题和原诗已重排匿名编号与呈现顺序。v2 的切题看语义，可读性看表达能否理解，连贯性只评可解析的四句，意境只在可读性和连贯性各达到 3 分时评。小于门槛的项目为 `NA`。第 1 份 AI 回件的 60 条已校验，原件保存在 `runs/poetry-blind-v2/reviewer_1_ai_completed.csv`。v2 用于复核这些规则的适用范围。[v2 评分说明](reviewer_guide_v2.md) · [AI 汇总](../evidence/blind-v2-ai-14m.json)
 
 首次重建 v2 或把新回件存入 `runs/poetry-blind-v2/` 后汇总，分别使用以下命令。重建时选择新目录保留原表。仍需保存每个来源各自的覆盖率和结果。
 
@@ -37,9 +37,9 @@ python -E scripts/blind_review.py aggregate \
 
 14M 真人备份为 `reviewer_2_completed.csv`。[v1 量表](reviewer_guide.md)
 
-**原 92M 的 v1 材料尚无回件。** 两位各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。[原 92M 评阅者 1 材料](../../dist/orchid-blind-92m/reviewer_1.zip) · [原 92M 评阅者 2 材料](../../dist/orchid-blind-92m/reviewer_2.zip)
+**原 92M 的 v1 材料尚无回件。** 两位各有一份匿名 CSV 和评分说明。每轮次有 30 道题、共 60 条输出，两份表的题序和组内显示顺序独立打乱。原本机材料位于 `dist/orchid-blind-92m/`，可用下面的脚本重建。
 
-评阅者仅需各自的 ZIP，并在查看结果前独立完成。14M 回件放在本目录，原 92M 回件放在 `expanded/`，均用 `reviewer_1_completed.csv` 和 `reviewer_2_completed.csv` 命名。回件保存在本机，课程包使用空白表。按同一版本汇总，组织者确认两位独立完成。新押韵版已完成自动对照，已有评分对应旧轮次的原诗。[押韵改进实测](../prosody_optimization.md)
+评阅者使用各自单独分发的 ZIP，在查看结果前独立完成。用 `reviewer_1_completed.csv` 和 `reviewer_2_completed.csv` 命名回件，保存到本地组织者目录。源码和最新模型包提供量表、汇总和重建脚本。新押韵版已完成自动对照，已有评分对应旧轮次的原诗。[押韵改进实测](../prosody_optimization.md)
 
 ### 重建 v1 表与单独分发包
 
@@ -54,8 +54,8 @@ python -E scripts/blind_review.py make \
 python -E scripts/blind_review.py distribute \
     --generations report/evidence/retained-expanded-eval-v1/generations.jsonl \
     --key runs/poetry-blind-92m-recreated/private_key.json \
-    --templates report/blind_review/expanded/reviewer_1.csv \
-                report/blind_review/expanded/reviewer_2.csv \
+    --templates runs/poetry-blind-92m-recreated/reviewer_1.csv \
+                runs/poetry-blind-92m-recreated/reviewer_2.csv \
     --output dist/orchid-blind-92m-recreated
 ```
 
@@ -67,8 +67,8 @@ python -E scripts/blind_review.py distribute \
 python -E scripts/blind_review.py aggregate \
     --generations report/evidence/retained-expanded-eval-v1/generations.jsonl \
     --key runs/poetry-blind-expanded/private_key.json \
-    --templates report/blind_review/expanded/reviewer_1.csv \
-                report/blind_review/expanded/reviewer_2.csv \
+    --templates runs/poetry-blind-expanded/reviewer_1.csv \
+                runs/poetry-blind-expanded/reviewer_2.csv \
     --ratings report/blind_review/expanded/reviewer_1_completed.csv \
               report/blind_review/expanded/reviewer_2_completed.csv \
     --output runs/human_review_expanded.json

@@ -4,28 +4,36 @@ Orchid 是一个从随机初始化训练的字符级 GPT。课程任务是给定
 
 课程要求见 [Problem.md](Problem.md)，进度和验收标准见 [GPT_BUILD_CHECKLIST.md](GPT_BUILD_CHECKLIST.md)。[数据约定](docs/data_contract.md)说明语料和测试边界；具体参考及许可证见 [第三方登记](THIRD_PARTY_NOTICES.md)。
 
-## 使用新版生成古诗
+## 试用 92M 生成模型
+
+获取 `Orchid-model-kit.zip`，解压后进入 `orchid-course/`。模型包自带 92M 推理权重和离线韵表，用 Python 3.11.16 在 Linux x86_64 上即可运行。
 
 ```bash
-python -E scripts/generate.py --checkpoint dist/orchid-92m-prosody --keywords 秋雨 孤舟 --device cuda --json
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-cpu.txt
+python -E scripts/generate.py --checkpoint model --keywords 秋雨 孤舟 --device cpu --json
 ```
 
-新版默认写四句，每句五字，使用全部关键词，第 2、4 句以同一平水韵平声部的不同字结尾。输入可包含 1～3 个繁体关键词，每个 1～2 字。用 `--mode raw` 查看模型自由生成，`--mode rhyme-only` 只限定字数和押韵。原有 `--constrain-form` 和 `--constrain-keywords` 分别复现旧实验的字数和固定词位。JSON 会给出韵脚字、韵部和生成时间。
+用 NVIDIA GPU 时，在独立虚拟环境中安装 `requirements.txt`，生成时传 `--device cuda`。源码工作目录里的已导出权重通常位于 `dist/orchid-92m-prosody`，可直接传给 `--checkpoint`。
 
-解压 [92M 押韵版课程包](dist/Orchid-course-prosody.zip) 后，将命令中的检查点改为 `model`。无 CUDA 时用 `--device cpu`。续训、解码对照和逐条输出见[押韵改进实测](report/prosody_optimization.md)。
+默认模式写四句，每句五字，使用全部关键词，第 2、4 句以同一平水韵平声部的不同字结尾。请提供 1～3 个互异关键词，每词 1～2 个字，字形以训练字表为准。加 `--mode raw` 可看自由生成，加 `--mode rhyme-only` 可只限定字数和押韵。原有 `--constrain-form` 和 `--constrain-keywords` 用于复现只限字数及固定词位的旧实验。JSON 会给出韵脚字、韵部和生成时间。
+
+`Orchid-source.zip` 含源码、配置、数据指纹和封存结果。复跑下列训练步骤可从语料重建模型，有现成模型包即可从推理和复测开始。查看[当前模型评估与展示建议](report/release_evaluation.md)、[源码和模型包的构建与验证](docs/open_source_cleanup.md)。
 
 ## 环境与基础训练
 
-在 Ubuntu 22.04、Python 3.11.16 上，用仓库的 `.venv` 或用同版本 Python 新建虚拟环境。`requirements.txt` 固定了 CUDA 12.6 构建的 PyTorch。
+训练和报告使用 Ubuntu 22.04、Python 3.11.16 与 `requirements.txt` 中固定的 PyTorch CUDA 12.6 及其依赖。在源码根目录创建环境后运行下面的命令。
 
 ```bash
+python3.11 -m venv .venv
 source .venv/bin/activate
-unset PYTHONPATH
+python -m pip install -r requirements.txt
 python -m pip check
-python -I scripts/check_env.py --require-cuda --verify-pins --output artifacts/environment.json
+python -I scripts/check_env.py --require-cuda --verify-pins --output runs/environment.json
 ```
 
-如果是新建的空环境，激活后先运行 `python -m pip install -r requirements.txt`。`check_env.py` 会写出版本、显卡、BF16 能力和 CUDA 前向/反向检查结果；只使用 CPU 时去掉 `--require-cuda`。VS Code 可参考 [工作区设置模板](.vscode/settings.example.json)，在「Python: Select Interpreter」中选择 `.venv/bin/python`。如果 ROS 2 扩展自动写回 Python 3.10 的分析路径，可在 Orchid 工作区单独停用该扩展；运行命令用 `python -E` 避开 Python 环境变量。
+`check_env.py` 记录版本、显卡、BF16 能力和 CUDA 前后向结果。CPU 推理环境可运行 `python -I scripts/check_env.py --verify-pins --requirements requirements-cpu.txt`。VS Code 可按[工作区设置模板](.vscode/settings.example.json)选择 `.venv/bin/python`。示例运行命令用 `python -E` 避开全局 Python 环境变量。
 
 从仓库根目录获取和准备语料：
 
@@ -71,7 +79,7 @@ CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对�
 
 ### 历史基线包与盲评
 
-本机 ZIP 示例：[14M 基线包](dist/Orchid-course-baseline.zip)。在新目录解压进入 `orchid-course/`，安装固定依赖后运行：
+如有留档的 14M 基线包，可在新目录解压进入 `orchid-course/`，安装包内固定依赖后运行。
 
 ```bash
 python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --device cpu --constrain-keywords --json
@@ -83,7 +91,7 @@ python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --devi
 
 ### 单卡扩容：92M 唐宋版
 
-扩容使用同一公开唐诗与宋诗快照，验证和测试仍是固定唐诗集合。应先完整跑通上面的基础数据与监督构建。
+扩容使用固定的公开唐诗与宋诗快照，验证和测试沿用唐诗留出集。从源码开始时，先运行上面的 `prepare_data.py`、`build_tokenizer.py` 和 `build_sft_data.py --config configs/sft.yaml`，再执行以下命令。
 
 ```bash
 python -E scripts/download_song.py --config configs/song.yaml
@@ -100,11 +108,12 @@ done
 预训练每半轮验证，最多 16 轮，连续三次无改善时早停。本次在第 9 轮保存最佳、第 10.5 轮停，实际优化约 31 分钟；途中能直接用同一配置加 `--resume checkpoints/pretrain/pretrain-tang-song-92m/last.pt` 恢复。三个 SFT 种子各实跑 4 轮。交付模型是固定验证题选出的种子 2028：
 
 ```bash
-python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-song-92m-2028/best.pt --output dist/orchid-92m
+python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-song-92m-2028/best.pt \
+    --tokenizer artifacts/tang-song/tokenizer.json --output dist/orchid-92m
 python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cpu --mode raw --json
 python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cuda --constrain-keywords
 ```
 
 如要复跑多模型冻结对照，使用 `python -E scripts/evaluate.py --config configs/eval-expanded.json --device cuda --output runs/retained-expanded-eval-v1`；该配置同时登记 14M/42M/92M 对照的本地权重。只查看现成结果无需训练。每个运行 ID 的配置、成绩与 checkpoint 哈希在 [report/evidence](report/evidence/)。
 
-原 92M 权重、封存对照与两份匿名表可从旧版留档查看。当前报告纳入了新版韵律续训、推理解码和同题对照。[原 92M 本地 ZIP](dist/Orchid-course.zip) · [封存测试](report/evaluation_expanded.md) · [课程 PDF](report/Orchid课程报告.pdf)
+继续生成最新版权重时，按[韵律续训的复现步骤](report/prosody_optimization.md#本地复现)训练和导出。旧版对照见[封存测试](report/evaluation_expanded.md)和[课程 PDF](report/Orchid课程报告.pdf)。

@@ -10,32 +10,28 @@ import zipfile
 if not __package__:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from orchid.blind import DIMENSIONS, parse_form_bytes
 from orchid.inference import verify_bundle
 from orchid.io import ROOT, sha256_file, write_json
 
 
 PROJECT_DIRS = ("orchid", "scripts", "configs", "docs", "tests", "data/lexicon", "data/prompts", "artifacts")
+PROJECT_SUFFIXES = (".py", ".json", ".yaml", ".md", ".txt", ".pdf", ".svg", ".csv")
 ROOT_FILES = ("README.md", "GPT_BUILD_CHECKLIST.md", "Problem.md", "THIRD_PARTY_NOTICES.md", "requirements.txt",
-              ".python-version", ".gitignore")
+              "requirements-cpu.txt", ".python-version", ".gitignore", ".vscode/settings.example.json")
 REPORT_FILES = ("experiment_report.md", "Orchid课程报告.pdf", "pretraining.md", "finetuning.md",
                 "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md", "prosody_source_audit.md",
-                "prosody_optimization.md")
+                "prosody_optimization.md", "release_evaluation.md")
 BLIND_DOCS = ("README.md", "reviewer_guide.md", "reviewer_guide_v2.md", "meter_review.md", "ratings_status.json",
               "expanded/ratings_status.json")
+PRIVATE_FILES = {"private_key.json", "reviewer_1.csv", "reviewer_2.csv", "meter_review_completed.md"}
 
 
-def blank_template(path):
-    if not path.is_file():
-        return None
-    content = path.read_bytes()
-    try:
-        rows = parse_form_bytes(content, path)
-    except ValueError:
-        return None
-    if rows and all(not r[k].strip() for r in rows for k in (*DIMENSIONS, "notes")):
-        return content
-    return None
+def public_files(directory, suffixes):
+    for file in sorted(directory.rglob("*")):
+        if (file.is_file() and not file.is_symlink() and "__pycache__" not in file.parts
+                and file.suffix in suffixes and file.name not in PRIVATE_FILES
+                and not file.name.endswith("_completed.csv")):
+            yield file
 
 
 def make_zip(output, bundle):
@@ -54,40 +50,31 @@ def make_zip(output, bundle):
 
             for name in ROOT_FILES:
                 add(ROOT/name, name)
+            if (ROOT/"LICENSE").is_file():
+                add(ROOT/"LICENSE", "LICENSE")
             for directory in (*PROJECT_DIRS, "report/figures"):
-                for file in sorted((ROOT/directory).rglob("*")):
-                    if file.is_file() and "__pycache__" not in file.parts and file.suffix in (
-                        ".py", ".json", ".yaml", ".md", ".txt", ".pdf", ".svg", ".csv"
-                    ):
-                        add(file, file.relative_to(ROOT))
+                for file in public_files(ROOT/directory, PROJECT_SUFFIXES):
+                    add(file, file.relative_to(ROOT))
             blind = Path("report/blind_review")
             for name in BLIND_DOCS:
                 add(ROOT/blind/name, blind/name)
-            for directory, originals in (("", "poetry-blind-v1"), ("expanded", "poetry-blind-expanded")):
-                for name in ("reviewer_1.csv", "reviewer_2.csv"):
-                    path = blind/directory/name
-                    blank = blank_template(ROOT/path) or blank_template(ROOT/"runs"/originals/name)
-                    if blank is not None:
-                        key = "orchid-course/" + path.as_posix()
-                        z.writestr(key, blank)
-                        seen.add(key)
             for name in REPORT_FILES:
                 path = ROOT/"report"/name
                 add(path, path.relative_to(ROOT))
             for name in ("weights.pt", "tokenizer.json", "config.json", "bundle.json"):
                 add(bundle/name, "model/"+name)
-            for filename in sorted((ROOT/"report/evidence").rglob("*")):
-                if (filename.is_file() and filename.suffix in (".json", ".jsonl", ".csv")
-                        and not filename.name.startswith("delivery-")):
-                    add(filename, filename.relative_to(ROOT))
+            for filename in public_files(ROOT/"report/evidence", (".json", ".jsonl", ".csv")):
+                add(filename, filename.relative_to(ROOT))
             z.writestr("orchid-course/QUICKSTART.txt",
-                       "Orchid course delivery. Extract the whole zip to preserve source/module paths.\n"
-                       "Python 3.11.16, Linux x86_64; install via python -m pip install -r requirements.txt\n"
-                       "From this directory, with the venv active:\n"
+                       "Orchid 92M model kit. Extract the whole zip to preserve source/module paths.\n"
+                       "Python 3.11.16, Linux x86_64. Create and activate a virtual environment.\n"
+                       "For CPU, run python -m pip install -r requirements-cpu.txt\n"
+                       "For CUDA 12.6, run python -m pip install -r requirements.txt\n"
+                       "Run these from the extracted project directory.\n"
                        "  python -E scripts/generate.py --checkpoint model --keywords 秋雨 孤舟 --device cpu\n"
                        "  python -E scripts/generate.py --checkpoint model --keywords 霜 孤舟 --device cuda --json\n"
                        "  python -E -m unittest discover -s tests -v\n"
-                       "No training corpus or GPU is needed for CPU inference. Use --mode raw for raw sampling.\n"
+                       "CPU inference uses the provided weights and rhyme table. Use --mode raw for free sampling.\n"
                        "Verified source and data URLs are in THIRD_PARTY_NOTICES.md and the README.\n")
         with zipfile.ZipFile(temporary) as archive:
             issue = archive.testzip()

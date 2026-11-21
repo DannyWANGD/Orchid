@@ -71,7 +71,7 @@ def evaluate(args):
             raise ValueError("Selection must come from validation under the same prompt protocol")
         chosen = study["selection"]["model"]
         selected = study["models"][chosen]
-        models = {chosen: Path(selected["path"])}
+        models = {chosen: args.checkpoint or Path(selected["path"])}
         prompts = protocol["suites"]["main"]
         modes = {
             "raw": {},
@@ -92,8 +92,13 @@ def evaluate(args):
         if (poet.meta["lineage"]["data_manifest_sha256"] != tokens["data_manifest_sha256"]
                 or poet.meta["lineage"]["validation_input_sha256"] != validation_hash):
             raise ValueError(f"{name} does not use the expected training corpus and frozen validation split")
-        if args.stage == "test" and poet.checkpoint_sha256 != selected["sha256"]:
-            raise ValueError("Selected checkpoint has changed since evaluation")
+        source_sha = poet.checkpoint_sha256
+        if args.stage == "test" and source_sha != selected["sha256"]:
+            if path.is_dir():
+                # load_poet has already verified the files against the bundle manifest.
+                source_sha = read_json(path / "bundle.json").get("source_checkpoint_sha256")
+            if source_sha != selected["sha256"]:
+                raise ValueError("Selected checkpoint has changed since evaluation")
         print(f"Evaluating {name} on {len(prompts)} prompts × {len(seeds)} seeds", flush=True)
         for mode, opts in modes.items():
             stats = []
@@ -111,6 +116,8 @@ def evaluate(args):
             key = name if args.stage == "validation" else mode
             results[key] = {"path": str(path), "run_id": poet.meta["run_id"],
                             "sha256": poet.checkpoint_sha256, "summary": report}
+            if source_sha != poet.checkpoint_sha256:
+                results[key]["source_checkpoint_sha256"] = source_sha
             print(f"{key}: form={report['format_ok']['count']} rhyme={report['distinct_rhyme']['count']}"
                   f" all={report['all_rules']['count']} / {len(stats)}", flush=True)
     generation_path = args.output / "generations.jsonl"
@@ -137,6 +144,8 @@ def main():
     val.add_argument("--control", required=True, type=Path)
     val.add_argument("--rhyme", required=True, type=Path)
     test.add_argument("--selection", required=True, type=Path)
+    test.add_argument("--checkpoint", type=Path,
+                      help="Override the selected checkpoint path with that checkpoint or its exported bundle")
     evaluate(p.parse_args())
 
 

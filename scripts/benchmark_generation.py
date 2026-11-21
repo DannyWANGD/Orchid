@@ -2,6 +2,7 @@
 
 import argparse
 from pathlib import Path
+import platform
 import sys
 
 import torch
@@ -22,18 +23,27 @@ def main():
     p.add_argument("--output", required=True, type=Path)
     p.add_argument("--devices", choices=("cpu", "cuda"), nargs="+", default=("cuda", "cpu"))
     p.add_argument("--cpu-threads", type=int, default=2)
+    p.add_argument("--mode", choices=("raw", "rhymed"), default="raw")
+    p.add_argument("--requests", type=int, default=10, help="Timed requests per device after two warm-ups")
     a = p.parse_args()
+    if a.requests < 1:
+        p.error("--requests must be positive")
     spec = read_json(a.protocol)
     settings = Sampling(**spec["sampling"])
     all_results = {}
     torch.set_num_threads(a.cpu_threads)
+    rhymed = a.mode == "rhymed"
     for d in a.devices:
         poet = load_poet(a.checkpoint, d)
-        all_results[d] = benchmark(poet, spec["suites"]["main"], settings, spec["sampling_seeds"][0])
+        all_results[d] = benchmark(poet, spec["suites"]["main"], settings, spec["sampling_seeds"][0],
+                                   requests=a.requests, constrain_rhyme=rhymed, constrain_keywords=rhymed)
+        if d == "cuda":
+            all_results[d]["gpu"] = torch.cuda.get_device_name(poet.device)
         print(d, all_results[d], flush=True)
         digest = poet.checkpoint_sha256
         del poet
-    write_json(a.output, {"checkpoint": str(a.checkpoint), "checkpoint_sha256": digest,
+    write_json(a.output, {"checkpoint": str(a.checkpoint), "checkpoint_sha256": digest, "mode": a.mode,
+                         "python": platform.python_version(), "torch": str(torch.__version__),
                          "prompt_sha256": sha256_file(a.protocol), "sampling": spec["sampling"],
                          "sample_seed": spec["sampling_seeds"][0], "cpu_threads": a.cpu_threads,
                          "benchmarks": all_results})
