@@ -1,0 +1,393 @@
+{
+  "causality": {
+    "edited_suffix_tokens": 512,
+    "max_abs_prefix_logit_change": {
+      "manual": 0.0,
+      "sdpa": 0.0
+    },
+    "prefix_positions": 128,
+    "sequence_length": 256
+  },
+  "dataset": "Controlled synthetic sequences of non-special tokenizer IDs sampled uniformly on CPU.",
+  "metrics": [
+    "p50_ms",
+    "p95_ms",
+    "peak_extra_allocated_bytes",
+    "max_abs_logit_difference"
+  ],
+  "output_projection": {
+    "max_abs_last_logit_difference": 2.193450927734375e-05,
+    "sequence_length": 256,
+    "timing": {
+      "full": {
+        "backend": "sdpa",
+        "last_only": false,
+        "logits_fp32_bytes": 35151872,
+        "logits_shape": [
+          4,
+          256,
+          8582
+        ],
+        "p50_ms": 8.909495,
+        "p95_ms": 9.847684,
+        "peak_extra_allocated_bytes": 41945088,
+        "samples_ms": [
+          8.909109,
+          8.900829,
+          8.881946,
+          8.924815,
+          8.921549,
+          8.885354,
+          8.89949,
+          8.895185,
+          8.909881,
+          8.896337,
+          9.776578,
+          8.911154,
+          8.893788,
+          8.908577,
+          9.1095,
+          9.847684,
+          8.892706,
+          8.890796,
+          8.942827,
+          8.946996,
+          9.983838,
+          9.177733,
+          8.819411,
+          8.913711
+        ]
+      },
+      "last_only": {
+        "backend": "sdpa",
+        "last_only": true,
+        "logits_fp32_bytes": 137312,
+        "logits_shape": [
+          4,
+          1,
+          8582
+        ],
+        "p50_ms": 8.4841625,
+        "p95_ms": 9.474153,
+        "peak_extra_allocated_bytes": 34605056,
+        "samples_ms": [
+          8.454444,
+          8.477911,
+          8.460708,
+          8.488184,
+          8.492997,
+          8.443703,
+          8.473111,
+          8.493954,
+          8.48668,
+          9.32089,
+          8.725474,
+          8.441993,
+          8.420175,
+          8.470748,
+          8.499911,
+          8.730893,
+          8.481645,
+          8.518935,
+          8.465926,
+          8.505858,
+          9.474153,
+          8.467721,
+          8.404462,
+          10.415677
+        ]
+      }
+    }
+  },
+  "protocol": {
+    "batch_size": 4,
+    "device": "cuda",
+    "dropout": false,
+    "dtype": "torch.float32",
+    "float32_matmul_precision": "highest",
+    "inference_mode": true,
+    "memory": "Separate warmed forward, peak allocated bytes minus live allocation before forward.",
+    "padding": false,
+    "timed_forwards_per_variant": 24,
+    "timing": "Synchronized wall time per warmed forward with alternating variant order.",
+    "warmups_per_variant": 6
+  },
+  "provenance": {
+    "checkpoint": "dist/orchid-92m-prosody",
+    "checkpoint_sha256": "1613b489754c9d154ebf39e7c89cb621d691c395a6c5866cbe043d213f544e59",
+    "cuda_build": "12.6",
+    "hardware": "NVIDIA GeForce RTX 4080 SUPER",
+    "mode": "measured",
+    "operating_system": "Linux",
+    "source": "scripts/benchmark_attention.py",
+    "timestamp": "2026-11-22T06:20:13.765883+00:00",
+    "torch": "2.14.1+cu126"
+  },
+  "seeds": [
+    20261122
+  ],
+  "summary": {
+    "128": {
+      "full_logits_comparison": {
+        "argmax_agreement": 512,
+        "max_abs_difference": 1.9550323486328125e-05,
+        "positions": 512
+      },
+      "timing": {
+        "manual": {
+          "backend": "manual",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 4.9648565,
+          "p95_ms": 5.477002,
+          "peak_extra_allocated_bytes": 21513216,
+          "samples_ms": [
+            4.913237,
+            4.920478,
+            4.932527,
+            4.921106,
+            4.919192,
+            4.915351,
+            4.921041,
+            4.949951,
+            5.477002,
+            4.99255,
+            4.96109,
+            4.976078,
+            4.971335,
+            4.967652,
+            4.985053,
+            4.983101,
+            4.974987,
+            4.981553,
+            4.959441,
+            4.965903,
+            5.792718,
+            5.001186,
+            4.958255,
+            4.96381
+          ]
+        },
+        "sdpa": {
+          "backend": "sdpa",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 4.655723999999999,
+          "p95_ms": 5.004651,
+          "peak_extra_allocated_bytes": 18875392,
+          "samples_ms": [
+            4.598962,
+            4.63027,
+            4.598314,
+            4.62381,
+            4.60351,
+            4.623505,
+            4.61459,
+            4.65049,
+            5.186522,
+            4.670283,
+            4.827355,
+            4.659223,
+            4.6396,
+            4.660605,
+            4.677902,
+            4.666731,
+            4.652225,
+            4.665844,
+            4.651587,
+            4.664017,
+            5.004651,
+            4.682247,
+            4.870027,
+            4.640422
+          ]
+        }
+      }
+    },
+    "256": {
+      "full_logits_comparison": {
+        "argmax_agreement": 1024,
+        "max_abs_difference": 2.6226043701171875e-05,
+        "positions": 1024
+      },
+      "timing": {
+        "manual": {
+          "backend": "manual",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 9.4889865,
+          "p95_ms": 9.724718,
+          "peak_extra_allocated_bytes": 50399232,
+          "samples_ms": [
+            9.469746,
+            9.50845,
+            9.48838,
+            9.506732,
+            9.478115,
+            9.486699,
+            9.510556,
+            9.494807,
+            9.463376,
+            9.489593,
+            9.472243,
+            10.818653,
+            9.436238,
+            9.460518,
+            9.467731,
+            9.488125,
+            9.476174,
+            9.502441,
+            9.724718,
+            9.504524,
+            9.463231,
+            9.527521,
+            9.491934,
+            9.532106
+          ]
+        },
+        "sdpa": {
+          "backend": "sdpa",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 8.4225465,
+          "p95_ms": 8.458613,
+          "peak_extra_allocated_bytes": 34605056,
+          "samples_ms": [
+            8.394108,
+            8.410165,
+            8.443407,
+            8.443899,
+            8.449807,
+            8.446505,
+            8.406473,
+            8.398933,
+            8.430483,
+            8.406888,
+            8.40419,
+            8.458613,
+            8.395619,
+            8.397906,
+            8.408439,
+            8.442624,
+            8.455469,
+            8.421556,
+            10.151544,
+            8.395011,
+            8.403002,
+            8.451898,
+            8.423537,
+            8.439662
+          ]
+        }
+      }
+    },
+    "32": {
+      "full_logits_comparison": {
+        "argmax_agreement": 128,
+        "max_abs_difference": 1.430511474609375e-05,
+        "positions": 128
+      },
+      "timing": {
+        "manual": {
+          "backend": "manual",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 2.190932,
+          "p95_ms": 2.406078,
+          "peak_extra_allocated_bytes": 5374464,
+          "samples_ms": [
+            2.199516,
+            2.190807,
+            2.191057,
+            2.183268,
+            2.189528,
+            2.188667,
+            2.189771,
+            2.224744,
+            2.406078,
+            2.18597,
+            2.237964,
+            2.176443,
+            2.193456,
+            2.182516,
+            2.243541,
+            2.184141,
+            2.201108,
+            2.192675,
+            2.188173,
+            2.185383,
+            2.193948,
+            2.179738,
+            2.192731,
+            2.752203
+          ]
+        },
+        "sdpa": {
+          "backend": "sdpa",
+          "last_only": true,
+          "logits_fp32_bytes": 137312,
+          "logits_shape": [
+            4,
+            1,
+            8582
+          ],
+          "p50_ms": 1.8904155,
+          "p95_ms": 2.138598,
+          "peak_extra_allocated_bytes": 5374464,
+          "samples_ms": [
+            1.892645,
+            1.888613,
+            1.895614,
+            1.886768,
+            1.890226,
+            1.887384,
+            1.89116,
+            2.138598,
+            2.046274,
+            1.88857,
+            1.890036,
+            2.030556,
+            2.154439,
+            1.890428,
+            1.890168,
+            1.886481,
+            1.892728,
+            1.884507,
+            1.892374,
+            1.88715,
+            1.890403,
+            1.888378,
+            1.892706,
+            2.030473
+          ]
+        }
+      }
+    }
+  },
+  "task": "Orchid attention and vocabulary-projection microbenchmarks"
+}

@@ -113,6 +113,43 @@ def transformer(out):
     save(fig, out, "transformer")
 
 
+def attention_backends(out):
+    data = read_json(EVIDENCE / "attention-backends-20261122.json")
+    cases = sorted(data["summary"].items(), key=lambda item: int(item[0]))
+    fig, axes = plt.subplots(1, 2, figsize=(8.8, 2.86))
+    fig.subplots_adjust(left=.085, right=.983, bottom=.21, top=.70, wspace=.28)
+
+    positions = np.arange(len(cases))
+    series = (
+        ("sdpa", "SDPA", PLUM),
+        ("manual", "显式实现", CORAL),
+    )
+    fields = (
+        ("A  单次前向时延（p50）", "ms", "p50_ms", 1, ".2f"),
+        ("B  峰值已分配显存增量", "MiB", "peak_extra_allocated_bytes", 2**20, ".1f"),
+    )
+    for ax, (title, unit, key, scale, precision) in zip(axes, fields):
+        label(ax, title)
+        maximum = 0
+        for i, (backend, name, color) in enumerate(series):
+            values = [row["timing"][backend][key] / scale for _, row in cases]
+            maximum = max(maximum, *values)
+            bars = ax.bar(positions + (i - .5) * .29, values, width=.25,
+                          color=color, label=name, edgecolor=PLUM, linewidth=.55)
+            ax.bar_label(bars, labels=[format(value, precision) for value in values],
+                         padding=2, fontsize=8.5)
+        ax.set(xticks=positions, xticklabels=[length for length, _ in cases],
+               xlabel="前缀长度（token）", ylabel=unit, ylim=(0, maximum * 1.20))
+
+    fig.text(.085, .94,
+             f"Orchid 92M   ·   FP32   ·   每批 {data['protocol']['batch_size']} 条",
+             color=MUTED, ha="left", va="center", fontsize=9)
+    handles, names = axes[0].get_legend_handles_labels()
+    fig.legend(handles, names, loc="upper right", bbox_to_anchor=(.985, .995),
+               ncols=2, frameon=False, fontsize=9)
+    save(fig, out, "attention-backends")
+
+
 def supervision(out):
     source = read_json(ROOT / "artifacts/sft_mask_example.json")
     all_positions = source["positions"]
@@ -381,7 +418,7 @@ def main():
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
     with plt.rc_context(STYLE):
-        for plot in (workflow, transformer, corpus, supervision, training, finetune, rules,
+        for plot in (workflow, transformer, attention_backends, corpus, supervision, training, finetune, rules,
                      blind, decoding_slots, rhyme_strictness, latency, ranking):
             plot(args.output)
 

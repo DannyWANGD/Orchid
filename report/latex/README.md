@@ -19,8 +19,10 @@ latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```bash
 python -E scripts/evaluate_ranking.py --split challenge --checkpoint dist/orchid-92m-prosody \
   --device cuda --output runs/ranking-replay
+python -E scripts/benchmark_attention.py --checkpoint dist/orchid-92m-prosody \
+  --device cuda --output runs/attention-replay.json
 python -E scripts/plot_project_report.py
 python -E scripts/prepare_final_review.py --output runs/blind-92m-replay
 ```
 
-图表脚本读取封存证据。新运行应先核对指纹，再按需更新证据和报告。封存排序结果和 AI v2 汇总可直接复查。[新排序证据](../evidence/ranking-ablation-20261121/) · [92M AI 盲评](../evidence/blind-v2-ai-92m-20261121.json) · [评分口径](../blind_review/reviewer_guide_v2.md)
+图表脚本读取封存证据。新运行应先核对指纹，再按需更新证据和报告。[注意力与输出投影对照](../evidence/attention-backends-20261122.json) · [新排序证据](../evidence/ranking-ablation-20261121/) · [92M AI 盲评](../evidence/blind-v2-ai-92m-20261121.json) · [评分口径](../blind_review/reviewer_guide_v2.md)

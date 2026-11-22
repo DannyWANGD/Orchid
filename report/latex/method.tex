@@ -7,23 +7,6 @@ Orchid 实现三个规模的字符级 GPT。14M 用于跑通基线和检查训�
 
 \reportfigure{workflow.pdf}{项目流程。公开语料先分组再派生分词窗口及监督样本。冻结唐诗验证集用于选模，独立新题用于报告生成表现。}{fig:workflow}
 
-\begin{table}[!htbp]
-  \centering
-  \caption{报告覆盖 \texttt{Problem.md} 的项目评分要求}
-  \label{tab:rubric}
-  \begin{tabularx}{\linewidth}{@{}p{.23\linewidth}p{.10\linewidth}Y@{}}
-    \toprule
-    评分项 & 占比 & 对应内容与证据\\
-    \midrule
-    知识与原理 & 35\% & 自回归、因果注意力、位置嵌入、参数量推导、分词与监督目标，见第~\ref{sec:model}、\ref{sec:corpus} 和 \ref{sec:sft} 节。\\
-    模型实现 & 20\% & 可训练的解码器、三种配置、同预算实验、单卡容量检查与部署，见第~\ref{sec:model}、\ref{sec:pretrain} 和 \ref{sec:deployment} 节。\\
-    预训练 & 20\% & 固定快照、训练窗、随机初始化、优化日志与续训、学习曲线和原诗续写，见第~\ref{sec:corpus} 和 \ref{sec:pretrain} 节。\\
-    微调 & 20\% & 监督标签、掩码、选模、韵律对照与生成测试，见第~\ref{sec:sft} 至 \ref{sec:evaluation} 节。\\
-    成果与体会 & 5\% & 交付范围、失败样例、限制、复现记录与个人项目体会，见第~\ref{sec:deployment} 和 \ref{sec:conclusion} 节。\\
-    \bottomrule
-  \end{tabularx}
-\end{table}
-
 \subsection{已有工作与本项目取舍}
 
 Transformer 以注意力为核心，GPT-2 展示了单向语言模型的自回归学习路线~\cite{vaswani2017attention,radford2019language}。中文古诗自动生成早期已有循环网络方案~\cite{zhang-lapata-2014-chinese}。九歌将押韵和诗体检查接入生成系统~\cite{guo-etal-2019-jiuge}，CharPoet 研究逐字生成对格式控制的作用~\cite{yu-etal-2024-charpoet}。本项目使用随机初始化的字符模型和固定唐宋诗料。论文结果用来解释设计选择，正文中的各组数值均来自 Orchid 自己的协议和实测。
@@ -80,6 +63,24 @@ Transformer 以注意力为核心，GPT-2 展示了单向语言模型的自回�
 \bottomrule
 \end{tabular}
 \end{table}
+
+\subsection{注意力实现与输出投影}
+
+记批大小为 $B$、序列长度为 $T$。一次合并的线性投影将输入分成 $Q$、$K$、$V$，每组张量按 $[B,H,T,d_h]$ 排列。显式实现先计算 $QK^{\mathsf T}$，再用布尔下三角掩码把未来位置设为 $-\infty$，沿键位置做 FP32 softmax，最后乘 $V$。分数张量形状为 $[B,H,T,T]$，与 $T^2$ 成正比。以 92M 模型的 12 个头和批大小 4 为例，单个 FP32 分数张量会从 $T=32$ 的 0.1875 MiB 增至 $T=256$ 的 12 MiB。$Q$、$K$ 的点积及对 $V$ 的加权合计具有 $O(BT^2d)$ 的计算量，块内线性层则具有 $O(BTd^2)$ 的计算量。图中的显存实测还包含注意力以外的前向临时张量。
+
+默认实现调用 PyTorch 的缩放点积注意力（SDPA）。在无额外键掩码的输入上，程序通过 \code{is_causal=True} 传入可见性要求，PyTorch 根据输入及设备选择可用的实现~\cite{pytorch214sdpa}。两条路径共享所有投影权重。自动调度的实际耗时和峰值分配可以用相同权重与输入对照，因果性则可以修改后缀并核对前缀输出。
+
+输出投影也有可测的成本。输入和输出共用 $8{,}582\times768$ 的词嵌入权重，节省 6,590,976 个参数，即 FP32 下约 25.14 MiB。训练需要所有位置参与各自的下一标记预测，输出形状是 $[B,T,8{,}582]$。逐标记生成只用最后位置的分布，程序先完成整个前缀的解码器计算，再截取最后位置做归一化和投影。以 $B=4,T=256$ 为例，仅 logits 张量的理论大小就由 33.52 MiB 降到约 0.13 MiB。当前实现每生成一个字仍重算前缀，节省量来自词表输出这一步。
+
+\subsection{同一权重的前向对照}
+
+在 RTX 4080 SUPER 上加载交付版 92M 的同一套权重，设批大小为 4，序列长度为 32、128 和 256。以固定种子生成字表内标记 ID，用于控制输入张量形状。关闭 dropout，采用 FP32 推理。每组预热 6 次，之后交替测量两种设置，各记录 24 次 CUDA 同步后的墙钟耗时。显存指标为前向期间 PyTorch 的峰值分配量减去当轮前向前的常驻分配量。两项对照分别切换注意力实现和词表投影范围。
+
+\reportfigure{attention-backends.pdf}{交付版 92M 的注意力对照。批大小为 4，计时覆盖模型的单次前向，词表输出只取最后位置。显存为峰值分配增量。}{fig:attn-backend}
+
+长度为 256 时，SDPA 和显式实现的前向中位耗时分别为 8.42 和 9.49 毫秒，峰值分配增量分别为 33.00 和 48.06 MiB。长度为 32 时，两者的峰值增量均为 5.13 MiB。三种长度额外比较了全序列 logits，两种实现的最大绝对差为 $2.62\times10^{-5}$，共 1,664 个位置的最高分标记全部一致。将长度 256 的输入保留前 128 个标记并逐个替换后 128 个标记，两个实现的前缀 logits 最大变化均为 0，符合因果性预期。
+
+投影对照固定 SDPA 与长度 256。只输出末位置时中位耗时为 8.48 毫秒，峰值分配增量为 33.00 MiB。输出所有位置时分别为 8.91 毫秒和 40.00 MiB，两种做法的末位置 logits 最大绝对差为 $2.19\times10^{-5}$。理论张量大小和整次前向的峰值含义不同，峰值还取决于注意力与前馈临时张量的生存时间。整首诗的延迟另见第~\ref{sec:deployment} 节，其中还包含多次逐字采样和候选排序。
 
 \section{语料、冻结划分与字符词表}
 \label{sec:corpus}
