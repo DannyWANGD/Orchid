@@ -13,7 +13,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 KEY_PACKAGES = (
     "torch", "triton", "cuda-toolkit", "cuda-bindings", "nvidia-cudnn-cu12",
-    "numpy", "PyYAML", "regex", "matplotlib", "markdown-it-py",
+    "numpy", "PyYAML", "regex", "matplotlib",
 )
 
 

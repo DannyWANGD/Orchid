@@ -4,13 +4,13 @@
 
 ## 编译
 
-准备 XeLaTeX、BibTeX、latexmk、Fandol、Georgia、Courier New 和 Noto CJK 字体。在本目录运行以下命令。
+准备 XeLaTeX、BibTeX、latexmk、Fandol、Georgia、Courier New 和 Noto CJK 字体。在本目录运行以下命令，结果位于本地构建目录 `build/main.pdf`。
 
 ```bash
-latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
+latexmk -xelatex -interaction=nonstopmode -halt-on-error -outdir=build main.tex
 ```
 
-封面从可选的 `cover.local.tex` 读取姓名、学号、班级和方向。署名版 LaTeX 源码包内含该文件。Git 源码与模型包用项目名称和日期完成封面，可用于公开复现构建。
+封面从可选的 `cover.local.tex` 读取姓名、学号、班级和方向。署名版在本机构建。维护公开 PDF 时，从干净 Git 源码快照编译，再将结果复制为 `report/Orchid项目报告.pdf`。[公开报告 PDF](../Orchid项目报告.pdf)
 
 ## 更新图表与补测
 

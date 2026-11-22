@@ -17,3 +17,15 @@ __pycache__/
 /report/blind_review/**/private_key.json
 /report/blind_review/meter_review_completed.md
 /report/latex/cover.local.tex
+/report/latex/build/
+/report/latex/*.aux
+/report/latex/*.bbl
+/report/latex/*.blg
+/report/latex/*.fdb_latexmk
+/report/latex/*.fls
+/report/latex/*.log
+/report/latex/*.out
+/report/latex/*.pdf
+/report/latex/*.synctex.gz
+/report/latex/*.toc
+/report/latex/*.xdv

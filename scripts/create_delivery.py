@@ -16,7 +16,7 @@ from orchid.io import ROOT, sha256_file, write_json
 
 PROJECT_DIRS = (
     "orchid", "scripts", "configs", "docs", "tests", "data/lexicon", "data/prompts", "artifacts", "assets",
-    "demo", "report/latex",
+    "demo", "report/latex/figures",
 )
 PROJECT_SUFFIXES = (
     ".py", ".json", ".yaml", ".md", ".txt", ".pdf", ".svg", ".csv",
@@ -24,9 +24,11 @@ PROJECT_SUFFIXES = (
 )
 ROOT_FILES = ("README.md", "GPT_BUILD_CHECKLIST.md", "Problem.md", "THIRD_PARTY_NOTICES.md", "requirements.txt",
               "requirements-cpu.txt", ".python-version", ".gitignore", ".vscode/settings.example.json")
-REPORT_FILES = ("experiment_report.md", "Orchid课程报告.pdf", "pretraining.md", "finetuning.md",
+REPORT_FILES = ("Orchid项目报告.pdf", "pretraining.md", "finetuning.md",
                 "scaling.md", "evaluation_baseline.md", "evaluation_expanded.md", "prosody_source_audit.md",
                 "prosody_optimization.md", "release_evaluation.md")
+LATEX_FILES = ("README.md", "main.tex", "orchid-report.sty", "references.bib",
+               "method.tex", "training.tex", "evaluation.tex", "deployment.tex")
 BLIND_DOCS = ("README.md", "reviewer_guide.md", "reviewer_guide_v2.md", "meter_review.md", "ratings_status.json",
               "expanded/ratings_status.json")
 PRIVATE_FILES = {
@@ -63,6 +65,9 @@ def make_zip(output, bundle):
             for directory in (*PROJECT_DIRS, "report/figures"):
                 for file in public_files(ROOT/directory, PROJECT_SUFFIXES):
                     add(file, file.relative_to(ROOT))
+            for name in LATEX_FILES:
+                path = Path("report/latex") / name
+                add(ROOT/path, path)
             blind = Path("report/blind_review")
             for name in BLIND_DOCS:
                 add(ROOT/blind/name, blind/name)

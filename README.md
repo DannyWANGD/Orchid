@@ -7,7 +7,7 @@
     <a href="#试用-92m-生成模型">🖥️ 实时生成</a> ·
     <a href="#实验结果">📊 实验结果</a> ·
     <a href="#从源码复现">🧪 从源码复现</a> ·
-    <a href="report/latex/README.md">📖 项目报告</a>
+    <a href="report/Orchid项目报告.pdf">📖 项目报告</a>
   </p>
 </div>
 
@@ -34,6 +34,8 @@ Orchid 是从随机初始化开始训练的字符级 GPT。给定 1～3 个短�
 ## 试用 92M 生成模型
 
 ### 📦 1. 找到推理权重
+
+从 GitHub 获取源码后，即可用浏览器打开本地离线样例。实时生成需要已导出的权重，可以使用配套模型包，或按下文复现训练并导出权重。
 
 | 手头的文件 | 运行命令的位置 | 检查点路径 |
 | --- | --- | --- |
@@ -210,6 +212,6 @@ python -E scripts/create_delivery.py --bundle dist/orchid-92m-prosody \
 
 ## 课程材料
 
-- 📖 [项目报告与 LaTeX 构建](report/latex/README.md)
+- 📖 [项目报告 PDF](report/Orchid项目报告.pdf) · [LaTeX 构建](report/latex/README.md)
 - 📝 [课程要求](Problem.md) · [建设与验收清单](GPT_BUILD_CHECKLIST.md)
 - 📚 [数据及第三方来源](THIRD_PARTY_NOTICES.md)

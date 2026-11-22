@@ -386,7 +386,7 @@ token IDs
 
 已验证封装权重在新进程中使用 CPU 与 CUDA 推理。固定 2 道预热、10 道计时的[实测](report/evidence/infer-benchmark-14m.json)另注明 GPU 同时有训练进程，不用来定性判断独占加速比。
 
-新版默认解码写满五言四句，并强制偶句异字同平水韵及所有关键词入诗。`--mode raw` 复现自由解码，`--mode rhyme-only` 便于测量押韵和字数约束。150 次同题测试中，只有字数、偶句同韵与用词这三项自动规则计入联合指标。[推理消融](report/prosody_optimization.md) · [新版课程包](dist/Orchid-course-prosody.zip)
+新版默认解码写满五言四句，并强制偶句异字同平水韵及所有关键词入诗。`--mode raw` 复现自由解码，`--mode rhyme-only` 便于测量押韵和字数约束。150 次同题测试中，只有字数、偶句同韵与用词这三项自动规则计入联合指标。[推理消融](report/prosody_optimization.md) · [模型包构建](docs/open_source_cleanup.md)
 
 - [x] INFER-01 实现独立 `generate.py`，参数包括检查点、关键词、体裁、device、种子、temperature、top-k/top-p 与最大新 token 数；加载模型所对应的 tokenizer/config。
 - [x] INFER-02 实现自回归采样：只取最后位置 logits，按参数筛选并重归一化，采样后追加 token；`temperature=0` 明确走 greedy 分支，避免除零。
@@ -432,7 +432,7 @@ python scripts/generate.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --
 
 ## 13. 课程报告、图表和提交材料
 
-已编写[可编辑课程报告](report/experiment_report.md)并导出 [PDF](report/Orchid课程报告.pdf)。[独立环境验收](docs/local_delivery.md)已通过；扩容成绩继续记录。
+当前课程报告使用 LaTeX 构建，历史结项材料按原提交归档。[报告 PDF](report/Orchid项目报告.pdf) · [LaTeX 源码](report/latex/README.md) · [结项验收](docs/local_delivery.md)
 
 - [x] REPORT-01 按评分要求写知识梳理：下一个 token 目标、字符级分词、嵌入、位置编码、因果注意力、残差与归一化、优化、SFT 掩码、自回归采样；每项联系本项目代码和实际例子。
 - [x] REPORT-02 给出实际模型配置、参数量、训练硬件、精度、数据数量/划分、预训练和微调超参数、种子、停止条件及实际时间。
