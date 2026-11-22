@@ -26,6 +26,8 @@ python -E scripts/serve_demo.py --checkpoint model --device cpu
 
 \subsection{复现路径与验收}
 
+公开源码仓库为 \url{https://github.com/DannyWANGD/Orchid}。可\href{https://codeload.github.com/DannyWANGD/Orchid/zip/040360649f565f08109eadd4bb861219cb63256b}{下载实验版本 \texttt{0403606} 的源码 ZIP}。解压后先阅读 \path{README.md}，模型实现位于 \path{orchid/model.py}，预训练和微调入口分别是 \path{scripts/pretrain.py} 和 \path{scripts/finetune.py}。配套推理包文件名为 \path{Orchid-model-kit-demo.zip}。
+
 复现分为生成已训练模型、重跑冻结评估及从头训练。第一条路径用模型包内权重和离线韵表即可试用，不需要原始唐宋诗。第二条路径先按仓库说明从固定清单构建数据和监督集，以供应训练重合检查；然后将推理包传给 \code{evaluate_prosody.py}。脚本确认推理包沿袭已选检查点，并检查验证与训练文件指纹。用同一 CUDA 条件逐条比对了 600 条冻结输出，又在独立目录重新下载 313 个分片，核对了两套语料、划分、字表和监督统计。第三条路径从语料开始运行 \code{pretrain.py}、\code{finetune.py} 和韵律续训，以本次训练的验证集合选择自己的权重。种子固定能方便同设备比对，CPU 与 CUDA 的采样文本可能有差异。
 
 \begin{tcolorbox}[consolestyle]
@@ -42,7 +44,7 @@ python -E -m unittest discover -s tests -v
 
 \begin{table}[!htbp]
 \centering
-\caption{复现所需的输入和入口。压缩包以项目提供的附件为准。}
+\caption{复现所需的输入和入口。}
 \label{tab:deliverables}
 \begin{tabularx}{\linewidth}{@{}p{.20\linewidth}Y Y@{}}
 \toprule
