@@ -15,7 +15,8 @@ from orchid.io import ROOT, sha256_file, write_json
 
 
 PROJECT_DIRS = (
-    "orchid", "scripts", "configs", "docs", "tests", "data/lexicon", "data/prompts", "artifacts", "demo", "report/latex",
+    "orchid", "scripts", "configs", "docs", "tests", "data/lexicon", "data/prompts", "artifacts", "assets",
+    "demo", "report/latex",
 )
 PROJECT_SUFFIXES = (
     ".py", ".json", ".yaml", ".md", ".txt", ".pdf", ".svg", ".csv",

@@ -1,72 +1,155 @@
-# Orchid：古诗 GPT
+<div align="center">
+  <img src="assets/orchid-cover.png" alt="Orchid 五言诗生成项目封面" width="960">
+  <h1>Orchid</h1>
+  <p><strong>从零训练的五言诗生成与韵律控制</strong></p>
+  <p>
+    <a href="#离线看样例">🌸 离线看样例</a> ·
+    <a href="#试用-92m-生成模型">🖥️ 实时生成</a> ·
+    <a href="#实验结果">📊 实验结果</a> ·
+    <a href="#从源码复现">🧪 从源码复现</a> ·
+    <a href="report/latex/README.md">📖 项目报告</a>
+  </p>
+</div>
 
-Orchid 是一个从随机初始化训练的字符级 GPT。课程任务是给定 1～3 个关键词，生成一首五言四句诗。预训练用古诗正文预测下一个 token，监督微调学习如何按给定关键词写诗。
+Orchid 是从随机初始化开始训练的字符级 GPT。给定 1～3 个短词，模型可以自由生成，也可以按四句、每句五字的句式写诗，让第 2、4 句用同一平水韵平声部的两个不同韵脚。网页把两种结果放在一起，方便逐句比较。
 
-课程要求见 [Problem.md](Problem.md)，进度和验收标准见 [GPT_BUILD_CHECKLIST.md](GPT_BUILD_CHECKLIST.md)。[数据约定](docs/data_contract.md)说明语料和测试边界；具体参考及许可证见 [第三方登记](THIRD_PARTY_NOTICES.md)。
+## 离线看样例
 
-## 展示与项目报告
+打开本地的 [`demo/index.html`](demo/index.html)，点选页面上的 **霜 · 孤舟**、**清霜**等题目，即可查看四组封存样例。浏览器直接读取同目录的样式、脚本和样例数据，离线演示只需带上完整的 `demo/` 目录。
 
-直接打开 [demo/index.html](demo/index.html) 可查看四组封存样例。运行以下命令后，在浏览器打开 `http://127.0.0.1:8765/` 即可输入自选关键词，对照自由与押韵生成。
+| 解码方式 | 「霜、孤舟」封存输出 |
+| --- | --- |
+| 自由生成 | 一望長江闊，千尋古戍閑。<br>煙波猶未定，不得上孤山。 |
+| 默认押韵生成 | 霜葉滿空落，悲心無處尋。<br>孤舟寒夜水，獨自照秋林。 |
 
-```bash
-python -E scripts/serve_demo.py --checkpoint dist/orchid-92m-prosody --device cpu
-```
+这组输出取自冻结测试 M017，种子为 11。默认模式的韵脚「尋／林」同属下平声十二侵。两栏都展示句式、韵脚、原词覆盖和生成耗时。
 
-解压模型包后使用 `--checkpoint model`。CLI 和实时页面均提供隔位重字排序，CLI 加 `--ranking repeat-aware` 即可使用。实测与 LaTeX 构建见[项目报告说明](report/latex/README.md)。
+<details>
+<summary>🖼️ 查看网页实拍</summary>
+
+<img src="report/latex/figures/demo.png" alt="Orchid 网页中的关键词、种子和两首并排的诗" width="920">
+
+</details>
 
 ## 试用 92M 生成模型
 
-获取 `Orchid-model-kit-demo.zip`，解压后进入 `orchid-course/`。模型包自带 92M 推理权重和离线韵表，用 Python 3.11.16 在 Linux x86_64 上即可运行。
+### 📦 1. 找到推理权重
+
+| 手头的文件 | 运行命令的位置 | 检查点路径 |
+| --- | --- | --- |
+| `Orchid-model-kit-demo.zip` | 解压后进入 `orchid-course/` | `model` |
+| 源码及已导出的 92M 韵律权重 | 仓库根目录 | `dist/orchid-92m-prosody` |
+
+模型包内的 `model/` 包含权重、字表、配置和校验清单。可以在 ZIP 所在目录执行下面的命令。若从仓库根目录解压本机留档，将 ZIP 路径改为 `dist/Orchid-model-kit-demo.zip`。
 
 ```bash
-python3.11 -m venv .venv
+unzip Orchid-model-kit-demo.zip -d orchid-demo
+cd orchid-demo/orchid-course
+```
+
+### 🧰 2. 安装 CPU 或 CUDA 依赖
+
+以下命令以 Linux x86_64 和 Python 3.11.16 为例。已有可用的 Orchid 虚拟环境时，直接激活即可。新建环境时，安装了 `uv` 的机器可运行下列命令。
+
+```bash
+uv venv --python 3.11.16 --seed .venv
 source .venv/bin/activate
+python --version
+```
+
+也可用本机已安装的 Python 3.11.16 执行 `python3.11 -m venv .venv`，再激活环境。根据演示设备选择一组依赖。
+
+**💻 CPU 推理**
+
+```bash
 python -m pip install -r requirements-cpu.txt
-python -E scripts/generate.py --checkpoint model --keywords 秋雨 孤舟 --device cpu --json
+DEVICE=cpu
 ```
 
-用 NVIDIA GPU 时，在独立虚拟环境中安装 `requirements.txt`，生成时传 `--device cuda`。源码工作目录里的已导出权重通常位于 `dist/orchid-92m-prosody`，可直接传给 `--checkpoint`。
-
-默认模式写四句，每句五字，使用全部关键词，第 2、4 句以同一平水韵平声部的不同字结尾。请提供 1～3 个互异关键词，每词 1～2 个字，字形以训练字表为准。加 `--mode raw` 可看自由生成，加 `--mode rhyme-only` 可只限定字数和押韵。原有 `--constrain-form` 和 `--constrain-keywords` 用于复现只限字数及固定词位的旧实验。JSON 会给出韵脚字、韵部和生成时间。
-
-`Orchid-source.zip` 含源码、配置、数据指纹和封存结果。复跑下列训练步骤可从语料重建模型，有现成模型包即可从推理和复测开始。查看[当前模型评估与展示建议](report/release_evaluation.md)、[源码和模型包的构建与验证](docs/open_source_cleanup.md)。
-
-## 环境与基础训练
-
-训练和报告使用 Ubuntu 22.04、Python 3.11.16 与 `requirements.txt` 中固定的 PyTorch CUDA 12.6 及其依赖。在源码根目录创建环境后运行下面的命令。
+**⚡ NVIDIA GPU 推理**
 
 ```bash
-python3.11 -m venv .venv
-source .venv/bin/activate
 python -m pip install -r requirements.txt
-python -m pip check
 python -I scripts/check_env.py --require-cuda --verify-pins --output runs/environment.json
+DEVICE=cuda
 ```
 
-`check_env.py` 记录版本、显卡、BF16 能力和 CUDA 前后向结果。CPU 推理环境可运行 `python -I scripts/check_env.py --verify-pins --requirements requirements-cpu.txt`。VS Code 可按[工作区设置模板](.vscode/settings.example.json)选择 `.venv/bin/python`。示例运行命令用 `python -E` 避开全局 Python 环境变量。
+训练环境使用 `requirements.txt` 固定的 PyTorch CUDA 12.6 构建。在 VS Code 中可按[工作区设置模板](.vscode/settings.example.json)选择 `.venv/bin/python`。运行命令中的 `python -E` 可隔离全局 Python 环境变量。
 
-从仓库根目录获取和准备语料：
+### ✍️ 3. 启动网页并现场演示
+
+下例从解压后的模型包运行。若在仓库根目录操作，将第一行改为 `MODEL=dist/orchid-92m-prosody`。在已激活的现成环境中运行时，可把 `--device "$DEVICE"` 直接写成 `--device cpu` 或 `--device cuda`。
+
+```bash
+MODEL=model
+python -E scripts/serve_demo.py --checkpoint "$MODEL" --device "$DEVICE"
+```
+
+1. 终端打印服务地址后，浏览器打开 [本地演示页](http://127.0.0.1:8765/)。
+2. 页面显示「模型就绪」后，输入 `霜 孤舟`，保留种子 `11`，点击 **生成两首**。输入可含 1～3 个互异的短词，每词 1～2 个汉字，用空格或顿号分隔。繁体词可先用 `清霜`、`煙波` 或 `孤舟`。
+3. 对照两栏的诗句，先看第 2、4 句末字和韵部，再看原词覆盖与耗时。原词覆盖逐字检查，切题、可读性、连贯性与意境按量表分别记录。
+4. 保持关键词和种子，切换 **减少隔位重字** 后再点击生成。该排序调整押韵模式挑选候选诗的方式。
+5. 演示结束，在终端按 `Ctrl+C` 停止服务。如果端口 8765 被占用，启动命令可加 `--port 8766`，浏览器打开终端打印的新地址。
+
+### ⌨️ 4. 直接从命令行出诗
+
+延用上一步的 `MODEL` 和 `DEVICE`。相同题目和种子可用于展示不同解码设置。
+
+```bash
+python -E scripts/generate.py --checkpoint "$MODEL" --device "$DEVICE" \
+  --keywords 秋雨 孤舟 --seed 11
+
+python -E scripts/generate.py --checkpoint "$MODEL" --device "$DEVICE" \
+  --keywords 秋雨 孤舟 --seed 11 --mode rhymed --ranking repeat-aware --json
+```
+
+| 想看什么 | 命令参数 |
+| --- | --- |
+| 自由抽样 | `--mode raw` |
+| 四句五字与偶句押韵 | `--mode rhyme-only` |
+| 四句五字、偶句押韵、逐字覆盖原词 | `--mode rhymed`，省略 `--mode` 时采用此模式 |
+| 押韵候选少选同句隔位重字 | `--mode rhymed --ranking repeat-aware` |
+| 输出结构化结果 | `--json`，含诗句、命中原词、模型哈希、加载与生成耗时，押韵模式另含韵脚和韵部 |
+
+复现旧实验时可用 `--constrain-form` 或 `--constrain-keywords` 分别启用字数限制与固定词位解码。CPU 和 CUDA 在相同种子下可能生成不同的诗，逐字复测时应固定设备。
+
+## 实验结果
+
+📊 冻结测试使用 50 道题和 3 个种子，每种解码生成 150 条。三项达标同时要求四句五字、输入词原样覆盖，以及第 2、4 句异字同平声韵。
+
+| 解码 | 四句五字 | 偶句异字同平声韵 | 原词全覆盖 | 三项达标 |
+| --- | ---: | ---: | ---: | ---: |
+| 自由生成 | 148/150 | 92/150 | 25/150 | 17/150 |
+| 字数与押韵约束 | 150/150 | 150/150 | 25/150 | 25/150 |
+| 默认完整约束 | 150/150 | 150/150 | 150/150 | 150/150 |
+
+🔬 另在 36 道新题上比较候选排序，每题采样 3 次。采用减少隔位重字的排序后，出现同句隔位重字的输出从 13/108 降至 9/108，两种排序的三项达标均为 108/108。[冻结测试与计时](report/release_evaluation.md) · [排序补测记录](report/evidence/ranking-ablation-20261121/challenge/metrics.json)
+
+## 从源码复现
+
+源代码包 `Orchid-source-demo.zip` 包含配置、数据指纹、训练与复测脚本以及封存结果。在仓库根目录执行以下命令。需要重新训练时，先按上面的 CUDA 步骤建好环境。
+
+### 📚 数据与字表
 
 ```bash
 python -E scripts/prepare_data.py --config configs/data.yaml
 python -E scripts/build_tokenizer.py --config configs/data.yaml
+python -E scripts/build_sft_data.py --config configs/sft.yaml
 ```
 
-首次运行下载原始唐诗到 `data/raw/tang/`。添加 `--offline` 可用本地已校验的分片复跑。同一快照和配置重建 `data/processed/`，其中包含三个独立诗集与 token 流；`artifacts/` 保存源文件清单、冻结的划分、字表和统计。训练只学习 train 的 8,582 个 token（含保留标记）；验证和测试里的生僻字可以变成 `<unk>`，比例见 [token 统计](artifacts/token_stats.json)。
+数据脚本下载固定版本的唐诗分片到 `data/raw/tang/`。`prepare_data.py --offline` 可从已校验的本地分片复跑。`data/processed/` 存放三套独立诗集及 token 序列，`artifacts/` 存放来源清单、冻结划分、字表和统计。字符级字表仅用训练集构建，共 8,582 个 token（含保留标记）。[数据约定](docs/data_contract.md) · [token 统计](artifacts/token_stats.json)
 
-正式预训练可按实际记录分两段运行（首轮试训后完整续训，调度仍以 10 轮为上限）：
+下面的历史运行名用于匹配配置和导出命令。若本机已有同名运行，另选运行名并相应调整检查点与评估配置中的路径。
+
+<details>
+<summary>🔁 复现 14M 基线</summary>
+
+#### 预训练、恢复与监督微调
 
 ```bash
 python -E scripts/pretrain.py --config configs/pretrain.yaml --run-id pretrain-tang-v1 --stop-after 87
 python -E scripts/pretrain.py --config configs/pretrain.yaml --resume checkpoints/pretrain/pretrain-tang-v1/last.pt
-```
 
-日志写入 `runs/pretrain-tang-v1/`；权重写入 `checkpoints/pretrain/pretrain-tang-v1/{random,best,last}.pt`。重新运行实验时使用新的 `--run-id`。详见 [预训练实测](report/pretraining.md)。
-
-从上述最佳权重派生监督数据并运行三个微调种子：
-
-```bash
-python -E scripts/build_sft_data.py --config configs/sft.yaml
 for seed in 2026 2027 2028; do
     python -E scripts/finetune.py --config configs/sft.yaml \
         --init checkpoints/pretrain/pretrain-tang-v1/best.pt \
@@ -74,56 +157,59 @@ for seed in 2026 2027 2028; do
 done
 ```
 
-每轮在验证集中记录正文 NLL 与固定条件样例。本次实测的演示权重是 `checkpoints/sft/sft-tang-2027/best.pt`；选择规则与三个种子见 [微调实测](report/finetuning.md)。
+预训练在第 87 步写盘后恢复，完整调度以 10 轮为上限。预训练日志位于 `runs/pretrain-tang-v1/`，权重位于 `checkpoints/pretrain/pretrain-tang-v1/{random,best,last}.pt`。14M 演示使用微调种子 2027。[预训练实测](report/pretraining.md) · [微调选模](report/finetuning.md)
 
-基线冻结自动评估与模型交付：
+#### 自动评估和推理包
 
 ```bash
 python -E scripts/evaluate.py --config configs/eval.yaml --device cpu --output runs/fixed-eval-v1
-python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-2027/best.pt --output dist/orchid-14m
-python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cpu --mode raw --json
-python -E scripts/generate.py --checkpoint dist/orchid-14m --keywords 秋雨 孤舟 --device cuda --mode raw --json
+python -E scripts/package_model.py \
+    --checkpoint checkpoints/sft/sft-tang-2027/best.pt --output dist/orchid-14m
+python -E scripts/generate.py --checkpoint dist/orchid-14m \
+    --keywords 秋雨 孤舟 --device cpu --mode raw --json
 ```
 
-CPU 和 CUDA 在相同种子下可能生成不同诗作，因此正式自动对照固定设备。`dist/orchid-14m/bundle.json` 记录从检查点导出的权重、字表和配置哈希。详见[封存评估](report/evaluation_baseline.md)和[盲评说明](report/blind_review/README.md)。
+若使用留档的 14M 模型包，解压到独立目录后传入 `--checkpoint model`。每个推理包的 `bundle.json` 记录权重、字表与配置的哈希。[基线封存评估](report/evaluation_baseline.md)
 
-### 历史基线包与盲评
-
-如有留档的 14M 基线包，可在新目录解压进入 `orchid-course/`，安装包内固定依赖后运行。
-
-```bash
-python -E scripts/generate.py --checkpoint model --keywords 青山 白雲 --device cpu --constrain-keywords --json
-```
-
-评阅者收到的是各自的匿名诗、题目及评分说明。14M 主对照采用提交者确认的 v1 真人回件与同版 AI 参照。v2 已核验一份 AI 回件以复核量表。汇总核对同版本表，并按维度保存评分分布及适用数。[盲评说明](report/blind_review/README.md)
-
-原课程结项报告保存在 [Markdown](report/experiment_report.md) 和 [PDF](report/Orchid课程报告.pdf)。本机有 XeLaTeX 与 Noto CJK 字体时，可运行 `python -E scripts/build_report.py` 重建该留档版本。最新版使用前文链接的 LaTeX 工程。
+</details>
 
 ### 单卡扩容：92M 唐宋版
 
-扩容使用固定的公开唐诗与宋诗快照，验证和测试沿用唐诗留出集。从源码开始时，先运行上面的 `prepare_data.py`、`build_tokenizer.py` 和 `build_sft_data.py --config configs/sft.yaml`，再执行以下命令。
+完成上面的**数据与字表**三步后，下载宋诗、保持唐诗留出集、构建扩容监督数据，随后训练 92M 版本。
 
 ```bash
 python -E scripts/download_song.py --config configs/song.yaml
 python -E scripts/prepare_tang_song.py --config configs/data-tang-song.yaml
 python -E scripts/build_sft_data.py --config configs/sft-tang-song.yaml
 python -E scripts/pretrain.py --config configs/pretrain-tang-song.yaml --run-id pretrain-tang-song-92m
+
 for seed in 2026 2027 2028; do
     python -E scripts/finetune.py --config configs/sft-tang-song.yaml \
         --init checkpoints/pretrain/pretrain-tang-song-92m/best.pt \
         --seed "$seed" --run-id "sft-tang-song-92m-$seed"
 done
-```
 
-预训练每半轮验证，最多 16 轮，连续三次无改善时早停。本次在第 9 轮保存最佳、第 10.5 轮停，实际优化约 31 分钟；途中能直接用同一配置加 `--resume checkpoints/pretrain/pretrain-tang-song-92m/last.pt` 恢复。三个 SFT 种子各实跑 4 轮。交付模型是固定验证题选出的种子 2028：
-
-```bash
 python -E scripts/package_model.py --checkpoint checkpoints/sft/sft-tang-song-92m-2028/best.pt \
     --tokenizer artifacts/tang-song/tokenizer.json --output dist/orchid-92m
-python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cpu --mode raw --json
-python -E scripts/generate.py --checkpoint dist/orchid-92m --keywords 霜 孤舟 --device cuda --constrain-keywords
 ```
 
-如要复跑多模型冻结对照，使用 `python -E scripts/evaluate.py --config configs/eval-expanded.json --device cuda --output runs/retained-expanded-eval-v1`；该配置同时登记 14M/42M/92M 对照的本地权重。只查看现成结果无需训练。每个运行 ID 的配置、成绩与 checkpoint 哈希在 [report/evidence](report/evidence/)。
+预训练每半轮验证，最多 16 轮，连续三次无改善时早停。封存运行在第 9 轮保存最佳权重、第 10.5 轮停止，实际优化约 31 分钟。可用同一配置加 `--resume checkpoints/pretrain/pretrain-tang-song-92m/last.pt` 恢复。三个微调种子各跑 4 轮，固定验证选出 2028。后续按实测方案完成普通续训与同韵续训对照，导出 `dist/orchid-92m-prosody`。[韵律续训与导出步骤](report/prosody_optimization.md#本地复现)
 
-继续生成最新版权重时，按[韵律续训的复现步骤](report/prosody_optimization.md#本地复现)训练和导出。旧版对照见[封存测试](report/evaluation_expanded.md)和[课程 PDF](report/Orchid课程报告.pdf)。
+### 🧪 复跑评估与构建模型包
+
+已有推理包即可复跑新题排序补测。全套固定规则测试还需上一步的唐宋数据及原划分。
+
+```bash
+python -E scripts/evaluate_ranking.py --split challenge --checkpoint dist/orchid-92m-prosody \
+    --device cuda --output runs/ranking-replay
+python -E scripts/create_delivery.py --bundle dist/orchid-92m-prosody \
+    --output dist/Orchid-model-kit-demo.zip
+```
+
+多模型冻结对照可运行 `python -E scripts/evaluate.py --config configs/eval-expanded.json --device cuda --output runs/retained-expanded-eval-v1`，配置需要本地 14M、42M 和 92M 对照权重。完整配置、逐条输出及指纹均已归档。[完整固定测试命令](report/release_evaluation.md#复跑命令) · [发布包构建与验证](docs/open_source_cleanup.md) · [机器可读证据](report/evidence/)
+
+## 课程材料
+
+- 📖 [项目报告与 LaTeX 构建](report/latex/README.md)
+- 📝 [课程要求](Problem.md) · [建设与验收清单](GPT_BUILD_CHECKLIST.md)
+- 📚 [数据及第三方来源](THIRD_PARTY_NOTICES.md)

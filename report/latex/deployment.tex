@@ -9,6 +9,8 @@
 
 默认四候选模式在本机 CPU、两线程下的常驻中位耗时为 2.532 秒，在 RTX 4080 SUPER 为 0.198 秒，PyTorch 的峰值分配约为 370 MiB。相同权重的自由模式分别为 0.622 和 0.050 秒。这组速度实验每种模式、每设备预热两次再测 30 次，计时范围包含生成和排序，载入权重另测约 0.8 至 1.2 秒。展示接口在多次生成间保留模型。权重文件、字表和配置配套校验，CPU 可以只安装 CPU 构建依赖。
 
+\reportfigure{latency.pdf}{CPU 与 GPU 上的生成时延。模型常驻，计时包含候选生成及排序。}{fig:latency}
+
 \begin{tcolorbox}[consolestyle]
 \begin{Verbatim}[fontsize=\small,breaklines=true]
 python -m venv .venv
@@ -18,7 +20,9 @@ python -E scripts/serve_demo.py --checkpoint model --device cpu
 \end{Verbatim}
 \end{tcolorbox}
 
-上面的命令在解压的模型包根目录运行，随后浏览 \url{http://127.0.0.1:8765/}。仓库开发目录使用 \code{dist/orchid-92m-prosody} 作为检查点路径。离线查看只需打开 \code{demo/index.html}；选用新排序时可在实时服务页切换，CLI 则传 \code{--ranking repeat-aware}。测试涵盖有效输入的双诗生成、字表外输入和错误词数。本次复测使用的最终推理权重指纹以 \code{1613b489754c} 开头，完整值在模型包的 \code{bundle.json}。
+上面的命令在解压的模型包根目录运行，随后浏览 \url{http://127.0.0.1:8765/}。仓库开发目录使用 \code{dist/orchid-92m-prosody} 作为检查点路径。离线样例入口为 \code{demo/index.html}。
+
+在实时页面可切换新的候选排序。命令行使用 \code{--ranking repeat-aware}。测试涵盖有效输入的双诗生成、字表外输入和错误词数。最终推理权重指纹以 \code{1613b489754c} 开头，完整值在模型包的 \code{bundle.json}。
 
 \subsection{复现路径与验收}
 

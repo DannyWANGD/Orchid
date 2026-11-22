@@ -1,11 +1,11 @@
-\documentclass[UTF8,a4paper,zihao=-4,fontset=none]{ctexart}
+\documentclass[UTF8,a4paper,11pt,zihao=false,fontset=none]{ctexart}
 \usepackage{orchid-report}
 
 \newcommand{\reportauthor}{}
 \newcommand{\reportid}{}
 \newcommand{\reportclass}{}
 \newcommand{\reportprogram}{}
-\newcommand{\reportdate}{2026 年 11 月 21 日}
+\newcommand{\reportdate}{2026 年 11 月 22 日}
 \InputIfFileExists{cover.local.tex}{}{}
 \hypersetup{pdftitle={Orchid 从零训练的五言诗生成与韵律控制},pdfauthor={\reportauthor}}
 
@@ -14,23 +14,25 @@
 \thispagestyle{empty}
 \centering
 \setlength{\parindent}{0pt}
-\vspace*{16mm}
-{\color{pine}\large 课程项目报告\par}
-\vspace{13mm}
-{\fontsize{67}{74}\selectfont\color{ink} Orchid\par}
-\vspace{4mm}
-{\fontsize{23}{32}\selectfont\bfseries\color{pine} 从零训练的五言诗生成与韵律控制\par}
+\vspace*{8mm}
+{\color{plum}\large 课程项目报告\par}
 \vspace{6mm}
-{\color{line}\rule{.56\textwidth}{.7pt}\par}
-\vspace{10mm}
+{\fontsize{60}{66}\selectfont\color{ink} Orchid\par}
+\vspace{3mm}
+{\fontsize{22}{31}\selectfont\bfseries\color{plum} 从零训练的五言诗生成与韵律控制\par}
+\vspace{4mm}
+{\color{gold}\rule{.16\textwidth}{1.8pt}\par}
+\vspace{5mm}
+\includegraphics[width=.88\textwidth]{orchid-cover.png}\par
+\vspace{5mm}
 \noindent\begin{minipage}{.59\textwidth}
   \begin{poembox}
     \centering
     {\versefont\Large
     霜葉滿空落，\\[2pt]
-    悲心無處{\color{clay}尋}。\\[2pt]
+    悲心無處{\color{rhymeink}尋}。\\[2pt]
     孤舟寒夜水，\\[2pt]
-    獨自照秋{\color{clay}林}。\par}
+    獨自照秋{\color{rhymeink}林}。\par}
     \vspace{2mm}
     {\small\color{muted}「霜、孤舟」实测输出\par
     平水韵下平声十二侵\par}
@@ -44,8 +46,8 @@
   \reportprogram\par}
   \vspace{5mm}
 }
-{\color{pine}\reportdate\par}
-\vspace*{10mm}
+{\color{plum}\reportdate\par}
+\vspace*{6mm}
 \end{titlepage}
 
 \pagenumbering{Roman}

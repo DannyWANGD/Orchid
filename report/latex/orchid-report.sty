@@ -25,15 +25,19 @@
 \setCJKfallbackfamilyfont{\CJKrmdefault}{Noto Serif CJK SC}
 \newCJKfontfamily\versefont{Noto Serif CJK TC}
 
-\definecolor{ink}{HTML}{273732}
-\definecolor{pine}{HTML}{265344}
-\definecolor{muted}{HTML}{566763}
-\definecolor{line}{HTML}{CBD9D1}
-\definecolor{wash}{HTML}{F1F6F2}
-\definecolor{warm}{HTML}{F8F2E7}
-\definecolor{clay}{HTML}{8A4829}
+\definecolor{ink}{HTML}{32263A}
+\definecolor{plum}{HTML}{794E83}
+\definecolor{muted}{HTML}{645266}
+\definecolor{gold}{HTML}{F9DB64}
+\definecolor{peach}{HTML}{EFC8B9}
+\definecolor{coral}{HTML}{ED867C}
+\definecolor{rose}{HTML}{DD808A}
+\colorlet{line}{rose!53!white}
+\colorlet{wash}{peach!25!white}
+\colorlet{warm}{peach!40!white}
+\colorlet{rhymeink}{ink!50!coral}
 \color{ink}
-\hypersetup{colorlinks,linkcolor=pine,citecolor=pine,urlcolor=pine,pdfborder={0 0 0}}
+\hypersetup{colorlinks,linkcolor=plum,citecolor=plum,urlcolor=plum,pdfborder={0 0 0}}
 \setlength{\parindent}{2em}
 \setlength{\parskip}{.40em plus .10em minus .09em}
 \setlength{\emergencystretch}{2.0em}
@@ -44,12 +48,12 @@
 \renewcommand{\arraystretch}{1.22}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 \ctexset{
-  section={format=\Large\bfseries\color{pine},aftername=\enspace,beforeskip=18pt plus 4pt,afterskip=8pt},
+  section={format=\Large\bfseries\color{plum},aftername=\enspace,beforeskip=18pt plus 4pt,afterskip=8pt},
   subsection={format=\large\bfseries\color{ink},beforeskip=13pt plus 2pt,afterskip=4pt},
   contentsname={目录},figurename={图},tablename={表},bibname={参考资料}
 }
-\captionsetup{font=small,labelfont={bf,color=pine},justification=raggedright,singlelinecheck=false,skip=7pt}
-\graphicspath{{figures/}}
+\captionsetup{font=small,labelfont={bf,color=plum},justification=raggedright,singlelinecheck=false,skip=7pt}
+\graphicspath{{figures/}{../../assets/}}
 \setlength{\textfloatsep}{14pt plus 3pt minus 3pt}
 \setlength{\intextsep}{11pt plus 3pt minus 3pt}
 \renewcommand{\topfraction}{.87}
@@ -59,7 +63,7 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{pine} Orchid}
+\fancyhead[L]{\small\color{plum} Orchid}
 \fancyhead[R]{\small\color{muted} 五言诗生成与韵律控制}
 \fancyfoot[C]{\small\color{muted}\thepage}
 \renewcommand{\headrulewidth}{.35pt}
@@ -67,7 +71,7 @@
 
 \newtcbox{\codechip}{on line,arc=1.4mm,boxrule=0pt,boxsep=0pt,
   left=2.1pt,right=2.1pt,top=1.25pt,bottom=1.15pt,
-  colback=wash,coltext=pine,fontupper=\small\ttfamily}
+  colback=wash,coltext=plum,fontupper=\small\ttfamily}
 \newcommand{\code}[1]{\codechip{\detokenize{#1}}}
 \tcbset{consolestyle/.style={enhanced,breakable,arc=2.5mm,colback=wash,colframe=line,
   boxrule=.5pt,left=3mm,right=3mm,top=1.8mm,bottom=1.8mm,before skip=9pt,after skip=9pt}}
